@@ -1,0 +1,359 @@
+/* Fontshare CDN - Satoshi (Body fallback) */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Design Tokens ── */
+:root {
+  /* Warm cream editorial palette — inspired by janelleamores.design */
+  --bg-base: #f7f5f0;
+  --bg-surface: #f0ede6;
+  --bg-card: #faf9f6;
+  --border-card: #e2ddd6;
+  --border-subtle: #ede9e2;
+  --text-primary: #1a1814;
+  --text-secondary: #6b6760;
+  --text-muted: #a09d99;
+  --accent: #00B4D8;          /* cyan accent */
+  --accent-hover: rgba(0, 180, 216, 0.12);
+  --card-shadow-hover: 0 8px 24px rgba(26, 24, 20, 0.06);
+  --nav-bg: rgba(247, 245, 240, 0.92);
+  --separator: #dedad4;
+}
+
+:root.dark {
+  --bg-base: #0f0f0d;
+  --bg-surface: #161612;
+  --bg-card: #1c1c18;
+  --border-card: #2a2a26;
+  --border-subtle: #222220;
+  --text-primary: #f5f3ee;
+  --text-secondary: #8c897f;
+  --text-muted: #5a5750;
+  --accent: #00B4D8;
+  --accent-hover: rgba(0, 180, 216, 0.12);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --nav-bg: rgba(15, 15, 13, 0.92);
+  --separator: #2a2a26;
+}
+
+@theme {
+  --font-display: 'Instrument Serif', 'Fraunces', Georgia, serif;
+  --font-serif: 'Instrument Serif', 'Fraunces', Georgia, serif;
+  --font-heading: 'Hanken Grotesk', 'Satoshi', sans-serif;
+  --font-body: 'Hanken Grotesk', 'Satoshi', sans-serif;
+  --font-mono: 'DM Mono', 'Fira Code', ui-monospace, monospace;
+
+  --color-accent: var(--accent);
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-card: var(--bg-card);
+  --color-border-card: var(--border-card);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-separator: var(--separator);
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: 'Hanken Grotesk', 'Satoshi', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Hanken Grotesk', 'Satoshi', sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+}
+
+/* ── Background noise texture ── */
+#texture {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100vh;
+  opacity: 0.04;
+  pointer-events: none;
+  filter: contrast(120%) brightness(100%);
+  transition: opacity 0.3s ease;
+}
+
+.dark #texture {
+  opacity: 0.06;
+}
+
+/* ── Marquee Scroll ── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ── Display / Serif utilities ── */
+.font-display {
+  font-family: 'Instrument Serif', 'Fraunces', Georgia, serif;
+}
+
+.font-display-italic {
+  font-family: 'Instrument Serif', 'Fraunces', Georgia, serif;
+  font-style: italic;
+}
+
+/* ── Section dividers & ambient glows ── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--separator);
+  margin: 0;
+}
+
+.divider-faded {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--separator) 25%,
+    var(--separator) 75%,
+    transparent 100%
+  );
+  opacity: 0.65;
+}
+
+.divider-glow {
+  height: 1px;
+  width: 100%;
+  position: relative;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--separator) 20%,
+    rgba(0, 180, 216, 0.4) 50%,
+    var(--separator) 80%,
+    transparent 100%
+  );
+}
+
+.divider-glow::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 8px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 180, 216, 0.25) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(4px);
+}
+
+.section-ambient-glow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 200px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 180, 216, 0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.dark .section-ambient-glow {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 180, 216, 0.07) 0%,
+    transparent 70%
+  );
+}
+
+/* ── Custom hover underline link ── */
+.link-underline {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text-primary);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-underline:hover::after {
+  width: 100%;
+}
+
+/* ── Project card hover ── */
+.project-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--card-shadow-hover);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-card);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Tool icon glow ── */
+.tool-icon-wrap {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+}
+
+.tool-icon-wrap:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent) !important;
+}
+
+/* ── Tag pill ── */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border-card);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: 'Hanken Grotesk', 'Satoshi', sans-serif;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tag-pill:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ── Antigravity Floating Badge ── */
+.antigravity-badge {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-card);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: var(--bg-card);
+  background: color-mix(in srgb, var(--bg-card) 70%, transparent);
+  color: var(--text-primary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-decoration: none;
+}
+
+.antigravity-badge:hover {
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 16px rgba(0, 180, 216, 0.15);
+}
+
+.antigravity-badge:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ── Section Separation System (No Dividers) ── */
+.section-band-surface {
+  width: 100%;
+  background-color: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-band-base {
+  width: 100%;
+  background-color: var(--bg-base);
+}
+
+.section-inset-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.section-index-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+
+
