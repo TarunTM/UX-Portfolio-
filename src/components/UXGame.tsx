@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Play, RotateCcw } from 'lucide-react';
+import { Play, RotateCcw, Trophy, Zap, Sparkles } from 'lucide-react';
 
 interface Obstacle {
   x: number;
@@ -7,6 +7,26 @@ interface Obstacle {
   width: number;
   height: number;
   text: string;
+  passed?: boolean;
+}
+
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
+  color: string;
+  size: number;
+}
+
+interface FloatingText {
+  id: number;
+  x: number;
+  y: number;
+  text: string;
+  alpha: number;
 }
 
 export const UXGame: React.FC = () => {
@@ -18,6 +38,8 @@ export const UXGame: React.FC = () => {
     const saved = localStorage.getItem('ux-game-highscore');
     return saved ? parseInt(saved, 10) : 0;
   });
+  const [currentLevel, setCurrentLevel] = useState('Sprint: Wireframing');
+  const [lastHurdle, setLastHurdle] = useState('Last Change');
 
   const gameStateRef = useRef(gameState);
   const scoreRef = useRef(score);
@@ -30,64 +52,109 @@ export const UXGame: React.FC = () => {
     scoreRef.current = score;
   }, [score]);
 
-  // Physics & Game Loop variables (using refs to avoid re-renders resetting them)
+  // Player Physics with High Jump Clearance & Buffer
   const playerRef = useRef({
     x: 50,
-    y: 110,
-    width: 24,
-    height: 24,
+    y: 115,
+    width: 20,
+    height: 20,
     vy: 0,
     isGrounded: false,
-    jumpForce: -7.5,
-    gravity: 0.35,
+    jumpForce: -8.2, // High clearance jump
+    gravity: 0.38,
     rotation: 0
   });
 
+  const jumpBufferRef = useRef(0); // Input buffer for early jump presses
   const obstaclesRef = useRef<Obstacle[]>([]);
+  const particlesRef = useRef<Particle[]>([]);
+  const floatingTextsRef = useRef<FloatingText[]>([]);
   const spawnTimerRef = useRef(0);
-  const speedRef = useRef(3.5);
+  const speedRef = useRef(2.4);
   const animationFrameId = useRef<number | null>(null);
+  const groundOffsetRef = useRef(0);
 
+  // Short, punchy UI/UX specific hurdle names
   const obstacleTexts = [
+    'Last Change',
+    'Iterate',
     'Scope Creep',
-    'Bug',
-    'Tight Deadline',
-    'Client Review',
-    'IE11 Support',
+    'Pixel Off',
     'Font Shift',
-    'Merge Conflict',
-    'Crash'
+    'V2 Draft',
+    '404 Error',
+    'Dark Pattern',
+    'User Bug',
+    'Client Edit',
+    'Edge Case',
+    'Break Point'
   ];
+
+  const getSprintLevel = (currentScore: number) => {
+    if (currentScore < 150) return 'Sprint 1: Wireframing';
+    if (currentScore < 350) return 'Sprint 2: Prototyping';
+    if (currentScore < 650) return 'Sprint 3: Usability Test';
+    return 'Sprint 4: Shipped to Prod! 🚀';
+  };
+
+  const spawnJumpParticles = (px: number, py: number, color: string) => {
+    for (let i = 0; i < 6; i++) {
+      particlesRef.current.push({
+        x: px + 10,
+        y: py + 18,
+        vx: (Math.random() - 0.5) * 3,
+        vy: (Math.random() - 0.7) * 2,
+        life: 1,
+        maxLife: 14 + Math.random() * 8,
+        color: color,
+        size: 2 + Math.random() * 2
+      });
+    }
+  };
 
   const handleStart = () => {
     setGameState('playing');
     setScore(0);
+    setCurrentLevel('Sprint 1: Wireframing');
     obstaclesRef.current = [];
-    speedRef.current = 3.5;
+    particlesRef.current = [];
+    floatingTextsRef.current = [];
+    speedRef.current = 2.4;
     spawnTimerRef.current = 0;
-    playerRef.current.y = 110;
+    groundOffsetRef.current = 0;
+    jumpBufferRef.current = 0;
+    playerRef.current.y = 115;
     playerRef.current.vy = 0;
     playerRef.current.isGrounded = false;
     playerRef.current.rotation = 0;
   };
 
-  const handleJump = () => {
+  const triggerJump = () => {
     const player = playerRef.current;
-    if (player.isGrounded && gameStateRef.current === 'playing') {
+    if (gameStateRef.current !== 'playing') return;
+
+    if (player.isGrounded) {
       player.vy = player.jumpForce;
       player.isGrounded = false;
+      jumpBufferRef.current = 0;
+      const rootStyle = getComputedStyle(document.documentElement);
+      const accentColor = rootStyle.getPropertyValue('--accent').trim() || '#3b82f6';
+      spawnJumpParticles(player.x, player.y, accentColor);
+    } else {
+      // Buffer jump input if pressed slightly before landing (10 frames window)
+      jumpBufferRef.current = 10;
     }
   };
 
-  // Setup keyboard event listeners
+  // Keyboard controls with jump buffering
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        e.preventDefault(); // Stop spacebar scrolling
+      if (e.code === 'Space' || e.code === 'ArrowUp') {
+        e.preventDefault();
         if (gameStateRef.current === 'idle') {
           handleStart();
         } else if (gameStateRef.current === 'playing') {
-          handleJump();
+          triggerJump();
         } else if (gameStateRef.current === 'gameover') {
           handleStart();
         }
@@ -108,9 +175,9 @@ export const UXGame: React.FC = () => {
     const canvasWidth = 480;
     const canvasHeight = 160;
     const groundY = 135;
+    const obstacleHeight = 15;
 
     const gameLoop = () => {
-      // 1. Fetch Dynamic Theme Colors from CSS variables
       const rootStyle = getComputedStyle(document.documentElement);
       const accentColor = rootStyle.getPropertyValue('--accent').trim() || '#3b82f6';
       const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#fafafa';
@@ -120,7 +187,25 @@ export const UXGame: React.FC = () => {
       // Clear Canvas
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      // Draw Ground Line
+      // Dot Grid Parallax Background
+      ctx.fillStyle = textSecondary;
+      ctx.globalAlpha = 0.08;
+      const dotSpacing = 24;
+      const gridShift = (groundOffsetRef.current * 0.2) % dotSpacing;
+      for (let x = -gridShift; x < canvasWidth; x += dotSpacing) {
+        for (let y = 20; y < groundY - 10; y += dotSpacing) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1.0;
+
+      if (gameStateRef.current === 'playing') {
+        groundOffsetRef.current += speedRef.current;
+      }
+
+      // Ground Line
       ctx.strokeStyle = borderCard;
       ctx.lineWidth = 2;
       ctx.beginPath();
@@ -128,72 +213,121 @@ export const UXGame: React.FC = () => {
       ctx.lineTo(canvasWidth, groundY);
       ctx.stroke();
 
+      // Scrolling Ground Dashes
+      ctx.strokeStyle = accentColor;
+      ctx.globalAlpha = 0.35;
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([8, 12]);
+      ctx.lineDashOffset = -groundOffsetRef.current;
+      ctx.beginPath();
+      ctx.moveTo(0, groundY + 4);
+      ctx.lineTo(canvasWidth, groundY + 4);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1.0;
+
       const player = playerRef.current;
 
       if (gameStateRef.current === 'playing') {
-        // Update Physics
+        // Decrease Jump Buffer timer
+        if (jumpBufferRef.current > 0) {
+          jumpBufferRef.current--;
+        }
+
+        // Apply Physics
         player.vy += player.gravity;
         player.y += player.vy;
 
-        // Ground Collision
+        // Ground Landing Collision
         if (player.y >= groundY - player.height) {
           player.y = groundY - player.height;
           player.vy = 0;
           player.isGrounded = true;
+
+          // Consume Jump Buffer if pressed right before landing
+          if (jumpBufferRef.current > 0) {
+            player.vy = player.jumpForce;
+            player.isGrounded = false;
+            jumpBufferRef.current = 0;
+            spawnJumpParticles(player.x, player.y, accentColor);
+          }
         }
 
-        // Rotate slightly when jumping
+        // Jump Rotation
         if (!player.isGrounded) {
           player.rotation += 0.08;
         } else {
           player.rotation = 0;
         }
 
-        // Update Score
+        // Score & Sprint Level Updates
         setScore((prev) => {
           const next = prev + 1;
           if (next > highScore) {
             setHighScore(next);
             localStorage.setItem('ux-game-highscore', next.toString());
           }
+          const newLevel = getSprintLevel(next);
+          if (newLevel !== currentLevel) {
+            setCurrentLevel(newLevel);
+          }
           return next;
         });
 
         // Obstacles Handling
         spawnTimerRef.current++;
-        // Spawn interval decreases slightly as score increases (more speed, tighter spawns)
-        const spawnInterval = Math.max(70, 120 - Math.floor(scoreRef.current / 300));
+        const spawnInterval = Math.max(90, 140 - Math.floor(scoreRef.current / 300));
         
         if (spawnTimerRef.current >= spawnInterval) {
           spawnTimerRef.current = 0;
           const text = obstacleTexts[Math.floor(Math.random() * obstacleTexts.length)];
-          ctx.font = '10px monospace';
+          ctx.font = 'bold 10px system-ui, -apple-system, sans-serif';
           const textWidth = ctx.measureText(text).width;
-          
+
+          // Compact hurdle width for clear jumpability
+          const obsWidth = Math.min(Math.max(textWidth + 14, 44), 72);
+
           obstaclesRef.current.push({
             x: canvasWidth,
-            y: groundY - 20,
-            width: textWidth + 12,
-            height: 18,
-            text: text
+            y: groundY - obstacleHeight,
+            width: obsWidth,
+            height: obstacleHeight,
+            text: text,
+            passed: false
           });
         }
 
-        // Increase Speed slightly
-        speedRef.current = 3.5 + (scoreRef.current / 1000);
+        // Smooth speed scaling starting at 2.4
+        speedRef.current = 2.4 + (scoreRef.current / 1200);
       }
 
-      // Draw Player
+      // Draw Particles
+      for (let pIdx = particlesRef.current.length - 1; pIdx >= 0; pIdx--) {
+        const p = particlesRef.current[pIdx];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life++;
+        const alpha = Math.max(0, 1 - p.life / p.maxLife);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = alpha * 0.7;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+        if (p.life >= p.maxLife) particlesRef.current.splice(pIdx, 1);
+      }
+
+      // Render Player Character Block
       ctx.save();
       ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
       ctx.rotate(player.rotation);
+      ctx.shadowColor = accentColor;
+      ctx.shadowBlur = player.isGrounded ? 4 : 10;
       
-      // Draw a sleek modern rounded-rectangle block representation for the player (Tarun / Accent Block)
-      ctx.fillStyle = accentColor;
-      // Draw squircle-like path
-      const r = 6; // rounded corner radius
+      const r = 4;
       const w = player.width;
       const h = player.height;
+      ctx.fillStyle = accentColor;
       ctx.beginPath();
       ctx.moveTo(-w/2 + r, -h/2);
       ctx.lineTo(w/2 - r, -h/2);
@@ -206,44 +340,54 @@ export const UXGame: React.FC = () => {
       ctx.quadraticCurveTo(-w/2, -h/2, -w/2 + r, -h/2);
       ctx.closePath();
       ctx.fill();
-
-      // Outer border for style
+      ctx.shadowBlur = 0;
       ctx.strokeStyle = textPrimary;
-      ctx.lineWidth = 1.5;
+      ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      // Little avatar eyes to give it a character feel
-      ctx.fillStyle = textPrimary;
-      ctx.fillRect(2, -4, 3, 3);
-      ctx.fillRect(8, -4, 3, 3);
+      // Expressive Eyes
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(1.5, -3.5, 3, 3);
+      ctx.fillRect(7, -3.5, 3, 3);
       ctx.restore();
 
-      // Draw & Update Obstacles
-      const currentObstacles = obstaclesRef.current;
-      for (let i = currentObstacles.length - 1; i >= 0; i--) {
-        const obs = currentObstacles[i];
-
+      // Render & Update Obstacles
+      for (let i = obstaclesRef.current.length - 1; i >= 0; i--) {
+        const obs = obstaclesRef.current[i];
         if (gameStateRef.current === 'playing') {
           obs.x -= speedRef.current;
+          
+          if (!obs.passed && obs.x + obs.width < player.x) {
+            obs.passed = true;
+            floatingTextsRef.current.push({
+              id: Date.now() + Math.random(),
+              x: player.x + 10,
+              y: player.y - 10,
+              text: '+10',
+              alpha: 1.0
+            });
+          }
         }
 
-        // Collision Check (AABB with slightly smaller collision box for better user experience)
-        const hitBoxShrink = 4;
+        // Fair & forgiving hitbox insets (Coyote-friendly collision)
+        const hitBoxShrinkX = 6;
+        const hitBoxShrinkY = 4;
+
         if (
-          player.x + hitBoxShrink < obs.x + obs.width - hitBoxShrink &&
-          player.x + player.width - hitBoxShrink > obs.x + hitBoxShrink &&
-          player.y + hitBoxShrink < obs.y + obs.height - hitBoxShrink &&
-          player.y + player.height - hitBoxShrink > obs.y + hitBoxShrink
+          player.x + hitBoxShrinkX < obs.x + obs.width - hitBoxShrinkX &&
+          player.x + player.width - hitBoxShrinkX > obs.x + hitBoxShrinkX &&
+          player.y + hitBoxShrinkY < obs.y + obs.height &&
+          player.y + player.height > obs.y + hitBoxShrinkY
         ) {
+          spawnJumpParticles(player.x, player.y, '#ef4444');
+          setLastHurdle(obs.text);
           setGameState('gameover');
         }
 
-        // Draw Obstacle Pill
-        ctx.fillStyle = borderCard;
-        ctx.strokeStyle = textSecondary;
-        ctx.lineWidth = 1;
-        
-        // Draw rounded rectangle for text obstacle
+        // Chip Card Hurdle
+        ctx.fillStyle = '#121217';
+        ctx.strokeStyle = accentColor;
+        ctx.lineWidth = 1.2;
         const rx = 4;
         ctx.beginPath();
         ctx.moveTo(obs.x + rx, obs.y);
@@ -259,55 +403,80 @@ export const UXGame: React.FC = () => {
         ctx.fill();
         ctx.stroke();
 
-        // Draw text inside
-        ctx.fillStyle = textPrimary;
-        ctx.font = '9px monospace';
+        // Left accent tag
+        ctx.fillStyle = accentColor;
+        ctx.fillRect(obs.x + 2, obs.y + 2, 2.5, obs.height - 4);
+
+        // High-contrast readable hurdle text
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 10px system-ui, -apple-system, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText(obs.text, obs.x + obs.width / 2, obs.y + obs.height / 2 + 1);
+        ctx.fillText(obs.text, obs.x + obs.width / 2 + 1, obs.y + obs.height / 2 + 0.5);
 
-        // Remove offscreen obstacles
-        if (obs.x + obs.width < 0) {
-          currentObstacles.splice(i, 1);
-        }
+        if (obs.x + obs.width < 0) obstaclesRef.current.splice(i, 1);
       }
 
-      // Loop request
+      // Floating Score Popups
+      for (let ftIdx = floatingTextsRef.current.length - 1; ftIdx >= 0; ftIdx--) {
+        const ft = floatingTextsRef.current[ftIdx];
+        ft.y -= 0.6;
+        ft.alpha -= 0.035;
+        if (ft.alpha <= 0) {
+          floatingTextsRef.current.splice(ftIdx, 1);
+          continue;
+        }
+        ctx.fillStyle = accentColor;
+        ctx.globalAlpha = ft.alpha;
+        ctx.font = 'bold 9px monospace';
+        ctx.fillText(ft.text, ft.x, ft.y);
+        ctx.globalAlpha = 1.0;
+      }
+
       animationFrameId.current = requestAnimationFrame(gameLoop);
     };
 
     animationFrameId.current = requestAnimationFrame(gameLoop);
-
     return () => {
-      if (animationFrameId.current) {
-        cancelAnimationFrame(animationFrameId.current);
-      }
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
     };
-  }, [highScore]);
+  }, [highScore, currentLevel]);
 
   return (
     <div 
       ref={containerRef}
       className="flex flex-col gap-4 w-full h-full select-none"
-      onClick={gameState === 'playing' ? handleJump : undefined}
+      onClick={gameState === 'playing' ? triggerJump : undefined}
     >
-      <div className="flex justify-between items-center w-full border-b border-border-card/45 pb-3">
-        <div className="flex flex-col text-left">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold">ARCADE</span>
-          <h3 className="text-lg font-medium font-sans">UX Runner</h3>
-        </div>
-        <div className="flex items-center gap-4 font-mono text-xs">
-          <div>
-            <span className="text-text-secondary/60">SCORE:</span> <span className="font-bold">{score}</span>
+      <div className="flex flex-wrap justify-between items-center w-full border-b border-border-card/45 pb-3 gap-2">
+        <div className="flex items-center gap-3">
+          <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+            <Zap className="w-3.5 h-3.5" />
           </div>
-          <div>
-            <span className="text-text-secondary/60">HI:</span> <span className="font-bold text-accent">{highScore}</span>
+          <div className="flex flex-col text-left">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold">MINIGAME</span>
+              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-accent/10 text-accent font-semibold">
+                {currentLevel}
+              </span>
+            </div>
+            <h3 className="text-base font-semibold font-sans text-text-primary">UX Runner</h3>
+          </div>
+        </div>
+        <div className="flex items-center gap-5 font-mono text-xs">
+          <div className="flex items-center gap-1.5">
+            <span className="text-text-secondary/60">SCORE:</span> 
+            <span className="font-bold text-text-primary">{score}</span>
+          </div>
+          <div className="flex items-center gap-1.5 bg-accent/5 px-2.5 py-1 rounded-full border border-accent/15">
+            <Trophy className="w-3 h-3 text-amber-400" />
+            <span className="text-text-secondary/60">BEST:</span> 
+            <span className="font-bold text-accent">{highScore}</span>
           </div>
         </div>
       </div>
 
-      <div className="relative flex-1 bg-bg-base/30 rounded-2xl border border-border-card/50 overflow-hidden min-h-[160px] flex items-center justify-center">
-        {/* Transparent canvas element */}
+      <div className="relative flex-1 bg-bg-base/30 rounded-2xl border border-border-card/50 overflow-hidden min-h-[160px] flex items-center justify-center shadow-inner">
         <canvas 
           ref={canvasRef}
           width={480}
@@ -315,38 +484,47 @@ export const UXGame: React.FC = () => {
           className="w-full h-[160px] max-w-[480px] cursor-pointer"
         />
 
-        {/* Overlays for idle / gameover */}
         {gameState === 'idle' && (
-          <div className="absolute inset-0 bg-bg-surface/85 backdrop-blur-[2px] flex flex-col items-center justify-center gap-3 p-4 text-center">
-            <p className="text-xs text-text-secondary font-mono uppercase tracking-widest">Dodge Scope Creep & Bugs</p>
-            <p className="text-sm font-semibold text-text-primary">Press Space or Tap to Jump</p>
+          <div className="absolute inset-0 bg-bg-surface/90 backdrop-blur-[3px] flex flex-col items-center justify-center gap-3 p-4 text-center">
+            <div className="flex items-center gap-1.5 text-accent text-xs font-mono uppercase tracking-wider font-semibold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Short UI/UX Hurdles Challenge</span>
+            </div>
+            <p className="text-xs text-text-secondary font-mono">
+              Dodge <span className="text-accent font-bold">"Last Change"</span>, <span className="text-accent font-bold">"Iterate"</span> & <span className="text-accent font-bold">"Scope Creep"</span>
+            </p>
+            <p className="text-xs font-semibold text-text-primary">Press Space or Tap Screen to Jump</p>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleStart();
               }}
-              className="flex items-center gap-2 bg-accent hover:bg-accent/90 text-white text-xs font-mono font-medium px-4 py-2 rounded-full cursor-pointer transition-all active:scale-95 shadow-md shadow-accent/20"
+              className="flex items-center gap-2 bg-accent hover:bg-accent/90 text-white text-xs font-mono font-bold px-5 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 shadow-lg shadow-accent/25 mt-1"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
-              <span>START PLAYING</span>
+              <span>START SPRINT</span>
             </button>
           </div>
         )}
 
         {gameState === 'gameover' && (
-          <div className="absolute inset-0 bg-bg-surface/85 backdrop-blur-[2px] flex flex-col items-center justify-center gap-2 p-4 text-center animate-fade-in">
-            <p className="text-xs text-rose-500 font-mono font-bold uppercase tracking-widest">CRASHED</p>
-            <h4 className="text-lg font-bold text-text-primary font-serif">Scope Exceeded!</h4>
-            <p className="text-xs text-text-secondary font-mono">Final Score: {score}</p>
+          <div className="absolute inset-0 bg-bg-surface/90 backdrop-blur-[3px] flex flex-col items-center justify-center gap-2 p-4 text-center animate-fade-in">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-500 border border-rose-500/20">
+              REVISION REQUESTED
+            </span>
+            <h4 className="text-lg font-bold text-text-primary font-sans mt-0.5">Caught by "{lastHurdle}"!</h4>
+            <p className="text-xs text-text-secondary font-mono">
+              Sprint Score: <span className="font-bold text-text-primary">{score}</span> | Best: <span className="font-bold text-accent">{highScore}</span>
+            </p>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleStart();
               }}
-              className="flex items-center gap-2 bg-text-primary hover:bg-text-primary/95 text-bg-base text-xs font-mono font-medium px-4 py-2 rounded-full cursor-pointer transition-all active:scale-95 mt-2"
+              className="flex items-center gap-2 bg-text-primary hover:bg-text-primary/90 text-bg-base text-xs font-mono font-bold px-5 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 mt-2 shadow-md"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span>RESTART</span>
+              <span>ITERATE AGAIN</span>
             </button>
           </div>
         )}

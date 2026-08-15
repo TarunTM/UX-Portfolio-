@@ -345,70 +345,121 @@ export const Landing: React.FC = () => {
           </span>
         </div>
 
-        {/* Project grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {/* Project vertical stack (Image First -> Details Second) */}
+        <div className="space-y-16 sm:space-y-24">
           {projects.map((project, idx) => (
             <div
               key={project.id}
               onClick={() => navigate(`/work/${project.id}`)}
-              className="group project-card rounded-2xl overflow-hidden cursor-pointer"
-              style={{
-                background: 'var(--bg-card)',
-                border: '1px solid var(--border-card)',
-              }}
+              className="group cursor-pointer flex flex-col gap-6"
             >
-              {/* Visual cover area */}
+              {/* 1. SPOTLIGHT IMAGE CANVAS (FIRST) */}
               <div
-                className="aspect-[16/9] flex items-center justify-center relative overflow-hidden"
-                style={{ background: 'var(--bg-surface)' }}
+                className="w-full aspect-[16/10] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl border relative overflow-hidden transition-all duration-500 shadow-sm group-hover:shadow-md group-hover:border-neutral-400 dark:group-hover:border-neutral-600"
+                style={{
+                  background: 'var(--bg-surface)',
+                  borderColor: 'var(--border-card)',
+                }}
               >
-                {/* Project number */}
-                <span
-                  className="absolute top-4 left-4 text-[10px] font-mono font-medium"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
+                {/* Floating Glassmorphic Badge */}
+                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 px-3.5 py-1.5 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider uppercase text-accent bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200/60 dark:border-neutral-800/60 shadow-sm flex items-center gap-1.5">
+                  <span>{String(idx + 1).padStart(2, '0')}</span>
+                  <span>•</span>
+                  <span>{project.category}</span>
+                </div>
 
-                {renderAppIcon(project.id)}
-
-                {/* Arrow on hover */}
+                {/* Arrow Button on Hover */}
                 <div
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md group-hover:scale-105"
                   style={{ background: 'var(--text-primary)', color: 'var(--bg-base)' }}
                 >
-                  <ArrowUpRight className="w-4 h-4" />
+                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+
+                {/* Simulated Browser/App Window Frame */}
+                <div
+                  className="absolute inset-x-4 sm:inset-x-10 bottom-0 top-14 sm:top-16 rounded-t-xl sm:rounded-t-2xl border-t border-x p-4 sm:p-6 flex flex-col justify-between shadow-xl transition-transform duration-500 group-hover:-translate-y-2"
+                  style={{
+                    background: 'var(--bg-card)',
+                    borderColor: 'var(--border-card)',
+                  }}
+                >
+                  {/* Browser dots header */}
+                  <div className="flex items-center gap-1.5 mb-4">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                  </div>
+
+                  {/* Canvas Preview Center */}
+                  <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 py-6">
+                    {renderAppIcon(project.id)}
+                    <span
+                      className="font-mono text-xs sm:text-sm tracking-wide font-medium"
+                      style={{ color: 'var(--text-muted)' }}
+                    >
+                      {project.title} Interface Preview
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Card body */}
-              <div className="p-5">
-                <div className="flex items-center justify-between mb-2">
+              {/* 2. SPOTLIGHT DETAILS (SECOND) */}
+              <div className="flex flex-col gap-3.5 px-1">
+                {/* Meta row */}
+                <div className="flex items-center justify-between">
                   <span
-                    className="text-[10px] font-medium uppercase tracking-[0.1em]"
+                    className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-[0.12em]"
                     style={{ color: 'var(--accent)' }}
                   >
                     {project.category}
                   </span>
                   <span
-                    className="text-[10px] font-mono"
+                    className="text-[11px] sm:text-xs font-mono"
                     style={{ color: 'var(--text-muted)' }}
                   >
                     {project.timeline}
                   </span>
                 </div>
+
+                {/* Title */}
                 <h3
-                  className="text-base font-semibold mb-1.5 leading-snug transition-colors duration-200"
-                  style={{ letterSpacing: '-0.01em' }}
+                  className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight transition-colors duration-200"
+                  style={{ letterSpacing: '-0.025em' }}
                 >
                   {project.title}
                 </h3>
+
+                {/* Tagline / Summary */}
                 <p
-                  className="text-sm leading-relaxed"
+                  className="text-sm sm:text-base leading-relaxed max-w-3xl"
                   style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
                 >
-                  Modern systems and strategic UX for fintech and consumer products.
+                  {project.tagline || project.objective}
                 </p>
+
+                {/* Metrics & Action Bar */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-3 mt-1 border-t border-[var(--border-card)]/60">
+                  {/* Metrics List */}
+                  <div className="flex items-center gap-6 sm:gap-8 flex-wrap">
+                    {project.metrics.map((metric, mIdx) => (
+                      <div key={mIdx} className="flex flex-col">
+                        <span className="text-base sm:text-lg font-mono font-semibold text-[var(--text-primary)]">
+                          {metric.value}
+                        </span>
+                        <span className="text-[11px] font-sans text-[var(--text-muted)]">
+                          {metric.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* CTA Button */}
+                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white transition-all duration-300 cursor-pointer shadow-sm self-start sm:self-auto group-hover:translate-x-1">
+                    <span>Explore Case Study</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </div>
+                </div>
               </div>
             </div>
           ))}
