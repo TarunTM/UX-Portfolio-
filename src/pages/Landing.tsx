@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Copy, Check, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../data/projects';
 import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.png';
 import wixStudioIcon from '../assets/wix-studio.png';
 import antigravityIcon from '../assets/antigravity-icon__full-color.png';
+import socialSlateLogo from '../assets/SS- OG colors.png';
 
 // ── Tool Icon Components ──────────────────────────────────────────────
 const FigmaIcon = () => (
@@ -78,6 +79,15 @@ const AntigravityLogo = () => (
 const renderAppIcon = (projectId: string) => {
   const baseClass = "w-16 h-16 rounded-2xl shadow-sm flex flex-col items-center justify-center relative overflow-hidden transition-transform duration-500 group-hover:scale-105";
   switch (projectId) {
+    case 'rizen':
+      return (
+        <div className={`${baseClass} bg-gradient-to-br from-cyan-950 via-slate-900 to-amber-950 border border-cyan-500/40 shadow-lg shadow-cyan-500/10`}>
+          <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+          </svg>
+          <span className="text-[7px] font-mono text-cyan-400 font-bold mt-1 uppercase tracking-widest">RIZEN</span>
+        </div>
+      );
     case 'quantel-ai':
       return (
         <div className={`${baseClass} bg-gradient-to-br from-slate-900 to-zinc-800 border border-zinc-700/40`}>
@@ -178,13 +188,25 @@ export const Landing: React.FC = () => {
     'Design Strategy',
   ];
 
+  const [expandedExp, setExpandedExp] = useState<string | null>(null);
+
+  const toggleExp = (id: string) => {
+    setExpandedExp((prev) => (prev === id ? null : id));
+  };
+
   const experiences = [
     {
-      period: 'March 2025 – Feb 2026',
-      role: 'UI/UX Designer',
+      id: 'the-social-slate',
       company: 'The Social Slate',
-      description: 'Designed wireframes, user flows, and high-fidelity UI/UX systems for SaaS platforms, dashboards, and mobile apps in Figma. Engineered responsive layouts using Framer and Wix Studio, and coordinated design workflows with teams using Asana.',
+      role: 'UI/UX DESIGNER',
+      period: 'Mar 2025 — Feb 2026',
+      logo: socialSlateLogo,
+      fallbackInitials: 'SS',
       tag: '1 Year',
+      employmentType: 'Internship',
+      description:
+        'Designed wireframes, user flows, and high-fidelity UI/UX systems for SaaS platforms, dashboards, and mobile apps in Figma. Engineered responsive layouts using Framer and Wix Studio, and coordinated design workflows with teams using Asana.',
+      skills: ['Figma', 'Framer', 'Wix Studio', 'Design Systems', 'Responsive UI', 'Asana'],
     },
   ];
 
@@ -257,7 +279,7 @@ export const Landing: React.FC = () => {
                 I'm{' '}
                 <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Tarun Madan</span>
                 {' '}crafting designs with top notes of delight, heart notes of simplicity,
-                and base notes of usability. 1 year building digital products that matter.
+                and base notes of usability. 1+ year building digital products that matter.
               </p>
               
               <div className="flex flex-wrap items-center gap-3.5 mt-8">
@@ -559,47 +581,98 @@ export const Landing: React.FC = () => {
             </span>
           </div>
 
-          <div className="flex flex-col gap-0">
-            {experiences.map((exp, idx) => (
-              <div
-                key={exp.company}
-                className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-4 sm:gap-8 py-8 group"
-                style={{ borderBottom: idx < experiences.length - 1 ? '1px solid var(--separator)' : 'none' }}
-              >
-                {/* Left: period */}
-                <div className="flex sm:flex-col gap-3 sm:gap-1">
-                  <span
-                    className="text-[11px] font-mono"
-                    style={{ color: 'var(--text-muted)' }}
+          <div className="flex flex-col border-t border-[var(--border-card)]">
+            {experiences.map((exp) => {
+              const isExpanded = expandedExp === exp.id;
+              return (
+                <div
+                  key={exp.id}
+                  className="transition-colors"
+                >
+                  {/* Horizontal Interactive Row Button */}
+                  <button
+                    onClick={() => toggleExp(exp.id)}
+                    className="w-full py-5 sm:py-6 px-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left cursor-pointer group hover:bg-[var(--bg-surface)]/30 rounded-xl transition-all"
+                    aria-expanded={isExpanded}
                   >
-                    {exp.period}
-                  </span>
-                  <span className="tag-pill w-fit">{exp.tag}</span>
-                </div>
+                    {/* Left: Circular Company Logo + Company Name + Internship Status */}
+                    <div className="flex items-center gap-3.5 sm:w-1/3">
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shrink-0 border border-[var(--border-card)] bg-[#121212] flex items-center justify-center shadow-sm relative">
+                        {exp.logo ? (
+                          <img
+                            src={exp.logo}
+                            alt={exp.company}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <span className="text-[11px] font-bold font-mono text-[var(--text-primary)]">
+                            {exp.fallbackInitials}
+                          </span>
+                        )}
+                      </div>
 
-                {/* Right: details */}
-                <div>
-                  <h3
-                    className="text-lg font-semibold mb-0.5 leading-snug"
-                    style={{ letterSpacing: '-0.01em' }}
-                  >
-                    {exp.role}
-                  </h3>
-                  <p
-                    className="text-sm font-medium mb-3"
-                    style={{ color: 'var(--accent)' }}
-                  >
-                    {exp.company}
-                  </p>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
-                  >
-                    {exp.description}
-                  </p>
+                      <span className="text-sm sm:text-base font-medium text-[var(--text-primary)] leading-snug">
+                        {exp.company}
+                      </span>
+                    </div>
+
+                    {/* Center: Role in Uppercase */}
+                    <div className="sm:w-1/3 sm:text-center">
+                      <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[var(--text-primary)] font-mono">
+                        {exp.role}
+                      </span>
+                    </div>
+
+                    {/* Right: Date Range + Down Arrow */}
+                    <div className="flex items-center gap-2 sm:w-1/3 sm:justify-end text-xs sm:text-sm font-mono text-[var(--text-secondary)]">
+                      <span>{exp.period}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-transform duration-300 ${
+                          isExpanded ? 'rotate-180 text-accent' : ''
+                        }`}
+                      />
+                    </div>
+                  </button>
+
+                  {/* Expandable Details Panel */}
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-4 sm:px-12 pb-6 pt-1 flex flex-col gap-2.5 text-left">
+                          {exp.employmentType && (
+                            <span className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider">
+                              {exp.employmentType}
+                            </span>
+                          )}
+                          <p className="text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-light max-w-3xl">
+                            {exp.description}
+                          </p>
+
+                          {exp.skills && exp.skills.length > 0 && (
+                            <div className="flex flex-wrap items-center gap-2 pt-1">
+                              {exp.skills.map((skill, sIdx) => (
+                                <span
+                                  key={sIdx}
+                                  className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[var(--bg-surface)] border border-[var(--border-card)] text-[var(--text-secondary)]"
+                                >
+                                  {skill}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

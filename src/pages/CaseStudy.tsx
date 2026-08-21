@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowRight, Calendar, User, Wrench, Sparkles, BookOpen } fro
 import { projects } from '../data/projects';
 import ProjectMockup from '../components/ProjectMockup';
 import Navbar from '../components/Navbar';
+import RizenCaseStudy from './RizenCaseStudy';
+import SanctumCaseStudy from './SanctumCaseStudy';
+import QuantelCaseStudy from './QuantelCaseStudy';
 
 export const CaseStudy: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,6 +17,18 @@ export const CaseStudy: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  if (id === 'rizen') {
+    return <RizenCaseStudy />;
+  }
+
+  if (id === 'sanctum') {
+    return <SanctumCaseStudy />;
+  }
+
+  if (id === 'quantel-ai') {
+    return <QuantelCaseStudy />;
+  }
 
   const currentIdx = projects.findIndex((p) => p.id === id);
   const project = projects[currentIdx];
@@ -34,28 +49,12 @@ export const CaseStudy: React.FC = () => {
   const nextProject = projects[(currentIdx + 1) % projects.length];
 
   return (
-    <div className="min-h-screen bg-bg-base text-text-primary px-4 md:px-8 py-12 pb-32 max-w-5xl mx-auto flex flex-col gap-12 relative">
+    <div className="min-h-screen bg-bg-base text-text-primary px-6 sm:px-10 lg:px-16 pt-24 sm:pt-32 pb-32 max-w-5xl mx-auto flex flex-col gap-12 relative">
       {/* Background radial highlight */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/5 rounded-full filter blur-[120px] pointer-events-none z-0" />
 
       {/* Floating Navbar */}
       <Navbar />
-
-      {/* Header Controls */}
-      <header className="flex items-center justify-between z-10 border-b border-border-card/40 pb-4">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary transition-colors cursor-pointer group"
-          aria-label="Back to Home"
-        >
-          <ArrowLeft className="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" />
-          <span className="font-mono text-xs">Back to Portfolio</span>
-        </button>
-
-        <span className="text-xs text-text-secondary font-mono">
-          CASE STUDY {currentIdx + 1} / {projects.length}
-        </span>
-      </header>
 
       {/* Project Hero Header */}
       <motion.section

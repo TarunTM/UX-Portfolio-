@@ -7,7 +7,56 @@ interface ProjectMockupProps {
 
 export const ProjectMockup: React.FC<ProjectMockupProps> = ({ projectId, className = '' }) => {
   // Render custom premium SVGs representing high-fidelity wireframes/mockups for each case study
-  
+
+  if (projectId === 'rizen') {
+    return (
+      <div className={`w-full h-full bg-neutral-950 border border-neutral-800 rounded-2xl p-4 md:p-6 flex flex-col justify-between font-mono text-[10px] text-neutral-400 overflow-hidden relative group ${className}`}>
+        {/* Ambient glow */}
+        <div className="absolute top-0 right-0 w-48 h-48 bg-accent/10 rounded-full filter blur-3xl pointer-events-none" />
+
+        {/* Mock App Header */}
+        <div className="flex items-center justify-between border-b border-neutral-800 pb-3 z-10">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+            <span className="font-semibold text-neutral-100 tracking-wider">RIZEN · COMEBACK ENGINE</span>
+          </div>
+          <span className="text-[9px] bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 rounded text-amber-400 font-sans">
+            RECOVERY NUDGE ACTIVE
+          </span>
+        </div>
+
+        {/* Dynamic Card Area */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 my-3 z-10 flex-1 items-center">
+          <div className="md:col-span-2 bg-neutral-900/80 border border-neutral-800 rounded-xl p-3.5 flex flex-col gap-2">
+            <div className="text-[9px] uppercase tracking-wider text-amber-400 font-semibold flex items-center gap-1.5">
+              <span>⚡</span>
+              <span>Designing for the comeback</span>
+            </div>
+            <div className="text-neutral-100 font-sans text-xs font-semibold">
+              Missed 2 workouts? 15-min reactivation routine unlocked.
+            </div>
+            <div className="flex items-center gap-2 mt-1 font-sans text-[11px]">
+              <span className="px-2.5 py-1 rounded bg-accent text-neutral-950 font-bold">Start Recovery Session</span>
+              <span className="text-neutral-400 font-mono text-[9px]">+100 XP · Multiplier Saved</span>
+            </div>
+          </div>
+
+          <div className="md:col-span-1 bg-neutral-900/80 border border-neutral-800 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+            <span className="text-[10px] font-mono text-neutral-400 uppercase">Rank Tier</span>
+            <span className="text-base font-bold text-amber-400 mt-0.5">Gold Rank</span>
+            <span className="text-[9px] text-neutral-500 font-mono">4,200 XP</span>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between text-[8px] border-t border-neutral-850 pt-2.5 text-neutral-500 z-10 font-mono">
+          <span>CAPSTONE MVP · HABIT ARCHITECTURE</span>
+          <span className="text-emerald-400">STRUCTURE · PROGRESS · RECOVERY</span>
+        </div>
+      </div>
+    );
+  }
+
   if (projectId === 'quantel-ai') {
     return (
       <div className={`w-full h-full bg-zinc-950 border border-zinc-800 rounded-2xl p-4 md:p-6 flex flex-col justify-between font-mono text-[10px] text-zinc-500 overflow-hidden relative group ${className}`}>

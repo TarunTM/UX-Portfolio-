@@ -28,97 +28,147 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "quantel-ai",
-    title: "Quantel AI",
-    tagline: "Account Creation & Trust-Building in AI Investment Services",
-    category: "Web & Mobile Application",
-    role: "Lead Product Designer",
-    timeline: "3 Months (Q3 2025)",
-    tools: ["Figma", "ProtoPie", "Tailwind CSS", "UserTesting"],
-    objective: "Redesign the digital onboarding and account creation flow for an AI-powered retail investment assistant, lowering abandonment rates while fostering platform trust.",
-    problem: "Quantel AI's onboarding flow suffered from a 58% abandonment rate. Users felt overwhelmed by long financial compliance forms (KYC) and expressed skepticism regarding how the AI algorithm managed their financial portfolios.",
-    solution: "A step-by-step progressive onboarding wizard that groups complex financial questions into natural, conversational queries. We integrated contextual tooltips explaining 'Why the AI needs this' at high-friction points, combined with visual trust cues.",
+    id: "rizen",
+    title: "RIZEN",
+    tagline: "Designing for the comeback, not the streak.",
+    category: "Mobile App · Gamified Fitness",
+    role: "Product Designer",
+    timeline: "1 Month",
+    tools: ["Figma", "Design Systems", "User Research", "Gamification Design", "Mobile UI/UX"],
+    objective: "A fitness companion designed to help inconsistent exercisers build sustainable workout habits through structure, progress and accountability.",
+    problem: "The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.",
+    solution: "An intentional fitness experience built around recovery nudges, separating workout planning from live execution, friend-circle accountability, and visible XP/tier progress.",
     metrics: [
-      { value: "+34%", label: "Onboarding Completion Rate" },
-      { value: "-42s", label: "Average Time-to-Complete" },
-      { value: "91%", label: "User Trust Rating (Post-Flow)" }
+      { value: "37", label: "Research Surveys" },
+      { value: "5", label: "In-Depth Interviews" },
+      { value: "6", label: "Progression Tiers" }
     ],
     process: [
       {
-        phase: "01 Discover",
+        phase: "01 Intro & Insight",
         type: "Divergent",
-        summary: "Understanding compliance friction and user trust barriers.",
-        details: "Conducted 12 moderated remote usability tests on the legacy flow and ran an open-ended survey (150 participants). Discovered that users abandoned because they didn't understand why the platform needed sensitive financial data (SSNs/net worth statements) right after sign-up."
+        summary: "Discovering that the core problem wasn't starting, it was restarting.",
+        details: "Surveyed 37 exercisers and conducted 5 in-depth qualitative interviews. Found that 78% of users abandon fitness apps entirely after breaking a streak due to guilt, shame, and friction in resetting routines."
       },
       {
-        phase: "02 Define",
+        phase: "02 Role & Systems",
         type: "Convergent",
-        summary: "Synthesizing research into core design pillars.",
-        details: "Mapped out the user journey and identified three critical friction points: compliance over-explanation, lack of algorithmic transparency, and rigid input validation. Defined the design goal: humanize compliance and explain AI decisions in real-time."
+        summary: "Architecting user flows, information architecture, and the design system.",
+        details: "Worked in a cross-functional team of 6 to establish complete UI components, recovery flow architectures, rank progression metrics, and high-fidelity screens."
       },
       {
-        phase: "03 Develop",
+        phase: "03 Design Decisions",
         type: "Divergent",
-        summary: "Ideating conversational and progressive onboarding patterns.",
-        details: "Sketched and wireframed three distinct layouts: a single-scroll page, a modular card stack, and a conversational chat-style wizard. Designed multiple micro-copy variations for compliance fields to reassure users about data security."
+        summary: "Engineering the comeback engine, planning separation, and small circles.",
+        details: "Designed 15-minute recovery reactivation flows, split the app into relaxed planning vs high-focus execution modes, and removed toxic global leaderboards in favor of intimate friend pods."
       },
       {
-        phase: "04 Deliver",
+        phase: "04 Outcome & Delivery",
         type: "Convergent",
-        summary: "Testing interactive prototypes and shipping the flow.",
-        details: "Refined the conversational wizard into a high-fidelity prototype. Conducted A/B testing on 50 users. The progressive modular wizard proved superior, leading to a 34% increase in flow completion. Validated visual cues and packaged components for front-end implementation."
+        summary: "Delivering a focused MVP balancing Structure, Progress, Recovery, and Social.",
+        details: "Delivered a complete mobile prototype integrating workout plans, live tracking, friend activity feeds, and a 6-tier XP rank ladder (Iron to Rizen Elite)."
       }
     ],
     takeaways: [
-      "In AI-driven finance, transparency is the primary driver of conversion. Explaining the reasoning behind algorithmic data collection builds instant trust.",
-      "Progressive disclosure is highly effective for reducing cognitive load during lengthy compliance questionnaires."
+      "A feature is only valuable when it supports a user behaviour.",
+      "Rizen taught me to move beyond 'What features should this product have?' and ask 'What behaviour are we trying to change?'",
+      "Designing for the comeback prevents shame-induced churn and turns broken streaks into sustainable habit loops."
     ]
   },
   {
     id: "sanctum",
-    title: "Sanctum Luxury Gym",
-    tagline: "Overhauling Luxury Fitness Branding & Lead Generation",
-    category: "Luxury Gym Redesign",
-    role: "Freelance UI/UX Designer",
-    timeline: "2 Months (2025)",
-    tools: ["Wix Studio", "Figma", "Adobe Photoshop", "Google Analytics"],
-    objective: "Redesign Sanctum Gym's website to convey an ultra-premium, wellness-sanctuary brand identity while optimizing the membership lead generation funnel.",
-    problem: "The original site looked generic and failed to justify the gym's premium monthly price point. Navigation was cluttered, and the CTA button for booking private tours generated fewer than 5 inquiries per week.",
-    solution: "A bespoke editorial landing page featuring high-contrast typography, cinematic fullscreen photography, and an integrated, seamless tour booking widget. Rebuilt on Wix Studio for smooth responsiveness and scroll animation control.",
+    title: "Sanctum House of Wellness",
+    tagline: "Designing a premium fitness experience around brand clarity, local discovery, and conversion.",
+    category: "Web — Desktop + Mobile · Fitness & Wellness",
+    role: "UI/UX Designer",
+    timeline: "2025",
+    tools: ["Figma", "Responsive Layouts", "Location Discovery", "Conversion UX"],
+    objective: "Create a digital experience that clearly communicated what Sanctum stands for while helping users discover a nearby club and take the next step.",
+    problem: "Sanctum needed to communicate its core proposition without overwhelming visitors with a long list of services, while bridging the gap between brand understanding and physical club enquiry in Mumbai.",
+    solution: "Designed a clean two-pillar homepage (Training + Recovery), instant location discovery for Mumbai clubs, and high-intent contact actions (WhatsApp, Phone, Directions) on club landing pages.",
     metrics: [
-      { value: "+148%", label: "Membership Lead Inquiries" },
-      { value: "45%", label: "Reduction in Page Bounce Rate" },
-      { value: "6.2%", label: "Conversion Rate (Visits to Leads)" }
+      { value: "~3×", label: "Enquiries Increase" },
+      { value: "3", label: "Mumbai Clubs (Andheri, Khar, Juhu)" },
+      { value: "2", label: "Equal Core Pillars" }
     ],
     process: [
       {
-        phase: "01 Discover",
+        phase: "01 Project Intro",
         type: "Divergent",
-        summary: "Competitive benchmarking and luxury demographic analysis.",
-        details: "Analyzed top luxury fitness websites globally (Equinox, Third Space, Remedy). Conducted interviews with 8 high-net-worth gym members to identify key conversion motivators (exclusivity, facility hygiene, trainer caliber, and community atmosphere)."
+        summary: "Defining brand clarity and local discovery for premium Mumbai clubs.",
+        details: "Sanctum House of Wellness is a premium fitness and wellness brand with clubs across Mumbai. The challenge was to create a digital experience that clearly communicated what Sanctum stands for while helping users discover a nearby club and take the next step."
       },
       {
-        phase: "02 Define",
+        phase: "02 Team & Role",
         type: "Convergent",
-        summary: "Establishing brand aesthetic guidelines and flow objectives.",
-        details: "Synthesized insights into a brand brief: Sanctum is not a workout station; it is a wellness sanctuary. Defined the key site metric as booking a 'Guided Private Sanctuary Experience'. Designed a clean, distraction-free tour booking path."
+        summary: "Shaping the journey from understanding to club discovery and enquiry.",
+        details: "Worked alongside a team of three designers contributing to new website screens, responsive layouts, location experiences, and conversion-focused improvements."
       },
       {
-        phase: "03 Develop",
+        phase: "03 Key Design Decisions",
         type: "Divergent",
-        summary: "Designing visual layouts and editorial typography grids.",
-        details: "Explored visual themes utilizing dark modes, gold/champagne accents, and asymmetric photo grids. Designed custom layouts emphasizing large, elegant typography alongside immersive video backgrounds showing the facilities."
+        summary: "Two pillars, location discovery, and actionable club pages.",
+        details: "Introduced Training + Recovery as two equal visual pillars, placed location discovery immediately after brand proposition, and added direct WhatsApp, Phone, and Directions actions."
       },
       {
-        phase: "04 Deliver",
+        phase: "04 Outcome & Impact",
         type: "Convergent",
-        summary: "Implementing in Wix Studio and optimizing performance.",
-        details: "Coded and built the final layouts in Wix Studio. Configured responsive breakpoints, optimized media assets to prevent layout shifting, and implemented interactive calendars. Conducted speed audits to keep load times under 1.8 seconds."
+        summary: "3× surge in direct enquiries during active Meta Ad traffic.",
+        details: "Following the addition of direct contact actions, enquiries increased approximately 3× while Meta Ads were actively driving traffic to the website, demonstrating the power of intent-driven UX."
       }
     ],
     takeaways: [
-      "Luxury websites must lead with visual story-telling. Emphasizing atmosphere over spec lists builds stronger emotional desire.",
-      "A simple, low-friction booking form is vastly superior to sending users to third-party scheduling software."
+      "A small, intent-driven UX improvement can directly support business conversion.",
+      "Shaping the journey from understanding Sanctum → finding a club → making an enquiry drastically reduces cognitive friction.",
+      "Direct communication channels (WhatsApp, Phone, Directions) capture high-intent ad traffic before drop-off occurs."
+    ]
+  },
+  {
+    id: "quantel-ai",
+    title: "Quantel AI",
+    tagline: "Designing new experiences for an AI-powered wealth management platform",
+    category: "FinTech · Web App · Mobile App · UI/UX Design",
+    role: "UI/UX Designer",
+    timeline: "2025",
+    tools: ["Figma", "Design Systems", "Web App UI", "Mobile UX", "FinTech"],
+    objective: "Quantel AI is a wealth management platform that brings investing, financial advice, and market insights into one digital experience.",
+    problem: "When I joined the project, the core product direction and design system were already established. I focused on designing new web and mobile experiences needed to expand the product toward production.",
+    solution: "Structured complex asset data into clear scannable hierarchies, designed focused step-by-step onboarding for Capital & Advise, and extended Light Mode and Points & Rewards while maintaining 100% design system consistency.",
+    metrics: [
+      { value: "5+", label: "New Core Flows" },
+      { value: "100%", label: "System Consistency" },
+      { value: "Web+App", label: "Production Ready" }
+    ],
+    process: [
+      {
+        phase: "01 Project Intro",
+        type: "Divergent",
+        summary: "Extending an established AI wealth management platform toward production.",
+        details: "Quantel AI is a wealth management platform that brings investing, financial advice, and market insights into one digital experience. When I joined the project, the core product direction and design system were already established. I focused on designing new web and mobile experiences needed to expand the product toward production."
+      },
+      {
+        phase: "02 My Role",
+        type: "Convergent",
+        summary: "Extending the existing product through new screens and flows.",
+        details: "Contributed to new web and mobile experiences including the Assets Dashboard, Light Mode Dashboard, Points & Rewards experience, Quantel Capital, and Quantel Advise, ensuring seamless consistency with the established design system."
+      },
+      {
+        phase: "03 Key Design Decisions",
+        type: "Divergent",
+        summary: "Structuring data, focused onboarding steps, and system extension.",
+        details: "Created scannable asset hierarchies, broke Capital and Advise into focused progressive steps, and adapted existing components to Light Mode and gamified reward systems."
+      },
+      {
+        phase: "04 Outcome & Delivery",
+        type: "Convergent",
+        summary: "Delivered production-ready web and mobile investment experiences.",
+        details: "Expanded Quantel's existing product foundation across investment, wealth management, and engagement features while mastering constraint within an established FinTech design system."
+      }
+    ],
+    takeaways: [
+      "Extending a product is about mastering constraint — designing seamlessly within an established system.",
+      "Structuring data from broad portfolio overview to granular holdings keeps complex numbers scannable.",
+      "One decision at a time reduces cognitive overload in high-stakes financial choices."
     ]
   },
   {
