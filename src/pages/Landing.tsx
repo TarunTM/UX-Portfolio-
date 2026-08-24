@@ -9,6 +9,12 @@ import figjamIcon from '../assets/figjam-icon-filled-256 1.png';
 import wixStudioIcon from '../assets/wix-studio.png';
 import antigravityIcon from '../assets/antigravity-icon__full-color.png';
 import socialSlateLogo from '../assets/SS- OG colors.png';
+import rizenHomeMockup from '../assets/HomePage Rizen.png';
+import sanctumHomeMockup from '../assets/Sanctum HomePage.png';
+import quantelHomeMockup from '../assets/Home page Quantel.png';
+import sideProject1 from '../assets/1.Side Project.png';
+import sideProject2 from '../assets/2.Side Project.png';
+import sideProject3 from '../assets/3.Side Project.png';
 
 // ── Tool Icon Components ──────────────────────────────────────────────
 const FigmaIcon = () => (
@@ -359,74 +365,42 @@ export const Landing: React.FC = () => {
               </span>
             </h2>
           </div>
-          <span
+          {/* <span
             className="hidden sm:block text-xs uppercase tracking-widest"
             style={{ color: 'var(--text-muted)' }}
           >
             {projects.length} Case Studies
-          </span>
+          </span> */}
         </div>
 
         {/* Bento Grid Layout (Left: 3 Horizontal Cards, Right: Tall Side Projects Card) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* ── LEFT COLUMN (8 Cols) — 3 Horizontal Stacked Cards (Wider) ── */}
+          {/* ── LEFT COLUMN (8 Cols) — 3 Horizontal Bento Cards ── */}
           <div className="lg:col-span-8 flex flex-col gap-6">
             
             {/* Card 1: Rizen */}
             <div
               onClick={() => navigate('/work/rizen')}
-              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
                   Case Study
                 </span>
               </div>
 
-              {/* Phone Mockup Peek */}
-              <div className="absolute right-6 sm:right-12 -bottom-10 sm:-bottom-12 w-[180px] sm:w-[210px] aspect-[9/18.5] bg-white rounded-t-[32px] border-[5px] sm:border-[6px] border-neutral-800 shadow-2xl overflow-hidden pointer-events-none group-hover:-translate-y-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
-                {/* Status Bar */}
-                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
-                  <span>5:24</span>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
-                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
-                  </div>
-                </div>
-                {/* Screen Content */}
-                <div className="p-3 pt-2 text-left">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-[11px] font-bold text-neutral-900">My cards</span>
-                    <span className="w-4 h-4 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-700">+</span>
-                  </div>
-                  {/* Teal Card */}
-                  <div className="bg-[#38a3a5] rounded-xl p-2.5 text-white shadow-sm flex flex-col justify-between h-[78px]">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="text-[8px] opacity-80 block leading-tight">Balance</span>
-                        <span className="text-xs font-bold">$4,800</span>
-                      </div>
-                      <div className="w-5 h-2.5 bg-white/30 rounded-full p-0.5 flex items-center justify-end">
-                        <span className="w-2 h-2 rounded-full bg-white block" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between text-[7px] opacity-90 font-mono">
-                      <span>•••• 5402</span>
-                      <span>Debit Card</span>
-                    </div>
-                  </div>
-                  {/* Dots */}
-                  <div className="flex justify-center gap-1 mt-2">
-                    <span className="w-1.5 h-1 bg-[#38a3a5] rounded-full" />
-                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                  </div>
-                </div>
+              {/* Phone Mockup Peek — Decreased width and shifted slightly down */}
+              <div className="absolute right-4 sm:right-8 md:right-12 top-5 sm:top-6 w-[185px] sm:w-[205px] md:w-[220px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-[1.02] transition-all duration-500 ease-out z-0 drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]">
+                <img
+                  src={rizenHomeMockup}
+                  alt="Rizen Mockup Preview"
+                  className="w-full h-auto object-contain object-top"
+                />
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
                   Rizen
                 </h3>
               </div>
@@ -435,57 +409,25 @@ export const Landing: React.FC = () => {
             {/* Card 2: Sanctum */}
             <div
               onClick={() => navigate('/work/sanctum')}
-              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
                   Case Study
                 </span>
               </div>
 
-              {/* Phone Mockup Peek */}
-              <div className="absolute right-6 sm:right-12 -bottom-10 sm:-bottom-12 w-[180px] sm:w-[210px] aspect-[9/18.5] bg-white rounded-t-[32px] border-[5px] sm:border-[6px] border-neutral-800 shadow-2xl overflow-hidden pointer-events-none group-hover:-translate-y-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
-                {/* Status Bar */}
-                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
-                  <span>5:24</span>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
-                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
-                  </div>
-                </div>
-                {/* Screen Content */}
-                <div className="p-3 pt-2 text-left">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-[11px] font-bold text-neutral-900">My cards</span>
-                    <span className="w-4 h-4 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-700">+</span>
-                  </div>
-                  {/* Teal Card */}
-                  <div className="bg-[#38a3a5] rounded-xl p-2.5 text-white shadow-sm flex flex-col justify-between h-[78px]">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="text-[8px] opacity-80 block leading-tight">Balance</span>
-                        <span className="text-xs font-bold">$4,800</span>
-                      </div>
-                      <div className="w-5 h-2.5 bg-white/30 rounded-full p-0.5 flex items-center justify-end">
-                        <span className="w-2 h-2 rounded-full bg-white block" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between text-[7px] opacity-90 font-mono">
-                      <span>•••• 5402</span>
-                      <span>Debit Card</span>
-                    </div>
-                  </div>
-                  {/* Dots */}
-                  <div className="flex justify-center gap-1 mt-2">
-                    <span className="w-1.5 h-1 bg-[#38a3a5] rounded-full" />
-                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                  </div>
-                </div>
+              {/* Laptop + Phone Mockup Peek — Native Mockup PNG */}
+              <div className="absolute -right-10 sm:-right-4 -bottom-6 sm:-bottom-10 w-[290px] sm:w-[380px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-105 transition-transform duration-500 ease-out z-0 drop-shadow-[0_15px_30px_rgba(0,0,0,0.14)]">
+                <img
+                  src={sanctumHomeMockup}
+                  alt="Sanctum Mockup Preview"
+                  className="w-full h-auto object-contain"
+                />
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
                   Sanctum
                 </h3>
               </div>
@@ -494,57 +436,25 @@ export const Landing: React.FC = () => {
             {/* Card 3: Quantel AI */}
             <div
               onClick={() => navigate('/work/quantel-ai')}
-              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
                   Case Study
                 </span>
               </div>
 
-              {/* Phone Mockup Peek */}
-              <div className="absolute right-6 sm:right-12 -bottom-10 sm:-bottom-12 w-[180px] sm:w-[210px] aspect-[9/18.5] bg-white rounded-t-[32px] border-[5px] sm:border-[6px] border-neutral-800 shadow-2xl overflow-hidden pointer-events-none group-hover:-translate-y-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
-                {/* Status Bar */}
-                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
-                  <span>5:24</span>
-                  <div className="flex items-center gap-1">
-                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
-                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
-                  </div>
-                </div>
-                {/* Screen Content */}
-                <div className="p-3 pt-2 text-left">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-[11px] font-bold text-neutral-900">My cards</span>
-                    <span className="w-4 h-4 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-700">+</span>
-                  </div>
-                  {/* Teal Card */}
-                  <div className="bg-[#38a3a5] rounded-xl p-2.5 text-white shadow-sm flex flex-col justify-between h-[78px]">
-                    <div className="flex justify-between items-start">
-                      <div>
-                        <span className="text-[8px] opacity-80 block leading-tight">Balance</span>
-                        <span className="text-xs font-bold">$4,800</span>
-                      </div>
-                      <div className="w-5 h-2.5 bg-white/30 rounded-full p-0.5 flex items-center justify-end">
-                        <span className="w-2 h-2 rounded-full bg-white block" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between text-[7px] opacity-90 font-mono">
-                      <span>•••• 5402</span>
-                      <span>Debit Card</span>
-                    </div>
-                  </div>
-                  {/* Dots */}
-                  <div className="flex justify-center gap-1 mt-2">
-                    <span className="w-1.5 h-1 bg-[#38a3a5] rounded-full" />
-                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-                  </div>
-                </div>
+              {/* Laptop + Phone Mockup Peek — Shifted down and to the far right */}
+              <div className="absolute -right-16 sm:-right-10 md:-right-8 -bottom-9 sm:-bottom-13 md:-bottom-14 w-[330px] sm:w-[410px] md:w-[430px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-105 transition-transform duration-500 ease-out z-0 drop-shadow-[0_15px_30px_rgba(0,0,0,0.14)]">
+                <img
+                  src={quantelHomeMockup}
+                  alt="Quantel AI Mockup Preview"
+                  className="w-full h-auto object-contain"
+                />
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
                   Quantel AI
                 </h3>
               </div>
@@ -556,87 +466,49 @@ export const Landing: React.FC = () => {
           <div className="lg:col-span-4 flex flex-col">
             <div
               onClick={() => navigate('/work/influencer-agency')}
-              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
                   Case Study
                 </span>
               </div>
 
-              {/* Tilted Angled Phone Mockup */}
-              <div className="absolute -right-14 sm:-right-8 top-1/2 -translate-y-1/2 w-[215px] sm:w-[240px] aspect-[9/18.5] bg-white rounded-[34px] sm:rounded-[38px] border-[5px] sm:border-[6px] border-neutral-800 shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden pointer-events-none rotate-[-12deg] group-hover:rotate-[-8deg] group-hover:scale-105 transition-all duration-500 ease-out z-0">
-                {/* Status bar */}
-                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
-                  <span>5:24</span>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
-                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
-                    <span className="w-3.5 h-3.5 rounded-full bg-neutral-200 overflow-hidden inline-block">
-                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="avatar" className="w-full h-full object-cover" />
-                    </span>
-                  </div>
+              {/* Diagonal Staggered Deck: Top-Left, Center, Bottom-Right -> Expands on Hover */}
+              <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+                {/* Ambient Backlight Glow */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[340px] rounded-full bg-black/[0.02] blur-3xl pointer-events-none" />
+
+                {/* 1. Top Mockup (Indian Modern Reels) — At Rest: Top-Left | On Hover: Glides UP & LEFT */}
+                <div className="absolute left-[44%] sm:left-[42%] top-1/2 -translate-x-1/2 -translate-y-[56%] -rotate-3 w-[240px] sm:w-[280px] md:w-[310px] z-20 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:left-[38%] sm:group-hover:left-[36%] group-hover:-translate-y-[104%] sm:group-hover:-translate-y-[110%] group-hover:-rotate-5 group-hover:scale-[1.03] drop-shadow-[0_20px_35px_rgba(0,0,0,0.18)]">
+                  <img
+                    src={sideProject1}
+                    alt="Side Project - Reels"
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
 
-                {/* Job Search Screen Content */}
-                <div className="p-3 pt-2 text-left flex flex-col gap-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold text-neutral-900">Search for jobs</span>
-                    <span className="w-4 h-4 rounded bg-red-400 text-white flex items-center justify-center text-[9px]">≡</span>
-                  </div>
-                  
-                  {/* Search input */}
-                  <div className="border border-neutral-200 rounded-lg px-2 py-1 flex items-center justify-between text-[8px] text-neutral-600 bg-neutral-50">
-                    <span className="flex items-center gap-1">🔍 Product Designer</span>
-                    <span className="text-neutral-400">✕</span>
-                  </div>
+                {/* 2. Middle Mockup (Flipkart MacBook) — At Rest: Dead Center | On Hover: Stays in CENTER */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[330px] sm:w-[380px] md:w-[410px] z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] drop-shadow-[0_15px_30px_rgba(0,0,0,0.14)]">
+                  <img
+                    src={sideProject2}
+                    alt="Desktop Side Project - Flipkart"
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
 
-                  <span className="text-[8px] font-bold text-neutral-700 mt-1">Results for Product Designer</span>
-
-                  {/* Job item 1 */}
-                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
-                    <div className="w-5 h-5 rounded bg-blue-50 flex items-center justify-center text-blue-600 text-[9px] font-bold">G</div>
-                    <div className="flex-1">
-                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">Product Designer</span>
-                      <span className="text-[7px] text-neutral-400">Google • Cairo, EG</span>
-                    </div>
-                    <span className="text-[7px] font-semibold text-neutral-600">$4500/mo</span>
-                  </div>
-
-                  {/* Job item 2 */}
-                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
-                    <div className="w-5 h-5 rounded bg-emerald-50 flex items-center justify-center text-emerald-600 text-[9px] font-bold">☺</div>
-                    <div className="flex-1">
-                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">UX Designer</span>
-                      <span className="text-[7px] text-neutral-400">Careem • Dubai, UAE</span>
-                    </div>
-                    <span className="text-[7px] font-semibold text-neutral-600">$45k - 55k/yr</span>
-                  </div>
-
-                  {/* Job item 3 */}
-                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
-                    <div className="w-5 h-5 rounded bg-pink-50 flex items-center justify-center text-pink-600 text-[9px] font-bold">⌂</div>
-                    <div className="flex-1">
-                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">Product Designer Lead</span>
-                      <span className="text-[7px] text-neutral-400">Airbnb • San Francisco</span>
-                    </div>
-                    <span className="text-[7px] font-semibold text-neutral-600">$60k - 75k/yr</span>
-                  </div>
-
-                  {/* Job item 4 */}
-                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
-                    <div className="w-5 h-5 rounded bg-neutral-900 text-white flex items-center justify-center text-[7px] font-bold">Uber</div>
-                    <div className="flex-1">
-                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">Senior UX Designer</span>
-                      <span className="text-[7px] text-neutral-400">Uber • Remote</span>
-                    </div>
-                    <span className="text-[7px] font-semibold text-neutral-600">$40/hr</span>
-                  </div>
+                {/* 3. Bottom Mockup (Nothing OS Calculator) — At Rest: Bottom-Right | On Hover: Glides DOWN & RIGHT */}
+                <div className="absolute left-[56%] sm:left-[58%] top-1/2 -translate-x-1/2 -translate-y-[44%] rotate-3 w-[240px] sm:w-[280px] md:w-[310px] z-30 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:left-[62%] sm:group-hover:left-[64%] group-hover:translate-y-[4%] sm:group-hover:translate-y-[10%] group-hover:rotate-5 group-hover:scale-[1.03] drop-shadow-[0_20px_35px_rgba(0,0,0,0.18)]">
+                  <img
+                    src={sideProject3}
+                    alt="Side Project - Calculator"
+                    className="w-full h-auto object-contain"
+                  />
                 </div>
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
                   Side Projects
                 </h3>
               </div>

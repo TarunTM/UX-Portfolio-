@@ -60,7 +60,7 @@ export const SanctumCaseStudy: React.FC = () => {
               </span>
               <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
                 <span>UI/UX Designer</span>
-                <span className="text-xs text-[var(--text-muted)]">(Web & Conversion)</span>
+                {/* <span className="text-xs text-[var(--text-muted)]">(Web & Conversion)</span> */}
               </div>
             </div>
 
@@ -69,10 +69,11 @@ export const SanctumCaseStudy: React.FC = () => {
                 WHAT I DID
               </span>
               <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
-                <span>Website Redesign</span>
-                <span>Location Discovery</span>
-                <span>Conversion Strategy</span>
-                <span>Mobile UX</span>
+                <span>Product Design,</span>
+                <span>Product Thinking,</span>
+                <span>Prototyping,</span>
+                <span>Product Development</span>
+                
               </div>
             </div>
 
@@ -82,12 +83,12 @@ export const SanctumCaseStudy: React.FC = () => {
               </span>
               <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <div>
-                  <span className="text-[var(--text-primary)] font-medium block">Sanctum Brand</span>
-                  <span className="text-xs text-[var(--text-muted)]">Stakeholders & Leads</span>
+                  <span >Yash Moon</span> <br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(Deign Lead)</span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-primary)] font-medium block">Tarun Madan</span>
-                  <span className="text-xs text-[var(--text-muted)]">UI/UX Designer</span>
+                  <span >Tarun Madan</span><br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
                 </div>
               </div>
             </div>
@@ -109,7 +110,7 @@ export const SanctumCaseStudy: React.FC = () => {
                 <span>Figma</span>
                 <span>FigJam</span>
                 <span>Analytics</span>
-                <span>WhatsApp API</span>
+                <span>Asana</span>
                 <span>Notion</span>
               </div>
             </div>
@@ -159,116 +160,118 @@ export const SanctumCaseStudy: React.FC = () => {
         </section>
 
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
-        <section className="flex flex-col gap-8 sm:gap-10">
+        <section className="flex flex-col gap-5 sm:gap-6">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Key Design Decisions
           </h2>
 
-          {/* Decision 01 */}
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 1 — Defining Sanctum through two pillars
-              </h3>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  Sanctum's offering is built around Training + Recovery. I designed these as two visually equal pillars on the homepage to immediately communicate what the brand stands for instead of presenting a long list of services.
-                </p>
+          <div className="flex flex-col gap-8 sm:gap-10">
+            {/* Decision 01 */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  1. Defining Sanctum through two pillars
+                </h3>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Sanctum's offering is built around Training + Recovery. I designed these as two visually equal pillars on the homepage to immediately communicate what the brand stands for instead of presenting a long list of services.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mockup for Decision 01 */}
+              <div className="flex flex-col gap-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div
+                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
+                      alt="Training Pillar visual"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div
+                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop"
+                      alt="Recovery Pillar visual"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Training + Recovery Equal Pillars Showcase
+                </span>
               </div>
             </div>
 
-            {/* Mockup for Decision 01 */}
-            <div className="flex flex-col gap-1.5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Decision 02 */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  2. Introducing location discovery
+                </h3>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Once users understood the Sanctum proposition, the next question was “Where can I experience it?” I introduced the club locations immediately after the Training + Recovery introduction, allowing users to quickly discover a Sanctum location relevant to them.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mockup for Decision 02 */}
+              <div className="flex flex-col gap-1.5">
                 <div
-                  className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
-                    alt="Training Pillar visual"
+                    src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=1600&auto=format&fit=crop"
+                    alt="Sanctum Club Location Discovery Map and Cards"
                     className="w-full h-full object-cover"
                   />
                 </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Club Location Discovery — Andheri, Khar & Juhu
+                </span>
+              </div>
+            </div>
+
+            {/* Decision 03 */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  3. Making location pages actionable
+                </h3>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    After Meta Ads started driving traffic to the website, users were landing directly on specific club pages. I noticed an opportunity to reduce friction for visitors who had questions about trials, offers, memberships, or the club itself.
+                  </p>
+                  <p>
+                    I added WhatsApp, Phone, and Directions actions to the Andheri, Khar and Juhu pages, giving high-intent visitors a direct way to ask, call, or visit.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mockup for Decision 03 */}
+              <div className="flex flex-col gap-1.5">
                 <div
-                  className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop"
-                    alt="Recovery Pillar visual"
+                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1600&auto=format&fit=crop"
+                    alt="Actionable Club Page with Direct Communication CTA Bar"
                     className="w-full h-full object-cover"
                   />
                 </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Direct Contact Actions (WhatsApp, Phone, Directions) on Club Pages
+                </span>
               </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Training + Recovery Equal Pillars Showcase
-              </span>
-            </div>
-          </div>
-
-          {/* Decision 02 */}
-          <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 2 — Introducing location discovery
-              </h3>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  Once users understood the Sanctum proposition, the next question was “Where can I experience it?” I introduced the club locations immediately after the Training + Recovery introduction, allowing users to quickly discover a Sanctum location relevant to them.
-                </p>
-              </div>
-            </div>
-
-            {/* Mockup for Decision 02 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=1600&auto=format&fit=crop"
-                  alt="Sanctum Club Location Discovery Map and Cards"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Club Location Discovery — Andheri, Khar & Juhu
-              </span>
-            </div>
-          </div>
-
-          {/* Decision 03 */}
-          <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 3 — Making location pages actionable
-              </h3>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  After Meta Ads started driving traffic to the website, users were landing directly on specific club pages. I noticed an opportunity to reduce friction for visitors who had questions about trials, offers, memberships, or the club itself.
-                </p>
-                <p>
-                  I added WhatsApp, Phone, and Directions actions to the Andheri, Khar and Juhu pages, giving high-intent visitors a direct way to ask, call, or visit.
-                </p>
-              </div>
-            </div>
-
-            {/* Mockup for Decision 03 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1600&auto=format&fit=crop"
-                  alt="Actionable Club Page with Direct Communication CTA Bar"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Direct Contact Actions (WhatsApp, Phone, Directions) on Club Pages
-              </span>
             </div>
           </div>
         </section>

@@ -59,8 +59,8 @@ export const RizenCaseStudy: React.FC = () => {
                 MY ROLE
               </span>
               <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
-                <span>Product Designer</span>
-                <span className="text-xs text-[var(--text-muted)]">(UI/UX Lead)</span>
+                <span>Product Designer (PG Austin UX Project)</span>
+                {/* <span className="text-xs text-[var(--text-muted)]">(UI/UX Lead)</span> */}
               </div>
             </div>
 
@@ -82,13 +82,13 @@ export const RizenCaseStudy: React.FC = () => {
               </span>
               <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <div>
-                  <span className="text-[var(--text-primary)] font-medium block">Jonathan Remulla</span>
-                  <span className="text-xs text-[var(--text-muted)]">Design Manager</span>
+                  <span >6 Designers</span> <br></br>
+                  {/* <span className="text-xs text-[var(--text-muted)]">(Design Lead)</span> */}
                 </div>
-                <div>
-                  <span className="text-[var(--text-primary)] font-medium block">Peter Piczon</span>
-                  <span className="text-xs text-[var(--text-muted)]">Web Designer</span>
-                </div>
+                {/* <div>
+                  <span >Tarun Madan</span> <br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
+                </div> */}
               </div>
             </div>
 
@@ -97,7 +97,7 @@ export const RizenCaseStudy: React.FC = () => {
                 TIMELINE
               </span>
               <span className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
-                4 Months
+                1 Month
               </span>
             </div>
 
@@ -108,9 +108,9 @@ export const RizenCaseStudy: React.FC = () => {
               <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <span>Figma</span>
                 <span>FigJam</span>
+                <span>Wix Studio</span>
                 <span>Asana</span>
-                <span>Slack</span>
-                <span>Telegram</span>
+                <span>Google Meet </span>
               </div>
             </div>
           </div>
@@ -156,119 +156,121 @@ export const RizenCaseStudy: React.FC = () => {
         </section>
 
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
-        <section className="flex flex-col gap-8 sm:gap-10">
+        <section className="flex flex-col gap-5 sm:gap-6">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Key Design Decisions
           </h2>
 
-          {/* Decision 01 */}
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 1 — Designing for the comeback
-              </h3>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  Users often lost momentum after missing workouts. We designed recovery nudges to help users return instead of treating a missed workout as the end of their routine.
-                </p>
+          <div className="flex flex-col gap-8 sm:gap-10">
+            {/* Decision 01 */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  1. Designing for the comeback
+                </h3>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Users often lost momentum after missing workouts. We designed recovery nudges to help users return instead of treating a missed workout as the end of their routine.
+                  </p>
+                </div>
               </div>
-            </div>
 
-            {/* Mockup for Decision 01 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600&auto=format&fit=crop"
-                  alt="Recovery nudges and mobility comeback flow"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Recovery Nudge & Low-Friction Restart Screen
-              </span>
-            </div>
-          </div>
-
-          {/* Decision 02 */}
-          <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 2 — Separate planning from doing
-              </h3>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  Planning and exercising require different mindsets. We separated Workout Plans (discovering & customising routines) from Record Workout (focusing solely on executing the session).
-                </p>
-                <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
-                  "Plan when you're planning. Execute when you're training."
-                </p>
-              </div>
-            </div>
-
-            {/* Mockup for Decision 02 */}
-            <div className="flex flex-col gap-1.5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Mockup for Decision 01 */}
+              <div className="flex flex-col gap-1.5">
                 <div
-                  className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1483721074573-586540da5703?q=80&w=1200&auto=format&fit=crop"
-                    alt="Workout routine planner discovery mode"
+                    src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600&auto=format&fit=crop"
+                    alt="Recovery nudges and mobility comeback flow"
                     className="w-full h-full object-cover"
                   />
                 </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Recovery Nudge & Low-Friction Restart Screen
+                </span>
+              </div>
+            </div>
+
+            {/* Decision 02 */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  2. Separate planning from doing
+                </h3>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Planning and exercising require different mindsets. We separated Workout Plans (discovering & customising routines) from Record Workout (focusing solely on executing the session).
+                  </p>
+                  <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
+                    "Plan when you're planning. Execute when you're training."
+                  </p>
+                </div>
+              </div>
+
+              {/* Mockup for Decision 02 */}
+              <div className="flex flex-col gap-1.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div
+                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1483721074573-586540da5703?q=80&w=1200&auto=format&fit=crop"
+                      alt="Workout routine planner discovery mode"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div
+                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
+                    <img
+                      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
+                      alt="Active live session record mode"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Workout Plans Mode vs. Record Workout Mode
+                </span>
+              </div>
+            </div>
+
+            {/* Decision 03 */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  3. Accountability without comparison anxiety
+                </h3>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Users wanted accountability, but not the pressure of competing with everyone. We focused on friends, activity, and small-circle competition instead of global leaderboards, paired with visible rank progression (Iron to Rizen Elite).
+                  </p>
+                  <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
+                    "My friend is working out. I should probably show up too."
+                  </p>
+                </div>
+              </div>
+
+              {/* Mockup for Decision 03 */}
+              <div className="flex flex-col gap-1.5">
                 <div
-                  className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
-                    alt="Active live session record mode"
+                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1600&auto=format&fit=crop"
+                    alt="Friends activity feed and small squad accountability"
                     className="w-full h-full object-cover"
                   />
                 </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Home Activity, Friend Profile & Small-Circle Squad
+                </span>
               </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Workout Plans Mode vs. Record Workout Mode
-              </span>
-            </div>
-          </div>
-
-          {/* Decision 03 */}
-          <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 3 — Accountability without comparison anxiety
-              </h3>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  Users wanted accountability, but not the pressure of competing with everyone. We focused on friends, activity, and small-circle competition instead of global leaderboards, paired with visible rank progression (Iron to Rizen Elite).
-                </p>
-                <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
-                  "My friend is working out. I should probably show up too."
-                </p>
-              </div>
-            </div>
-
-            {/* Mockup for Decision 03 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1600&auto=format&fit=crop"
-                  alt="Friends activity feed and small squad accountability"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Home Activity, Friend Profile & Small-Circle Squad
-              </span>
             </div>
           </div>
         </section>

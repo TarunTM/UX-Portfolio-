@@ -60,7 +60,7 @@ export const QuantelCaseStudy: React.FC = () => {
               </span>
               <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
                 <span>UI/UX Designer</span>
-                <span className="text-xs text-[var(--text-muted)]">(Feature Expansion)</span>
+                {/* <span className="text-xs text-[var(--text-muted)]">(Feature Expansion)</span> */}
               </div>
             </div>
 
@@ -70,9 +70,9 @@ export const QuantelCaseStudy: React.FC = () => {
               </span>
               <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <span>UI & Interaction</span>
-                <span>Design Systems</span>
-                <span>Mobile Flows</span>
-                <span>Asset Dashboards</span>
+                <span>Prototyping</span>
+                <span>Product Thinking</span>
+                
               </div>
             </div>
 
@@ -82,12 +82,16 @@ export const QuantelCaseStudy: React.FC = () => {
               </span>
               <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <div>
-                  <span className="text-[var(--text-primary)] font-medium block">Quantel Core</span>
-                  <span className="text-xs text-[var(--text-muted)]">Design & Product</span>
+                  <span >Yash Moon</span><br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(Deign Lead)</span>
                 </div>
                 <div>
-                  <span className="text-[var(--text-primary)] font-medium block">Tarun Madan</span>
-                  <span className="text-xs text-[var(--text-muted)]">UI/UX Designer</span>
+                  <span >Tarun Madan</span><br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
+                </div>
+                <div>
+                  <span > Shruti Katekar</span><br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
                 </div>
               </div>
             </div>
@@ -108,9 +112,9 @@ export const QuantelCaseStudy: React.FC = () => {
               <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <span>Figma</span>
                 <span>FigJam</span>
-                <span>Design System</span>
-                <span>Linear</span>
-                <span>Slack</span>
+                <span>Jira</span>
+                <span>Asana</span>
+                <span>Google Meet</span>
               </div>
             </div>
           </div>
@@ -159,128 +163,130 @@ export const QuantelCaseStudy: React.FC = () => {
         </section>
 
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
-        <section className="flex flex-col gap-8 sm:gap-10">
+        <section className="flex flex-col gap-5 sm:gap-6">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Key Design Decisions
           </h2>
 
-          {/* Decision 01 */}
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 1 — Structuring complex financial data
-              </h3>
-              <p className="text-xs font-mono text-accent uppercase tracking-wider">
-                Making the Assets experience easier to scan
-              </p>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  The Assets experience contained a large amount of financial information, from portfolio-level information to individual holdings and detailed performance data.
+          <div className="flex flex-col gap-8 sm:gap-10">
+            {/* Decision 01 */}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  1. Structuring complex financial data
+                </h3>
+                <p className="text-xs font-mono text-accent uppercase tracking-wider">
+                  Making the Assets experience easier to scan
                 </p>
-                <p>
-                  I structured the experience so users could move from high-level portfolio information to deeper asset details without competing information overwhelming the screen.
-                </p>
-                <p>
-                  The hierarchy separates summary information, supporting metrics, detailed asset information, and comparison data into clear sections.
-                </p>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    The Assets experience contained a large amount of financial information, from portfolio-level information to individual holdings and detailed performance data.
+                  </p>
+                  <p>
+                    I structured the experience so users could move from high-level portfolio information to deeper asset details without competing information overwhelming the screen.
+                  </p>
+                  <p>
+                    The hierarchy separates summary information, supporting metrics, detailed asset information, and comparison data into clear sections.
+                  </p>
+                </div>
+              </div>
+
+              {/* Mockup for Decision 01 */}
+              <div className="flex flex-col gap-1.5">
+                <div
+                  className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
+                    alt="Assets Dashboard full screen and information hierarchy"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Assets Dashboard — full screen + close-up of the information hierarchy
+                </span>
               </div>
             </div>
 
-            {/* Mockup for Decision 01 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=1600&auto=format&fit=crop"
-                  alt="Assets Dashboard full screen and information hierarchy"
-                  className="w-full h-full object-cover"
-                />
+            {/* Decision 02 */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  2. Breaking financial onboarding into focused steps
+                </h3>
+                <p className="text-xs font-mono text-accent uppercase tracking-wider">
+                  Making complex investment decisions feel manageable
+                </p>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    The Capital and Advise experiences required users to provide financial information and make important decisions during onboarding.
+                  </p>
+                  <p>
+                    Rather than presenting everything at once, I designed the flows around focused steps, allowing users to make one decision at a time while maintaining a clear sense of progress.
+                  </p>
+                  <p>
+                    This helped keep the experience structured while working within the existing Quantel design language.
+                  </p>
+                </div>
               </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Assets Dashboard — full screen + close-up of the information hierarchy
-              </span>
-            </div>
-          </div>
 
-          {/* Decision 02 */}
-          <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 2 — Breaking financial onboarding into focused steps
-              </h3>
-              <p className="text-xs font-mono text-accent uppercase tracking-wider">
-                Making complex investment decisions feel manageable
-              </p>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  The Capital and Advise experiences required users to provide financial information and make important decisions during onboarding.
-                </p>
-                <p>
-                  Rather than presenting everything at once, I designed the flows around focused steps, allowing users to make one decision at a time while maintaining a clear sense of progress.
-                </p>
-                <p>
-                  This helped keep the experience structured while working within the existing Quantel design language.
-                </p>
-              </div>
-            </div>
-
-            {/* Mockup for Decision 02 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1600&auto=format&fit=crop"
-                  alt="Capital and Advise mobile flow connected horizontally"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Capital & Advise flow — 4–6 screens connected as one horizontal flow
-              </span>
-            </div>
-          </div>
-
-          {/* Decision 03 */}
-          <div className="flex flex-col gap-4 pt-2">
-            <div className="flex flex-col gap-1.5">
-              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
-                Decision 3 — Extending the product without breaking consistency
-              </h3>
-              <p className="text-xs font-mono text-accent uppercase tracking-wider">
-                Designing new experiences within an established system
-              </p>
-              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                <p>
-                  Because Quantel already had an established design system when I joined, new screens needed to feel native to the existing product.
-                </p>
-                <p>
-                  I reused the existing components, typography, spacing, navigation patterns, and visual language while adapting them to new requirements such as Light Mode and the Points & Rewards experience.
-                </p>
-                <p>
-                  The goal wasn't to introduce a new visual direction, but to make the product feel consistent as it expanded.
-                </p>
+              {/* Mockup for Decision 02 */}
+              <div className="flex flex-col gap-1.5">
+                <div
+                  className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=1600&auto=format&fit=crop"
+                    alt="Capital and Advise mobile flow connected horizontally"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Capital & Advise flow — 4–6 screens connected as one horizontal flow
+                </span>
               </div>
             </div>
 
-            {/* Mockup for Decision 03 */}
-            <div className="flex flex-col gap-1.5">
-              <div
-                className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop"
-                  alt="Existing component to Light Mode Dashboard to Points and Rewards progression"
-                  className="w-full h-full object-cover"
-                />
+            {/* Decision 03 */}
+            <div className="flex flex-col gap-4 pt-2">
+              <div className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  3. Extending the product without breaking consistency
+                </h3>
+                <p className="text-xs font-mono text-accent uppercase tracking-wider">
+                  Designing new experiences within an established system
+                </p>
+                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Because Quantel already had an established design system when I joined, new screens needed to feel native to the existing product.
+                  </p>
+                  <p>
+                    I reused the existing components, typography, spacing, navigation patterns, and visual language while adapting them to new requirements such as Light Mode and the Points & Rewards experience.
+                  </p>
+                  <p>
+                    The goal wasn't to introduce a new visual direction, but to make the product feel consistent as it expanded.
+                  </p>
+                </div>
               </div>
-              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                Visual: Existing component → Light Mode Dashboard → Points & Rewards screen
-              </span>
+
+              {/* Mockup for Decision 03 */}
+              <div className="flex flex-col gap-1.5">
+                <div
+                  className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1600&auto=format&fit=crop"
+                    alt="Existing component to Light Mode Dashboard to Points and Rewards progression"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                  Visual: Existing component → Light Mode Dashboard → Points & Rewards screen
+                </span>
+              </div>
             </div>
           </div>
         </section>
