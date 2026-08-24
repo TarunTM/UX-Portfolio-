@@ -18,155 +18,156 @@ export const RizenCaseStudy: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen relative pb-32 text-left"
+      className="min-h-screen relative pb-28 text-left"
       style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
     >
       {/* Floating Navbar */}
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-24 sm:pt-32 flex flex-col gap-24 sm:gap-32">
+      <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-20 sm:pt-24 flex flex-col gap-10 sm:gap-14">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
-        <section className="flex flex-col gap-8">
-          <div className="flex flex-col gap-3">
+        <section className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Mobile App · Fitness & Habit Formation
             </span>
-            <h1
-              className="text-5xl sm:text-7xl font-light tracking-tight text-[var(--text-primary)] leading-none"
-              style={{ fontFamily: 'Instrument Serif, Fraunces, Georgia, serif' }}
-            >
+            <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
               RIZEN
             </h1>
-            <p
-              className="text-2xl sm:text-3xl text-[var(--text-secondary)] font-normal leading-snug mt-1"
-              style={{ fontFamily: 'Instrument Serif, Fraunces, Georgia, serif', fontStyle: 'italic' }}
-            >
-              Designing for the comeback.
+            <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
+              Designing for the comeback — behavioral UX for sustainable fitness routines.
             </p>
           </div>
 
           {/* Large Project Mockup */}
-          <div className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
+          <div
+            className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
+            style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+          >
             <img
               src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1600&auto=format&fit=crop"
               alt="Rizen Fitness App Concept — Editorial Workout Scene"
               className="w-full h-full object-cover grayscale-[15%] contrast-[1.05]"
             />
-            <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full text-[10px] font-mono bg-black/60 text-white backdrop-blur-sm">
-              Hero Visual · Product Concept
-            </div>
           </div>
 
-          {/* Minimal Metadata Strip */}
-          <div
-            className="grid grid-cols-2 sm:grid-cols-5 gap-6 pt-6 pb-6 border-y text-xs"
-            style={{ borderColor: 'var(--border-card)' }}
-          >
-            <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">My Role</span>
-              <span className="font-medium text-[var(--text-primary)]">Product Designer</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Team</span>
-              <span className="font-medium text-[var(--text-primary)]">6 Designers</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Timeline</span>
-              <span className="font-medium text-[var(--text-primary)]">1 Month</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Platform</span>
-              <span className="font-medium text-[var(--text-primary)]">Mobile App</span>
-            </div>
-            <div className="flex flex-col gap-1 col-span-2 sm:col-span-1">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--text-muted)]">Research</span>
-              <span className="font-medium text-[var(--text-primary)]"> Survey · 5 Interviews</span>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 01 — PROJECT INTRO ────────────────────────────────────── */}
-        <section className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-              01 — Project Intro
-            </h2>
-          </div>
-
-          <div className="flex flex-col gap-5 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] font-light w-full">
-            <p>
-              Rizen is a fitness companion designed to help inconsistent exercisers build sustainable workout habits through structure, progress, and accountability.
-            </p>
-            <p>
-              The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.
-            </p>
-          </div>
-
-          {/* Project Intro Mockup */}
-          {/* <div className="flex flex-col gap-3">
-            <div className="w-full aspect-[16/10] sm:aspect-[21/10] rounded-2xl sm:rounded-3xl overflow-hidden border relative" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
-              <img
-                src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=1600&auto=format&fit=crop"
-                alt="Research data and fitness habit tracking insights"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-6 sm:p-10 text-center">
-                <blockquote className="text-white text-lg sm:text-2xl font-light italic max-w-xl leading-relaxed" style={{ fontFamily: 'Instrument Serif, Fraunces, Georgia, serif' }}>
-                  "Missing a single day wasn't what broke my habit. It was opening the app the next day and seeing a broken streak that made me want to give up."
-                </blockquote>
+          {/* Metadata Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 sm:gap-8 pt-6 pb-2 items-start text-left">
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                MY ROLE
+              </span>
+              <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
+                <span>Product Designer</span>
+                <span className="text-xs text-[var(--text-muted)]">(UI/UX Lead)</span>
               </div>
             </div>
-            <span className="text-[11px] font-mono text-[var(--text-muted)] text-left">
-              Research synthesis · Qualitative interview quote from inconsistent exercisers
-            </span>
-          </div> */}
+
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                WHAT I DID
+              </span>
+              <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
+                <span>Product Design</span>
+                <span>User Research</span>
+                <span>Prototyping</span>
+                <span>Product Thinking</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                TEAM
+              </span>
+              <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
+                <div>
+                  <span className="text-[var(--text-primary)] font-medium block">Jonathan Remulla</span>
+                  <span className="text-xs text-[var(--text-muted)]">Design Manager</span>
+                </div>
+                <div>
+                  <span className="text-[var(--text-primary)] font-medium block">Peter Piczon</span>
+                  <span className="text-xs text-[var(--text-muted)]">Web Designer</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                TIMELINE
+              </span>
+              <span className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
+                4 Months
+              </span>
+            </div>
+
+            <div className="flex flex-col col-span-2 sm:col-span-1">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                TOOLS
+              </span>
+              <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
+                <span>Figma</span>
+                <span>FigJam</span>
+                <span>Asana</span>
+                <span>Slack</span>
+                <span>Telegram</span>
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* ── 02 — MY ROLE ────────────────────────────────────────── */}
-        <section className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-              02 — My Role
-            </h2>
-          </div>
+        {/* ── CONTEXT ─────────────────────────────────────────────── */}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Context
+          </h2>
 
-          <div className="flex flex-col gap-4 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] font-light w-full">
+          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-              I worked as a Product Designer within a team of 6, focusing on Information Architecture, User Flows, Design System, Hi-Fi UI, Gamification, and Ranks & Achievements.
+              Kultivate Labs (KL), the nonprofit behind San Francisco's SOMA Pilipinas, needed a central platform for its expanding internship program established 2020. Like a startup continuing to scale, they lacked a cohesive space for users to engage with the program.
             </p>
           </div>
-
-          {/* Role / Design System Mockup */}
-          {/* <div className="flex flex-col gap-3">
-            <div className="w-full aspect-[16/8] sm:aspect-[21/8] rounded-2xl sm:rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
-              <img
-                src="https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1600&auto=format&fit=crop"
-                alt="Design System, Tokens & UI Components Strip"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <span className="text-[11px] font-mono text-[var(--text-muted)] text-left">
-              Design System & UI Components Strip (Placeholder — Screens to be added)
-            </span>
-          </div> */}
         </section>
 
-        {/* ── 03 — KEY DESIGN DECISIONS ────────────────────────────── */}
-        <section className="flex flex-col gap-20 sm:gap-28">
-          <div className="flex flex-col gap-2 border-b pb-4" style={{ borderColor: 'var(--border-card)' }}>
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-              03 — Key Design Decisions
-            </h2>
+        {/* ── THE PROBLEM ─────────────────────────────────────────── */}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            The Problem
+          </h2>
+
+          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+            <p>
+              The internship program lacked a dedicated website, leaving information scattered and hard to find. Without a centralized home, users struggled to learn about the program and apply, limiting its growth. There is an internship program — but no home to call its own.
+            </p>
           </div>
+        </section>
+
+        {/* ── MY ROLE ─────────────────────────────────────────────── */}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            My Role & Scope
+          </h2>
+
+          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+            <p>
+              I worked as a Product Designer within a collaborative team, focusing on Information Architecture, User Flows, Design System foundation, Hi-Fi UI, Gamification, and Ranks & Achievements.
+            </p>
+          </div>
+        </section>
+
+        {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
+        <section className="flex flex-col gap-8 sm:gap-10">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Key Design Decisions
+          </h2>
 
           {/* Decision 01 */}
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-3">
-              <h3 className="text-lg sm:text-xl font-medium text-[var(--text-primary)]">
-                Decision 01 — Designing for the comeback
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
+                Decision 1 — Designing for the comeback
               </h3>
-              <div className="flex flex-col gap-3 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] font-light w-full">
+              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                 <p>
                   Users often lost momentum after missing workouts. We designed recovery nudges to help users return instead of treating a missed workout as the end of their routine.
                 </p>
@@ -174,50 +175,56 @@ export const RizenCaseStudy: React.FC = () => {
             </div>
 
             {/* Mockup for Decision 01 */}
-            <div className="flex flex-col gap-3">
-              <div className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
+            <div className="flex flex-col gap-1.5">
+              <div
+                className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+              >
                 <img
                   src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600&auto=format&fit=crop"
                   alt="Recovery nudges and mobility comeback flow"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-[11px] font-mono text-[var(--text-muted)] text-left">
-                Recovery Nudge & Low-Friction Restart Screen (Placeholder — Screens to be added)
+              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                Visual: Recovery Nudge & Low-Friction Restart Screen
               </span>
             </div>
           </div>
 
           {/* Decision 02 */}
-          <div className="flex flex-col gap-8 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
-            <div className="flex flex-col gap-3">
-              <h3 className="text-lg sm:text-xl font-medium text-[var(--text-primary)]">
-                Decision 02 — Separate planning from doing
+          <div className="flex flex-col gap-4 pt-2">
+            <div className="flex flex-col gap-1.5">
+              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
+                Decision 2 — Separate planning from doing
               </h3>
-              <div className="flex flex-col gap-3 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] font-light w-full">
+              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                 <p>
                   Planning and exercising require different mindsets. We separated Workout Plans (discovering & customising routines) from Record Workout (focusing solely on executing the session).
                 </p>
-                <p
-                  className="text-xl sm:text-2xl text-[var(--text-primary)] leading-snug pt-1"
-                  style={{ fontFamily: 'Instrument Serif, Fraunces, Georgia, serif', fontStyle: 'italic' }}
-                >
+                <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
                   "Plan when you're planning. Execute when you're training."
                 </p>
               </div>
             </div>
 
             {/* Mockup for Decision 02 */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1.5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
+                <div
+                  className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
                   <img
                     src="https://images.unsplash.com/photo-1483721074573-586540da5703?q=80&w=1200&auto=format&fit=crop"
                     alt="Workout routine planner discovery mode"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
+                <div
+                  className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
                   <img
                     src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
                     alt="Active live session record mode"
@@ -225,69 +232,64 @@ export const RizenCaseStudy: React.FC = () => {
                   />
                 </div>
               </div>
-              <span className="text-[11px] font-mono text-[var(--text-muted)] text-left">
-                Workout Plans Mode vs. Record Workout Mode (Placeholder — Screens to be added)
+              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                Visual: Workout Plans Mode vs. Record Workout Mode
               </span>
             </div>
           </div>
 
           {/* Decision 03 */}
-          <div className="flex flex-col gap-8 pt-6 border-t" style={{ borderColor: 'var(--border-card)' }}>
-            <div className="flex flex-col gap-3">
-              <h3 className="text-lg sm:text-xl font-medium text-[var(--text-primary)]">
-                Decision 03 — Accountability without comparison anxiety
+          <div className="flex flex-col gap-4 pt-2">
+            <div className="flex flex-col gap-1.5">
+              <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">
+                Decision 3 — Accountability without comparison anxiety
               </h3>
-              <div className="flex flex-col gap-3 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] font-light w-full">
+              <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                 <p>
                   Users wanted accountability, but not the pressure of competing with everyone. We focused on friends, activity, and small-circle competition instead of global leaderboards, paired with visible rank progression (Iron to Rizen Elite).
                 </p>
-                <p
-                  className="text-xl sm:text-2xl text-[var(--text-primary)] leading-snug pt-1"
-                  style={{ fontFamily: 'Instrument Serif, Fraunces, Georgia, serif', fontStyle: 'italic' }}
-                >
+                <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
                   "My friend is working out. I should probably show up too."
                 </p>
               </div>
             </div>
 
             {/* Mockup for Decision 03 */}
-            <div className="flex flex-col gap-3">
-              <div className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
+            <div className="flex flex-col gap-1.5">
+              <div
+                className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+              >
                 <img
                   src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1600&auto=format&fit=crop"
                   alt="Friends activity feed and small squad accountability"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-[11px] font-mono text-[var(--text-muted)] text-left">
-                Home Activity, Friend Profile & Small-Circle Squad (Placeholder — Screens to be added)
+              <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+                Visual: Home Activity, Friend Profile & Small-Circle Squad
               </span>
             </div>
           </div>
         </section>
 
-        {/* ── 04 — OUTCOME ────────────────────────────────────────── */}
-        <section className="flex flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[var(--text-primary)]">
-              04 — Outcome
-            </h2>
-          </div>
+        {/* ── OUTCOME ─────────────────────────────────────────────── */}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Outcome & Learnings
+          </h2>
 
-          <div className="flex flex-col gap-4 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] font-light w-full">
+          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
               Rizen evolved from a broad fitness-tracking concept into a focused experience built around Structure, Progress, Recovery, and Social Accountability.
             </p>
-            <p
-              className="text-xl sm:text-2xl text-[var(--text-primary)] leading-snug pt-2"
-              style={{ fontFamily: 'Instrument Serif, Fraunces, Georgia, serif', fontStyle: 'italic' }}
-            >
+            <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
               "A feature is only valuable when it supports a user behaviour."
             </p>
           </div>
 
           {/* Final Polished Screens Mockup Grid */}
-          <div className="flex flex-col gap-3 mt-4">
+          <div className="flex flex-col gap-2 mt-2">
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
               {[
                 { title: 'Home & Comeback Nudge', img: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop' },
@@ -298,24 +300,30 @@ export const RizenCaseStudy: React.FC = () => {
                 { title: 'Milestone Rewards', img: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=800&auto=format&fit=crop' },
               ].map((screen, idx) => (
                 <div key={idx} className="flex flex-col gap-1.5">
-                  <div className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}>
+                  <div
+                    className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
                     <img src={screen.img} alt={screen.title} className="w-full h-full object-cover" />
                   </div>
                   <span className="text-[10px] font-mono text-[var(--text-muted)] truncate">{screen.title}</span>
                 </div>
               ))}
             </div>
-            <span className="text-[11px] font-mono text-[var(--text-muted)] text-left">
-              Final MVP Core Screens Grid (Placeholder — Final high-res screens will be inserted here)
+            <span className="text-xs font-mono text-[var(--text-muted)] text-left">
+              Final MVP Core Screens
             </span>
           </div>
         </section>
 
         {/* ── FOOTER / NEXT PROJECT NAVIGATION ─────────────────────── */}
-        <footer className="pt-10 border-t flex flex-col sm:flex-row items-center justify-between gap-6" style={{ borderColor: 'var(--border-card)' }}>
+        <footer
+          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6"
+          style={{ borderColor: 'var(--border-card)' }}
+        >
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-xs font-mono text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Portfolio</span>

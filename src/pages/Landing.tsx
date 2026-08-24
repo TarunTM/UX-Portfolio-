@@ -367,124 +367,282 @@ export const Landing: React.FC = () => {
           </span>
         </div>
 
-        {/* Project vertical stack (Image First -> Details Second) */}
-        <div className="space-y-16 sm:space-y-24">
-          {projects.map((project, idx) => (
+        {/* Bento Grid Layout (Left: 3 Horizontal Cards, Right: Tall Side Projects Card) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          {/* ── LEFT COLUMN (8 Cols) — 3 Horizontal Stacked Cards (Wider) ── */}
+          <div className="lg:col-span-8 flex flex-col gap-6">
+            
+            {/* Card 1: Rizen */}
             <div
-              key={project.id}
-              onClick={() => navigate(`/work/${project.id}`)}
-              className="group cursor-pointer flex flex-col gap-6"
+              onClick={() => navigate('/work/rizen')}
+              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
             >
-              {/* 1. SPOTLIGHT IMAGE CANVAS (FIRST) */}
-              <div
-                className="w-full aspect-[16/10] sm:aspect-[21/9] rounded-2xl sm:rounded-3xl border relative overflow-hidden transition-all duration-500 shadow-sm group-hover:shadow-md group-hover:border-neutral-400 dark:group-hover:border-neutral-600"
-                style={{
-                  background: 'var(--bg-surface)',
-                  borderColor: 'var(--border-card)',
-                }}
-              >
-                {/* Floating Glassmorphic Badge */}
-                <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-10 px-3.5 py-1.5 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold tracking-wider uppercase text-accent bg-white/80 dark:bg-neutral-900/80 backdrop-blur-md border border-neutral-200/60 dark:border-neutral-800/60 shadow-sm flex items-center gap-1.5">
-                  <span>{String(idx + 1).padStart(2, '0')}</span>
-                  <span>•</span>
-                  <span>{project.category}</span>
-                </div>
+              <div className="z-10">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                  Case Study
+                </span>
+              </div>
 
-                {/* Arrow Button on Hover */}
-                <div
-                  className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-md group-hover:scale-105"
-                  style={{ background: 'var(--text-primary)', color: 'var(--bg-base)' }}
-                >
-                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                </div>
-
-                {/* Simulated Browser/App Window Frame */}
-                <div
-                  className="absolute inset-x-4 sm:inset-x-10 bottom-0 top-14 sm:top-16 rounded-t-xl sm:rounded-t-2xl border-t border-x p-4 sm:p-6 flex flex-col justify-between shadow-xl transition-transform duration-500 group-hover:-translate-y-2"
-                  style={{
-                    background: 'var(--bg-card)',
-                    borderColor: 'var(--border-card)',
-                  }}
-                >
-                  {/* Browser dots header */}
-                  <div className="flex items-center gap-1.5 mb-4">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+              {/* Phone Mockup Peek */}
+              <div className="absolute right-6 sm:right-12 -bottom-10 sm:-bottom-12 w-[180px] sm:w-[210px] aspect-[9/18.5] bg-white rounded-t-[32px] border-[5px] sm:border-[6px] border-neutral-800 shadow-2xl overflow-hidden pointer-events-none group-hover:-translate-y-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
+                {/* Status Bar */}
+                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
+                  <span>5:24</span>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
+                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
                   </div>
+                </div>
+                {/* Screen Content */}
+                <div className="p-3 pt-2 text-left">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[11px] font-bold text-neutral-900">My cards</span>
+                    <span className="w-4 h-4 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-700">+</span>
+                  </div>
+                  {/* Teal Card */}
+                  <div className="bg-[#38a3a5] rounded-xl p-2.5 text-white shadow-sm flex flex-col justify-between h-[78px]">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-[8px] opacity-80 block leading-tight">Balance</span>
+                        <span className="text-xs font-bold">$4,800</span>
+                      </div>
+                      <div className="w-5 h-2.5 bg-white/30 rounded-full p-0.5 flex items-center justify-end">
+                        <span className="w-2 h-2 rounded-full bg-white block" />
+                      </div>
+                    </div>
+                    <div className="flex justify-between text-[7px] opacity-90 font-mono">
+                      <span>•••• 5402</span>
+                      <span>Debit Card</span>
+                    </div>
+                  </div>
+                  {/* Dots */}
+                  <div className="flex justify-center gap-1 mt-2">
+                    <span className="w-1.5 h-1 bg-[#38a3a5] rounded-full" />
+                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                  </div>
+                </div>
+              </div>
 
-                  {/* Canvas Preview Center */}
-                  <div className="flex-1 flex flex-col items-center justify-center text-center gap-3 py-6">
-                    {renderAppIcon(project.id)}
-                    <span
-                      className="font-mono text-xs sm:text-sm tracking-wide font-medium"
-                      style={{ color: 'var(--text-muted)' }}
-                    >
-                      {project.title} Interface Preview
+              <div className="z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Rizen
+                </h3>
+              </div>
+            </div>
+
+            {/* Card 2: Sanctum */}
+            <div
+              onClick={() => navigate('/work/sanctum')}
+              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+            >
+              <div className="z-10">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                  Case Study
+                </span>
+              </div>
+
+              {/* Phone Mockup Peek */}
+              <div className="absolute right-6 sm:right-12 -bottom-10 sm:-bottom-12 w-[180px] sm:w-[210px] aspect-[9/18.5] bg-white rounded-t-[32px] border-[5px] sm:border-[6px] border-neutral-800 shadow-2xl overflow-hidden pointer-events-none group-hover:-translate-y-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
+                {/* Status Bar */}
+                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
+                  <span>5:24</span>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
+                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
+                  </div>
+                </div>
+                {/* Screen Content */}
+                <div className="p-3 pt-2 text-left">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[11px] font-bold text-neutral-900">My cards</span>
+                    <span className="w-4 h-4 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-700">+</span>
+                  </div>
+                  {/* Teal Card */}
+                  <div className="bg-[#38a3a5] rounded-xl p-2.5 text-white shadow-sm flex flex-col justify-between h-[78px]">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-[8px] opacity-80 block leading-tight">Balance</span>
+                        <span className="text-xs font-bold">$4,800</span>
+                      </div>
+                      <div className="w-5 h-2.5 bg-white/30 rounded-full p-0.5 flex items-center justify-end">
+                        <span className="w-2 h-2 rounded-full bg-white block" />
+                      </div>
+                    </div>
+                    <div className="flex justify-between text-[7px] opacity-90 font-mono">
+                      <span>•••• 5402</span>
+                      <span>Debit Card</span>
+                    </div>
+                  </div>
+                  {/* Dots */}
+                  <div className="flex justify-center gap-1 mt-2">
+                    <span className="w-1.5 h-1 bg-[#38a3a5] rounded-full" />
+                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Sanctum
+                </h3>
+              </div>
+            </div>
+
+            {/* Card 3: Quantel AI */}
+            <div
+              onClick={() => navigate('/work/quantel-ai')}
+              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+            >
+              <div className="z-10">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                  Case Study
+                </span>
+              </div>
+
+              {/* Phone Mockup Peek */}
+              <div className="absolute right-6 sm:right-12 -bottom-10 sm:-bottom-12 w-[180px] sm:w-[210px] aspect-[9/18.5] bg-white rounded-t-[32px] border-[5px] sm:border-[6px] border-neutral-800 shadow-2xl overflow-hidden pointer-events-none group-hover:-translate-y-2 group-hover:scale-105 transition-transform duration-500 ease-out z-0">
+                {/* Status Bar */}
+                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
+                  <span>5:24</span>
+                  <div className="flex items-center gap-1">
+                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
+                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
+                  </div>
+                </div>
+                {/* Screen Content */}
+                <div className="p-3 pt-2 text-left">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[11px] font-bold text-neutral-900">My cards</span>
+                    <span className="w-4 h-4 rounded-full bg-neutral-100 flex items-center justify-center text-[10px] font-bold text-neutral-700">+</span>
+                  </div>
+                  {/* Teal Card */}
+                  <div className="bg-[#38a3a5] rounded-xl p-2.5 text-white shadow-sm flex flex-col justify-between h-[78px]">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-[8px] opacity-80 block leading-tight">Balance</span>
+                        <span className="text-xs font-bold">$4,800</span>
+                      </div>
+                      <div className="w-5 h-2.5 bg-white/30 rounded-full p-0.5 flex items-center justify-end">
+                        <span className="w-2 h-2 rounded-full bg-white block" />
+                      </div>
+                    </div>
+                    <div className="flex justify-between text-[7px] opacity-90 font-mono">
+                      <span>•••• 5402</span>
+                      <span>Debit Card</span>
+                    </div>
+                  </div>
+                  {/* Dots */}
+                  <div className="flex justify-center gap-1 mt-2">
+                    <span className="w-1.5 h-1 bg-[#38a3a5] rounded-full" />
+                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                    <span className="w-1 h-1 bg-neutral-300 rounded-full" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Quantel AI
+                </h3>
+              </div>
+            </div>
+
+          </div>
+
+          {/* ── RIGHT COLUMN (4 Cols) — Sleeker Tall Side Projects Card ── */}
+          <div className="lg:col-span-4 flex flex-col">
+            <div
+              onClick={() => navigate('/work/influencer-agency')}
+              className="bg-[#141414] border border-neutral-800/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-neutral-700 transition-all duration-300 shadow-sm"
+            >
+              <div className="z-10">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[#b4f469] text-black w-max shadow-sm tracking-tight inline-block">
+                  Case Study
+                </span>
+              </div>
+
+              {/* Tilted Angled Phone Mockup */}
+              <div className="absolute -right-14 sm:-right-8 top-1/2 -translate-y-1/2 w-[215px] sm:w-[240px] aspect-[9/18.5] bg-white rounded-[34px] sm:rounded-[38px] border-[5px] sm:border-[6px] border-neutral-800 shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden pointer-events-none rotate-[-12deg] group-hover:rotate-[-8deg] group-hover:scale-105 transition-all duration-500 ease-out z-0">
+                {/* Status bar */}
+                <div className="pt-2 px-4 flex justify-between items-center text-[9px] font-semibold text-neutral-800">
+                  <span>5:24</span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-1.5 bg-neutral-800 rounded-sm inline-block" />
+                    <span className="w-1.5 h-1.5 bg-neutral-800 rounded-full inline-block" />
+                    <span className="w-3.5 h-3.5 rounded-full bg-neutral-200 overflow-hidden inline-block">
+                      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&auto=format&fit=crop" alt="avatar" className="w-full h-full object-cover" />
                     </span>
                   </div>
                 </div>
+
+                {/* Job Search Screen Content */}
+                <div className="p-3 pt-2 text-left flex flex-col gap-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[12px] font-bold text-neutral-900">Search for jobs</span>
+                    <span className="w-4 h-4 rounded bg-red-400 text-white flex items-center justify-center text-[9px]">≡</span>
+                  </div>
+                  
+                  {/* Search input */}
+                  <div className="border border-neutral-200 rounded-lg px-2 py-1 flex items-center justify-between text-[8px] text-neutral-600 bg-neutral-50">
+                    <span className="flex items-center gap-1">🔍 Product Designer</span>
+                    <span className="text-neutral-400">✕</span>
+                  </div>
+
+                  <span className="text-[8px] font-bold text-neutral-700 mt-1">Results for Product Designer</span>
+
+                  {/* Job item 1 */}
+                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-blue-50 flex items-center justify-center text-blue-600 text-[9px] font-bold">G</div>
+                    <div className="flex-1">
+                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">Product Designer</span>
+                      <span className="text-[7px] text-neutral-400">Google • Cairo, EG</span>
+                    </div>
+                    <span className="text-[7px] font-semibold text-neutral-600">$4500/mo</span>
+                  </div>
+
+                  {/* Job item 2 */}
+                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-emerald-50 flex items-center justify-center text-emerald-600 text-[9px] font-bold">☺</div>
+                    <div className="flex-1">
+                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">UX Designer</span>
+                      <span className="text-[7px] text-neutral-400">Careem • Dubai, UAE</span>
+                    </div>
+                    <span className="text-[7px] font-semibold text-neutral-600">$45k - 55k/yr</span>
+                  </div>
+
+                  {/* Job item 3 */}
+                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-pink-50 flex items-center justify-center text-pink-600 text-[9px] font-bold">⌂</div>
+                    <div className="flex-1">
+                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">Product Designer Lead</span>
+                      <span className="text-[7px] text-neutral-400">Airbnb • San Francisco</span>
+                    </div>
+                    <span className="text-[7px] font-semibold text-neutral-600">$60k - 75k/yr</span>
+                  </div>
+
+                  {/* Job item 4 */}
+                  <div className="p-2 border border-neutral-100 rounded-lg bg-white shadow-xs flex items-center gap-2">
+                    <div className="w-5 h-5 rounded bg-neutral-900 text-white flex items-center justify-center text-[7px] font-bold">Uber</div>
+                    <div className="flex-1">
+                      <span className="text-[8px] font-bold text-neutral-900 block leading-tight">Senior UX Designer</span>
+                      <span className="text-[7px] text-neutral-400">Uber • Remote</span>
+                    </div>
+                    <span className="text-[7px] font-semibold text-neutral-600">$40/hr</span>
+                  </div>
+                </div>
               </div>
 
-              {/* 2. SPOTLIGHT DETAILS (SECOND) */}
-              <div className="flex flex-col gap-3.5 px-1">
-                {/* Meta row */}
-                <div className="flex items-center justify-between">
-                  <span
-                    className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-[0.12em]"
-                    style={{ color: 'var(--accent)' }}
-                  >
-                    {project.category}
-                  </span>
-                  <span
-                    className="text-[11px] sm:text-xs font-mono"
-                    style={{ color: 'var(--text-muted)' }}
-                  >
-                    {project.timeline}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3
-                  className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight transition-colors duration-200"
-                  style={{ letterSpacing: '-0.025em' }}
-                >
-                  {project.title}
+              <div className="z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  Side Projects
                 </h3>
-
-                {/* Tagline / Summary */}
-                <p
-                  className="text-sm sm:text-base leading-relaxed max-w-3xl"
-                  style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
-                >
-                  {project.tagline || project.objective}
-                </p>
-
-                {/* Metrics & Action Bar */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-3 mt-1 border-t border-[var(--border-card)]/60">
-                  {/* Metrics List */}
-                  <div className="flex items-center gap-6 sm:gap-8 flex-wrap">
-                    {project.metrics.map((metric, mIdx) => (
-                      <div key={mIdx} className="flex flex-col">
-                        <span className="text-base sm:text-lg font-mono font-semibold text-[var(--text-primary)]">
-                          {metric.value}
-                        </span>
-                        <span className="text-[11px] font-sans text-[var(--text-muted)]">
-                          {metric.label}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA Button */}
-                  <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white transition-all duration-300 cursor-pointer shadow-sm self-start sm:self-auto group-hover:translate-x-1">
-                    <span>Explore Case Study</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
               </div>
             </div>
-          ))}
+          </div>
+
         </div>
         </div>
       </section>

@@ -35,9 +35,12 @@ export const CaseStudy: React.FC = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-bg-base text-text-primary flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-light font-serif">Case Study Not Found</h1>
-        <Link to="/" className="text-accent flex items-center gap-2 hover:underline">
+      <div
+        className="min-h-screen flex flex-col items-center justify-center gap-4"
+        style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
+      >
+        <h1 className="text-2xl font-bold tracking-tight">Case Study Not Found</h1>
+        <Link to="/" className="text-accent flex items-center gap-2 hover:underline text-sm font-mono">
           <ArrowLeft className="w-4 h-4" />
           <span>Return Home</span>
         </Link>
@@ -49,215 +52,214 @@ export const CaseStudy: React.FC = () => {
   const nextProject = projects[(currentIdx + 1) % projects.length];
 
   return (
-    <div className="min-h-screen bg-bg-base text-text-primary px-6 sm:px-10 lg:px-16 pt-24 sm:pt-32 pb-32 max-w-5xl mx-auto flex flex-col gap-12 relative">
-      {/* Background radial highlight */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-accent/5 rounded-full filter blur-[120px] pointer-events-none z-0" />
-
+    <div
+      className="min-h-screen relative pb-28 text-left"
+      style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
+    >
       {/* Floating Navbar */}
       <Navbar />
 
-      {/* Project Hero Header */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="flex flex-col gap-4 text-left z-10"
-      >
-        <span className="text-[10px] font-mono uppercase tracking-widest text-accent bg-accent/5 border border-accent/15 px-3 py-1 rounded-full w-max">
-          {project.category}
-        </span>
-        <h1 className="text-4xl md:text-7xl font-light tracking-tight text-text-primary font-serif mt-2">
-          {project.title}
-        </h1>
-        <p className="text-xl md:text-2xl font-light text-text-secondary max-w-3xl leading-relaxed">
-          {project.tagline}
-        </p>
-      </motion.section>
-
-      {/* Project Metadata Card */}
-      <motion.section
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-bg-surface/30 border border-border-card p-6 rounded-3xl z-10"
-      >
-        <div className="flex items-start gap-3.5 text-left">
-          <User className="w-5 h-5 text-accent mt-0.5" />
-          <div>
-            <h4 className="text-[10px] font-mono uppercase tracking-wider text-text-secondary">Role</h4>
-            <p className="text-sm font-medium text-text-primary mt-1">{project.role}</p>
-          </div>
-        </div>
-
-        <div className="flex items-start gap-3.5 text-left">
-          <Calendar className="w-5 h-5 text-accent mt-0.5" />
-          <div>
-            <h4 className="text-[10px] font-mono uppercase tracking-wider text-text-secondary">Timeline</h4>
-            <p className="text-sm font-medium text-text-primary mt-1">{project.timeline}</p>
-          </div>
-        </div>
-
-        <div className="flex items-start gap-3.5 text-left">
-          <Wrench className="w-5 h-5 text-accent mt-0.5" />
-          <div>
-            <h4 className="text-[10px] font-mono uppercase tracking-wider text-text-secondary">Tools & Stack</h4>
-            <p className="text-sm font-medium text-text-primary mt-1.5 flex flex-wrap gap-1.5">
-              {project.tools.map((t, idx) => (
-                <span key={idx} className="bg-bg-base border border-border-card px-2.5 py-0.5 rounded-md text-xs font-mono">
-                  {t}
-                </span>
-              ))}
+      <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-20 sm:pt-24 flex flex-col gap-10 sm:gap-14">
+        {/* Project Hero Header */}
+        <section className="flex flex-col gap-6">
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+              {project.category}
+            </span>
+            <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
+              {project.title}
+            </h1>
+            <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
+              {project.tagline}
             </p>
           </div>
-        </div>
-      </motion.section>
 
-      {/* Primary Metrics Highlights */}
-      <motion.section
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 z-10"
-      >
-        {project.metrics.map((metric, idx) => (
-          <div
-            key={idx}
-            className="bg-bg-surface/30 border border-border-card p-6 rounded-2xl flex flex-col justify-center items-center text-center shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
-          >
-            <span className="text-3xl md:text-4xl font-light tracking-tight text-accent font-serif">
-              {metric.value}
+          {/* Project Metadata Strip */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-6 pb-2 items-start text-left">
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                MY ROLE
+              </span>
+              <span className="text-[14px] sm:text-[15px] font-normal leading-[1.6] text-[var(--text-secondary)]">
+                {project.role}
+              </span>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                TIMELINE
+              </span>
+              <span className="text-[14px] sm:text-[15px] font-normal leading-[1.6] text-[var(--text-secondary)]">
+                {project.timeline}
+              </span>
+            </div>
+
+            <div className="flex flex-col">
+              <span className="text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
+                TOOLS
+              </span>
+              <div className="flex flex-col text-[14px] sm:text-[15px] font-normal leading-[1.6] text-[var(--text-secondary)]">
+                {project.tools.map((t, idx) => (
+                  <span key={idx}>{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Primary Metrics Highlights */}
+        {project.metrics && project.metrics.length > 0 && (
+          <section className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {project.metrics.map((metric, idx) => (
+              <div
+                key={idx}
+                className="border p-6 rounded-2xl flex flex-col justify-center items-center text-center"
+                style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <span className="text-3xl sm:text-4xl font-bold tracking-tight text-accent">
+                  {metric.value}
+                </span>
+                <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-secondary)] mt-1.5">
+                  {metric.label}
+                </span>
+              </div>
+            ))}
+          </section>
+        )}
+
+        {/* Case Overview: Objectives, Problem & Solution */}
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-left py-2">
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-mono uppercase tracking-wider text-accent">
+              Core Objective
             </span>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-text-secondary mt-1.5">
-              {metric.label}
+            <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Goal</h3>
+            <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">{project.objective}</p>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">
+              Problem Statement
             </span>
+            <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Friction</h3>
+            <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">{project.problem}</p>
           </div>
-        ))}
-      </motion.section>
 
-      {/* Case Overview: Objectives, Problem & Solution */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left py-4 z-10">
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-accent">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Core Objective</span>
+          <div className="flex flex-col gap-2">
+            <span className="text-xs font-mono uppercase tracking-wider text-accent">
+              Design Solution
+            </span>
+            <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Outcome</h3>
+            <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">{project.solution}</p>
           </div>
-          <h3 className="text-xl font-light font-serif text-text-primary">The Goal</h3>
-          <p className="text-sm text-text-secondary leading-relaxed font-light">{project.objective}</p>
-        </div>
+        </section>
 
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-text-secondary">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500/80 animate-pulse" />
-            <span>Problem Statement</span>
+        {/* Detailed Double Diamond Walkthrough */}
+        <section className="flex flex-col gap-6 text-left">
+          <div className="flex items-center justify-between">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Double Diamond Execution
+            </h2>
+            <span className="text-xs text-[var(--text-muted)] font-mono">STEP-BY-STEP</span>
           </div>
-          <h3 className="text-xl font-light font-serif text-text-primary">The Friction</h3>
-          <p className="text-sm text-text-secondary leading-relaxed font-light">{project.problem}</p>
-        </div>
 
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-1.5 text-xs font-mono uppercase tracking-wider text-text-secondary">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/80" />
-            <span>Design Solution</span>
-          </div>
-          <h3 className="text-xl font-light font-serif text-text-primary">The Outcome</h3>
-          <p className="text-sm text-text-secondary leading-relaxed font-light">{project.solution}</p>
-        </div>
-      </section>
-
-      {/* Detailed Double Diamond Walkthrough */}
-      <section className="flex flex-col gap-8 text-left z-10 pt-4">
-        <div className="flex items-center justify-between pb-2">
-          <h2 className="text-2xl font-light font-serif tracking-tight text-text-primary flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-accent" />
-            <span>Double Diamond Execution Walkthrough</span>
-          </h2>
-          <span className="text-xs text-text-secondary font-mono">STEP-BY-STEP</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {project.process.map((step, idx) => (
-            <div
-              key={idx}
-              className="bg-bg-surface/20 border border-border-card/50 p-6 rounded-3xl flex flex-col justify-between gap-4"
-            >
-              <div className="flex flex-col gap-2">
-                <div className="flex justify-between items-center">
-                  <span className="font-mono text-xs text-text-secondary">
-                    Phase {step.phase.split(' ')[0]}
-                  </span>
-                  <span className={`text-[9px] font-mono uppercase tracking-wider px-2 py-0.5 rounded ${
-                    step.type === 'Divergent'
-                      ? 'bg-amber-500/5 text-amber-500 border border-amber-500/10'
-                      : 'bg-emerald-500/5 text-emerald-500 border border-emerald-500/10'
-                  }`}>
-                    {step.type} Thinking {step.type === 'Divergent' ? '◀▶' : '▶◀'}
-                  </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {project.process.map((step, idx) => (
+              <div
+                key={idx}
+                className="border p-6 rounded-2xl sm:rounded-3xl flex flex-col justify-between gap-4"
+                style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+              >
+                <div className="flex flex-col gap-2">
+                  <div className="flex justify-between items-center">
+                    <span className="font-mono text-xs text-[var(--text-muted)]">
+                      Phase {step.phase.split(' ')[0]}
+                    </span>
+                    <span className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded ${
+                      step.type === 'Divergent'
+                        ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                        : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                    }`}>
+                      {step.type} Thinking {step.type === 'Divergent' ? '◀▶' : '▶◀'}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-medium text-[var(--text-primary)] mt-1">
+                    {step.phase.split(' ').slice(1).join(' ')}
+                  </h3>
+                  <p className="text-xs text-accent font-sans mt-0.5 leading-snug">
+                    {step.summary}
+                  </p>
                 </div>
-                <h3 className="text-lg font-light font-serif text-text-primary mt-1">
-                  {step.phase.split(' ').slice(1).join(' ')}
-                </h3>
-                <p className="text-xs text-accent font-sans mt-0.5 leading-snug">
-                  {step.summary}
+
+                <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">
+                  {step.details}
                 </p>
               </div>
-
-              <p className="text-sm text-text-secondary leading-relaxed border-t border-border-card/30 pt-3 font-light">
-                {project.id === 'strength-training-research' && step.details.includes('Strong, JEFIT, and Hevy') ? (
-                  // Custom highlights for strength training research details
-                  <span>
-                    Conducted UX audit on leading tracking competitors like <strong className="text-text-primary">Strong, JEFIT, and Hevy</strong> to isolate common structural inefficiencies. {step.details.replace('Conducted UX audit on leading tracking competitors like Strong, JEFIT, and Hevy to isolate common structural inefficiencies.', '')}
-                  </span>
-                ) : (
-                  step.details
-                )}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Hi-Fi Design Mockups Section */}
-      <section className="flex flex-col gap-6 text-left z-10">
-        <h3 className="text-xl font-light font-serif text-text-primary">High-Fidelity Interface Concept</h3>
-        <div className="h-[320px] md:h-[450px] w-full rounded-3xl overflow-hidden shadow-2xl relative bg-bg-surface border border-border-card/60">
-          <ProjectMockup projectId={project.id} />
-        </div>
-      </section>
-
-      {/* Takeaways & Learning */}
-      <section className="bg-bg-surface/20 border border-border-card p-6 md:p-8 rounded-3xl text-left flex flex-col gap-4 z-10">
-        <h3 className="text-xl font-light font-serif text-text-primary">Key Project Takeaways</h3>
-        <ul className="flex flex-col gap-3 text-sm text-text-secondary leading-relaxed font-sans list-disc list-inside font-light">
-          {project.takeaways.map((takeaway, idx) => (
-            <li key={idx} className="marker:text-accent pl-1">
-              <span className="text-text-primary font-medium pl-1">{takeaway.split('.')[0]}.</span>
-              {takeaway.split('.').slice(1).join('.')}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Next Case Study Navigation CTA */}
-      <footer className="pt-2 flex flex-col md:flex-row md:items-center justify-between gap-6 z-10">
-        <button
-          onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-xs font-mono text-text-secondary hover:text-text-primary transition-colors cursor-pointer"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Return to Dashboard</span>
-        </button>
-
-        <button
-          onClick={() => navigate(`/work/${nextProject.id}`)}
-          className="flex items-center gap-2.5 bg-bg-surface/40 hover:bg-bg-surface/80 border border-border-card/60 px-5 py-3 rounded-2xl cursor-pointer group transition-colors text-sm font-medium"
-        >
-          <div className="text-right">
-            <span className="text-[10px] font-mono uppercase tracking-widest text-text-secondary block">Next Case Study</span>
-            <span className="text-text-primary font-light font-serif">{nextProject.title}</span>
+            ))}
           </div>
-          <ArrowRight className="w-4 h-4 text-accent transform group-hover:translate-x-1 transition-transform" />
-        </button>
-      </footer>
+        </section>
+
+        {/* Hi-Fi Design Mockups Section */}
+        <section className="flex flex-col gap-4 text-left">
+          <h3 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            High-Fidelity Interface Concept
+          </h3>
+          <div
+            className="h-[320px] sm:h-[450px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm relative border"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <ProjectMockup projectId={project.id} />
+          </div>
+        </section>
+
+        {/* Takeaways & Learning */}
+        <section
+          className="border p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-left flex flex-col gap-4"
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+        >
+          <h3 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Key Project Takeaways
+          </h3>
+          <ul className="flex flex-col gap-3 text-[16px] text-[var(--text-secondary)] leading-[1.75] list-disc list-inside font-normal">
+            {project.takeaways.map((takeaway, idx) => (
+              <li key={idx} className="marker:text-accent pl-1">
+                <span className="text-[var(--text-primary)] font-medium pl-1">{takeaway.split('.')[0]}.</span>
+                {takeaway.split('.').slice(1).join('.')}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Footer / Next Project */}
+        <footer
+          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6"
+          style={{ borderColor: 'var(--border-card)' }}
+        >
+          <button
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Return to Portfolio</span>
+          </button>
+
+          <button
+            onClick={() => navigate(`/work/${nextProject.id}`)}
+            className="flex items-center gap-3 p-3 px-5 rounded-xl border transition-colors hover:border-[var(--text-primary)] cursor-pointer group"
+            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          >
+            <div className="text-right">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] block">
+                Next Case Study
+              </span>
+              <span className="text-xs font-medium text-[var(--text-primary)]">
+                {nextProject.title}
+              </span>
+            </div>
+            <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform" />
+          </button>
+        </footer>
+      </main>
     </div>
   );
 };
