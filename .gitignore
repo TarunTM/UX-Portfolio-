@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+Agent_rules.md
+tarun_portfolio_ai_prompt.md
+tarun_portfolio_implementation_plan.md
