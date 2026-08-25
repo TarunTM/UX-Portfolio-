@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, Calendar, User, Wrench, Sparkles, BookOpen } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { projects } from '../data/projects';
 import ProjectMockup from '../components/ProjectMockup';
 import Navbar from '../components/Navbar';

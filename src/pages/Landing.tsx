@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { projects } from '../data/projects';
 import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.png';
@@ -80,60 +79,6 @@ const AntigravityLogo = () => (
     className="w-3.5 h-3.5 object-contain group-hover:rotate-[12deg] transition-transform duration-300"
   />
 );
-
-// ── App Icons ─────────────────────────────────────────────────────────
-const renderAppIcon = (projectId: string) => {
-  const baseClass = "w-16 h-16 rounded-2xl shadow-sm flex flex-col items-center justify-center relative overflow-hidden transition-transform duration-500 group-hover:scale-105";
-  switch (projectId) {
-    case 'rizen':
-      return (
-        <div className={`${baseClass} bg-gradient-to-br from-cyan-950 via-slate-900 to-amber-950 border border-cyan-500/40 shadow-lg shadow-cyan-500/10`}>
-          <svg className="w-8 h-8 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.7}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-          </svg>
-          <span className="text-[7px] font-mono text-cyan-400 font-bold mt-1 uppercase tracking-widest">RIZEN</span>
-        </div>
-      );
-    case 'quantel-ai':
-      return (
-        <div className={`${baseClass} bg-gradient-to-br from-slate-900 to-zinc-800 border border-zinc-700/40`}>
-          <svg className="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-          </svg>
-          <span className="text-[7px] font-mono text-blue-400/80 mt-1 uppercase tracking-widest">QUANTEL</span>
-        </div>
-      );
-    case 'sanctum':
-      return (
-        <div className={`${baseClass} bg-gradient-to-br from-stone-950 to-neutral-800 border border-stone-700/40`}>
-          <svg className="w-8 h-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
-          </svg>
-          <span className="text-[7px] font-mono text-amber-400/80 mt-1 uppercase tracking-widest">SANCTUM</span>
-        </div>
-      );
-    case 'influencer-agency':
-      return (
-        <div className={`${baseClass} bg-gradient-to-br from-zinc-900 to-neutral-800 border border-zinc-700/40`}>
-          <svg className="w-8 h-8 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.109A11.386 11.386 0 0110.089 20.08l-.014-.002" />
-          </svg>
-          <span className="text-[7px] font-mono text-pink-400/80 mt-1 uppercase tracking-widest">SLATE</span>
-        </div>
-      );
-    case 'strength-training-research':
-      return (
-        <div className={`${baseClass} bg-gradient-to-br from-slate-950 to-slate-800 border border-slate-700/40`}>
-          <svg className="w-8 h-8 text-violet-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-          </svg>
-          <span className="text-[7px] font-mono text-violet-400/80 mt-1 uppercase tracking-widest">STRENGTH</span>
-        </div>
-      );
-    default:
-      return null;
-  }
-};
 
 // ── Motion Animation Variants ─────────────────────────────────────────
 const containerVariants = {
