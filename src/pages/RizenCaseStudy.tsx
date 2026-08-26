@@ -3,6 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
+import heroRizen from '../assets/Rizen Img/Hero Rizen.png';
+import homeMockup from '../assets/Rizen Img/Home Mockup.png';
+import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.png';
+import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.png';
+import friendsProfileMockup from '../assets/Rizen Img/Friends Profile Mockup.png';
+import friendsActivityMockup from '../assets/Rizen Img/Friends Activity Mockup.png';
+import rankSystem from '../assets/Rizen Img/Rank System.png';
+import achievementBadges from '../assets/Rizen Img/Achievement Badges.png';
 
 export const RizenCaseStudy: React.FC = () => {
   const navigate = useNavigate();
@@ -36,7 +44,7 @@ export const RizenCaseStudy: React.FC = () => {
               RIZEN
             </h1>
             <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
-              Designing for the comeback — behavioral UX for sustainable fitness routines.
+              Fitness Journey Companion to achieve fitness goals.
             </p>
           </div>
 
@@ -46,9 +54,9 @@ export const RizenCaseStudy: React.FC = () => {
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
           >
             <img
-              src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1600&auto=format&fit=crop"
-              alt="Rizen Fitness App Concept — Editorial Workout Scene"
-              className="w-full h-full object-cover grayscale-[15%] contrast-[1.05]"
+              src={heroRizen}
+              alt="Rizen Fitness App Showcase — Hero Mockup"
+              className="w-full h-full object-cover"
             />
           </div>
 
@@ -124,13 +132,16 @@ export const RizenCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-              Kultivate Labs (KL), the nonprofit behind San Francisco's SOMA Pilipinas, needed a central platform for its expanding internship program established 2020. Like a startup continuing to scale, they lacked a cohesive space for users to engage with the program.
+              Rizen is a fitness journey companion designed to help people stay committed to their fitness goals through workout planning, progress tracking and social accountability.
+              This was a project I worked on as part of my PG UX Austin course, starting with a simple question: how might we help people stay committed to their fitness goals? <br></br>
+              The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.
+              After Survey & 5 user interviews we noticed user didn't necessarily want more motivation or another public leaderboard. They wanted structure, visible progress and accountability from people they actually knew.
             </p>
           </div>
         </section>
 
         {/* ── THE PROBLEM ─────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        {/* <section className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             The Problem
           </h2>
@@ -140,7 +151,7 @@ export const RizenCaseStudy: React.FC = () => {
               The internship program lacked a dedicated website, leaving information scattered and hard to find. Without a centralized home, users struggled to learn about the program and apply, limiting its growth. There is an internship program — but no home to call its own.
             </p>
           </div>
-        </section>
+        </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
         <section className="flex flex-col gap-3">
@@ -150,8 +161,44 @@ export const RizenCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-              I worked as a Product Designer within a collaborative team, focusing on Information Architecture, User Flows, Design System foundation, Hi-Fi UI, Gamification, and Ranks & Achievements.
+                I worked across the workout experience, social/accountability features, gamification and visual direction, while also contributing to the information architecture, user flows and high-fidelity UI.
+                I was also involved in Product Thinking (MVP) like sharing workouts with friends or clients, and the XP, rank, streak and achievement system.
             </p>
+          </div>
+        </section>
+
+        {/* ── OUTCOME ─────────────────────────────────────────────── */}
+        <section className="flex flex-col gap-6 sm:gap-8">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Outcome
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-center">
+            {/* Left Mockup */}
+            <div className="md:col-span-5 flex justify-center md:justify-start">
+              <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px]">
+                <img
+                  src={homeMockup}
+                  alt="Rizen Home Screen Outcome Mockup"
+                  className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                />
+              </div>
+            </div>
+
+            {/* Right Narrative & Core Pillars */}
+            <div className="md:col-span-7 flex flex-col justify-center gap-6 sm:gap-7 text-left">
+              <p className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.75] text-[var(--text-secondary)] font-normal">
+                Rizen evolved from a simple workout-tracking idea into a fitness companion built around
+              </p>
+
+              <div className="text-[16px] sm:text-[18px] md:text-[19px] font-medium tracking-wide text-[var(--text-primary)] text-center sm:text-left py-1">
+                Plan <span className="text-[var(--text-muted)] mx-1">|</span> Workout <span className="text-[var(--text-muted)] mx-1">|</span> Progress <span className="text-[var(--text-muted)] mx-1">|</span> Accountability
+              </div>
+
+              <p className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.75] text-[var(--text-secondary)] font-normal">
+                The final product brought together workout plans, workout tracking, progress, social features and gamification in one mobile experience.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -166,30 +213,41 @@ export const RizenCaseStudy: React.FC = () => {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  1. Designing for the comeback
+                  1. Separate Planning from Doing
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Users often lost momentum after missing workouts. We designed recovery nudges to help users return instead of treating a missed workout as the end of their routine.
+                    Planning a workout and actually doing one are two very different things.
+                    When planning, users need to browse, customise and decide what they're going to do. Once they're working out, they just need to focus on the session, so we separated Workout Plans from Record Workout.
                   </p>
                 </div>
               </div>
 
-              {/* Mockup for Decision 01 */}
-              <div className="flex flex-col gap-1.5">
-                <div
-                  className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                >
+              {/* 2 Side-by-Side Phone Mockups with divided captions above */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-start justify-items-center">
+                {/* 1st Mockup: Plan */}
+                <div className="w-full flex flex-col items-center gap-3">
+                  <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
+                    "Plan when you're planning"
+                  </p>
                   <img
-                    src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1600&auto=format&fit=crop"
-                    alt="Recovery nudges and mobility comeback flow"
-                    className="w-full h-full object-cover"
+                    src={workoutPlanMockup}
+                    alt="Workout Plans Mode Mockup"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
                   />
                 </div>
-                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                  Visual: Recovery Nudge & Low-Friction Restart Screen
-                </span>
+
+                {/* 2nd Mockup: Execute */}
+                <div className="w-full flex flex-col items-center gap-3">
+                  <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
+                    "Execute when you're training"
+                  </p>
+                  <img
+                    src={recordWorkoutMockup}
+                    alt="Record Workout Mode Mockup"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                  />
+                </div>
               </div>
             </div>
 
@@ -197,130 +255,98 @@ export const RizenCaseStudy: React.FC = () => {
             <div className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  2. Separate planning from doing
+                  2. Accountability Without Comparison Anxiety
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Planning and exercising require different mindsets. We separated Workout Plans (discovering & customising routines) from Record Workout (focusing solely on executing the session).
-                  </p>
-                  <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
-                    "Plan when you're planning. Execute when you're training."
+                    We initially considered public leaderboards, but our interviews showed that users were more comfortable competing or staying accountable within their own circles.
+                    So instead of ranking users against an entire country or the world, we built the social experience around friends, activity, profiles and group rankings. We also made workouts shareable, so users could share routines with friends or clients.                  
                   </p>
                 </div>
               </div>
 
-              {/* Mockup for Decision 02 */}
-              <div className="flex flex-col gap-1.5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div
-                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1483721074573-586540da5703?q=80&w=1200&auto=format&fit=crop"
-                      alt="Workout routine planner discovery mode"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div
-                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
-                      alt="Active live session record mode"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+              {/* Centered Quote across both images */}
+              <div className="w-full flex justify-center pt-2">
+                <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
+                  "My friend is working out. I should probably show up too."
+                </p>
+              </div>
+
+              {/* 2 Side-by-Side Phone Mockups for Decision 02 */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-center justify-items-center">
+                <div className="w-full flex justify-center">
+                  <img
+                    src={friendsActivityMockup}
+                    alt="Friends Activity Feed Mockup"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                  />
                 </div>
-                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                  Visual: Workout Plans Mode vs. Record Workout Mode
-                </span>
+                <div className="w-full flex justify-center">
+                  <img
+                    src={friendsProfileMockup}
+                    alt="Friends Profile Mockup"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                  />
+                </div>
               </div>
             </div>
 
             {/* Decision 03 */}
-            <div className="flex flex-col gap-4 pt-2">
+            <div className="flex flex-col gap-5 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  3. Accountability without comparison anxiety
+                  3. Gamification That Makes Progress Feel Good
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Users wanted accountability, but not the pressure of competing with everyone. We focused on friends, activity, and small-circle competition instead of global leaderboards, paired with visible rank progression (Iron to Rizen Elite).
-                  </p>
-                  <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
-                    "My friend is working out. I should probably show up too."
+                    I wanted gamification to make progress feel rewarding without making Rizen feel like a game.<br />
+                    So each part had a different purpose:<br />
+                    <b>XP</b> shows progress.<br />
+                    <b>Ranks</b> show long-term progression.<br />
+                    <b>Streaks</b> celebrate consistency.<br />
+                    <b>Achievements</b> to celebrate smaller milestones.<br />
+                    We chose familiar rank names because our research was conducted with Indian users, many of whom were already familiar with similar progression systems through games.
                   </p>
                 </div>
               </div>
 
-              {/* Mockup for Decision 03 */}
-              <div className="flex flex-col gap-1.5">
-                <div
-                  className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                >
-                  <img
-                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1600&auto=format&fit=crop"
-                    alt="Friends activity feed and small squad accountability"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                  Visual: Home Activity, Friend Profile & Small-Circle Squad
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── OUTCOME ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Outcome & Learnings
-          </h2>
-
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              Rizen evolved from a broad fitness-tracking concept into a focused experience built around Structure, Progress, Recovery, and Social Accountability.
-            </p>
-            <p className="text-base sm:text-lg font-medium text-[var(--text-primary)] italic pt-0.5">
-              "A feature is only valuable when it supports a user behaviour."
-            </p>
-          </div>
-
-          {/* Final Polished Screens Mockup Grid */}
-          <div className="flex flex-col gap-2 mt-2">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-              {[
-                { title: 'Home & Comeback Nudge', img: 'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Routine Planner', img: 'https://images.unsplash.com/photo-1483721074573-586540da5703?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Live Workout Logger', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Squad Feed', img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Rank Progression', img: 'https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Milestone Rewards', img: 'https://images.unsplash.com/photo-1584735935682-2f2b69dff9d2?q=80&w=800&auto=format&fit=crop' },
-              ].map((screen, idx) => (
-                <div key={idx} className="flex flex-col gap-1.5">
-                  <div
-                    className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img src={screen.img} alt={screen.title} className="w-full h-full object-cover" />
+              {/* Visual Artifacts: Rank System & Achievement Badges */}
+              <div className="flex flex-col gap-6 pt-2">
+                {/* 1. Rank System */}
+                <div className="flex flex-col gap-3">
+                  <p className="text-[16px] font-bold text-[var(--text-primary)]">
+                    The Rank progression became
+                  </p>
+                  <div className="w-full py-1">
+                    <img
+                      src={rankSystem}
+                      alt="The Rank progression system: Iron, Bronze, Silver, Gold, Diamond, Rizen Elite"
+                      className="w-full h-auto object-contain block"
+                    />
                   </div>
-                  <span className="text-[10px] font-mono text-[var(--text-muted)] truncate">{screen.title}</span>
                 </div>
-              ))}
+
+                {/* 2. Achievement Badges */}
+                <div className="flex flex-col gap-3 pt-2">
+                  <p className="text-[16px] font-bold text-[var(--text-primary)]">
+                    Achievement Badges
+                  </p>
+                  <div className="w-full py-1">
+                    <img
+                      src={achievementBadges}
+                      alt="Achievement Badges: First Step, Momentum, Unbreakable, Record Breaker, Progress Machine, Consistent Performer"
+                      className="w-full h-auto object-contain block"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-              Final MVP Core Screens
-            </span>
           </div>
         </section>
 
         {/* ── FOOTER / NEXT PROJECT NAVIGATION ─────────────────────── */}
         <footer
-          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6"
+          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6" 
           style={{ borderColor: 'var(--border-card)' }}
         >
           <button
