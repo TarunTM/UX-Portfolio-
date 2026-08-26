@@ -36,7 +36,7 @@ export const SanctumCaseStudy: React.FC = () => {
               Sanctum House of Wellness
             </h1>
             <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
-              Designing a premium fitness experience around brand clarity, local discovery, and conversion.
+              A digital experience for a premium fitness & wellness brand
             </p>
           </div>
 
@@ -90,6 +90,10 @@ export const SanctumCaseStudy: React.FC = () => {
                   <span >Tarun Madan</span><br></br>
                   <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
                 </div>
+                <div>
+                  <span >Shruti Katekar</span><br></br>
+                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
+                </div>
               </div>
             </div>
 
@@ -98,7 +102,7 @@ export const SanctumCaseStudy: React.FC = () => {
                 TIMELINE
               </span>
               <span className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
-                2 Months
+                3 Months
               </span>
             </div>
 
@@ -109,9 +113,9 @@ export const SanctumCaseStudy: React.FC = () => {
               <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <span>Figma</span>
                 <span>FigJam</span>
-                <span>Analytics</span>
+                <span>Wix Studio</span>
+                <span>Google Meet</span>
                 <span>Asana</span>
-                <span>Notion</span>
               </div>
             </div>
           </div>
@@ -125,13 +129,13 @@ export const SanctumCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-              Sanctum House of Wellness is a premium fitness and wellness brand with flagship clubs across Mumbai. The challenge was to create a digital presence that clearly communicated Sanctum's dual philosophy while helping users discover nearby clubs and convert effortlessly.
+                Sanctum House of Wellness is a premium fitness and wellness brand with multiple locations across Mumbai. I worked on the website from design through implementation, creating an experience that communicated what Sanctum stands for, helped users discover the right classes and locations, and made it easier to enquire.
             </p>
           </div>
         </section>
 
         {/* ── THE PROBLEM ─────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        {/* <section className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             The Problem
           </h2>
@@ -141,7 +145,7 @@ export const SanctumCaseStudy: React.FC = () => {
               The previous online presence presented an overwhelming catalog of wellness services without clarifying the core brand ethos. Furthermore, high-intent traffic arriving from Meta advertising had no frictionless channel to ask questions or book trial sessions.
             </p>
           </div>
-        </section>
+        </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
         <section className="flex flex-col gap-3">
@@ -151,10 +155,7 @@ export const SanctumCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-              I worked as a UI/UX Designer alongside three designers. I contributed to new website screens, responsive mobile layouts, location experiences, and conversion-focused improvements.
-            </p>
-            <p>
-              My key contribution was shaping the journey from understanding Sanctum → finding a club → making an enquiry.
+                I worked as part of a team of three designers, contributing to the design of the website, including the homepage, all club pages and the GroupX experience. I designed the screens in Figma and implemented the final experience in Wix Studio, using Wix Bookings for class scheduling and reservations.
             </p>
           </div>
         </section>
@@ -170,11 +171,11 @@ export const SanctumCaseStudy: React.FC = () => {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  1. Defining Sanctum through two pillars
+                  1. Making GroupX easier to explore 
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Sanctum's offering is built around Training + Recovery. I designed these as two visually equal pillars on the homepage to immediately communicate what the brand stands for instead of presenting a long list of services.
+                      GroupX offers a range of classes across Sanctum's locations, but users first needed to understand what classes were available and where they could take them.I designed the GroupX experience to make the relationship between class and location clearer, allowing users to browse the available sessions and understand where each class was offered before moving into the booking flow.
                   </p>
                 </div>
               </div>
@@ -213,11 +214,12 @@ export const SanctumCaseStudy: React.FC = () => {
             <div className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  2. Introducing location discovery
+                  2. Building the experience around Training + Recovery
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Once users understood the Sanctum proposition, the next question was “Where can I experience it?” I introduced the club locations immediately after the Training + Recovery introduction, allowing users to quickly discover a Sanctum location relevant to them.
+                      Sanctum's branding already defined Training and Recovery as its two core pillars. I translated that into the website through a left-and-right visual composition, giving both pillars equal importance.
+This helped communicate what Sanctum stood for before users moved into the details of its locations, classes and facilities.
                   </p>
                 </div>
               </div>
@@ -244,15 +246,15 @@ export const SanctumCaseStudy: React.FC = () => {
             <div className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  3. Making location pages actionable
+                  3. Turning club pages into actionable experiences
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    After Meta Ads started driving traffic to the website, users were landing directly on specific club pages. I noticed an opportunity to reduce friction for visitors who had questions about trials, offers, memberships, or the club itself.
+                      After the website went live, Meta Ads started driving traffic to specific Sanctum locations. We knew the campaigns were targeting areas around the clubs, so users landing on these pages were often already interested in a particular location.
+I redesigned the Andheri, Juhu and Khar club pages and later added direct WhatsApp, Phone and Directions actions to make it easier for users to ask questions, call the club or find their way there.
+About a week after the change, the client shared that WhatsApp and phone enquiries had increased by approximately <strong>3X</strong>.
                   </p>
-                  <p>
-                    I added WhatsApp, Phone, and Directions actions to the Andheri, Khar and Juhu pages, giving high-intent visitors a direct way to ask, call, or visit.
-                  </p>
+                  
                 </div>
               </div>
 
@@ -284,11 +286,10 @@ export const SanctumCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-              Following the addition of the direct contact actions, enquiries increased approximately <strong className="text-[var(--text-primary)] font-semibold">3×</strong> while Meta Ads were actively driving traffic to the website.
+                The final website gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
+                The most measurable result came from the club-page improvement, where the client reported a <strong>3X increase</strong> in WhatsApp and phone enquiries after the direct contact actions were introduced.
             </p>
-            <p>
-              The change showed how a small, intent-driven UX improvement could directly support business conversion.
-            </p>
+            
           </div>
 
           {/* Final Polished Screens Mockup Grid */}
