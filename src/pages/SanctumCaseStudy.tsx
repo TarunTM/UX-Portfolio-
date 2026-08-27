@@ -1,15 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
+import heroVideo from '../assets/Sanctum Img:Video/Hero Video.webm';
+import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.png';
+import juhuSanctum from '../assets/Sanctum Img:Video/Juhu Sanctum.png';
+import groupxSanctum from '../assets/Sanctum Img:Video/GroupX Sanctum.png';
+import trainingScrollVideo from '../assets/Sanctum Img:Video/Training Scroll video.webm';
+
+const outcomeImages = [
+  { img: homeSanctum, alt: 'Sanctum Home Page', title: 'Home Experience' },
+  { img: juhuSanctum, alt: 'Sanctum Juhu Club Page', title: 'Club Location Page' },
+  { img: groupxSanctum, alt: 'Sanctum GroupX Classes', title: 'GroupX Experience' },
+];
 
 export const SanctumCaseStudy: React.FC = () => {
   const navigate = useNavigate();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [btnHovered, setBtnHovered] = useState(false);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // 2-second rotating image timer for Outcome section
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % outcomeImages.length);
+    }, 2000);
+    return () => clearInterval(timer);
   }, []);
 
   // Find next project in the list (or loop to next available)
@@ -30,7 +51,7 @@ export const SanctumCaseStudy: React.FC = () => {
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
-              Web — Desktop + Mobile · Fitness & Wellness
+              Website · Fitness & Wellness
             </span>
             <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
               Sanctum House of Wellness
@@ -40,15 +61,18 @@ export const SanctumCaseStudy: React.FC = () => {
             </p>
           </div>
 
-          {/* Large Project Mockup */}
+          {/* Large Project Hero Video — Uncropped Natural Aspect Ratio */}
           <div
-            className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
+            className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
           >
-            <img
-              src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=1600&auto=format&fit=crop"
-              alt="Sanctum House of Wellness — Luxury Club Atmosphere"
-              className="w-full h-full object-cover grayscale-[15%] contrast-[1.05]"
+            <video
+              src={heroVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto object-contain block"
             />
           </div>
 
@@ -160,6 +184,78 @@ export const SanctumCaseStudy: React.FC = () => {
           </div>
         </section>
 
+        {/* ── OUTCOME ─────────────────────────────────────────────── */}
+        <section className="flex flex-col gap-3">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Outcome & Business Impact
+          </h2>
+
+          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+            <p>
+                The final website gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
+                The most measurable result came from the club-page improvement, where the client reported a <strong>3X increase</strong> in WhatsApp and phone enquiries after the direct contact actions were introduced.
+            </p>
+            
+          </div>
+
+          {/* 2-Second Rotating Showcase Carousel — Matching Hero Video Aspect Ratio */}
+          <div className="flex flex-col gap-2 mt-2">
+            <div
+              className="relative w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
+              style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+            >
+              {outcomeImages.map((slide, idx) => (
+                <div
+                  key={idx}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    activeSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                  }`}
+                >
+                  <img
+                    src={slide.img}
+                    alt={slide.alt}
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              ))}
+
+              {/* Slide Indicator Dots */}
+              <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 z-10">
+                {outcomeImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveSlide(idx)}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                      activeSlide === idx ? 'w-6 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* View Live Site Full-Width Button with Black & Gold Gradient */}
+            <div className="w-full pt-3 pb-1">
+              <a
+                href="https://www.sanctumclub.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setBtnHovered(true)}
+                onMouseLeave={() => setBtnHovered(false)}
+                className="w-full py-4 px-6 rounded-2xl font-semibold text-[16px] tracking-wide flex items-center justify-center gap-2.5 transition-all duration-300 border-0 outline-none shadow-[0_4px_24px_rgba(200,157,66,0.22)] hover:shadow-[0_8px_36px_rgba(200,157,66,0.42)] hover:scale-[1.005] active:scale-[0.99] cursor-pointer text-white relative overflow-hidden"
+                style={{
+                  background: 'linear-gradient(to right, #090909 0%, #16120a 28%, #38280d 55%, #75551c 76%, #bd923b 92%, #ecc46c 100%)',
+                }}
+              >
+                <span className="transition-all duration-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+                  {btnHovered ? "Letss gooo.." : "See it here"}
+                </span>
+                <ArrowRight className={`w-4 h-4 transition-transform duration-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)] ${btnHovered ? 'translate-x-1.5' : ''}`} />
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
         <section className="flex flex-col gap-5 sm:gap-6">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
@@ -180,33 +276,18 @@ export const SanctumCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              {/* Mockup for Decision 01 */}
-              <div className="flex flex-col gap-1.5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div
-                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&auto=format&fit=crop"
-                      alt="Training Pillar visual"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div
-                    className="aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden border"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img
-                      src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1200&auto=format&fit=crop"
-                      alt="Recovery Pillar visual"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+              {/* Mockup for Decision 01 — GroupX Experience */}
+              <div className="flex flex-col gap-1.5 pt-1">
+                <div
+                  className="w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <img
+                    src={groupxSanctum}
+                    alt="Sanctum GroupX Class Experience"
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                  Visual: Training + Recovery Equal Pillars Showcase
-                </span>
               </div>
             </div>
 
@@ -224,21 +305,21 @@ This helped communicate what Sanctum stood for before users moved into the detai
                 </div>
               </div>
 
-              {/* Mockup for Decision 02 */}
-              <div className="flex flex-col gap-1.5">
+              {/* Video Mockup for Decision 02 — Training Scroll Video */}
+              <div className="flex flex-col gap-1.5 pt-1">
                 <div
-                  className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 >
-                  <img
-                    src="https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=1600&auto=format&fit=crop"
-                    alt="Sanctum Club Location Discovery Map and Cards"
-                    className="w-full h-full object-cover"
+                  <video
+                    src={trainingScrollVideo}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto object-contain block"
                   />
                 </div>
-                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                  Visual: Club Location Discovery — Andheri, Khar & Juhu
-                </span>
               </div>
             </div>
 
@@ -258,65 +339,20 @@ About a week after the change, the client shared that WhatsApp and phone enquiri
                 </div>
               </div>
 
-              {/* Mockup for Decision 03 */}
-              <div className="flex flex-col gap-1.5">
+              {/* Mockup for Decision 03 — Juhu Club Page & Direct Actions */}
+              <div className="flex flex-col gap-1.5 pt-1">
                 <div
-                  className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border"
+                  className="w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 >
                   <img
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1600&auto=format&fit=crop"
-                    alt="Actionable Club Page with Direct Communication CTA Bar"
-                    className="w-full h-full object-cover"
+                    src={juhuSanctum}
+                    alt="Sanctum Juhu Club Actionable Page"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
-                <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-                  Visual: Direct Contact Actions (WhatsApp, Phone, Directions) on Club Pages
-                </span>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* ── OUTCOME ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Outcome & Business Impact
-          </h2>
-
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-                The final website gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
-                The most measurable result came from the club-page improvement, where the client reported a <strong>3X increase</strong> in WhatsApp and phone enquiries after the direct contact actions were introduced.
-            </p>
-            
-          </div>
-
-          {/* Final Polished Screens Mockup Grid */}
-          <div className="flex flex-col gap-2 mt-2">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-              {[
-                { title: 'Brand Homepage', img: 'https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Training & Recovery Split', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Location Hub', img: 'https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Andheri Club Page', img: 'https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Khar & Juhu Discovery', img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop' },
-                { title: 'Direct CTA Bar & Lead Flow', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop' },
-              ].map((screen, idx) => (
-                <div key={idx} className="flex flex-col gap-1.5">
-                  <div
-                    className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden border"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img src={screen.img} alt={screen.title} className="w-full h-full object-cover" />
-                  </div>
-                  <span className="text-[10px] font-mono text-[var(--text-muted)] truncate">{screen.title}</span>
-                </div>
-              ))}
-            </div>
-            <span className="text-xs font-mono text-[var(--text-muted)] text-left">
-              Final Sanctum Web & Mobile Layouts
-            </span>
           </div>
         </section>
 

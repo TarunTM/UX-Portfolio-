@@ -48,15 +48,15 @@ export const RizenCaseStudy: React.FC = () => {
             </p>
           </div>
 
-          {/* Large Project Mockup */}
+          {/* Large Project Hero Image — Uncropped Natural Aspect Ratio */}
           <div
-            className="w-full aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
+            className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
           >
             <img
               src={heroRizen}
               alt="Rizen Fitness App Showcase — Hero Mockup"
-              className="w-full h-full object-cover"
+              className="w-full h-auto object-contain block"
             />
           </div>
 
