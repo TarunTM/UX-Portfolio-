@@ -4,16 +4,16 @@ import { Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
-import figjamIcon from '../assets/figjam-icon-filled-256 1.png';
-import wixStudioIcon from '../assets/wix-studio.png';
-import antigravityIcon from '../assets/antigravity-icon__full-color.png';
-import socialSlateLogo from '../assets/SS- OG colors.png';
-import rizenHomeMockup from '../assets/HomePage Rizen.png';
-import sanctumHomeMockup from '../assets/Sanctum HomePage.png';
-import quantelHomeMockup from '../assets/Home page Quantel.png';
-import sideProject1 from '../assets/1.Side Project.png';
-import sideProject2 from '../assets/2.Side Project.png';
-import sideProject3 from '../assets/3.Side Project.png';
+import figjamIcon from '../assets/figjam-icon-filled-256 1.webp';
+import wixStudioIcon from '../assets/wix-studio.webp';
+import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
+import socialSlateLogo from '../assets/SS- OG colors.webp';
+import rizenHomeMockup from '../assets/HomePage Rizen.webp';
+import sanctumHomeMockup from '../assets/Sanctum HomePage.webp';
+import quantelHomeMockup from '../assets/Home page Quantel.webp';
+import sideProject1 from '../assets/1.Side Project.webp';
+import sideProject2 from '../assets/2.Side Project.webp';
+import sideProject3 from '../assets/3.Side Project.webp';
 
 // ── Tool Icon Components ──────────────────────────────────────────────
 const FigmaIcon = () => (
@@ -201,7 +201,7 @@ export const Landing: React.FC = () => {
                 style={{ borderColor: 'var(--border-card)' }}
               >
                 <img
-                  src="/avatar.png"
+                  src="/avatar.webp"
                   alt="Tarun — Product Designer"
                   className="w-full h-full object-cover"
                 />
@@ -410,7 +410,7 @@ export const Landing: React.FC = () => {
           {/* ── RIGHT COLUMN (4 Cols) — Sleeker Tall Side Projects Card ── */}
           <div className="lg:col-span-4 flex flex-col">
             <div
-              onClick={() => navigate('/work/influencer-agency')}
+              onClick={() => navigate('/work/side-quests')}
               className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
@@ -454,7 +454,7 @@ export const Landing: React.FC = () => {
 
               <div className="z-10">
                 <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
-                  Side Projects
+                  Side Quests
                 </h3>
               </div>
             </div>

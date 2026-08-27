@@ -4,9 +4,9 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
 import heroVideo from '../assets/Sanctum Img:Video/Hero Video.webm';
-import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.png';
-import juhuSanctum from '../assets/Sanctum Img:Video/Juhu Sanctum.png';
-import groupxSanctum from '../assets/Sanctum Img:Video/GroupX Sanctum.png';
+import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.webp';
+import juhuSanctum from '../assets/Sanctum Img:Video/Juhu Sanctum.webp';
+import groupxSanctum from '../assets/Sanctum Img:Video/GroupX Sanctum.webp';
 import trainingScrollVideo from '../assets/Sanctum Img:Video/Training Scroll video.webm';
 
 const outcomeImages = [

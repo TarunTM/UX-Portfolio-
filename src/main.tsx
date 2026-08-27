@@ -6,7 +6,7 @@ import App from './App.tsx'
 // Dynamic Circular Favicon generator
 const generateCircularFavicon = () => {
   const img = new Image();
-  img.src = '/avatar.png';
+  img.src = '/avatar.webp';
   img.onload = () => {
     const canvas = document.createElement('canvas');
     canvas.width = 64;

@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
-import heroQuantel from '../assets/Quantel Img/Hero Sanctum.jpg';
-import assetsQuantel from '../assets/Quantel Img/Assets Quantel.jpg';
-import lightmodeDashboard from '../assets/Quantel Img/Quantel LightMode Dashboard.png';
-import capital1Quantel from '../assets/Quantel Img/Capital 1.png';
-import capital2Quantel from '../assets/Quantel Img/Capital 2.png';
-import adviseQuantel from '../assets/Quantel Img/Advice.png';
-import referralQuantel from '../assets/Quantel Img/Quantel referal Screen.jpg';
+import heroQuantel from '../assets/Quantel Img/Hero Sanctum.webp';
+import assetsQuantel from '../assets/Quantel Img/Assets Quantel.webp';
+import lightmodeDashboard from '../assets/Quantel Img/Quantel LightMode Dashboard.webp';
+import capital1Quantel from '../assets/Quantel Img/Capital 1.webp';
+import capital2Quantel from '../assets/Quantel Img/Capital 2.webp';
+import adviseQuantel from '../assets/Quantel Img/Advice.webp';
+import referralQuantel from '../assets/Quantel Img/Quantel referal Screen.webp';
 
 export const QuantelCaseStudy: React.FC = () => {
   const navigate = useNavigate();

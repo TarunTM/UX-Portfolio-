@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
-import heroRizen from '../assets/Rizen Img/Hero Rizen.png';
-import homeMockup from '../assets/Rizen Img/Home Mockup.png';
-import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.png';
-import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.png';
-import friendsProfileMockup from '../assets/Rizen Img/Friends Profile Mockup.png';
-import friendsActivityMockup from '../assets/Rizen Img/Friends Activity Mockup.png';
-import rankSystem from '../assets/Rizen Img/Rank System.png';
-import achievementBadges from '../assets/Rizen Img/Achievement Badges.png';
+import heroRizen from '../assets/Rizen Img/Hero Rizen.webp';
+import homeMockup from '../assets/Rizen Img/Home Mockup.webp';
+import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.webp';
+import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.webp';
+import friendsProfileMockup from '../assets/Rizen Img/Friends Profile Mockup.webp';
+import friendsActivityMockup from '../assets/Rizen Img/Friends Activity Mockup.webp';
+import rankSystem from '../assets/Rizen Img/Rank System.webp';
+import achievementBadges from '../assets/Rizen Img/Achievement Badges.webp';
 
 export const RizenCaseStudy: React.FC = () => {
   const navigate = useNavigate();

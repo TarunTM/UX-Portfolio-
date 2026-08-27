@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar';
 import RizenCaseStudy from './RizenCaseStudy';
 import SanctumCaseStudy from './SanctumCaseStudy';
 import QuantelCaseStudy from './QuantelCaseStudy';
+import SideQuestsCaseStudy from './SideQuestsCaseStudy';
 
 export const CaseStudy: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -27,6 +28,10 @@ export const CaseStudy: React.FC = () => {
 
   if (id === 'quantel-ai') {
     return <QuantelCaseStudy />;
+  }
+
+  if (id === 'side-quests' || id === 'side-projects' || id === 'influencer-agency') {
+    return <SideQuestsCaseStudy />;
   }
 
   const currentIdx = projects.findIndex((p) => p.id === id);

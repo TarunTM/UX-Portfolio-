@@ -172,50 +172,46 @@ export const projects: Project[] = [
     ]
   },
   {
-    id: "influencer-agency",
-    title: "Influencer Slate",
-    tagline: "High-Conversion Web Presence for an Influencer Marketing Agency",
-    category: "High-Conversion Landing Page",
-    role: "Lead Frontend/UI Designer",
-    timeline: "1 Month (2025)",
-    tools: ["Framer", "Figma", "CSS Grid", "Spline 3D"],
-    objective: "Design and develop a high-conversion landing page for Influencer Slate to convert brand marketers looking for creator partnerships.",
-    problem: "The agency lacked a modern digital showcase. Brand managers visiting the site found it hard to navigate case studies and estimate campaign ROI, resulting in lost client opportunities.",
-    solution: "A bold, graphic-heavy landing page built on Framer. Features include structured metric cards, dynamic case study popovers, and an interactive pricing calculator to generate instant campaign quotes.",
+    id: "side-quests",
+    title: "Side Quests",
+    tagline: "A collection of small design explorations, interface experiments, and everyday UX problems I wanted to solve.",
+    category: "Design Explorations · UI/UX Experiments",
+    role: "Product Designer",
+    timeline: "2025",
+    tools: ["Figma", "Prototyping", "Design Systems", "Mobile UI/UX"],
+    objective: "A collection of small design explorations, interface experiments, and everyday UX problems I wanted to solve.",
+    problem: "Everyday mobile and web products frequently have subtle friction points in navigation, context switching, and checkout transparency.",
+    solution: "Crafted minimal, focused design interventions for Nothing Calculator, Instagram Reels shared browsing, and Flipkart Checkout order transparency.",
     metrics: [
-      { value: "+85%", label: "Inbound Agency Briefs" },
-      { value: "4.8m", label: "Impressions on Shared Case Studies" },
-      { value: "72%", label: "Increase in Calculator Engagement" }
+      { value: "3", label: "Core Explorations" },
+      { value: "01", label: "Nothing Calculator" },
+      { value: "02", label: "Instagram Reels" },
+      { value: "03", label: "Flipkart Checkout" }
     ],
     process: [
       {
-        phase: "01 Discover",
+        phase: "01 Nothing Calculator",
         type: "Divergent",
-        summary: "Analyzing brand marketer needs and ROI metrics.",
-        details: "Interviewed 5 marketing directors to understand what metrics they scan when vetting agencies (creator roster size, average engagement, previous brand case studies). Collected historical campaign data to feed into an estimation model."
+        summary: "UI exploration for Nothing Calculator.",
+        details: "A visual redesign of the calculator experience inspired by Nothing’s minimal, distinctive design language. The exploration focused on typography, spacing, hierarchy, and creating a calculator interface that feels native to the Nothing ecosystem."
       },
       {
-        phase: "02 Define",
+        phase: "02 Instagram Reels",
         type: "Convergent",
-        summary: "Mapping the path to action (instant quote submission).",
-        details: "Determined that providing transparent case study outcomes and allowing users to estimate campaign cost instantly would drastically increase lead qualification. Focused design flow on a CTA leading directly to a 'Get Campaign Quote' slider."
+        summary: "Making shared reels easier to browse and reply to.",
+        details: "When a friend sends multiple reels in a DM, each reel has to be opened individually. I explored a way to surface reels shared by a friend directly inside the Reels experience, turning a repetitive back-and-forth interaction into a continuous viewing experience."
       },
       {
-        phase: "03 Develop",
+        phase: "03 Flipkart Checkout",
         type: "Divergent",
-        summary: "Creating bold visual styles and interactive layout options.",
-        details: "Designed high-contrast, graphic layout options with bold cards. Built mockups for a live campaign budget calculator widget. Refined 3D asset integration ideas to add a sense of digital maturity."
-      },
-      {
-        phase: "04 Deliver",
-        type: "Convergent",
-        summary: "Shipping on Framer and fine-tuning micro-interactions.",
-        details: "Built the page inside Framer. Configured high-fidelity micro-interactions for the calculator slider, created smooth scroll transitions, and set up Webflow/Framer forms. Conducted cross-browser compatibility testing."
+        summary: "Adding context to the payment step.",
+        details: "Added an Order Summary to the checkout experience, allowing users to quickly review what they're purchasing before making payment, giving users a final opportunity to catch mistakes and creating more confidence."
       }
     ],
     takeaways: [
-      "Providing immediate utility (such as a campaign calculator) drastically increases user engagement and lead conversion rate.",
-      "Clear social proof linked to physical data (case studies) is the most effective vetting tool for brand managers."
+      "Great UX often lives in the micro-moments — solving everyday friction in the apps we use constantly.",
+      "A seamless continuous flow reduces cognitive context switching between messaging and media.",
+      "Clear order transparency at the final checkout step builds buyer confidence."
     ]
   },
   {
