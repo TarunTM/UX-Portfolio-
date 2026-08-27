@@ -234,7 +234,7 @@ export const SanctumCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            {/* View Live Site Full-Width Button with Black & Gold Gradient */}
+            {/* View Live Site Full-Width Seamless Gradient Button */}
             <div className="w-full pt-3 pb-1">
               <a
                 href="https://www.sanctumclub.co/"
@@ -242,15 +242,42 @@ export const SanctumCaseStudy: React.FC = () => {
                 rel="noopener noreferrer"
                 onMouseEnter={() => setBtnHovered(true)}
                 onMouseLeave={() => setBtnHovered(false)}
-                className="w-full py-4 px-6 rounded-2xl font-semibold text-[16px] tracking-wide flex items-center justify-center gap-2.5 transition-all duration-300 border-0 outline-none shadow-[0_4px_24px_rgba(200,157,66,0.22)] hover:shadow-[0_8px_36px_rgba(200,157,66,0.42)] hover:scale-[1.005] active:scale-[0.99] cursor-pointer text-white relative overflow-hidden"
+                className="group relative w-full py-4 px-6 rounded-2xl font-medium text-[15px] sm:text-[16px] tracking-wide flex items-center justify-center gap-2.5 transition-all duration-300 cursor-pointer overflow-hidden border active:scale-[0.99] shadow-sm hover:shadow-xl"
                 style={{
-                  background: 'linear-gradient(to right, #090909 0%, #16120a 28%, #38280d 55%, #75551c 76%, #bd923b 92%, #ecc46c 100%)',
+                  background: btnHovered
+                    ? 'linear-gradient(135deg, rgba(26, 24, 20, 0.96) 0%, rgba(55, 50, 42, 0.95) 50%, rgba(26, 24, 20, 0.98) 100%)'
+                    : 'linear-gradient(135deg, rgba(26, 24, 20, 0.92) 0%, rgba(38, 35, 30, 0.90) 50%, rgba(26, 24, 20, 0.92) 100%)',
+                  borderColor: btnHovered ? 'rgba(255, 255, 255, 0.25)' : 'var(--border-card)',
+                  color: '#ffffff',
                 }}
               >
-                <span className="transition-all duration-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)]">
+                {/* Subtle top specular sheen */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[1px] transition-opacity duration-300 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent)',
+                    opacity: btnHovered ? 1 : 0.4,
+                  }}
+                />
+
+                {/* Subtle luminous ambient background glow on hover */}
+                <div
+                  className="absolute inset-0 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08), transparent 70%)',
+                    opacity: btnHovered ? 1 : 0,
+                  }}
+                />
+
+                <span className="relative z-10 font-medium transition-all duration-300 tracking-wide">
                   {btnHovered ? "Letss gooo.." : "See it here"}
                 </span>
-                <ArrowRight className={`w-4 h-4 transition-transform duration-300 drop-shadow-[0_1px_3px_rgba(0,0,0,0.7)] ${btnHovered ? 'translate-x-1.5' : ''}`} />
+
+                <ArrowRight
+                  className={`relative z-10 w-4 h-4 transition-all duration-300 ${
+                    btnHovered ? 'translate-x-1.5 opacity-100' : 'opacity-70'
+                  }`}
+                />
               </a>
             </div>
           </div>

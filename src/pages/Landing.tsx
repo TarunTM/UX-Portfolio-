@@ -331,7 +331,7 @@ export const Landing: React.FC = () => {
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
-                  Case Study
+                  Mobile App
                 </span>
               </div>
 
@@ -358,7 +358,7 @@ export const Landing: React.FC = () => {
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
-                  Case Study
+                  Website
                 </span>
               </div>
 
@@ -385,7 +385,7 @@ export const Landing: React.FC = () => {
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
-                  Case Study
+                  WebApp
                 </span>
               </div>
 
@@ -415,7 +415,7 @@ export const Landing: React.FC = () => {
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
-                  Case Study
+                  Side Quests
                 </span>
               </div>
 
