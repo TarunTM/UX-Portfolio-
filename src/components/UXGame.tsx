@@ -138,8 +138,8 @@ export const UXGame: React.FC = () => {
       player.isGrounded = false;
       jumpBufferRef.current = 0;
       const rootStyle = getComputedStyle(document.documentElement);
-      const accentColor = rootStyle.getPropertyValue('--accent').trim() || '#3b82f6';
-      spawnJumpParticles(player.x, player.y, accentColor);
+      const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#1a1814';
+      spawnJumpParticles(player.x, player.y, textPrimary);
     } else {
       // Buffer jump input if pressed slightly before landing (10 frames window)
       jumpBufferRef.current = 10;
@@ -179,10 +179,11 @@ export const UXGame: React.FC = () => {
 
     const gameLoop = () => {
       const rootStyle = getComputedStyle(document.documentElement);
-      const accentColor = rootStyle.getPropertyValue('--accent').trim() || '#3b82f6';
-      const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#fafafa';
-      const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || '#8c8c99';
-      const borderCard = rootStyle.getPropertyValue('--border-card').trim() || '#222226';
+      const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#1a1814';
+      const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || '#6b6760';
+      const borderCard = rootStyle.getPropertyValue('--border-card').trim() || '#e2ddd6';
+      const bgSurface = rootStyle.getPropertyValue('--bg-surface').trim() || '#f0ede6';
+      const bgCard = rootStyle.getPropertyValue('--bg-card').trim() || '#faf9f6';
 
       // Clear Canvas
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -207,15 +208,15 @@ export const UXGame: React.FC = () => {
 
       // Ground Line
       ctx.strokeStyle = borderCard;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(0, groundY);
       ctx.lineTo(canvasWidth, groundY);
       ctx.stroke();
 
-      // Scrolling Ground Dashes
-      ctx.strokeStyle = accentColor;
-      ctx.globalAlpha = 0.35;
+      // Scrolling Ground Dashes (Monochrome)
+      ctx.strokeStyle = textSecondary;
+      ctx.globalAlpha = 0.25;
       ctx.lineWidth = 1.5;
       ctx.setLineDash([8, 12]);
       ctx.lineDashOffset = -groundOffsetRef.current;
@@ -249,7 +250,7 @@ export const UXGame: React.FC = () => {
             player.vy = player.jumpForce;
             player.isGrounded = false;
             jumpBufferRef.current = 0;
-            spawnJumpParticles(player.x, player.y, accentColor);
+            spawnJumpParticles(player.x, player.y, textPrimary);
           }
         }
 
@@ -317,17 +318,15 @@ export const UXGame: React.FC = () => {
         if (p.life >= p.maxLife) particlesRef.current.splice(pIdx, 1);
       }
 
-      // Render Player Character Block
+      // Render Player Character Block (Monochrome)
       ctx.save();
       ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
       ctx.rotate(player.rotation);
-      ctx.shadowColor = accentColor;
-      ctx.shadowBlur = player.isGrounded ? 4 : 10;
       
       const r = 4;
       const w = player.width;
       const h = player.height;
-      ctx.fillStyle = accentColor;
+      ctx.fillStyle = textPrimary;
       ctx.beginPath();
       ctx.moveTo(-w/2 + r, -h/2);
       ctx.lineTo(w/2 - r, -h/2);
@@ -340,13 +339,9 @@ export const UXGame: React.FC = () => {
       ctx.quadraticCurveTo(-w/2, -h/2, -w/2 + r, -h/2);
       ctx.closePath();
       ctx.fill();
-      ctx.shadowBlur = 0;
-      ctx.strokeStyle = textPrimary;
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
 
-      // Expressive Eyes
-      ctx.fillStyle = '#ffffff';
+      // Expressive Eyes (contrasting against textPrimary)
+      ctx.fillStyle = bgCard;
       ctx.fillRect(1.5, -3.5, 3, 3);
       ctx.fillRect(7, -3.5, 3, 3);
       ctx.restore();
@@ -379,14 +374,14 @@ export const UXGame: React.FC = () => {
           player.y + hitBoxShrinkY < obs.y + obs.height &&
           player.y + player.height > obs.y + hitBoxShrinkY
         ) {
-          spawnJumpParticles(player.x, player.y, '#ef4444');
+          spawnJumpParticles(player.x, player.y, textSecondary);
           setLastHurdle(obs.text);
           setGameState('gameover');
         }
 
-        // Chip Card Hurdle
-        ctx.fillStyle = '#121217';
-        ctx.strokeStyle = accentColor;
+        // Chip Card Hurdle (Monochrome)
+        ctx.fillStyle = bgSurface;
+        ctx.strokeStyle = borderCard;
         ctx.lineWidth = 1.2;
         const rx = 4;
         ctx.beginPath();
@@ -403,13 +398,13 @@ export const UXGame: React.FC = () => {
         ctx.fill();
         ctx.stroke();
 
-        // Left accent tag
-        ctx.fillStyle = accentColor;
+        // Left indicator tag (Monochrome)
+        ctx.fillStyle = textPrimary;
         ctx.fillRect(obs.x + 2, obs.y + 2, 2.5, obs.height - 4);
 
         // High-contrast readable hurdle text
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 10px system-ui, -apple-system, sans-serif';
+        ctx.fillStyle = textPrimary;
+        ctx.font = '600 10px system-ui, -apple-system, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(obs.text, obs.x + obs.width / 2 + 1, obs.y + obs.height / 2 + 0.5);
@@ -417,7 +412,7 @@ export const UXGame: React.FC = () => {
         if (obs.x + obs.width < 0) obstaclesRef.current.splice(i, 1);
       }
 
-      // Floating Score Popups
+      // Floating Score Popups (Monochrome)
       for (let ftIdx = floatingTextsRef.current.length - 1; ftIdx >= 0; ftIdx--) {
         const ft = floatingTextsRef.current[ftIdx];
         ft.y -= 0.6;
@@ -426,7 +421,7 @@ export const UXGame: React.FC = () => {
           floatingTextsRef.current.splice(ftIdx, 1);
           continue;
         }
-        ctx.fillStyle = accentColor;
+        ctx.fillStyle = textPrimary;
         ctx.globalAlpha = ft.alpha;
         ctx.font = 'bold 9px monospace';
         ctx.fillText(ft.text, ft.x, ft.y);
@@ -448,35 +443,47 @@ export const UXGame: React.FC = () => {
       className="flex flex-col gap-4 w-full h-full select-none"
       onClick={gameState === 'playing' ? triggerJump : undefined}
     >
-      <div className="flex flex-wrap justify-between items-center w-full border-b border-border-card/45 pb-3 gap-2">
+      <div className="flex flex-wrap justify-between items-center w-full border-b border-[var(--border-card)] pb-3 gap-2">
         <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+          <div 
+            className="w-7 h-7 rounded-lg flex items-center justify-center"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+          >
             <Zap className="w-3.5 h-3.5" />
           </div>
           <div className="flex flex-col text-left">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-accent font-bold">MINIGAME</span>
-              <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-accent/10 text-accent font-semibold">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold">MINIGAME</span>
+              <span 
+                className="text-[9px] font-mono px-2 py-0.5 rounded-full font-medium"
+                style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-secondary)' }}
+              >
                 {currentLevel}
               </span>
             </div>
-            <h3 className="text-base font-semibold font-sans text-text-primary">UX Runner</h3>
+            <h3 className="text-base font-semibold font-sans text-[var(--text-primary)]">UX Runner</h3>
           </div>
         </div>
-        <div className="flex items-center gap-5 font-mono text-xs">
+        <div className="flex items-center gap-4 font-mono text-xs">
           <div className="flex items-center gap-1.5">
-            <span className="text-text-secondary/60">SCORE:</span> 
-            <span className="font-bold text-text-primary">{score}</span>
+            <span className="text-[var(--text-muted)]">SCORE:</span> 
+            <span className="font-bold text-[var(--text-primary)]">{score}</span>
           </div>
-          <div className="flex items-center gap-1.5 bg-accent/5 px-2.5 py-1 rounded-full border border-accent/15">
-            <Trophy className="w-3 h-3 text-amber-400" />
-            <span className="text-text-secondary/60">BEST:</span> 
-            <span className="font-bold text-accent">{highScore}</span>
+          <div 
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono"
+            style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)' }}
+          >
+            <Trophy className="w-3 h-3 text-[var(--text-secondary)]" />
+            <span className="text-[var(--text-muted)]">BEST:</span> 
+            <span className="font-bold text-[var(--text-primary)]">{highScore}</span>
           </div>
         </div>
       </div>
 
-      <div className="relative flex-1 bg-bg-base/30 rounded-2xl border border-border-card/50 overflow-hidden min-h-[160px] flex items-center justify-center shadow-inner">
+      <div 
+        className="relative flex-1 rounded-2xl border overflow-hidden min-h-[160px] flex items-center justify-center"
+        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-base)' }}
+      >
         <canvas 
           ref={canvasRef}
           width={480}
@@ -485,21 +492,25 @@ export const UXGame: React.FC = () => {
         />
 
         {gameState === 'idle' && (
-          <div className="absolute inset-0 bg-bg-surface/90 backdrop-blur-[3px] flex flex-col items-center justify-center gap-3 p-4 text-center">
-            <div className="flex items-center gap-1.5 text-accent text-xs font-mono uppercase tracking-wider font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div 
+            className="absolute inset-0 backdrop-blur-[4px] flex flex-col items-center justify-center gap-3 p-4 text-center"
+            style={{ background: 'rgba(var(--bg-surface-rgb, 240, 237, 230), 0.92)' }}
+          >
+            <div className="flex items-center gap-1.5 text-[var(--text-primary)] text-xs font-mono uppercase tracking-wider font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
               <span>Short UI/UX Hurdles Challenge</span>
             </div>
-            <p className="text-xs text-text-secondary font-mono">
-              Dodge <span className="text-accent font-bold">"Last Change"</span>, <span className="text-accent font-bold">"Iterate"</span> & <span className="text-accent font-bold">"Scope Creep"</span>
+            <p className="text-xs text-[var(--text-secondary)] font-mono">
+              Dodge <span className="text-[var(--text-primary)] font-semibold">"Last Change"</span>, <span className="text-[var(--text-primary)] font-semibold">"Iterate"</span> & <span className="text-[var(--text-primary)] font-semibold">"Scope Creep"</span>
             </p>
-            <p className="text-xs font-semibold text-text-primary">Press Space or Tap Screen to Jump</p>
+            <p className="text-[11px] font-medium text-[var(--text-muted)]">Press Space or Tap Screen to Jump</p>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleStart();
               }}
-              className="flex items-center gap-2 bg-accent hover:bg-accent/90 text-white text-xs font-mono font-bold px-5 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 shadow-lg shadow-accent/25 mt-1"
+              className="flex items-center gap-2 text-xs font-mono font-bold px-6 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 shadow-sm mt-1 hover:opacity-90"
+              style={{ background: 'var(--text-primary)', color: 'var(--bg-base)' }}
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>START SPRINT</span>
@@ -508,20 +519,27 @@ export const UXGame: React.FC = () => {
         )}
 
         {gameState === 'gameover' && (
-          <div className="absolute inset-0 bg-bg-surface/90 backdrop-blur-[3px] flex flex-col items-center justify-center gap-2 p-4 text-center animate-fade-in">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-500 border border-rose-500/20">
+          <div 
+            className="absolute inset-0 backdrop-blur-[4px] flex flex-col items-center justify-center gap-2 p-4 text-center animate-fade-in"
+            style={{ background: 'rgba(var(--bg-surface-rgb, 240, 237, 230), 0.92)' }}
+          >
+            <span 
+              className="text-[10px] font-mono font-medium uppercase tracking-widest px-3 py-0.5 rounded-full"
+              style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-secondary)' }}
+            >
               REVISION REQUESTED
             </span>
-            <h4 className="text-lg font-bold text-text-primary font-sans mt-0.5">Caught by "{lastHurdle}"!</h4>
-            <p className="text-xs text-text-secondary font-mono">
-              Sprint Score: <span className="font-bold text-text-primary">{score}</span> | Best: <span className="font-bold text-accent">{highScore}</span>
+            <h4 className="text-lg font-bold text-[var(--text-primary)] font-sans mt-0.5">Caught by "{lastHurdle}"!</h4>
+            <p className="text-xs text-[var(--text-secondary)] font-mono">
+              Sprint Score: <span className="font-bold text-[var(--text-primary)]">{score}</span> | Best: <span className="font-bold text-[var(--text-primary)]">{highScore}</span>
             </p>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleStart();
               }}
-              className="flex items-center gap-2 bg-text-primary hover:bg-text-primary/90 text-bg-base text-xs font-mono font-bold px-5 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 mt-2 shadow-md"
+              className="flex items-center gap-2 text-xs font-mono font-bold px-6 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 mt-2 shadow-sm hover:opacity-90"
+              style={{ background: 'var(--text-primary)', color: 'var(--bg-base)' }}
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>ITERATE AGAIN</span>

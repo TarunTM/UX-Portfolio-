@@ -165,7 +165,7 @@ export const Landing: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen relative"
+      className="min-h-screen relative overflow-x-hidden w-full max-w-full"
       style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
     >
       <Navbar />
@@ -567,10 +567,10 @@ export const Landing: React.FC = () => {
                   {/* Horizontal Interactive Row Button */}
                   <button
                     onClick={() => toggleExp(exp.id)}
-                    className="w-full py-5 sm:py-6 px-1 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-left cursor-pointer group hover:bg-[var(--bg-surface)]/30 rounded-xl transition-all"
+                    className="w-full py-5 sm:py-6 px-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 text-left cursor-pointer group hover:bg-[var(--bg-surface)]/30 rounded-xl transition-all"
                     aria-expanded={isExpanded}
                   >
-                    {/* Left: Circular Company Logo + Company Name + Internship Status */}
+                    {/* Left: Circular Company Logo + Company Name */}
                     <div className="flex items-center gap-3.5 sm:w-1/3">
                       <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shrink-0 border border-[var(--border-card)] bg-[#121212] flex items-center justify-center shadow-sm relative">
                         {exp.logo ? (
@@ -591,21 +591,24 @@ export const Landing: React.FC = () => {
                       </span>
                     </div>
 
-                    {/* Center: Role in Uppercase */}
-                    <div className="sm:w-1/3 sm:text-center">
-                      <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[var(--text-primary)] font-mono">
-                        {exp.role}
-                      </span>
-                    </div>
+                    {/* Right / Second Line on Mobile: Job Title & Timeline (Justify Between) */}
+                    <div className="w-full sm:w-2/3 flex items-center justify-between sm:grid sm:grid-cols-2 gap-4">
+                      {/* Role in Uppercase */}
+                      <div className="sm:text-center">
+                        <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[var(--text-primary)] font-mono">
+                          {exp.role}
+                        </span>
+                      </div>
 
-                    {/* Right: Date Range + Down Arrow */}
-                    <div className="flex items-center gap-2 sm:w-1/3 sm:justify-end text-xs sm:text-sm font-mono text-[var(--text-secondary)]">
-                      <span>{exp.period}</span>
-                      <ChevronDown
-                        className={`w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-transform duration-300 ${
-                          isExpanded ? 'rotate-180 text-accent' : ''
-                        }`}
-                      />
+                      {/* Date Range + Down Arrow */}
+                      <div className="flex items-center gap-2 justify-end text-xs sm:text-sm font-mono text-[var(--text-secondary)]">
+                        <span>{exp.period}</span>
+                        <ChevronDown
+                          className={`w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-transform duration-300 ${
+                            isExpanded ? 'rotate-180 text-[var(--text-primary)]' : ''
+                          }`}
+                        />
+                      </div>
                     </div>
                   </button>
 

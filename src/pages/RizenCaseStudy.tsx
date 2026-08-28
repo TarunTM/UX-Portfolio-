@@ -1,19 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
 import heroRizen from '../assets/Rizen Img/Hero Rizen.webp';
-import homeMockup from '../assets/Rizen Img/Home Mockup.webp';
+import outcomePrototype from '../assets/Rizen Img/Outcome Prototype.webm';
 import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.webp';
 import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.webp';
 import friendsProfileMockup from '../assets/Rizen Img/Friends Profile Mockup.webp';
 import friendsActivityMockup from '../assets/Rizen Img/Friends Activity Mockup.webp';
 import rankSystem from '../assets/Rizen Img/Rank System.webp';
-import achievementBadges from '../assets/Rizen Img/Achievement Badges.webp';
+import badgeFirstStep from '../assets/Rizen Img/Badge-FirstStep.webp';
+import badgeMomentum from '../assets/Rizen Img/Badge-Momentum.webp';
+import badgeUnbreakable from '../assets/Rizen Img/Badge-Unbreakable.webp';
+import badgeRecordBreaker from '../assets/Rizen Img/Badge-RecordBreaker.webp';
+import badgeProgressMachine from '../assets/Rizen Img/Badge-ProgressMachine.webp';
+import badgeConsistentPerformer from '../assets/Rizen Img/Badge-ConsistentPerformer.webp';
 
 export const RizenCaseStudy: React.FC = () => {
   const navigate = useNavigate();
+  const outcomeVideoRef = useRef<HTMLVideoElement>(null);
+  const [isPlayingOutcome, setIsPlayingOutcome] = useState(true);
+
+  const toggleOutcomePlay = () => {
+    if (outcomeVideoRef.current) {
+      if (outcomeVideoRef.current.paused) {
+        outcomeVideoRef.current.play();
+        setIsPlayingOutcome(true);
+      } else {
+        outcomeVideoRef.current.pause();
+        setIsPlayingOutcome(false);
+      }
+    }
+  };
 
   // Scroll to top on mount
   useEffect(() => {
@@ -26,13 +45,13 @@ export const RizenCaseStudy: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen relative pb-28 text-left"
+      className="min-h-screen relative pb-28 text-left overflow-x-hidden w-full max-w-full"
       style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
     >
       {/* Floating Navbar */}
       <Navbar />
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-20 sm:pt-24 flex flex-col gap-10 sm:gap-14">
+      <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-10 sm:gap-14">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section className="flex flex-col gap-6">
@@ -174,13 +193,31 @@ export const RizenCaseStudy: React.FC = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-center">
-            {/* Left Mockup */}
+            {/* Left Prototype Video (Click to Pause / Play) */}
             <div className="md:col-span-5 flex justify-center md:justify-start">
-              <div className="w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px]">
-                <img
-                  src={homeMockup}
-                  alt="Rizen Home Screen Outcome Mockup"
-                  className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+              <div
+                onClick={toggleOutcomePlay}
+                role="button"
+                tabIndex={0}
+                aria-label={isPlayingOutcome ? "Pause prototype video" : "Play prototype video"}
+                onKeyDown={(e) => {
+                  if (e.key === ' ' || e.key === 'Enter') {
+                    e.preventDefault();
+                    toggleOutcomePlay();
+                  }
+                }}
+                className="relative cursor-pointer select-none w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.22)]"
+              >
+                <video
+                  ref={outcomeVideoRef}
+                  src={outcomePrototype}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  onPlay={() => setIsPlayingOutcome(true)}
+                  onPause={() => setIsPlayingOutcome(false)}
+                  className="w-full h-auto object-contain block rounded-[44px]"
                 />
               </div>
             </div>
@@ -327,16 +364,64 @@ export const RizenCaseStudy: React.FC = () => {
                 </div>
 
                 {/* 2. Achievement Badges */}
-                <div className="flex flex-col gap-3 pt-2">
+                <div className="flex flex-col gap-4 pt-2">
                   <p className="text-[16px] font-bold text-[var(--text-primary)]">
                     Achievement Badges
                   </p>
-                  <div className="w-full py-1">
-                    <img
-                      src={achievementBadges}
-                      alt="Achievement Badges: First Step, Momentum, Unbreakable, Record Breaker, Progress Machine, Consistent Performer"
-                      className="w-full h-auto object-contain block"
-                    />
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-4 pt-1">
+                    {[
+                      {
+                        image: badgeFirstStep,
+                        name: "First Step",
+                        desc: "First Workout Completed"
+                      },
+                      {
+                        image: badgeMomentum,
+                        name: "Momentum",
+                        desc: "7-Day Streak"
+                      },
+                      {
+                        image: badgeUnbreakable,
+                        name: "Unbreakable",
+                        desc: "30-Day Streak"
+                      },
+                      {
+                        image: badgeRecordBreaker,
+                        name: "Record Breaker",
+                        desc: "First Personal Record"
+                      },
+                      {
+                        image: badgeProgressMachine,
+                        name: "Progress Machine",
+                        desc: "Achieve 10 PRs"
+                      },
+                      {
+                        image: badgeConsistentPerformer,
+                        name: "Consistent Performer",
+                        desc: "Complete 4 weeks of a plan"
+                      }
+                    ].map((badge, idx) => (
+                      <div
+                        key={idx}
+                        className="flex flex-col items-center text-center py-2 transition-all duration-300 hover:scale-[1.05] group"
+                      >
+                        <div className="w-18 h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center p-1">
+                          <img
+                            src={badge.image}
+                            alt={badge.name}
+                            className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-1 mt-2.5">
+                          <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-wider text-[var(--text-primary)] leading-tight">
+                            {badge.name}
+                          </span>
+                          <span className="text-[10px] sm:text-[11px] text-[var(--text-secondary)] font-normal leading-tight">
+                            {badge.desc}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

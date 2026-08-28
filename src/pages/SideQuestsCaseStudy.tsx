@@ -1,14 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
 import nothingCalculatorImg from '../assets/3.Side Project Large.webp';
-import instaReelsImg from '../assets/1.Side Project Large.webp';
-import flipkartCheckoutImg from '../assets/2.Side Project.webp';
+import instaReelsPrototype from '../assets/Insta Reels Prototype.webm';
+import beforeFlipkartImg from '../assets/Before Flipkart checkout.webp';
+import afterFlipkartImg from '../assets/After Flipkart Checkout.webp';
 
 export const SideQuestsCaseStudy: React.FC = () => {
   const navigate = useNavigate();
+  const instaVideoRef = useRef<HTMLVideoElement>(null);
+  const [isPlayingInsta, setIsPlayingInsta] = useState(true);
+
+  const toggleInstaPlay = () => {
+    if (instaVideoRef.current) {
+      if (instaVideoRef.current.paused) {
+        instaVideoRef.current.play();
+        setIsPlayingInsta(true);
+      } else {
+        instaVideoRef.current.pause();
+        setIsPlayingInsta(false);
+      }
+    }
+  };
 
   // Scroll to top on mount
   useEffect(() => {
@@ -20,13 +35,13 @@ export const SideQuestsCaseStudy: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen relative pb-28 text-left"
+      className="min-h-screen relative pb-28 text-left overflow-x-hidden w-full max-w-full"
       style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
     >
       {/* Floating Navbar */}
       <Navbar />
 
-      <main className="max-w-5xl mx-auto px-6 sm:px-10 pt-20 sm:pt-24 flex flex-col gap-14 sm:gap-20">
+      <main className="max-w-5xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-14 sm:gap-20">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section className="flex flex-col gap-6">
@@ -63,12 +78,12 @@ export const SideQuestsCaseStudy: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Mockup (20% smaller) */}
+          {/* Right Column: Mockup (Matches Rizen mockup sizing) */}
           <div className="lg:col-span-6 flex justify-center items-center py-2">
             <img
               src={nothingCalculatorImg}
               alt="Nothing Calculator UI Exploration"
-              className="w-full max-w-[280px] sm:max-w-[330px] lg:max-w-[365px] h-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.22)] transition-transform duration-500 hover:scale-[1.02]"
+              className="w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-500 hover:scale-[1.02]"
             />
           </div>
         </section>
@@ -120,13 +135,34 @@ export const SideQuestsCaseStudy: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Mockup (20% smaller) */}
+          {/* Right Column: Prototype Video (Click to Pause / Play) */}
+          {/* Right Column: Prototype Video (Matches Rizen mockup sizing) */}
           <div className="lg:col-span-6 flex justify-center items-center py-2">
-            <img
-              src={instaReelsImg}
-              alt="Instagram Reels Shared Thread Experience Exploration"
-              className="w-full max-w-[280px] sm:max-w-[330px] lg:max-w-[365px] h-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.22)] transition-transform duration-500 hover:scale-[1.02]"
-            />
+            <div
+              onClick={toggleInstaPlay}
+              role="button"
+              tabIndex={0}
+              aria-label={isPlayingInsta ? "Pause Instagram Reels prototype video" : "Play Instagram Reels prototype video"}
+              onKeyDown={(e) => {
+                if (e.key === ' ' || e.key === 'Enter') {
+                  e.preventDefault();
+                  toggleInstaPlay();
+                }
+              }}
+              className="relative cursor-pointer select-none w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] rounded-[48px] overflow-hidden drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
+            >
+              <video
+                ref={instaVideoRef}
+                src={instaReelsPrototype}
+                autoPlay
+                loop
+                muted
+                playsInline
+                onPlay={() => setIsPlayingInsta(true)}
+                onPause={() => setIsPlayingInsta(false)}
+                className="w-full h-auto object-contain block rounded-[48px]"
+              />
+            </div>
           </div>
         </section>
 
@@ -175,13 +211,64 @@ export const SideQuestsCaseStudy: React.FC = () => {
             </div>
           </div>
 
-          {/* Flipkart Checkout Laptop Mockup */}
-          <div className="w-full flex justify-center py-4">
-            <img
-              src={flipkartCheckoutImg}
-              alt="Flipkart Checkout Order Summary Redesign on Laptop"
-              className="w-full max-w-3xl h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.22)]"
-            />
+          {/* Before vs After Screens (Neutral Badges & Scaled Sizing) */}
+          <div className="flex flex-col gap-10 sm:gap-12 pt-2">
+            {/* Before */}
+            <div className="flex flex-col gap-3 max-w-3xl mx-auto w-full">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
+                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+                  >
+                    Before
+                  </span>
+                  <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
+                    Original Payment Screen
+                  </span>
+                </div>
+              </div>
+              <div
+                className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)]"
+                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+              >
+                <img
+                  src={beforeFlipkartImg}
+                  alt="Flipkart Original Payment Screen - Before"
+                  className="w-full h-auto object-contain block"
+                />
+              </div>
+              
+            </div>
+
+            {/* After */}
+            <div className="flex flex-col gap-3 max-w-3xl mx-auto w-full">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
+                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+                  >
+                    After
+                  </span>
+                  <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
+                    Redesigned Payment Screen with Order Summary
+                  </span>
+                </div>
+
+              </div>
+              <div
+                className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)]"
+                style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+              >
+                <img
+                  src={afterFlipkartImg}
+                  alt="Flipkart Redesigned Payment Screen - After"
+                  className="w-full h-auto object-contain block"
+                />
+              </div>
+              
+            </div>
           </div>
         </section>
 

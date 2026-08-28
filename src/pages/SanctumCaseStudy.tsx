@@ -39,13 +39,13 @@ export const SanctumCaseStudy: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen relative pb-28 text-left"
+      className="min-h-screen relative pb-28 text-left overflow-x-hidden w-full max-w-full"
       style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
     >
       {/* Floating Navbar */}
       <Navbar />
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-20 sm:pt-24 flex flex-col gap-10 sm:gap-14">
+      <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-10 sm:gap-14">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section className="flex flex-col gap-6">

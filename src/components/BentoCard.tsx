@@ -37,7 +37,7 @@ export const BentoCard: React.FC<BentoCardProps> = ({
         isClickable
           ? {
               y: -5,
-              borderColor: 'var(--accent-hover)',
+              borderColor: 'var(--text-primary)',
               boxShadow: 'var(--card-shadow-hover)',
             }
           : undefined
