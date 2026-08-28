@@ -26,21 +26,21 @@
 }
 
 :root.dark, .dark {
-  --bg-base: #0B0F14;
-  --bg-base-rgb: 11, 15, 20;
-  --bg-surface: #18222C;
-  --bg-surface-rgb: 24, 34, 44;
-  --bg-card: #121820;
-  --border-card: #22303E;
-  --border-subtle: #1B2633;
-  --text-primary: #F1F5F9;
-  --text-secondary: #94A3B8;
-  --text-muted: #64748B;
+  --bg-base: #141414;
+  --bg-base-rgb: 20, 20, 20;
+  --bg-surface: #1C1C1C;
+  --bg-surface-rgb: 28, 28, 28;
+  --bg-card: #1C1C1C;
+  --border-card: #282828;
+  --border-subtle: #222222;
+  --text-primary: #F0F0F0;
+  --text-secondary: #F0F0F0;
+  --text-muted: #B6B6B6;
   --accent: #00B4D8;
   --accent-hover: rgba(0, 180, 216, 0.12);
   --card-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.45);
-  --nav-bg: rgba(11, 15, 20, 0.88);
-  --separator: #22303E;
+  --nav-bg: rgba(38, 38, 38, 0.92);
+  --separator: #282828;
 }
 
 @theme {

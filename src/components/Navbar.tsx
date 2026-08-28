@@ -33,6 +33,20 @@ const CASE_STUDIES: CaseStudyItem[] = [
   { id: 'side-quests', path: '/work/side-quests', name: 'Side Quests', label: 'Side Quests · Explorations', icon: Layers },
 ];
 
+// BenBox / Framer Signature Sliding Pill (High-damping spring with crisp glide and zero wobble)
+const ActivePill: React.FC<{ layoutId: string }> = ({ layoutId }) => (
+  <motion.div
+    layoutId={layoutId}
+    className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#3D3D3D] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.35)] z-0"
+    transition={{
+      type: 'spring',
+      stiffness: 500,
+      damping: 35,
+      mass: 0.8,
+    }}
+  />
+);
+
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -143,7 +157,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed bottom-[58px] sm:bottom-[66px] left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-1/2 lg:left-8 lg:-translate-y-1/2 lg:-translate-x-0 z-[1000] select-none max-w-[calc(100vw-16px)]">
-      <div className="flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#121820]/95 backdrop-blur-xl border border-[#C8D7DF] dark:border-[#22303E] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.45)] transition-all duration-300">
+      <div className="flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#262626] backdrop-blur-xl border border-[#C8D7DF] dark:border-[#383838] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] transition-all duration-300">
         
         {isCaseStudy ? (
           /* ── CASE STUDY MODE NAVBAR ── */
@@ -151,7 +165,7 @@ export const Navbar: React.FC = () => {
             {/* Back to Home / Work */}
             <button
               onClick={() => navigate('/')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#94A3B8] dark:hover:bg-white/10 dark:hover:text-white"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
@@ -161,7 +175,7 @@ export const Navbar: React.FC = () => {
             </button>
 
             {/* Divider */}
-            <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#22303E] mx-0.5 sm:mx-1 my-0.5" />
+            <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#383838] mx-0.5 sm:mx-1 my-0.5" />
 
             {/* 4 Case Studies Quick Jump */}
             {CASE_STUDIES.map((item) => {
@@ -182,17 +196,11 @@ export const Navbar: React.FC = () => {
                   className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
                   aria-label={item.name}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="casestudy-active-pill"
-                      className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                      transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                    />
-                  )}
+                  {isActive && <ActivePill layoutId="casestudy-active-pill" />}
                   <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                     isActive
-                      ? 'text-[#000000]'
-                      : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                      ? 'text-[#000000] dark:text-[#FFFFFF]'
+                      : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
                   }`} />
                   <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                     {item.label}
@@ -207,7 +215,7 @@ export const Navbar: React.FC = () => {
                 navigate(nextProject.path);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#94A3B8] dark:hover:bg-white/10 dark:hover:text-white"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
               aria-label={`Next: ${nextProject.name}`}
             >
               <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
@@ -225,17 +233,11 @@ export const Navbar: React.FC = () => {
               className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Home"
             >
-              {activeSection === 'home' && (
-                <motion.div
-                  layoutId="nav-active-pill"
-                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                />
-              )}
+              {activeSection === 'home' && <ActivePill layoutId="nav-active-pill" />}
               <Home className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'home'
-                  ? 'text-[#000000]'
-                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  ? 'text-[#000000] dark:text-[#FFFFFF]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
               }`} />
               <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Home
@@ -248,17 +250,11 @@ export const Navbar: React.FC = () => {
               className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Work"
             >
-              {activeSection === 'work' && (
-                <motion.div
-                  layoutId="nav-active-pill"
-                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                />
-              )}
+              {activeSection === 'work' && <ActivePill layoutId="nav-active-pill" />}
               <Award className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'work'
-                  ? 'text-[#000000]'
-                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  ? 'text-[#000000] dark:text-[#FFFFFF]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
               }`} />
               <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Work
@@ -271,17 +267,11 @@ export const Navbar: React.FC = () => {
               className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Skills"
             >
-              {activeSection === 'skills' && (
-                <motion.div
-                  layoutId="nav-active-pill"
-                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                />
-              )}
+              {activeSection === 'skills' && <ActivePill layoutId="nav-active-pill" />}
               <Wrench className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'skills'
-                  ? 'text-[#000000]'
-                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  ? 'text-[#000000] dark:text-[#FFFFFF]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
               }`} />
               <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Skills
@@ -294,17 +284,11 @@ export const Navbar: React.FC = () => {
               className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Experience"
             >
-              {activeSection === 'timeline' && (
-                <motion.div
-                  layoutId="nav-active-pill"
-                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                />
-              )}
+              {activeSection === 'timeline' && <ActivePill layoutId="nav-active-pill" />}
               <Briefcase className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'timeline'
-                  ? 'text-[#000000]'
-                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  ? 'text-[#000000] dark:text-[#FFFFFF]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
               }`} />
               <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Experience
@@ -317,17 +301,11 @@ export const Navbar: React.FC = () => {
               className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Contact"
             >
-              {activeSection === 'contact' && (
-                <motion.div
-                  layoutId="nav-active-pill"
-                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                />
-              )}
+              {activeSection === 'contact' && <ActivePill layoutId="nav-active-pill" />}
               <Mail className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'contact'
-                  ? 'text-[#000000]'
-                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  ? 'text-[#000000] dark:text-[#FFFFFF]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
               }`} />
               <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Contact
@@ -340,17 +318,11 @@ export const Navbar: React.FC = () => {
               className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Mini Game"
             >
-              {activeSection === 'game' && (
-                <motion.div
-                  layoutId="nav-active-pill"
-                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
-                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
-                />
-              )}
+              {activeSection === 'game' && <ActivePill layoutId="nav-active-pill" />}
               <Gamepad2 className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'game'
-                  ? 'text-[#000000]'
-                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  ? 'text-[#000000] dark:text-[#FFFFFF]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
               }`} />
               <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Minigame
@@ -360,12 +332,12 @@ export const Navbar: React.FC = () => {
         )}
 
         {/* Vertical divider on mobile / Horizontal on desktop */}
-        <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#22303E] mx-0.5 sm:mx-1 my-0.5" />
+        <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#383838] mx-0.5 sm:mx-1 my-0.5" />
 
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#94A3B8] dark:hover:bg-white/10 dark:hover:text-white"
+          className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
           aria-label="Toggle Theme"
         >
           {theme === 'light' ? (
