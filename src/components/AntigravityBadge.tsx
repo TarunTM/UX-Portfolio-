@@ -4,7 +4,7 @@ import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
 export const AntigravityBadge: React.FC = () => {
   return (
     <a
-      href="https://github.com"
+      href="https://github.com/TarunTM/UX-Portfolio-"
       target="_blank"
       rel="noopener noreferrer"
       className="antigravity-badge group"
