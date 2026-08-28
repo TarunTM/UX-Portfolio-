@@ -319,10 +319,10 @@ export const Landing: React.FC = () => {
             {/* Card 1: Rizen */}
             <div
               onClick={() => navigate('/work/rizen')}
-              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
                   Mobile App
                 </span>
               </div>
@@ -337,7 +337,7 @@ export const Landing: React.FC = () => {
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Rizen
                 </h3>
               </div>
@@ -346,10 +346,10 @@ export const Landing: React.FC = () => {
             {/* Card 2: Sanctum */}
             <div
               onClick={() => navigate('/work/sanctum')}
-              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
                   Website
                 </span>
               </div>
@@ -364,7 +364,7 @@ export const Landing: React.FC = () => {
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Sanctum
                 </h3>
               </div>
@@ -373,10 +373,10 @@ export const Landing: React.FC = () => {
             {/* Card 3: Quantel AI */}
             <div
               onClick={() => navigate('/work/quantel-ai')}
-              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
                   WebApp
                 </span>
               </div>
@@ -391,7 +391,7 @@ export const Landing: React.FC = () => {
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Quantel AI
                 </h3>
               </div>
@@ -403,10 +403,10 @@ export const Landing: React.FC = () => {
           <div className="lg:col-span-4 flex flex-col">
             <div
               onClick={() => navigate('/work/side-quests')}
-              className="bg-white border border-neutral-200/80 rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-neutral-300 hover:shadow-md transition-all duration-300 shadow-sm"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
             >
               <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-black text-white w-max shadow-sm tracking-tight inline-block">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
                   Side Quests
                 </span>
               </div>
@@ -414,7 +414,7 @@ export const Landing: React.FC = () => {
               {/* Diagonal Staggered Deck: Top-Left, Center, Bottom-Right -> Expands on Hover */}
               <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
                 {/* Ambient Backlight Glow */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[340px] rounded-full bg-black/[0.02] blur-3xl pointer-events-none" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[340px] rounded-full bg-black/[0.02] dark:bg-white/[0.02] blur-3xl pointer-events-none" />
 
                 {/* 1. Top Mockup (Indian Modern Reels) — At Rest: Top-Left | On Hover: Glides UP & LEFT */}
                 <div className="absolute left-[44%] sm:left-[42%] top-1/2 -translate-x-1/2 -translate-y-[56%] -rotate-3 w-[240px] sm:w-[280px] md:w-[310px] z-20 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:left-[38%] sm:group-hover:left-[36%] group-hover:-translate-y-[104%] sm:group-hover:-translate-y-[110%] group-hover:-rotate-5 group-hover:scale-[1.03] drop-shadow-[0_20px_35px_rgba(0,0,0,0.18)]">
@@ -445,7 +445,7 @@ export const Landing: React.FC = () => {
               </div>
 
               <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Side Quests
                 </h3>
               </div>

@@ -25,41 +25,39 @@ export const ThemeToggle: React.FC = () => {
 
   return (
     <div className="flex items-center gap-3">
-      <span className="text-[10px] font-mono uppercase tracking-wider text-text-secondary select-none">
+      <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] select-none">
         {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
       </span>
       
-      {/* Tactile Slider Switch */}
+      {/* Tactile Capsule Segmented Toggle */}
       <button
         onClick={toggleTheme}
-        className="w-14 h-7 bg-bg-surface border border-border-card rounded-full p-0.5 relative flex items-center cursor-pointer select-none transition-colors duration-300"
+        className="w-16 h-8 bg-[#DFEAF0] dark:bg-[#18222C] border border-[#C8D7DF] dark:border-[#22303E] rounded-full p-1 relative flex items-center justify-between cursor-pointer select-none transition-colors duration-200"
         aria-label={`Toggle theme, current: ${theme}`}
       >
-        {/* Static Background Icons */}
-        <div className="absolute inset-0 flex justify-between items-center px-2 pointer-events-none text-text-secondary">
-          <Moon className="w-3.5 h-3.5 opacity-60" />
-          <Sun className="w-3.5 h-3.5 opacity-60" />
-        </div>
-
-        {/* Animated Sliding Handle */}
+        {/* Animated Sliding White Handle */}
         <motion.div
           layout
           transition={{
             type: 'spring',
             stiffness: 500,
-            damping: 30,
+            damping: 32,
           }}
-          className="w-5.5 h-5.5 bg-text-primary rounded-full shadow-md z-10 flex items-center justify-center"
+          className="absolute w-6 h-6 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_6px_rgba(0,0,0,0.1)] z-0"
           style={{
-            marginLeft: theme === 'light' ? 'auto' : '0',
+            left: theme === 'light' ? '4px' : 'calc(100% - 28px)',
           }}
-        >
-          {theme === 'light' ? (
-            <Sun className="w-3.5 h-3.5 text-amber-500" />
-          ) : (
-            <Moon className="w-3.5 h-3.5 text-accent" />
-          )}
-        </motion.div>
+        />
+
+        {/* Sun Icon */}
+        <div className="relative z-10 w-6 h-6 flex items-center justify-center pointer-events-none">
+          <Sun className={`w-3.5 h-3.5 stroke-[2] transition-colors ${theme === 'light' ? 'text-[#000000]' : 'text-[#595F5D] dark:text-[#64748B]'}`} />
+        </div>
+
+        {/* Moon Icon */}
+        <div className="relative z-10 w-6 h-6 flex items-center justify-center pointer-events-none">
+          <Moon className={`w-3.5 h-3.5 stroke-[2] transition-colors ${theme === 'dark' ? 'text-[#000000]' : 'text-[#595F5D] dark:text-[#64748B]'}`} />
+        </div>
       </button>
     </div>
   );

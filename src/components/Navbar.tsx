@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
   Home,
   Award,
@@ -142,7 +143,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed bottom-[58px] sm:bottom-[66px] left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-1/2 lg:left-8 lg:-translate-y-1/2 lg:-translate-x-0 z-[1000] select-none max-w-[calc(100vw-16px)]">
-      <div className="flex flex-row lg:flex-col items-center gap-1 sm:gap-2 lg:gap-2.5 px-2 py-1.5 sm:px-3 sm:py-2 lg:px-2.5 lg:py-3 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl border border-neutral-200/50 dark:border-zinc-800/80 rounded-full shadow-[0_12px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.4)] transition-all duration-300">
+      <div className="flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#121820]/95 backdrop-blur-xl border border-[#C8D7DF] dark:border-[#22303E] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.45)] transition-all duration-300">
         
         {isCaseStudy ? (
           /* ── CASE STUDY MODE NAVBAR ── */
@@ -150,17 +151,17 @@ export const Navbar: React.FC = () => {
             {/* Back to Home / Work */}
             <button
               onClick={() => navigate('/')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#94A3B8] dark:hover:bg-white/10 dark:hover:text-white"
               aria-label="Back to Home"
             >
-              <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Back to Home
               </span>
             </button>
 
             {/* Divider */}
-            <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-neutral-200 dark:bg-zinc-800 mx-0.5 sm:mx-1 my-0.5" />
+            <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#22303E] mx-0.5 sm:mx-1 my-0.5" />
 
             {/* 4 Case Studies Quick Jump */}
             {CASE_STUDIES.map((item) => {
@@ -178,15 +179,22 @@ export const Navbar: React.FC = () => {
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
                   }}
-                  className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                    isActive
-                      ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                      : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-                  }`}
+                  className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
                   aria-label={item.name}
                 >
-                  <IconComponent className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-                  <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+                  {isActive && (
+                    <motion.div
+                      layoutId="casestudy-active-pill"
+                      className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                      transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                    />
+                  )}
+                  <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                    isActive
+                      ? 'text-[#000000]'
+                      : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+                  }`} />
+                  <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                     {item.label}
                   </span>
                 </button>
@@ -199,11 +207,11 @@ export const Navbar: React.FC = () => {
                 navigate(nextProject.path);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#94A3B8] dark:hover:bg-white/10 dark:hover:text-white"
               aria-label={`Next: ${nextProject.name}`}
             >
-              <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Next: {nextProject.name}
               </span>
             </button>
@@ -214,15 +222,22 @@ export const Navbar: React.FC = () => {
             {/* Home Button */}
             <button
               onClick={() => handleNav('home')}
-              className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                activeSection === 'home'
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                  : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-              }`}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Home"
             >
-              <Home className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              {activeSection === 'home' && (
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                />
+              )}
+              <Home className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                activeSection === 'home'
+                  ? 'text-[#000000]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+              }`} />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Home
               </span>
             </button>
@@ -230,15 +245,22 @@ export const Navbar: React.FC = () => {
             {/* Projects (Work) Button */}
             <button
               onClick={() => handleNav('work')}
-              className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                activeSection === 'work'
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                  : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-              }`}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Work"
             >
-              <Award className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              {activeSection === 'work' && (
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                />
+              )}
+              <Award className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                activeSection === 'work'
+                  ? 'text-[#000000]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+              }`} />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Work
               </span>
             </button>
@@ -246,15 +268,22 @@ export const Navbar: React.FC = () => {
             {/* Skills Button */}
             <button
               onClick={() => handleNav('skills')}
-              className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                activeSection === 'skills'
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                  : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-              }`}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Skills"
             >
-              <Wrench className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              {activeSection === 'skills' && (
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                />
+              )}
+              <Wrench className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                activeSection === 'skills'
+                  ? 'text-[#000000]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+              }`} />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Skills
               </span>
             </button>
@@ -262,15 +291,22 @@ export const Navbar: React.FC = () => {
             {/* Experience Button */}
             <button
               onClick={() => handleNav('timeline')}
-              className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                activeSection === 'timeline'
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                  : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-              }`}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Experience"
             >
-              <Briefcase className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              {activeSection === 'timeline' && (
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                />
+              )}
+              <Briefcase className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                activeSection === 'timeline'
+                  ? 'text-[#000000]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+              }`} />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Experience
               </span>
             </button>
@@ -278,15 +314,22 @@ export const Navbar: React.FC = () => {
             {/* Contact Button */}
             <button
               onClick={() => handleNav('contact')}
-              className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                activeSection === 'contact'
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                  : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-              }`}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Contact"
             >
-              <Mail className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              {activeSection === 'contact' && (
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                />
+              )}
+              <Mail className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                activeSection === 'contact'
+                  ? 'text-[#000000]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+              }`} />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Contact
               </span>
             </button>
@@ -294,15 +337,22 @@ export const Navbar: React.FC = () => {
             {/* Mini Game Button */}
             <button
               onClick={() => handleNav('game')}
-              className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer ${
-                activeSection === 'game'
-                  ? 'bg-neutral-900 text-white dark:bg-white dark:text-zinc-950 shadow-md scale-105'
-                  : 'bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white'
-              }`}
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Mini Game"
             >
-              <Gamepad2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.75]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+              {activeSection === 'game' && (
+                <motion.div
+                  layoutId="nav-active-pill"
+                  className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#FFFFFF] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] z-0"
+                  transition={{ type: 'spring', stiffness: 480, damping: 34 }}
+                />
+              )}
+              <Gamepad2 className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                activeSection === 'game'
+                  ? 'text-[#000000]'
+                  : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#94A3B8] dark:group-hover:text-white'
+              }`} />
+              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
                 Minigame
               </span>
             </button>
@@ -310,20 +360,20 @@ export const Navbar: React.FC = () => {
         )}
 
         {/* Vertical divider on mobile / Horizontal on desktop */}
-        <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-neutral-200 dark:bg-zinc-800 mx-0.5 sm:mx-1 my-0.5" />
+        <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#22303E] mx-0.5 sm:mx-1 my-0.5" />
 
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 active:scale-90 relative group cursor-pointer bg-neutral-100/70 text-neutral-500 hover:bg-neutral-200/80 hover:text-neutral-800 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+          className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#94A3B8] dark:hover:bg-white/10 dark:hover:text-white"
           aria-label="Toggle Theme"
         >
           {theme === 'light' ? (
-            <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-accent stroke-[1.75]" />
+            <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#000000] stroke-[2]" />
           ) : (
-            <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-400 stroke-[1.75]" />
+            <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-400 stroke-[2]" />
           )}
-          <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+          <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
             Theme
           </span>
         </button>

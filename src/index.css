@@ -10,27 +10,27 @@
   /* Clean modern slate-tinted canvas (#EBF1F4) with crisp white cards */
   --bg-base: #EBF1F4;
   --bg-base-rgb: 235, 241, 244;
-  --bg-surface: #E1E8ED;
-  --bg-surface-rgb: 225, 232, 237;
+  --bg-surface: #DFEAF0;
+  --bg-surface-rgb: 223, 234, 240;
   --bg-card: #FFFFFF;
   --border-card: #D7E1E8;
   --border-subtle: #E2E9EE;
-  --text-primary: #121820;
-  --text-secondary: #566474;
-  --text-muted: #8B98A7;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --text-muted: #595F5D;
   --accent: #00B4D8;          /* cyan accent */
   --accent-hover: rgba(0, 180, 216, 0.12);
   --card-shadow-hover: 0 12px 30px rgba(18, 24, 32, 0.07);
-  --nav-bg: rgba(235, 241, 244, 0.88);
+  --nav-bg: rgba(223, 234, 240, 0.92);
   --separator: #D7E1E8;
 }
 
 :root.dark, .dark {
   --bg-base: #0B0F14;
   --bg-base-rgb: 11, 15, 20;
-  --bg-surface: #121820;
-  --bg-surface-rgb: 18, 24, 32;
-  --bg-card: #18222C;
+  --bg-surface: #18222C;
+  --bg-surface-rgb: 24, 34, 44;
+  --bg-card: #121820;
   --border-card: #22303E;
   --border-subtle: #1B2633;
   --text-primary: #F1F5F9;
@@ -307,10 +307,6 @@
 .tag-pill:hover,
 .tag-pill:active,
 .tag-pill:focus {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-  background: var(--bg-card);
-  transform: translateY(-1px);
   outline: none;
 }
 
