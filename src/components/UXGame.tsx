@@ -179,11 +179,11 @@ export const UXGame: React.FC = () => {
 
     const gameLoop = () => {
       const rootStyle = getComputedStyle(document.documentElement);
-      const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#1a1814';
-      const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || '#6b6760';
-      const borderCard = rootStyle.getPropertyValue('--border-card').trim() || '#e2ddd6';
-      const bgSurface = rootStyle.getPropertyValue('--bg-surface').trim() || '#f0ede6';
-      const bgCard = rootStyle.getPropertyValue('--bg-card').trim() || '#faf9f6';
+      const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#121820';
+      const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || '#566474';
+      const borderCard = rootStyle.getPropertyValue('--border-card').trim() || '#D7E1E8';
+      const bgSurface = rootStyle.getPropertyValue('--bg-surface').trim() || '#E1E8ED';
+      const bgCard = rootStyle.getPropertyValue('--bg-card').trim() || '#FFFFFF';
 
       // Clear Canvas
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);

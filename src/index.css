@@ -7,40 +7,40 @@
 
 /* ── Design Tokens ── */
 :root {
-  /* Warm cream editorial palette — inspired by janelleamores.design */
-  --bg-base: #f7f5f0;
-  --bg-base-rgb: 247, 245, 240;
-  --bg-surface: #f0ede6;
-  --bg-surface-rgb: 240, 237, 230;
-  --bg-card: #faf9f6;
-  --border-card: #e2ddd6;
-  --border-subtle: #ede9e2;
-  --text-primary: #1a1814;
-  --text-secondary: #6b6760;
-  --text-muted: #a09d99;
+  /* Clean modern slate-tinted canvas (#EBF1F4) with crisp white cards */
+  --bg-base: #EBF1F4;
+  --bg-base-rgb: 235, 241, 244;
+  --bg-surface: #E1E8ED;
+  --bg-surface-rgb: 225, 232, 237;
+  --bg-card: #FFFFFF;
+  --border-card: #D7E1E8;
+  --border-subtle: #E2E9EE;
+  --text-primary: #121820;
+  --text-secondary: #566474;
+  --text-muted: #8B98A7;
   --accent: #00B4D8;          /* cyan accent */
   --accent-hover: rgba(0, 180, 216, 0.12);
-  --card-shadow-hover: 0 8px 24px rgba(26, 24, 20, 0.06);
-  --nav-bg: rgba(247, 245, 240, 0.92);
-  --separator: #dedad4;
+  --card-shadow-hover: 0 12px 30px rgba(18, 24, 32, 0.07);
+  --nav-bg: rgba(235, 241, 244, 0.88);
+  --separator: #D7E1E8;
 }
 
 :root.dark, .dark {
-  --bg-base: #0f0f0d;
-  --bg-base-rgb: 15, 15, 13;
-  --bg-surface: #161612;
-  --bg-surface-rgb: 22, 22, 18;
-  --bg-card: #1c1c18;
-  --border-card: #2a2a26;
-  --border-subtle: #222220;
-  --text-primary: #f5f3ee;
-  --text-secondary: #8c897f;
-  --text-muted: #5a5750;
+  --bg-base: #0B0F14;
+  --bg-base-rgb: 11, 15, 20;
+  --bg-surface: #121820;
+  --bg-surface-rgb: 18, 24, 32;
+  --bg-card: #18222C;
+  --border-card: #22303E;
+  --border-subtle: #1B2633;
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
   --accent: #00B4D8;
   --accent-hover: rgba(0, 180, 216, 0.12);
-  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --nav-bg: rgba(15, 15, 13, 0.92);
-  --separator: #2a2a26;
+  --card-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.45);
+  --nav-bg: rgba(11, 15, 20, 0.88);
+  --separator: #22303E;
 }
 
 @theme {
