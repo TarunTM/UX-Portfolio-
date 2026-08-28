@@ -226,11 +226,12 @@ export const Landing: React.FC = () => {
               
               <div className="flex flex-wrap items-center gap-3.5 mt-8">
                 <a
-                  href="/resume.pdf"
-                  download
+                  href="https://drive.google.com/drive/u/2/folders/1NpTkjNMcNulzalu2sQMU_9ku9JsHZCP7"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer border border-transparent shadow-sm"
                 >
-                  <span>Download Resume</span>
+                  <span>Resume</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
                 
@@ -768,8 +769,9 @@ export const Landing: React.FC = () => {
           </span>
           <div className="flex items-center gap-2.5">
             <a
-              href="/resume.pdf"
-              download
+              href="https://drive.google.com/drive/u/2/folders/1NpTkjNMcNulzalu2sQMU_9ku9JsHZCP7"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5"
               style={{
                 borderColor: 'var(--border-card)',
