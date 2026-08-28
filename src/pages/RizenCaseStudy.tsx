@@ -9,7 +9,12 @@ import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.webp';
 import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.webp';
 import friendsProfileMockup from '../assets/Rizen Img/Friends Profile Mockup.webp';
 import friendsActivityMockup from '../assets/Rizen Img/Friends Activity Mockup.webp';
-import rankSystem from '../assets/Rizen Img/Rank System.webp';
+import rankIron from '../assets/Rizen Img/Rank-Iron.webp';
+import rankBronze from '../assets/Rizen Img/Rank-Bronze.webp';
+import rankSilver from '../assets/Rizen Img/Rank-Silver.webp';
+import rankGold from '../assets/Rizen Img/Rank-Gold.webp';
+import rankDiamond from '../assets/Rizen Img/Rank-Diamond.webp';
+import rankRizenElite from '../assets/Rizen Img/Rank-RizenElite.webp';
 import badgeFirstStep from '../assets/Rizen Img/Badge-FirstStep.webp';
 import badgeMomentum from '../assets/Rizen Img/Badge-Momentum.webp';
 import badgeUnbreakable from '../assets/Rizen Img/Badge-Unbreakable.webp';
@@ -354,12 +359,28 @@ export const RizenCaseStudy: React.FC = () => {
                   <p className="text-[16px] font-bold text-[var(--text-primary)]">
                     The Rank progression became
                   </p>
-                  <div className="w-full py-1">
-                    <img
-                      src={rankSystem}
-                      alt="The Rank progression system: Iron, Bronze, Silver, Gold, Diamond, Rizen Elite"
-                      className="w-full h-auto object-contain block"
-                    />
+                  <div className="grid grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4 pt-1">
+                    {[
+                      { image: rankIron, name: "Iron" },
+                      { image: rankBronze, name: "Bronze" },
+                      { image: rankSilver, name: "Silver" },
+                      { image: rankGold, name: "Gold" },
+                      { image: rankDiamond, name: "Diamond" },
+                      { image: rankRizenElite, name: "Rizen Elite" }
+                    ].map((rank, idx) => (
+                      <div
+                        key={idx}
+                        className="flex flex-col items-center justify-center py-1 sm:py-2 transition-all duration-300 hover:scale-[1.05] group"
+                      >
+                        <div className="w-[78px] h-[78px] sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center p-0.5 sm:p-1">
+                          <img
+                            src={rank.image}
+                            alt={rank.name}
+                            className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105"
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -368,7 +389,7 @@ export const RizenCaseStudy: React.FC = () => {
                   <p className="text-[16px] font-bold text-[var(--text-primary)]">
                     Achievement Badges
                   </p>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 sm:gap-4 pt-1">
+                  <div className="grid grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4 pt-1">
                     {[
                       {
                         image: badgeFirstStep,
@@ -405,18 +426,18 @@ export const RizenCaseStudy: React.FC = () => {
                         key={idx}
                         className="flex flex-col items-center text-center py-2 transition-all duration-300 hover:scale-[1.05] group"
                       >
-                        <div className="w-18 h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center p-1">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center p-1">
                           <img
                             src={badge.image}
                             alt={badge.name}
                             className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
-                        <div className="flex flex-col gap-1 mt-2.5">
-                          <span className="text-[11px] sm:text-[12px] font-bold uppercase tracking-wider text-[var(--text-primary)] leading-tight">
+                        <div className="flex flex-col gap-0.5 sm:gap-1 mt-2 sm:mt-2.5">
+                          <span className="text-[10px] sm:text-[12px] font-bold uppercase tracking-wider text-[var(--text-primary)] leading-tight">
                             {badge.name}
                           </span>
-                          <span className="text-[10px] sm:text-[11px] text-[var(--text-secondary)] font-normal leading-tight">
+                          <span className="text-[9px] sm:text-[11px] text-[var(--text-secondary)] font-normal leading-tight">
                             {badge.desc}
                           </span>
                         </div>

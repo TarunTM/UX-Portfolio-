@@ -18,14 +18,8 @@ const generateCircularFavicon = () => {
       ctx.arc(32, 32, 32, 0, Math.PI * 2);
       ctx.clip();
       
-      // Zoom in: crop center 74% of the avatar
-      const zoomFactor = 1.35;
-      const cropWidth = img.width / zoomFactor;
-      const cropHeight = img.height / zoomFactor;
-      const cropX = (img.width - cropWidth) / 2;
-      const cropY = (img.height - cropHeight) / 2;
-      
-      ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, 64, 64);
+      // Render full avatar cleanly within circle
+      ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, 64, 64);
       
       // Set favicon
       let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;

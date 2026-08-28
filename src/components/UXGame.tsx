@@ -441,7 +441,11 @@ export const UXGame: React.FC = () => {
     <div 
       ref={containerRef}
       className="flex flex-col gap-4 w-full h-full select-none"
-      onClick={gameState === 'playing' ? triggerJump : undefined}
+      onTouchStart={() => {
+        if (gameState === 'playing') {
+          triggerJump();
+        }
+      }}
     >
       <div className="flex flex-wrap justify-between items-center w-full border-b border-[var(--border-card)] pb-3 gap-2">
         <div className="flex items-center gap-3">
@@ -488,23 +492,30 @@ export const UXGame: React.FC = () => {
           ref={canvasRef}
           width={480}
           height={160}
-          className="w-full h-[160px] max-w-[480px] cursor-pointer"
+          className="w-full h-[160px] max-w-[480px] cursor-default"
         />
 
         {gameState === 'idle' && (
           <div 
-            className="absolute inset-0 backdrop-blur-[4px] flex flex-col items-center justify-center gap-3 p-4 text-center"
-            style={{ background: 'rgba(var(--bg-surface-rgb, 240, 237, 230), 0.92)' }}
+            className="absolute inset-0 backdrop-blur-md flex flex-col items-center justify-center gap-2.5 p-4 text-center z-20 animate-fade-in"
+            style={{ background: 'color-mix(in srgb, var(--bg-surface) 75%, transparent)' }}
           >
-            <div className="flex items-center gap-1.5 text-[var(--text-primary)] text-xs font-mono uppercase tracking-wider font-semibold">
+            <div 
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold border shadow-xs"
+              style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)', color: 'var(--text-primary)' }}
+            >
               <Sparkles className="w-3.5 h-3.5 text-[var(--text-secondary)]" />
               <span>Short UI/UX Hurdles Challenge</span>
             </div>
-            <p className="text-xs text-[var(--text-secondary)] font-mono">
+            <p className="text-xs text-[var(--text-secondary)] font-mono max-w-xs">
               Dodge <span className="text-[var(--text-primary)] font-semibold">"Last Change"</span>, <span className="text-[var(--text-primary)] font-semibold">"Iterate"</span> & <span className="text-[var(--text-primary)] font-semibold">"Scope Creep"</span>
             </p>
-            <p className="text-[11px] font-medium text-[var(--text-muted)]">Press Space or Tap Screen to Jump</p>
+            <p className="text-[11px] font-mono text-[var(--text-muted)]">
+              <span className="hidden sm:inline">Press Space to Jump</span>
+              <span className="sm:hidden">Tap Screen to Jump</span>
+            </p>
             <button
+              onTouchStart={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
                 handleStart();
@@ -520,25 +531,28 @@ export const UXGame: React.FC = () => {
 
         {gameState === 'gameover' && (
           <div 
-            className="absolute inset-0 backdrop-blur-[4px] flex flex-col items-center justify-center gap-2 p-4 text-center animate-fade-in"
-            style={{ background: 'rgba(var(--bg-surface-rgb, 240, 237, 230), 0.92)' }}
+            className="absolute inset-0 backdrop-blur-md flex flex-col items-center justify-center gap-2 p-4 text-center z-20 animate-fade-in"
+            style={{ background: 'color-mix(in srgb, var(--bg-surface) 75%, transparent)' }}
           >
             <span 
-              className="text-[10px] font-mono font-medium uppercase tracking-widest px-3 py-0.5 rounded-full"
-              style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-secondary)' }}
+              className="text-[10px] font-mono font-semibold uppercase tracking-widest px-3 py-0.5 rounded-full border shadow-xs"
+              style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)', color: 'var(--text-secondary)' }}
             >
               REVISION REQUESTED
             </span>
-            <h4 className="text-lg font-bold text-[var(--text-primary)] font-sans mt-0.5">Caught by "{lastHurdle}"!</h4>
+            <h4 className="text-lg font-bold text-[var(--text-primary)] font-sans mt-0.5 tracking-tight">
+              Caught by "{lastHurdle}"!
+            </h4>
             <p className="text-xs text-[var(--text-secondary)] font-mono">
               Sprint Score: <span className="font-bold text-[var(--text-primary)]">{score}</span> | Best: <span className="font-bold text-[var(--text-primary)]">{highScore}</span>
             </p>
             <button
+              onTouchStart={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
                 handleStart();
               }}
-              className="flex items-center gap-2 text-xs font-mono font-bold px-6 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 mt-2 shadow-sm hover:opacity-90"
+              className="flex items-center gap-2 text-xs font-mono font-bold px-6 py-2.5 rounded-full cursor-pointer transition-all active:scale-95 mt-1.5 shadow-sm hover:opacity-90"
               style={{ background: 'var(--text-primary)', color: 'var(--bg-base)' }}
             >
               <RotateCcw className="w-3.5 h-3.5" />

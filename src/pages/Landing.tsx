@@ -6,7 +6,6 @@ import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.webp';
 import wixStudioIcon from '../assets/wix-studio.webp';
-import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
 import socialSlateLogo from '../assets/SS- OG colors.webp';
 import rizenHomeMockup from '../assets/HomePage Rizen.webp';
 import sanctumHomeMockup from '../assets/Sanctum HomePage.webp';
@@ -69,14 +68,6 @@ const WixStudioIcon = () => (
     src={wixStudioIcon}
     alt="Wix Studio"
     className="w-full h-full object-contain"
-  />
-);
-
-const AntigravityLogo = () => (
-  <img
-    src={antigravityIcon}
-    alt="Antigravity"
-    className="w-3.5 h-3.5 object-contain group-hover:rotate-[12deg] transition-transform duration-300"
   />
 );
 
@@ -755,10 +746,11 @@ export const Landing: React.FC = () => {
               </h2>
             </div>
             <span
-              className="hidden sm:block text-[10px] font-mono uppercase tracking-widest"
+              className="text-[10px] font-mono uppercase tracking-widest"
               style={{ color: 'var(--text-muted)' }}
             >
-              Space / Tap to Jump
+              <span className="hidden sm:inline">Space to Jump</span>
+              <span className="sm:hidden">Tap to Jump</span>
             </span>
           </div>
           <UXGame />
@@ -803,22 +795,6 @@ export const Landing: React.FC = () => {
           </div>
         </div>
       </footer>
-
-      {/* ── ANTIGRAVITY FLOATING BADGE ─────────────────────────────────── */}
-      <a
-        href="https://github.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="antigravity-badge group"
-        aria-label="Vibe coded with Antigravity IDE"
-      >
-        <div className="w-5 h-5 rounded-lg flex items-center justify-center shrink-0 bg-accent/5 border border-accent/15 group-hover:scale-110 transition-all duration-300">
-          <AntigravityLogo />
-        </div>
-        <span>
-          Vibe coded with <span className="font-extrabold text-accent">Antigravity</span>
-        </span>
-      </a>
     </div>
   );
 };

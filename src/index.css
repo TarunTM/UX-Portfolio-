@@ -9,7 +9,9 @@
 :root {
   /* Warm cream editorial palette — inspired by janelleamores.design */
   --bg-base: #f7f5f0;
+  --bg-base-rgb: 247, 245, 240;
   --bg-surface: #f0ede6;
+  --bg-surface-rgb: 240, 237, 230;
   --bg-card: #faf9f6;
   --border-card: #e2ddd6;
   --border-subtle: #ede9e2;
@@ -23,9 +25,11 @@
   --separator: #dedad4;
 }
 
-:root.dark {
+:root.dark, .dark {
   --bg-base: #0f0f0d;
+  --bg-base-rgb: 15, 15, 13;
   --bg-surface: #161612;
+  --bg-surface-rgb: 22, 22, 18;
   --bg-card: #1c1c18;
   --border-card: #2a2a26;
   --border-subtle: #222220;
