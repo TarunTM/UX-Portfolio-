@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import CaseStudyFooter from '../components/CaseStudyFooter';
 import { projects } from '../data/projects';
 import heroQuantel from '../assets/Quantel Img/Quantel hero.webp';
 import assetsQuantel from '../assets/Quantel Img/Assets Quantel.webp';
@@ -12,7 +11,6 @@ import adviseQuantel from '../assets/Quantel Img/Advice.webp';
 import referralQuantel from '../assets/Quantel Img/Quantel referal Screen.webp';
 
 export const QuantelCaseStudy: React.FC = () => {
-  const navigate = useNavigate();
 
   // Scroll to top on mount
   useEffect(() => {
@@ -344,30 +342,8 @@ export const QuantelCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        {/* ── FOOTER / NEXT PROJECT NAVIGATION ─────────────────────── */}
-        <footer
-          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6"
-          style={{ borderColor: 'var(--border-card)' }}
-        >
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Portfolio</span>
-          </button>
-
-          <button
-            onClick={() => navigate(`/work/${nextProject.id}`)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-colors hover:border-[var(--text-primary)] cursor-pointer group"
-            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-          >
-            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
-              Next Case Study
-            </span>
-            <ArrowRight className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform ml-0.5" />
-          </button>
-        </footer>
+        {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
+        <CaseStudyFooter nextProject={nextProject} />
 
       </main>
     </div>

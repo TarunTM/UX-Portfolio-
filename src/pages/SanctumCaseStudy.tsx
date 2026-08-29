@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import CaseStudyFooter from '../components/CaseStudyFooter';
 import { projects } from '../data/projects';
 import heroVideo from '../assets/Sanctum Img:Video/Hero Video.webm';
 import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.webp';
@@ -16,7 +16,6 @@ const outcomeImages = [
 ];
 
 export const SanctumCaseStudy: React.FC = () => {
-  const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
   const [btnHovered, setBtnHovered] = useState(false);
 
@@ -383,30 +382,8 @@ About a week after the change, the client shared that WhatsApp and phone enquiri
           </div>
         </section>
 
-        {/* ── FOOTER / NEXT PROJECT NAVIGATION ─────────────────────── */}
-        <footer
-          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6"
-          style={{ borderColor: 'var(--border-card)' }}
-        >
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Portfolio</span>
-          </button>
-
-          <button
-            onClick={() => navigate(`/work/${nextProject.id}`)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-colors hover:border-[var(--text-primary)] cursor-pointer group"
-            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-          >
-            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
-              Next Case Study
-            </span>
-            <ArrowRight className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform ml-0.5" />
-          </button>
-        </footer>
+        {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
+        <CaseStudyFooter nextProject={nextProject} />
 
       </main>
     </div>

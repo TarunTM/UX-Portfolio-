@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
 import ProjectMockup from '../components/ProjectMockup';
 import Navbar from '../components/Navbar';
+import CaseStudyFooter from '../components/CaseStudyFooter';
 import RizenCaseStudy from './RizenCaseStudy';
 import SanctumCaseStudy from './SanctumCaseStudy';
 import QuantelCaseStudy from './QuantelCaseStudy';
@@ -11,7 +12,6 @@ import SideQuestsCaseStudy from './SideQuestsCaseStudy';
 
 export const CaseStudy: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
 
   // Scroll to top on route change
   useEffect(() => {
@@ -234,30 +234,8 @@ export const CaseStudy: React.FC = () => {
           </ul>
         </section>
 
-        {/* Footer / Next Project */}
-        <footer
-          className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-6"
-          style={{ borderColor: 'var(--border-card)' }}
-        >
-          <button
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Portfolio</span>
-          </button>
-
-          <button
-            onClick={() => navigate(`/work/${nextProject.id}`)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-colors hover:border-[var(--text-primary)] cursor-pointer group"
-            style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
-          >
-            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
-              Next Case Study
-            </span>
-            <ArrowRight className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform ml-0.5" />
-          </button>
-        </footer>
+        {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
+        <CaseStudyFooter nextProject={nextProject} />
       </main>
     </div>
   );
