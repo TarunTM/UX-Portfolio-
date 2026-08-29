@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { projects } from '../data/projects';
-import heroQuantel from '../assets/Quantel Img/Hero Sanctum.webp';
+import heroQuantel from '../assets/Quantel Img/Quantel hero.webp';
 import assetsQuantel from '../assets/Quantel Img/Assets Quantel.webp';
 import lightmodeDashboard from '../assets/Quantel Img/Quantel LightMode Dashboard.webp';
 import capital1Quantel from '../assets/Quantel Img/Capital 1.webp';
@@ -351,7 +351,7 @@ export const QuantelCaseStudy: React.FC = () => {
         >
           <button
             onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+            className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Return to Portfolio</span>
@@ -359,18 +359,13 @@ export const QuantelCaseStudy: React.FC = () => {
 
           <button
             onClick={() => navigate(`/work/${nextProject.id}`)}
-            className="flex items-center gap-3 p-3 px-5 rounded-xl border transition-colors hover:border-[var(--text-primary)] cursor-pointer group"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-colors hover:border-[var(--text-primary)] cursor-pointer group"
             style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
           >
-            <div className="text-right">
-              <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] block">
-                Next Case Study
-              </span>
-              <span className="text-xs font-medium text-[var(--text-primary)]">
-                {nextProject.title}
-              </span>
-            </div>
-            <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
+              Next Case Study
+            </span>
+            <ArrowRight className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform ml-0.5" />
           </button>
         </footer>
 

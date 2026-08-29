@@ -53,19 +53,33 @@ export const Navbar: React.FC = () => {
   const isHome = location.pathname === '/';
   const isCaseStudy = location.pathname.startsWith('/work/');
 
-  // Default to light theme for warm editorial design
+  // Default to dark theme
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const saved = localStorage.getItem('theme');
-    if (saved === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.classList.remove('light');
-      return 'dark';
+    if (saved === 'light') {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+      return 'light';
     }
-    document.documentElement.classList.remove('dark');
-    return 'light';
+    document.documentElement.classList.add('dark');
+    document.documentElement.classList.remove('light');
+    return 'dark';
   });
 
   const [activeSection, setActiveSection] = useState<string>('home');
+
+  useEffect(() => {
+    const handleThemeChanged = () => {
+      const saved = localStorage.getItem('theme');
+      setTheme(saved === 'light' ? 'light' : 'dark');
+    };
+    window.addEventListener('theme-changed', handleThemeChanged);
+    window.addEventListener('storage', handleThemeChanged);
+    return () => {
+      window.removeEventListener('theme-changed', handleThemeChanged);
+      window.removeEventListener('storage', handleThemeChanged);
+    };
+  }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
@@ -78,6 +92,7 @@ export const Navbar: React.FC = () => {
       root.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     }
+    window.dispatchEvent(new Event('theme-changed'));
   };
 
   const handleNav = (target: string) => {

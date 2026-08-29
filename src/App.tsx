@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import CaseStudy from './pages/CaseStudy';
 import AntigravityBadge from './components/AntigravityBadge';

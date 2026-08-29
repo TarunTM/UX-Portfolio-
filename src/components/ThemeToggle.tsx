@@ -5,22 +5,41 @@ import { Sun, Moon } from 'lucide-react';
 export const ThemeToggle: React.FC = () => {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     const saved = localStorage.getItem('theme');
-    if (saved === 'dark') return 'dark';
-    return 'light';
+    if (saved === 'light') return 'light';
+    return 'dark';
   });
 
   useEffect(() => {
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.classList.remove('light');
     } else {
       root.classList.remove('dark');
+      root.classList.add('light');
     }
     localStorage.setItem('theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const handleThemeChanged = () => {
+      const saved = localStorage.getItem('theme');
+      setTheme(saved === 'light' ? 'light' : 'dark');
+    };
+    window.addEventListener('theme-changed', handleThemeChanged);
+    window.addEventListener('storage', handleThemeChanged);
+    return () => {
+      window.removeEventListener('theme-changed', handleThemeChanged);
+      window.removeEventListener('storage', handleThemeChanged);
+    };
+  }, []);
+
   const toggleTheme = () => {
-    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+    setTheme((prev) => {
+      const next = prev === 'light' ? 'dark' : 'light';
+      setTimeout(() => window.dispatchEvent(new Event('theme-changed')), 0);
+      return next;
+    });
   };
 
   return (
