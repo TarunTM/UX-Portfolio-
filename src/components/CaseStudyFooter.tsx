@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Copy, Check, ExternalLink } from 'lucide-react';
+import ValorantGame from './ValorantGame';
 
 const LinkedInIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -31,7 +32,7 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
   const nextPath = nextProject.path || `/work/${nextProject.id}`;
 
   return (
-    <footer className="pt-8 sm:pt-10 mt-14 sm:mt-20 border-t border-[var(--border-card)] flex flex-col">
+    <footer className="mt-14 sm:mt-20 flex flex-col">
       
       {/* ── 1. CASE STUDY NAVIGATION BAR ────────────────────────── */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-5 w-full pb-8 sm:pb-10">
@@ -61,6 +62,46 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
           </span>
           <ArrowRight className="w-3.5 h-3.5 text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transform group-hover:translate-x-1 transition-transform ml-0.5" />
         </button>
+      </div>
+
+      {/* ── DIVIDER BELOW NAVIGATION BUTTONS ────────────────────── */}
+      <div className="w-full border-t border-[var(--border-card)] mb-10 sm:mb-14" />
+
+      {/* ── TACTICAL MINIGAME (AFTER NEXT CASE STUDY, ABOVE FOOTER) ─ */}
+      <div className="w-full pb-10 sm:pb-14">
+        <div className="flex items-end justify-between mb-8">
+          <div>
+            <p
+              className="text-[11px] font-medium uppercase tracking-[0.12em] mb-2"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              Just for fun
+            </p>
+            <h2
+              className="text-2xl sm:text-3xl font-semibold tracking-tight text-[var(--text-primary)]"
+              style={{ letterSpacing: '-0.02em' }}
+            >
+              Aim Labs{' '}
+              <span
+                style={{
+                  fontFamily: 'Instrument Serif, Georgia, serif',
+                  fontStyle: 'italic',
+                  fontWeight: 400,
+                }}
+              >
+                Minigame
+              </span>
+            </h2>
+          </div>
+          <span
+            className="text-[10px] font-mono uppercase tracking-widest"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            <span className="hidden sm:inline">Click to Shoot</span>
+            <span className="sm:hidden">Tap to Shoot</span>
+          </span>
+        </div>
+        <ValorantGame />
       </div>
 
       {/* ── DIVIDER ─────────────────────────────────────────────── */}

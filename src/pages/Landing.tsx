@@ -187,11 +187,11 @@ export const Landing: React.FC = () => {
                 Product
               </span>
               <div
-                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20 rounded-full overflow-hidden border-2 shrink-0 inline-block align-middle shadow-sm hover:scale-105 transition-transform duration-300"
+                className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 shrink-0 inline-block align-middle shadow-sm hover:scale-105 transition-transform duration-300"
                 style={{ borderColor: 'var(--border-card)' }}
               >
                 <img
-                  src="/avatar.webp"
+                  src="/avatar.webp?v=11"
                   alt="Tarun — Product Designer"
                   className="w-full h-full object-cover"
                 />
