@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
@@ -97,12 +97,11 @@ const itemVariants = {
 
 // ── Main Component ─────────────────────────────────────────────────────
 export const Landing: React.FC = () => {
-  const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigator.clipboard.writeText('tarun.ux@gmail.com');
+    navigator.clipboard.writeText('tarunmadan2506@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -317,9 +316,11 @@ export const Landing: React.FC = () => {
           <div className="lg:col-span-8 flex flex-col gap-6">
             
             {/* Card 1: Rizen */}
-            <div
-              onClick={() => navigate('/work/rizen')}
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
+            <Link
+              to="/work/rizen"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
@@ -341,12 +342,14 @@ export const Landing: React.FC = () => {
                   Rizen
                 </h3>
               </div>
-            </div>
+            </Link>
 
             {/* Card 2: Sanctum */}
-            <div
-              onClick={() => navigate('/work/sanctum')}
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
+            <Link
+              to="/work/sanctum"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
@@ -368,12 +371,14 @@ export const Landing: React.FC = () => {
                   Sanctum
                 </h3>
               </div>
-            </div>
+            </Link>
 
             {/* Card 3: Quantel AI */}
-            <div
-              onClick={() => navigate('/work/quantel-ai')}
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
+            <Link
+              to="/work/quantel-ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
@@ -395,15 +400,17 @@ export const Landing: React.FC = () => {
                   Quantel AI
                 </h3>
               </div>
-            </div>
+            </Link>
 
           </div>
 
           {/* ── RIGHT COLUMN (4 Cols) — Sleeker Tall Side Projects Card ── */}
           <div className="lg:col-span-4 flex flex-col">
-            <div
-              onClick={() => navigate('/work/side-quests')}
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm"
+            <Link
+              to="/work/side-quests"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
@@ -449,7 +456,7 @@ export const Landing: React.FC = () => {
                   Side Quests
                 </h3>
               </div>
-            </div>
+            </Link>
           </div>
 
         </div>
