@@ -406,7 +406,7 @@ export const Landing: React.FC = () => {
             >
               <div className="z-10">
                 <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
-                  Side Quests
+                  Mobile . Web
                 </span>
               </div>
 
