@@ -159,7 +159,7 @@ export const ValorantGame: React.FC = () => {
     const spriteWidth = 56;
 
     // Agent 1: Yoru Real (Leading)
-    const yoru: Agent = {
+    const yoru1: Agent = {
       id: Date.now() + Math.random(),
       x: -70,
       y: groundY,
@@ -172,21 +172,21 @@ export const ValorantGame: React.FC = () => {
       animOffset: 0,
     };
 
-    // Agent 2: Yoru Clone (Trailing Decoy)
-    const clone: Agent = {
+    // Agent 2: Yoru Real (Trailing)
+    const yoru2: Agent = {
       id: Date.now() + Math.random() + 1,
       x: -160,
       y: groundY,
       speed: speed,
       width: spriteWidth,
       height: spriteHeight,
-      isClone: true,
+      isClone: false,
       alive: true,
       dissolveProgress: 0,
       animOffset: 2,
     };
 
-    agentsRef.current = [yoru, clone];
+    agentsRef.current = [yoru1, yoru2];
   }, []);
 
   // Spawn particle explosion on hit
@@ -598,7 +598,7 @@ export const ValorantGame: React.FC = () => {
 
               {/* Subtext */}
               <p className="text-xs sm:text-sm text-[var(--text-secondary)] font-body leading-relaxed max-w-sm">
-                There is no Fake yoru just like there is no Fake Outcome/Impact in this Case Study.
+                There is no Fake yoru just like there is no fake metrics in this Case Study.
               </p>
 
               {/* Action Button */}
