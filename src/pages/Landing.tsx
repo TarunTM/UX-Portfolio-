@@ -218,7 +218,7 @@ export const Landing: React.FC = () => {
                 style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
               >
                 I'm{' '}
-                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Tarun Madan</span>
+                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Tarun Madan , </span>
                 {' '}crafting designs with top notes of delight, heart notes of simplicity,
                 and base notes of usability. 1+ year building digital products that matter.
               </p>
@@ -318,8 +318,6 @@ export const Landing: React.FC = () => {
             {/* Card 1: Rizen */}
             <Link
               to="/work/rizen"
-              target="_blank"
-              rel="noopener noreferrer"
               className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
@@ -347,8 +345,6 @@ export const Landing: React.FC = () => {
             {/* Card 2: Sanctum */}
             <Link
               to="/work/sanctum"
-              target="_blank"
-              rel="noopener noreferrer"
               className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
@@ -376,8 +372,6 @@ export const Landing: React.FC = () => {
             {/* Card 3: Quantel AI */}
             <Link
               to="/work/quantel-ai"
-              target="_blank"
-              rel="noopener noreferrer"
               className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
@@ -408,8 +402,6 @@ export const Landing: React.FC = () => {
           <div className="lg:col-span-4 flex flex-col">
             <Link
               to="/work/side-quests"
-              target="_blank"
-              rel="noopener noreferrer"
               className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
             >
               <div className="z-10">
