@@ -511,7 +511,7 @@ export const ValorantGame: React.FC = () => {
           </div>
           <div className="flex items-center gap-2.5">
             <h3 className="text-sm sm:text-base font-semibold font-sans text-[var(--text-primary)]">
-              Spot the Real Yoru
+              Spot the Yoru Clone
             </h3>
             <span 
               className="text-[9px] font-mono px-2 py-0.5 rounded-full font-medium"
