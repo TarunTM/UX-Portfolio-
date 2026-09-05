@@ -146,7 +146,7 @@ export const Landing: React.FC = () => {
       tag: '1 Year',
       employmentType: 'Internship',
       description:
-        'Designed wireframes, user flows, and high-fidelity UI/UX systems for SaaS platforms, dashboards, and mobile apps in Figma. Engineered responsive layouts using Framer and Wix Studio, and coordinated design workflows with teams using Asana.',
+        'Shipped 5 digital products and websites across fintech, fitness, education, and creative industries, owning features and pages from wireframes to final implementation.',
       skills: ['Figma', 'Framer', 'Wix Studio', 'Design Systems', 'Responsive UI', 'Asana'],
     },
   ];
