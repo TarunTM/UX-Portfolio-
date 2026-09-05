@@ -88,7 +88,7 @@ export const QuantelCaseStudy: React.FC = () => {
               <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <div>
                   <span >Yash Moon</span><br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(Deign Lead)</span>
+                  <span className="text-xs text-[var(--text-muted)]">(Design Lead)</span>
                 </div>
                 <div>
                   <span >Tarun Madan</span><br></br>
