@@ -356,9 +356,9 @@ export const Navbar: React.FC = () => {
           aria-label="Toggle Theme"
         >
           {theme === 'light' ? (
-            <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#000000] stroke-[2]" />
+            <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#000000] opacity-75 group-hover:opacity-100 stroke-[2] transition-colors" />
           ) : (
-            <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-400 stroke-[2]" />
+            <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white stroke-[2] transition-colors" />
           )}
           <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
             Theme
