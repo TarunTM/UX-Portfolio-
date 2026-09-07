@@ -48,6 +48,7 @@
   --font-serif: 'Instrument Serif', 'Fraunces', Georgia, serif;
   --font-heading: 'Hanken Grotesk', 'Satoshi', sans-serif;
   --font-body: 'Hanken Grotesk', 'Satoshi', sans-serif;
+  --font-inter: 'Inter', sans-serif;
   --font-mono: 'DM Mono', 'Fira Code', ui-monospace, monospace;
 
   --color-accent: var(--accent);

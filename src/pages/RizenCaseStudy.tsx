@@ -1,4 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { 
+  ArrowRight, 
+  CheckCircle2, 
+  XCircle, 
+  Clock, 
+  Dumbbell, 
+  TrendingUp, 
+  Users, 
+  Zap, 
+  Sparkles, 
+  UserCheck, 
+  Flame, 
+  Trophy,
+  Plus
+} from 'lucide-react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import { projects } from '../data/projects';
@@ -8,6 +23,7 @@ import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.webp';
 import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.webp';
 import friendsProfileMockup from '../assets/Rizen Img/Friends Profile Mockup.webp';
 import friendsActivityMockup from '../assets/Rizen Img/Friends Activity Mockup.webp';
+import bottomNavImg from '../assets/Rizen Img/Bottom Navigation.webp';
 import rankIron from '../assets/Rizen Img/Rank-Iron.webp';
 import rankBronze from '../assets/Rizen Img/Rank-Bronze.webp';
 import rankSilver from '../assets/Rizen Img/Rank-Silver.webp';
@@ -157,7 +173,7 @@ export const RizenCaseStudy: React.FC = () => {
               Rizen is a fitness journey companion designed to help people stay committed to their fitness goals through workout planning, progress tracking and social accountability.
               This was a project I worked on as part of my PG UX Austin course, starting with a simple question: how might we help people stay committed to their fitness goals? <br></br>
               The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.
-              After Survey & 5 user interviews we noticed user didn't necessarily want more motivation or another public leaderboard. They wanted structure, visible progress and accountability from people they actually knew.
+              
             </p>
           </div>
         </section>
@@ -238,6 +254,171 @@ export const RizenCaseStudy: React.FC = () => {
               <p className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.75] text-[var(--text-secondary)] font-normal">
                 The final product brought together workout plans, workout tracking, progress, social features and gamification in one mobile experience.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── BUILT THE MVP ────────────────────────────────────────── */}
+        <section className="flex flex-col gap-8">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+               Defining the MVP
+            </h2>
+            <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                We initially planned Rizen around workout tracking and gamification, including ranks and public leaderboards.
+              </p>
+              <p>
+                After our survey and 5 user interviews, we found that users preferred competing with friends rather than everyone. I proposed refining the MVP around what users actually valued and discussed it with the team using a Must Have vs Nice to Have approach.
+              </p>
+              <p className="font-medium text-[var(--text-primary)] pt-1">
+                The MVP focused on four core areas:
+              </p>
+            </div>
+          </div>
+
+          {/* 4 Core Focus Areas - Sleek Modular Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {[
+              {
+                title: "Workout Tracking",
+                desc: "Set, rep & rest timer logging",
+                icon: Dumbbell,
+                badge: "Must Have"
+              },
+              {
+                title: "Progress Tracking",
+                desc: "PRs, volume & consistency logs",
+                icon: TrendingUp,
+                badge: "Must Have"
+              },
+              {
+                title: "Social & Accountability",
+                desc: "Friends feed & routine sharing",
+                icon: Users,
+                badge: "Must Have"
+              },
+              {
+                title: "Lightweight Gamification",
+                desc: "XP, rank tiers, streaks & badges",
+                icon: Flame,
+                badge: "Must Have"
+              }
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="relative overflow-hidden p-4 sm:p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all duration-300 shadow-sm group"
+                  style={{
+                    borderColor: 'var(--border-card)',
+                    background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
+                  }}
+                >
+                  {/* Subtle Neon Volt ambient gradient in top-left */}
+                  <div className="absolute top-0 left-0 w-32 h-32 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
+
+                  <div className="flex items-center justify-between relative z-10">
+                    {/* Icon Container */}
+                    <div
+                      className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300"
+                      style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
+                    >
+                      <Icon size={20} />
+                    </div>
+
+                    <span 
+                      className="text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider border shrink-0 text-right whitespace-nowrap ml-auto"
+                      style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-muted)' }}
+                    >
+                      {item.badge}
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-1 relative z-10">
+                    <h4 className="text-[16px] sm:text-[17px] md:text-[18px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
+                      {item.title}
+                    </h4>
+                    <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] leading-relaxed font-normal">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Nice to Have Section & Modular Cards */}
+          <div className="flex flex-col gap-4 pt-1">
+            <div className="flex flex-col gap-2 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Public leaderboards and other ideas like AI workout assistance and trainer booking were moved out of the MVP:
+              </p>
+            </div>
+
+            {/* 3 Nice to Have (Moved Out) Cards matching the MVP style */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              {[
+                {
+                  title: "Public Leaderboards",
+                  desc: "Removed to prevent comparison anxiety",
+                  icon: XCircle,
+                  badge: "Moved Out"
+                },
+                {
+                  title: "AI Workout Assistance",
+                  desc: "Deferred to a future subscription tier",
+                  icon: Clock,
+                  badge: "Phase 2"
+                },
+                {
+                  title: "Trainer Booking",
+                  desc: "Deferred to validate retention first",
+                  icon: Clock,
+                  badge: "Phase 2"
+                }
+              ].map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div
+                    key={idx}
+                    className="relative overflow-hidden p-4 sm:p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all duration-300 shadow-sm group"
+                    style={{
+                      borderColor: 'var(--border-card)',
+                      background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
+                    }}
+                  >
+                    {/* Subtle Neon Volt ambient gradient in top-left */}
+                    <div className="absolute top-0 left-0 w-32 h-32 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
+
+                    <div className="flex items-center justify-between relative z-10">
+                      {/* Icon Container */}
+                      <div
+                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300"
+                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
+                      >
+                        <Icon size={20} />
+                      </div>
+
+                      <span 
+                        className="text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider border shrink-0 text-right whitespace-nowrap ml-auto"
+                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-muted)' }}
+                      >
+                        {item.badge}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col gap-1 relative z-10">
+                      <h4 className="text-[16px] sm:text-[17px] md:text-[18px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
+                        {item.title}
+                      </h4>
+                      <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] leading-relaxed font-normal">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -444,6 +625,470 @@ export const RizenCaseStudy: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── SETTING THE VISUAL DIRECTION ─────────────────────────── */}
+        <section className="flex flex-col gap-8">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Setting the Visual Direction
+            </h2>
+            <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                We started with blue and purple, but the direction felt too similar to existing fitness apps. I moved towards neon green to give Rizen a more energetic and distinctive identity.
+              </p>
+              <p>
+                I created the initial visual system covering colour, typography, buttons, cards, spacing and icons, giving the team a consistent foundation for the Hi-Fi screens.
+              </p>
+            </div>
+          </div>
+
+          {/* 01 — Color */}
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-2.5">
+              <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
+              <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
+                01 — Color
+              </h3>
+            </div>
+
+            {/* 3 Main Color Swatches */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              {/* Primary */}
+              <div className="flex flex-col gap-1.5">
+                <div className="h-28 sm:h-32 rounded-2xl bg-[#C8FF3D] p-4 sm:p-5 flex flex-col justify-between text-black shadow-sm">
+                  <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider">
+                    PRIMARY
+                  </span>
+                  <span className="text-[20px] sm:text-[24px] font-black font-mono tracking-tight">
+                    #C8FF3D
+                  </span>
+                </div>
+                <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1">
+                  brand/primary
+                </span>
+              </div>
+
+              {/* Streak */}
+              <div className="flex flex-col gap-1.5">
+                <div className="h-28 sm:h-32 rounded-2xl bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] p-4 sm:p-5 flex flex-col justify-between text-white shadow-sm">
+                  <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider opacity-90">
+                    STREAK
+                  </span>
+                  <span className="text-[20px] sm:text-[24px] font-black font-mono tracking-tight">
+                    #FF6B35
+                  </span>
+                </div>
+                <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1">
+                  accent/streak
+                </span>
+              </div>
+
+              {/* Danger */}
+              <div className="flex flex-col gap-1.5">
+                <div className="h-28 sm:h-32 rounded-2xl bg-[#FF4D6D] p-4 sm:p-5 flex flex-col justify-between text-white shadow-sm">
+                  <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider opacity-90">
+                    DANGER
+                  </span>
+                  <span className="text-[20px] sm:text-[24px] font-black font-mono tracking-tight">
+                    #FF4D6D
+                  </span>
+                </div>
+                <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1">
+                  feedback/danger
+                </span>
+              </div>
+            </div>
+
+            {/* Neutrals Sub-section (Divided in 2 Lines, matching primary swatch cards) */}
+            <div className="flex flex-col gap-3 pt-2">
+              <span className="text-[11px] sm:text-[12px] font-mono uppercase tracking-wider text-[var(--text-secondary)] font-semibold px-0.5">
+                Neutrals
+              </span>
+
+              <div className="flex flex-col gap-3 sm:gap-4">
+                {/* Line 1: Background & Stroke Tokens (4 items) */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                  {[
+                    { token: "bg/page", hex: "#0B0F1A", desc: "Page base", color: "#0B0F1A", borderColor: "#2A3142", textColor: "text-white" },
+                    { token: "bg/surface", hex: "#161B2A", desc: "Cards", color: "#161B2A", borderColor: "#2A3142", textColor: "text-white" },
+                    { token: "bg/raised", hex: "#1F2638", desc: "Raised cards", color: "#1F2638", borderColor: "#2A3142", textColor: "text-white" },
+                    { token: "border/stroke", hex: "#2A3142", desc: "Borders, dividers", color: "#2A3142", borderColor: "#3A4356", textColor: "text-white" }
+                  ].map((neutral, idx) => (
+                    <div key={idx} className="flex flex-col gap-1.5">
+                      <div 
+                        className={`h-24 sm:h-28 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border shadow-sm ${neutral.textColor}`}
+                        style={{ background: neutral.color, borderColor: neutral.borderColor }}
+                      >
+                        <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider opacity-80 font-mono">
+                          {neutral.token}
+                        </span>
+                        <span className="text-[16px] sm:text-[19px] font-black font-mono tracking-tight">
+                          {neutral.hex}
+                        </span>
+                      </div>
+                      <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1 truncate">
+                        {neutral.desc}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Line 2: Typography & Content Tokens (3 items) */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                  {[
+                    { token: "text/tertiary", hex: "#5A637B", desc: "Hints, disabled", color: "#5A637B", borderColor: "#4A5268", textColor: "text-white" },
+                    { token: "text/secondary", hex: "#9CA3AF", desc: "Labels, captions", color: "#9CA3AF", borderColor: "#CBD5E1", textColor: "text-black" },
+                    { token: "text/primary", hex: "#FFFFFF", desc: "Headings, values", color: "#FFFFFF", borderColor: "#FFFFFF", textColor: "text-black" }
+                  ].map((neutral, idx) => (
+                    <div key={idx} className="flex flex-col gap-1.5">
+                      <div 
+                        className={`h-24 sm:h-28 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border shadow-sm ${neutral.textColor}`}
+                        style={{ background: neutral.color, borderColor: neutral.borderColor }}
+                      >
+                        <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider opacity-80 font-mono">
+                          {neutral.token}
+                        </span>
+                        <span className="text-[16px] sm:text-[19px] font-black font-mono tracking-tight">
+                          {neutral.hex}
+                        </span>
+                      </div>
+                      <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1 truncate">
+                        {neutral.desc}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 02 — Typography */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
+              <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
+                02 — Typography
+              </h3>
+            </div>
+
+            <div 
+              style={{ fontFamily: "'Inter', sans-serif" }}
+              className="p-5 sm:p-7 md:p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col gap-6"
+            >
+              <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3.5">
+                <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-secondary)] font-bold">
+                  Type Scale
+                </span>
+                <span className="text-[11px] font-mono text-[var(--text-secondary)] font-medium">
+                  Inter
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-5">
+                {/* H1 */}
+                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
+                    <span className="text-[#C8FF3D] font-bold">H1</span>
+                    <span className="text-[var(--text-secondary)]">28 · Extra Bold · 34lh · -1%</span>
+                  </div>
+                  <p 
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-[22px] sm:text-[26px] md:text-[28px] font-extrabold text-[var(--text-primary)] tracking-[-0.01em] leading-[1.25]"
+                  >
+                    Your plan is ready
+                  </p>
+                </div>
+
+                {/* H2 */}
+                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
+                    <span className="text-[#C8FF3D] font-bold">H2</span>
+                    <span className="text-[var(--text-secondary)]">22 · Extra Bold · 28lh · -0.5%</span>
+                  </div>
+                  <p 
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-[18px] sm:text-[20px] md:text-[22px] font-extrabold text-[var(--text-primary)] tracking-[-0.005em] leading-[1.28]"
+                  >
+                    Workout Complete!
+                  </p>
+                </div>
+
+                {/* Title */}
+                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
+                    <span className="text-[#C8FF3D] font-bold">Title</span>
+                    <span className="text-[var(--text-secondary)]">16 · Bold · 22lh</span>
+                  </div>
+                  <p 
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-[15px] sm:text-[16px] font-bold text-[var(--text-primary)] leading-[22px]"
+                  >
+                    Friends activity
+                  </p>
+                </div>
+
+                {/* Body */}
+                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
+                    <span className="text-[#C8FF3D] font-bold">Body</span>
+                    <span className="text-[var(--text-secondary)]">14 · Medium · 20lh</span>
+                  </div>
+                  <p 
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-[14px] font-medium text-[var(--text-secondary)] leading-[20px]"
+                  >
+                    Six exercises planned for today's push session.
+                  </p>
+                </div>
+
+                {/* Body S */}
+                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
+                    <span className="text-[#C8FF3D] font-bold">Body S</span>
+                    <span className="text-[var(--text-secondary)]">13 · Medium · 18lh</span>
+                  </div>
+                  <p 
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-[13px] font-medium text-[var(--text-secondary)] leading-[18px]"
+                  >
+                    2 minutes ago
+                  </p>
+                </div>
+
+                {/* Caption */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
+                    <span className="text-[#C8FF3D] font-bold">Caption</span>
+                    <span className="text-[var(--text-secondary)]">11 · Semi Bold · 14lh · 2%</span>
+                  </div>
+                  <p 
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                    className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-[0.02em] leading-[14px]"
+                  >
+                    TUE 17 MAY · 52:18 MIN
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 03 — Components */}
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-2.5">
+              <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
+              <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
+                03 — Components
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+              {/* Buttons & States */}
+              <div className="lg:col-span-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col justify-between gap-5">
+                <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-secondary)] font-bold">
+                    Buttons & States
+                  </span>
+                  <span className="text-[11px] font-mono text-[var(--text-secondary)]">Interactive</span>
+                </div>
+
+                <div className="flex flex-col gap-4 py-2">
+                  {/* Primary Button */}
+                  <div className="flex items-center gap-4">
+                    <button
+                      type="button"
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                      className="w-36 sm:w-40 py-2.5 sm:py-3 rounded-xl bg-[#C8FF3D] text-black font-bold text-[13px] sm:text-[14px] shadow-sm flex items-center justify-center transition-transform hover:scale-105"
+                    >
+                      Start Workout
+                    </button>
+                    <span className="text-[12px] sm:text-[13px] font-mono text-[var(--text-secondary)]">
+                      Primary
+                    </span>
+                  </div>
+
+                  {/* Disabled Button */}
+                  <div className="flex items-center gap-4">
+                    <button
+                      type="button"
+                      disabled
+                      style={{ fontFamily: "'Inter', sans-serif" }}
+                      className="w-36 sm:w-40 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-surface)] text-[var(--text-secondary)] opacity-60 font-bold text-[13px] sm:text-[14px] border border-[var(--border-card)] flex items-center justify-center cursor-not-allowed"
+                    >
+                      Start Workout
+                    </button>
+                    <span className="text-[12px] sm:text-[13px] font-mono text-[var(--text-secondary)]">
+                      Disabled
+                    </span>
+                  </div>
+
+                  {/* FAB Button */}
+                  <div className="flex items-center gap-4">
+                    <button
+                      type="button"
+                      className="w-11 h-11 rounded-full bg-[#C8FF3D] text-black flex items-center justify-center shadow-md transition-transform hover:scale-110"
+                    >
+                      <Plus size={20} strokeWidth={3} />
+                    </button>
+                    <span className="text-[12px] sm:text-[13px] font-mono text-[var(--text-secondary)]">
+                      Create Plan
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Navigation */}
+              <div className="lg:col-span-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col justify-between gap-5">
+                <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3">
+                  <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-secondary)] font-bold">
+                    Bottom Navigation
+                  </span>
+                  <span className="text-[10px] font-mono text-[var(--text-secondary)]">from IA · 5 destinations</span>
+                </div>
+
+                {/* Bottom Navigation Image Preview */}
+                <div className="flex items-center justify-center my-auto py-4 sm:py-6 px-1">
+                  <img
+                    src={bottomNavImg}
+                    alt="Bottom Navigation (from IA · 5 destinations)"
+                    className="w-full max-w-md sm:max-w-lg object-contain transition-transform duration-300 hover:scale-[1.03]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+            <p>
+              I chose Inter for its readability across the app's workout data, social content and gamification.
+            </p>
+          </div>
+        </section>
+
+        {/* ── WHAT'S NEXT / PHASE 2 ─────────────────────────────────── */}
+        <section className="flex flex-col gap-8">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              What's Next for Rizen
+            </h2>
+            <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Once the MVP was defined, I also explored opportunities to make Rizen a sustainable business beyond basic workout tracking.
+              </p>
+              <p className="font-medium text-[var(--text-primary)] pt-1">
+                The Phase 2 ideas focused on three revenue opportunities:
+              </p>
+            </div>
+          </div>
+
+          {/* 3 Revenue Opportunities Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+            {[
+              {
+                num: "01",
+                category: "Monetization",
+                title: "Community",
+                desc: "Build engagement through group challenges, creator workout plans and community features.",
+                subtext: "Creator splits & group challenge passes",
+                icon: Users
+              },
+              {
+                num: "02",
+                category: "Premium Tier",
+                title: "Advanced Analytics",
+                desc: "Offer deeper performance, recovery and health insights as a potential premium feature.",
+                subtext: "Fatigue recovery & progressive overload insights",
+                icon: TrendingUp
+              },
+              {
+                num: "03",
+                category: "Marketplace",
+                title: "Online Coaching",
+                desc: "Connect users with certified trainers and explore a booking/commission model.",
+                subtext: "Direct coach assignments & session bookings",
+                icon: UserCheck
+              }
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="relative overflow-hidden p-4 sm:p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all duration-300 shadow-sm group"
+                  style={{
+                    borderColor: 'var(--border-card)',
+                    background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
+                  }}
+                >
+                  {/* Subtle Neon Volt ambient gradient in top-left */}
+                  <div className="absolute top-0 left-0 w-32 h-32 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
+
+                  <div className="flex flex-col gap-3 relative z-10">
+                    <div className="flex items-center justify-between gap-2">
+                      {/* Icon Container */}
+                      <div
+                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300"
+                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
+                      >
+                        <Icon size={20} />
+                      </div>
+
+                      <span 
+                        className="text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider border shrink-0 text-right whitespace-nowrap ml-auto"
+                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-muted)' }}
+                      >
+                        {item.category}
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <h3 className="text-[16px] sm:text-[17px] md:text-[18px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
+                        {item.title}
+                      </h3>
+                      <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] leading-relaxed font-normal">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div 
+                    className="pt-3 border-t text-[12px] text-[var(--text-muted)] flex items-center gap-1.5 relative z-10" 
+                    style={{ borderColor: 'var(--border-card)' }}
+                  >
+                    {item.subtext}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* AI Assistance Future Subscription Box */}
+          <div
+            className="w-full rounded-2xl p-4 sm:p-5 border relative overflow-hidden shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 transition-all duration-300 group"
+            style={{
+              borderColor: 'var(--border-card)',
+              background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
+            }}
+          >
+            {/* Subtle ambient gradient in top-left */}
+            <div className="absolute top-0 left-0 w-36 h-36 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
+
+            <div 
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300 relative z-10"
+              style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
+            >
+              <Sparkles size={20} />
+            </div>
+            <div className="flex flex-col gap-1 relative z-10">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-bold">
+                  Future AI Subscription Layer
+                </span>
+              </div>
+              <p className="text-[13px] sm:text-[14px] leading-relaxed text-[var(--text-secondary)]">
+                AI assistance could also become part of a future subscription, using the user's existing workout and progress data to provide personalised guidance.
+              </p>
             </div>
           </div>
         </section>
