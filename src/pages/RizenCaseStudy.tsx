@@ -1,17 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { 
-  ArrowRight, 
-  CheckCircle2, 
   XCircle, 
   Clock, 
   Dumbbell, 
   TrendingUp, 
   Users, 
-  Zap, 
   Sparkles, 
   UserCheck, 
   Flame, 
-  Trophy,
   Plus
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
