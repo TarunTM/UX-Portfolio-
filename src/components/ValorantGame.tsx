@@ -119,6 +119,13 @@ export const ValorantGame: React.FC = () => {
   const animFrameId = useRef<number | null>(null);
   const isVisibleRef = useRef(true);
   const nextSpawnTimerRef = useRef(0);
+  const showBannerRef = useRef(false);
+  const bannerOpenedTimeRef = useRef<number>(0);
+
+  // Sync ref with state
+  useEffect(() => {
+    showBannerRef.current = showBanner;
+  }, [showBanner]);
 
   // Preload map & character pose images
   useEffect(() => {
@@ -301,10 +308,15 @@ export const ValorantGame: React.FC = () => {
       // ── 2. UPDATE & DRAW DYNAMIC WALKING AGENTS ────────────────
       let allPassedOrDead = true;
 
+      // Only advance walking positions if banner is not open
+      const isPaused = showBannerRef.current;
+
       agentsRef.current.forEach((agent) => {
         if (agent.alive) {
-          // Move forward across screen from left to right
-          agent.x += agent.speed * dt;
+          if (!isPaused) {
+            // Move forward across screen from left to right
+            agent.x += agent.speed * dt;
+          }
 
           if (agent.x < width + 80) {
             allPassedOrDead = false;
@@ -358,7 +370,7 @@ export const ValorantGame: React.FC = () => {
       });
 
       // Respawn: If characters walked past the right side or both popped, come from left again!
-      if (allPassedOrDead && agentsRef.current.length > 0) {
+      if (!isPaused && allPassedOrDead && agentsRef.current.length > 0) {
         nextSpawnTimerRef.current += dt;
         if (nextSpawnTimerRef.current > 20) {
           spawnAgentPair(width, height);
@@ -443,45 +455,47 @@ export const ValorantGame: React.FC = () => {
     };
   }, [spawnAgentPair]);
 
-  // Handle Shoot Click / Tap
-  const handleShoot = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  // Handle Shoot Click / Tap with unified pointer events
+  const handleShoot = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    // If banner is currently showing, ignore canvas clicks
+    if (showBannerRef.current) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const rect = canvas.getBoundingClientRect();
 
-    let clientX = 0;
-    let clientY = 0;
+    // Accurate aspect-ratio scaling for responsive canvas
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
 
-    if ('touches' in e && e.touches.length > 0) {
-      clientX = e.touches[0].clientX;
-      clientY = e.touches[0].clientY;
-    } else if ('clientX' in e) {
-      clientX = (e as React.MouseEvent).clientX;
-      clientY = (e as React.MouseEvent).clientY;
-    }
-
-    const clickX = clientX - rect.left;
-    const clickY = clientY - rect.top;
+    const clickX = (e.clientX - rect.left) * scaleX;
+    const clickY = (e.clientY - rect.top) * scaleY;
 
     let hitOccurred = false;
 
     // Check hit on alive agents (bounding box around animated character)
-    agentsRef.current.forEach((agent) => {
-      if (!agent.alive) return;
+    for (const agent of agentsRef.current) {
+      if (!agent.alive) continue;
 
-      const hitBoxLeft = agent.x - 10;
-      const hitBoxRight = agent.x + agent.width + 10;
-      const hitBoxTop = agent.y - agent.height - 10;
-      const hitBoxBottom = agent.y + 10;
+      const padding = 16;
+      const hitBoxLeft = agent.x - padding;
+      const hitBoxRight = agent.x + agent.width + padding;
+      const hitBoxTop = agent.y - agent.height - padding;
+      const hitBoxBottom = agent.y + padding;
 
       if (clickX >= hitBoxLeft && clickX <= hitBoxRight && clickY >= hitBoxTop && clickY <= hitBoxBottom) {
         agent.alive = false;
         hitOccurred = true;
         setHits((prev) => prev + 1);
         spawnHitVFX(agent.x + agent.width / 2, agent.y, agent.isClone);
+        
+        // Open banner modal and record timestamp
         setShowBanner(true);
+        showBannerRef.current = true;
+        bannerOpenedTimeRef.current = Date.now();
+        break; // Eliminate only 1 agent per tap/click
       }
-    });
+    }
 
     playShotSound(hitOccurred);
   };
@@ -493,6 +507,19 @@ export const ValorantGame: React.FC = () => {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     setCrosshairPos({ x, y });
+  };
+
+  const handlePlayAgain = (e: React.MouseEvent | React.PointerEvent) => {
+    e.stopPropagation();
+    // Guard against immediate ghost clicks/touches on mobile (within 400ms of opening)
+    if (Date.now() - bannerOpenedTimeRef.current < 400) {
+      return;
+    }
+
+    setShowBanner(false);
+    showBannerRef.current = false;
+    const canvas = canvasRef.current;
+    if (canvas) spawnAgentPair(canvas.width, canvas.height);
   };
 
   return (
@@ -545,16 +572,15 @@ export const ValorantGame: React.FC = () => {
 
       {/* ── CANVAS ARENA (ASCENT MAP + DYNAMIC WALKING YORU) ───────── */}
       <div 
-        className="relative w-full h-[300px] cursor-crosshair overflow-hidden select-none"
+        className="relative w-full h-[300px] cursor-crosshair overflow-hidden select-none touch-none"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
         <canvas
           ref={canvasRef}
-          onClick={handleShoot}
-          onTouchStart={handleShoot}
+          onPointerDown={handleShoot}
           onMouseMove={handleMouseMove}
-          className="w-full h-full block"
+          className="w-full h-full block touch-none"
         />
 
         {/* Tactical Crosshair Overlay (Desktop) - Clean White / High Contrast */}
@@ -582,7 +608,10 @@ export const ValorantGame: React.FC = () => {
 
         {/* ── TACTICAL MODAL / POPUP BANNER ──────────────────────── */}
         {showBanner && (
-          <div className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md z-40 flex items-center justify-center p-4 transition-opacity duration-300">
+          <div 
+            className="absolute inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-md z-40 flex items-center justify-center p-4 transition-opacity duration-300 pointer-events-auto select-none"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="max-w-md w-full bg-[var(--bg-card)] border border-[var(--border-card)] rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col items-center text-center gap-4 relative overflow-hidden transform transition-all duration-300 animate-scale-up">
               
               {/* Corner tactical markers */}
@@ -604,11 +633,8 @@ export const ValorantGame: React.FC = () => {
               {/* Action Button */}
               <div className="flex items-center gap-3 mt-3 w-full justify-center">
                 <button
-                  onClick={() => {
-                    setShowBanner(false);
-                    const canvas = canvasRef.current;
-                    if (canvas) spawnAgentPair(canvas.width, canvas.height);
-                  }}
+                  type="button"
+                  onClick={handlePlayAgain}
                   className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--text-primary)] hover:opacity-90 text-[var(--bg-base)] text-xs font-mono font-bold tracking-wider uppercase transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-md"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
