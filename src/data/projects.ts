@@ -28,54 +28,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "rizen",
-    title: "RIZEN",
-    tagline: "Designing for the comeback, not the streak.",
-    category: "Mobile App · Gamified Fitness",
-    role: "Product Designer",
-    timeline: "1 Month",
-    tools: ["Figma", "Design Systems", "User Research", "Gamification Design", "Mobile UI/UX"],
-    objective: "A fitness companion designed to help inconsistent exercisers build sustainable workout habits through structure, progress and accountability.",
-    problem: "The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.",
-    solution: "An intentional fitness experience built around recovery nudges, separating workout planning from live execution, friend-circle accountability, and visible XP/tier progress.",
-    metrics: [
-      { value: "37", label: "Research Surveys" },
-      { value: "5", label: "In-Depth Interviews" },
-      { value: "6", label: "Progression Tiers" }
-    ],
-    process: [
-      {
-        phase: "01 Intro & Insight",
-        type: "Divergent",
-        summary: "Discovering that the core problem wasn't starting, it was restarting.",
-        details: "Surveyed 37 exercisers and conducted 5 in-depth qualitative interviews. Found that 78% of users abandon fitness apps entirely after breaking a streak due to guilt, shame, and friction in resetting routines."
-      },
-      {
-        phase: "02 Role & Systems",
-        type: "Convergent",
-        summary: "Architecting user flows, information architecture, and the design system.",
-        details: "Worked in a cross-functional team of 6 to establish complete UI components, recovery flow architectures, rank progression metrics, and high-fidelity screens."
-      },
-      {
-        phase: "03 Design Decisions",
-        type: "Divergent",
-        summary: "Engineering the comeback engine, planning separation, and small circles.",
-        details: "Designed 15-minute recovery reactivation flows, split the app into relaxed planning vs high-focus execution modes, and removed toxic global leaderboards in favor of intimate friend pods."
-      },
-      {
-        phase: "04 Outcome & Delivery",
-        type: "Convergent",
-        summary: "Delivering a focused MVP balancing Structure, Progress, Recovery, and Social.",
-        details: "Delivered a complete mobile prototype integrating workout plans, live tracking, friend activity feeds, and a 6-tier XP rank ladder (Iron to Rizen Elite)."
-      }
-    ],
-    takeaways: [
-      "A feature is only valuable when it supports a user behaviour.",
-      "Rizen taught me to move beyond 'What features should this product have?' and ask 'What behaviour are we trying to change?'",
-      "Designing for the comeback prevents shame-induced churn and turns broken streaks into sustainable habit loops."
-    ]
-  },
-  {
     id: "sanctum",
     title: "Sanctum House of Wellness",
     tagline: "Designing a premium fitness experience around brand clarity, local discovery, and conversion.",
@@ -121,6 +73,54 @@ export const projects: Project[] = [
       "A small, intent-driven UX improvement can directly support business conversion.",
       "Shaping the journey from understanding Sanctum → finding a club → making an enquiry drastically reduces cognitive friction.",
       "Direct communication channels (WhatsApp, Phone, Directions) capture high-intent ad traffic before drop-off occurs."
+    ]
+  },
+  {
+    id: "rizen",
+    title: "RIZEN",
+    tagline: "Designing for the comeback, not the streak.",
+    category: "Mobile App · Gamified Fitness",
+    role: "Product Designer",
+    timeline: "1 Month",
+    tools: ["Figma", "Design Systems", "User Research", "Gamification Design", "Mobile UI/UX"],
+    objective: "A fitness companion designed to help inconsistent exercisers build sustainable workout habits through structure, progress and accountability.",
+    problem: "The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.",
+    solution: "An intentional fitness experience built around recovery nudges, separating workout planning from live execution, friend-circle accountability, and visible XP/tier progress.",
+    metrics: [
+      { value: "37", label: "Research Surveys" },
+      { value: "5", label: "In-Depth Interviews" },
+      { value: "6", label: "Progression Tiers" }
+    ],
+    process: [
+      {
+        phase: "01 Intro & Insight",
+        type: "Divergent",
+        summary: "Discovering that the core problem wasn't starting, it was restarting.",
+        details: "Surveyed 37 exercisers and conducted 5 in-depth qualitative interviews. Found that 78% of users abandon fitness apps entirely after breaking a streak due to guilt, shame, and friction in resetting routines."
+      },
+      {
+        phase: "02 Role & Systems",
+        type: "Convergent",
+        summary: "Architecting user flows, information architecture, and the design system.",
+        details: "Worked in a cross-functional team of 6 to establish complete UI components, recovery flow architectures, rank progression metrics, and high-fidelity screens."
+      },
+      {
+        phase: "03 Design Decisions",
+        type: "Divergent",
+        summary: "Engineering the comeback engine, planning separation, and small circles.",
+        details: "Designed 15-minute recovery reactivation flows, split the app into relaxed planning vs high-focus execution modes, and removed toxic global leaderboards in favor of intimate friend pods."
+      },
+      {
+        phase: "04 Outcome & Delivery",
+        type: "Convergent",
+        summary: "Delivering a focused MVP balancing Structure, Progress, Recovery, and Social.",
+        details: "Delivered a complete mobile prototype integrating workout plans, live tracking, friend activity feeds, and a 6-tier XP rank ladder (Iron to Rizen Elite)."
+      }
+    ],
+    takeaways: [
+      "A feature is only valuable when it supports a user behaviour.",
+      "Rizen taught me to move beyond 'What features should this product have?' and ask 'What behaviour are we trying to change?'",
+      "Designing for the comeback prevents shame-induced churn and turns broken streaks into sustainable habit loops."
     ]
   },
   {

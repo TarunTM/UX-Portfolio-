@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.webp';
 import wixStudioIcon from '../assets/wix-studio.webp';
+import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
 import socialSlateLogo from '../assets/SS- OG colors.webp';
 import rizenHomeMockup from '../assets/HomePage Rizen.webp';
 import sanctumHomeMockup from '../assets/Sanctum HomePage.webp';
@@ -71,6 +72,14 @@ const WixStudioIcon = () => (
   />
 );
 
+const AntigravityIcon = () => (
+  <img
+    src={antigravityIcon}
+    alt="Antigravity"
+    className="w-full h-full object-contain"
+  />
+);
+
 // ── Motion Animation Variants ─────────────────────────────────────────
 const containerVariants = {
   hidden: {},
@@ -110,10 +119,11 @@ export const Landing: React.FC = () => {
     { name: 'Figma', icon: <FigmaIcon /> },
     { name: 'FigJam', icon: <FigJamIcon /> },
     { name: 'Framer', icon: <FramerIcon /> },
+    { name: 'Wix Studio', icon: <WixStudioIcon /> },
+    { name: 'Antigravity', icon: <AntigravityIcon /> },
+    { name: 'Miro', icon: <MiroIcon /> },
     { name: 'Notion', icon: <NotionIcon /> },
     { name: 'Asana', icon: <AsanaIcon /> },
-    { name: 'Miro', icon: <MiroIcon /> },
-    { name: 'Wix Studio', icon: <WixStudioIcon /> },
   ];
 
   const skills = [
@@ -223,12 +233,17 @@ export const Landing: React.FC = () => {
                 and base notes of usability. 1+ year building digital products that matter.
               </p>
               
-              <div className="flex flex-wrap items-center gap-3.5 mt-8">
+              <div className="flex flex-wrap items-center gap-3.5 mt-8 relative z-20">
                 <a
                   href="https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer border border-transparent shadow-sm"
+                  onClick={(e) => {
+                    if (!e.defaultPrevented) {
+                      window.open('https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing', '_blank', 'noopener,noreferrer');
+                    }
+                  }}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer border border-transparent shadow-sm relative z-20 select-none"
                 >
                   <span>Resume</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -315,34 +330,7 @@ export const Landing: React.FC = () => {
           {/* ── LEFT COLUMN (8 Cols) — 3 Horizontal Bento Cards ── */}
           <div className="lg:col-span-8 flex flex-col gap-6">
             
-            {/* Card 1: Rizen */}
-            <Link
-              to="/work/rizen"
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
-            >
-              <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
-                  Mobile App
-                </span>
-              </div>
-
-              {/* Phone Mockup Peek — Decreased width and shifted slightly down */}
-              <div className="absolute right-4 sm:right-8 md:right-12 top-5 sm:top-6 w-[185px] sm:w-[205px] md:w-[220px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-[1.02] transition-all duration-500 ease-out z-0 drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]">
-                <img
-                  src={rizenHomeMockup}
-                  alt="Rizen Mockup Preview"
-                  className="w-full h-auto object-contain object-top"
-                />
-              </div>
-
-              <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-                  Rizen
-                </h3>
-              </div>
-            </Link>
-
-            {/* Card 2: Sanctum */}
+            {/* Card 1: Sanctum */}
             <Link
               to="/work/sanctum"
               className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
@@ -365,6 +353,33 @@ export const Landing: React.FC = () => {
               <div className="z-10">
                 <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Sanctum
+                </h3>
+              </div>
+            </Link>
+
+            {/* Card 2: Rizen */}
+            <Link
+              to="/work/rizen"
+              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
+            >
+              <div className="z-10">
+                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
+                  Mobile App
+                </span>
+              </div>
+
+              {/* Phone Mockup Peek — Decreased width and shifted slightly down */}
+              <div className="absolute right-4 sm:right-8 md:right-12 top-5 sm:top-6 w-[185px] sm:w-[205px] md:w-[220px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-[1.02] transition-all duration-500 ease-out z-0 drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]">
+                <img
+                  src={rizenHomeMockup}
+                  alt="Rizen Mockup Preview"
+                  className="w-full h-auto object-contain object-top"
+                />
+              </div>
+
+              <div className="z-10">
+                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
+                  Rizen
                 </h3>
               </div>
             </Link>
@@ -657,7 +672,7 @@ export const Landing: React.FC = () => {
             04 / Contact
           </p>
           <h2
-            className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight mb-10 leading-none"
+            className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight mb-10 leading-[1.05]"
             style={{ letterSpacing: '-0.03em' }}
           >
             Let's work{' '}
@@ -674,7 +689,7 @@ export const Landing: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <p
-              className="text-base max-w-md leading-relaxed"
+              className="text-base sm:text-lg max-w-md leading-relaxed"
               style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
             >
               Open to Product Designer roles, design reviews, audits, and
@@ -730,8 +745,8 @@ export const Landing: React.FC = () => {
                 Just for fun
               </p>
               <h2
-                className="text-2xl sm:text-3xl font-semibold tracking-tight"
-                style={{ letterSpacing: '-0.02em' }}
+                className="text-3xl sm:text-4xl font-semibold tracking-tight"
+                style={{ letterSpacing: '-0.025em' }}
               >
                 UX Runner{' '}
                 <span
@@ -766,12 +781,17 @@ export const Landing: React.FC = () => {
           >
             © {new Date().getFullYear()} Tarun. All rights reserved.
           </span>
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 relative z-20">
             <a
               href="https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5"
+              onClick={(e) => {
+                if (!e.defaultPrevented) {
+                  window.open('https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing', '_blank', 'noopener,noreferrer');
+                }
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 cursor-pointer relative z-20 select-none"
               style={{
                 borderColor: 'var(--border-card)',
                 color: 'var(--text-secondary)',

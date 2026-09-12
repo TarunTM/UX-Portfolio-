@@ -27,8 +27,8 @@ interface CaseStudyItem {
 }
 
 const CASE_STUDIES: CaseStudyItem[] = [
-  { id: 'rizen', path: '/work/rizen', name: 'Rizen', label: 'Rizen · Fitness App', icon: Dumbbell },
   { id: 'sanctum', path: '/work/sanctum', name: 'Sanctum', label: 'Sanctum · Gym', icon: Sparkles },
+  { id: 'rizen', path: '/work/rizen', name: 'Rizen', label: 'Rizen · Fitness App', icon: Dumbbell },
   { id: 'quantel-ai', path: '/work/quantel-ai', name: 'Quantel AI', label: 'Quantel · AI Wealth', icon: TrendingUp },
   { id: 'side-quests', path: '/work/side-quests', name: 'Side Quests', label: 'Side Quests · Explorations', icon: Layers },
 ];
@@ -171,7 +171,7 @@ export const Navbar: React.FC = () => {
       : CASE_STUDIES[0];
 
   return (
-    <nav className="fixed bottom-[58px] sm:bottom-[66px] left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-1/2 lg:left-8 lg:-translate-y-1/2 lg:-translate-x-0 z-[1000] select-none max-w-[calc(100vw-16px)]">
+    <nav className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-1/2 lg:left-8 lg:-translate-y-1/2 lg:translate-x-0 z-[1000] select-none max-w-[calc(100vw-16px)] lg:max-w-none">
       <div className="flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#262626] backdrop-blur-xl border border-[#C8D7DF] dark:border-[#383838] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] transition-all duration-300">
         
         {isCaseStudy ? (
