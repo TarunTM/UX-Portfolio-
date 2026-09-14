@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import { projects } from '../data/projects';
@@ -15,9 +16,27 @@ const outcomeImages = [
   { img: groupxSanctum, alt: 'Sanctum GroupX Classes', title: 'GroupX Experience' },
 ];
 
+const constraints = [
+  {
+    id: 'wix-limitations',
+    title: 'Wix limitations',
+    desc: 'Parts of the experience relied on Wix Forms, Wix Bookings, and native Wix components, which limited customisation in certain areas.',
+  },
+  {
+    id: 'timeline',
+    title: 'Timeline',
+    desc: 'The website was developed in phases, with each phase working against its own timeline and delivery requirements.',
+  },
+];
+
 export const SanctumCaseStudy: React.FC = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [btnHovered, setBtnHovered] = useState(false);
+  const [expandedConstraint, setExpandedConstraint] = useState<string | null>(null);
+
+  const toggleConstraint = (id: string) => {
+    setExpandedConstraint((prev) => (prev === id ? null : id));
+  };
 
   // Scroll to top on mount
   useEffect(() => {
@@ -184,17 +203,30 @@ export const SanctumCaseStudy: React.FC = () => {
         </section>
 
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Outcome & Business Impact
-          </h2>
+        <section className="flex flex-col gap-6 sm:gap-8">
+          <div className="flex flex-col gap-4">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Outcome
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-                The final website gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
-                The most measurable result came from the club-page improvement, where the client reported a <strong>3X increase</strong> in WhatsApp and phone enquiries after the direct contact actions were introduced.
-            </p>
-            
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-center">
+              {/* Left narrative */}
+              <div className="md:col-span-9 flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal">
+                <p>
+                  3x increase in WhatsApp and phone enquiries within 3 weeks, as reported by the client after direct contact actions were introduced on the club pages. The final experience also gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
+                </p>
+              </div>
+
+              {/* Right: 3x Inquiries Stat Display */}
+              <div className="md:col-span-3 flex flex-col items-center justify-center text-center select-none py-1">
+                <span className="text-[60px] sm:text-[72px] md:text-[84px] font-bold tracking-tight text-[var(--text-primary)] leading-none">
+                  3x
+                </span>
+                <span className="text-[15px] sm:text-[17px] md:text-[18px] font-medium text-[var(--text-primary)] tracking-tight mt-1 sm:mt-1.5">
+                  Inquiries
+                </span>
+              </div>
+            </div>
           </div>
 
           {/* 2-Second Rotating Showcase Carousel — Matching Hero Video Aspect Ratio */}
@@ -379,6 +411,62 @@ About a week after the change, the client shared that WhatsApp and phone enquiri
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ── CONSTRAINTS ─────────────────────────────────────────── */}
+        <section className="flex flex-col gap-4 sm:gap-5">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            Constraints
+          </h2>
+
+          <div className="flex flex-col gap-3 sm:gap-4 max-w-3xl">
+            {constraints.map((item) => {
+              const isOpen = expandedConstraint === item.id;
+              return (
+                <div
+                  key={item.id}
+                  className="rounded-2xl border transition-all duration-300 overflow-hidden"
+                  style={{
+                    background: 'var(--bg-surface)',
+                    borderColor: isOpen ? 'var(--text-muted)' : 'var(--border-card)',
+                  }}
+                >
+                  <button
+                    onClick={() => toggleConstraint(item.id)}
+                    aria-expanded={isOpen}
+                    className="w-full py-4 px-5 sm:py-5 sm:px-6 flex items-center justify-between gap-4 text-left cursor-pointer group"
+                  >
+                    <span className="text-[17px] sm:text-[19px] font-semibold text-[var(--text-primary)] tracking-tight">
+                      {item.title}
+                    </span>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 border border-[var(--border-card)] group-hover:border-[var(--text-muted)] transition-colors">
+                      <ChevronDown
+                        className={`w-4 h-4 text-[var(--text-secondary)] transition-transform duration-300 ${
+                          isOpen ? 'rotate-180 text-[var(--text-primary)]' : 'group-hover:text-[var(--text-primary)]'
+                        }`}
+                      />
+                    </div>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-[15px] sm:text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal border-t border-[var(--border-card)]/40 pt-3.5">
+                          <p>{item.desc}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </section>
 
