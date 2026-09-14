@@ -16,16 +16,33 @@ const outcomeImages = [
   { img: groupxSanctum, alt: 'Sanctum GroupX Classes', title: 'GroupX Experience' },
 ];
 
-const constraints = [
+const constraintsData = [
   {
     id: 'wix-limitations',
     title: 'Wix limitations',
-    desc: 'Parts of the experience relied on Wix Forms, Wix Bookings, and native Wix components, which limited customisation in certain areas.',
+    description:
+      'Parts of the experience relied on Wix Forms, Wix Bookings, and native Wix components, which limited customisation in certain areas.',
   },
   {
     id: 'timeline',
     title: 'Timeline',
-    desc: 'The website was developed in phases, with each phase working against its own timeline and delivery requirements.',
+    description:
+      'The website was developed in phases, with each phase working against its own timeline and delivery requirements.',
+  },
+];
+
+const whatILearntData = [
+  {
+    id: 'design-for-outcomes',
+    title: 'Design for outcomes, not just aesthetics.',
+    description:
+      'The 3× increase in enquiries showed me that a small, practical UX improvement can matter more than a visually perfect solution. Sometimes aesthetics can be compromised when it leads to better conversion.',
+  },
+  {
+    id: 'design-with-implementation',
+    title: 'Design with implementation in mind.',
+    description:
+      'Working with a tight timeline taught me to consider the development process while designing. Using responsive, pre-built Wix components where appropriate helped speed up implementation without compromising the overall experience.',
   },
 ];
 
@@ -33,9 +50,14 @@ export const SanctumCaseStudy: React.FC = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [btnHovered, setBtnHovered] = useState(false);
   const [expandedConstraint, setExpandedConstraint] = useState<string | null>(null);
+  const [expandedLearning, setExpandedLearning] = useState<string | null>(null);
 
   const toggleConstraint = (id: string) => {
     setExpandedConstraint((prev) => (prev === id ? null : id));
+  };
+
+  const toggleLearning = (id: string) => {
+    setExpandedLearning((prev) => (prev === id ? null : id));
   };
 
   // Scroll to top on mount
@@ -64,7 +86,7 @@ export const SanctumCaseStudy: React.FC = () => {
       <Navbar />
 
       <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-10 sm:gap-14">
-        
+
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
@@ -115,7 +137,7 @@ export const SanctumCaseStudy: React.FC = () => {
                 <span>Product Thinking,</span>
                 <span>Prototyping,</span>
                 <span>Product Development</span>
-                
+
               </div>
             </div>
 
@@ -171,7 +193,7 @@ export const SanctumCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-                Sanctum House of Wellness is a premium fitness and wellness brand with multiple locations across Mumbai. I worked on the website from design through implementation, creating an experience that communicated what Sanctum stands for, helped users discover the right classes and locations, and made it easier to enquire.
+              Sanctum House of Wellness is a premium fitness and wellness brand with multiple locations across Mumbai. I worked on the website from design through implementation, creating an experience that communicated what Sanctum stands for, helped users discover the right classes and locations, and made it easier to enquire.
             </p>
           </div>
         </section>
@@ -197,7 +219,7 @@ export const SanctumCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
             <p>
-                I worked as part of a team of three designers, contributing to the design of the website, including the homepage, all club pages and the GroupX experience. I designed the screens in Figma and implemented the final experience in Wix Studio, using Wix Bookings for class scheduling and reservations.
+              I worked as part of a team of three designers, contributing to the design of the website, including the homepage, all club pages and the GroupX experience. I designed the screens in Figma and implemented the final experience in Wix Studio, using Wix Bookings for class scheduling and reservations.
             </p>
           </div>
         </section>
@@ -213,7 +235,7 @@ export const SanctumCaseStudy: React.FC = () => {
               {/* Left narrative */}
               <div className="md:col-span-9 flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal">
                 <p>
-                  3x increase in WhatsApp and phone enquiries within 3 weeks, as reported by the client after direct contact actions were introduced on the club pages. The final experience also gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
+                  <strong >3x increase in WhatsApp and phone enquiries within 3 weeks</strong>, as reported by the client after direct contact actions were introduced on the club pages. The final experience also gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
                 </p>
               </div>
 
@@ -238,9 +260,8 @@ export const SanctumCaseStudy: React.FC = () => {
               {outcomeImages.map((slide, idx) => (
                 <div
                   key={idx}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    activeSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                  }`}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                    }`}
                 >
                   <img
                     src={slide.img}
@@ -256,9 +277,8 @@ export const SanctumCaseStudy: React.FC = () => {
                   <button
                     key={idx}
                     onClick={() => setActiveSlide(idx)}
-                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                      activeSlide === idx ? 'w-6 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'
-                    }`}
+                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${activeSlide === idx ? 'w-6 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                      }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
                 ))}
@@ -305,9 +325,8 @@ export const SanctumCaseStudy: React.FC = () => {
                 </span>
 
                 <ArrowRight
-                  className={`relative z-10 w-4 h-4 transition-all duration-300 ${
-                    btnHovered ? 'translate-x-1.5 opacity-100' : 'opacity-70'
-                  }`}
+                  className={`relative z-10 w-4 h-4 transition-all duration-300 ${btnHovered ? 'translate-x-1.5 opacity-100' : 'opacity-70'
+                    }`}
                 />
               </a>
             </div>
@@ -325,11 +344,11 @@ export const SanctumCaseStudy: React.FC = () => {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  1. Making GroupX easier to explore 
+                  1. Making GroupX easier to explore
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                      GroupX offers a range of classes across Sanctum's locations, but users first needed to understand what classes were available and where they could take them.I designed the GroupX experience to make the relationship between class and location clearer, allowing users to browse the available sessions and understand where each class was offered before moving into the booking flow.
+                    GroupX offers a range of classes across Sanctum's locations, but users first needed to understand what classes were available and where they could take them.I designed the GroupX experience to make the relationship between class and location clearer, allowing users to browse the available sessions and understand where each class was offered before moving into the booking flow.
                   </p>
                 </div>
               </div>
@@ -357,8 +376,8 @@ export const SanctumCaseStudy: React.FC = () => {
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                      Sanctum's branding already defined Training and Recovery as its two core pillars. I translated that into the website through a left-and-right visual composition, giving both pillars equal importance.
-This helped communicate what Sanctum stood for before users moved into the details of its locations, classes and facilities.
+                    Sanctum's branding already defined Training and Recovery as its two core pillars. I translated that into the website through a left-and-right visual composition, giving both pillars equal importance.
+                    This helped communicate what Sanctum stood for before users moved into the details of its locations, classes and facilities.
                   </p>
                 </div>
               </div>
@@ -389,11 +408,11 @@ This helped communicate what Sanctum stood for before users moved into the detai
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                      After the website went live, Meta Ads started driving traffic to specific Sanctum locations. We knew the campaigns were targeting areas around the clubs, so users landing on these pages were often already interested in a particular location.
-I redesigned the Andheri, Juhu and Khar club pages and later added direct WhatsApp, Phone and Directions actions to make it easier for users to ask questions, call the club or find their way there.
-About a week after the change, the client shared that WhatsApp and phone enquiries had increased by approximately <strong>3X</strong>.
+                    After the website went live, Meta Ads started driving traffic to specific Sanctum locations. We knew the campaigns were targeting areas around the clubs, so users landing on these pages were often already interested in a particular location.
+                    I redesigned the Andheri, Juhu and Khar club pages and later added direct WhatsApp, Phone and Directions actions to make it easier for users to ask questions, call the club or find their way there.
+                    About a week after the change, the client shared that WhatsApp and phone enquiries had increased by approximately <strong>3X</strong>.
                   </p>
-                  
+
                 </div>
               </div>
 
@@ -420,46 +439,116 @@ About a week after the change, the client shared that WhatsApp and phone enquiri
             Constraints
           </h2>
 
-          <div className="flex flex-col gap-3 sm:gap-4 max-w-3xl">
-            {constraints.map((item) => {
-              const isOpen = expandedConstraint === item.id;
+          <div className="flex flex-col gap-2.5 sm:gap-3">
+            {constraintsData.map((item) => {
+              const isExpanded = expandedConstraint === item.id;
               return (
                 <div
                   key={item.id}
-                  className="rounded-2xl border transition-all duration-300 overflow-hidden"
+                  className="border rounded-xl sm:rounded-2xl overflow-hidden transition-colors duration-200"
                   style={{
+                    borderColor: 'var(--border-card)',
                     background: 'var(--bg-surface)',
-                    borderColor: isOpen ? 'var(--text-muted)' : 'var(--border-card)',
                   }}
                 >
                   <button
+                    type="button"
                     onClick={() => toggleConstraint(item.id)}
-                    aria-expanded={isOpen}
-                    className="w-full py-4 px-5 sm:py-5 sm:px-6 flex items-center justify-between gap-4 text-left cursor-pointer group"
+                    aria-expanded={isExpanded}
+                    className="w-full flex items-center justify-between py-3.5 px-4 sm:py-4 sm:px-5 text-left cursor-pointer select-none group focus:outline-none"
                   >
-                    <span className="text-[17px] sm:text-[19px] font-semibold text-[var(--text-primary)] tracking-tight">
+                    <span className="text-[16px] sm:text-[17px] md:text-[18px] font-semibold tracking-tight text-[var(--text-primary)] transition-colors duration-150">
                       {item.title}
                     </span>
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 border border-[var(--border-card)] group-hover:border-[var(--text-muted)] transition-colors">
-                      <ChevronDown
-                        className={`w-4 h-4 text-[var(--text-secondary)] transition-transform duration-300 ${
-                          isOpen ? 'rotate-180 text-[var(--text-primary)]' : 'group-hover:text-[var(--text-primary)]'
-                        }`}
-                      />
-                    </div>
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="w-7 h-7 rounded-full flex items-center justify-center border shrink-0 ml-3 transition-colors"
+                      style={{
+                        borderColor: 'var(--border-card)',
+                        background: isExpanded ? 'var(--bg-card)' : 'transparent',
+                        color: 'var(--text-secondary)',
+                      }}
+                    >
+                      <ChevronDown className="w-3.5 h-3.5" />
+                    </motion.div>
                   </button>
 
                   <AnimatePresence initial={false}>
-                    {isOpen && (
+                    {isExpanded && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 sm:px-6 pb-5 sm:pb-6 text-[15px] sm:text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal border-t border-[var(--border-card)]/40 pt-3.5">
-                          <p>{item.desc}</p>
+                        <div className="px-4 pb-3.5 sm:px-5 sm:pb-4 pt-0 text-[14.5px] sm:text-[15.5px] leading-[1.65] text-[var(--text-secondary)] font-normal">
+                          <p className="pt-0.5">{item.description}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── WHAT I LEARNT ───────────────────────────────────────── */}
+        <section className="flex flex-col gap-4 sm:gap-5">
+          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+            What I Learnt
+          </h2>
+
+          <div className="flex flex-col gap-2.5 sm:gap-3">
+            {whatILearntData.map((item) => {
+              const isExpanded = expandedLearning === item.id;
+              return (
+                <div
+                  key={item.id}
+                  className="border rounded-xl sm:rounded-2xl overflow-hidden transition-colors duration-200"
+                  style={{
+                    borderColor: 'var(--border-card)',
+                    background: 'var(--bg-surface)',
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleLearning(item.id)}
+                    aria-expanded={isExpanded}
+                    className="w-full flex items-center justify-between py-3.5 px-4 sm:py-4 sm:px-5 text-left cursor-pointer select-none group focus:outline-none"
+                  >
+                    <span className="text-[16px] sm:text-[17px] md:text-[18px] font-semibold tracking-tight text-[var(--text-primary)] transition-colors duration-150">
+                      {item.title}
+                    </span>
+                    <motion.div
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                      className="w-7 h-7 rounded-full flex items-center justify-center border shrink-0 ml-3 transition-colors"
+                      style={{
+                        borderColor: 'var(--border-card)',
+                        background: isExpanded ? 'var(--bg-card)' : 'transparent',
+                        color: 'var(--text-secondary)',
+                      }}
+                    >
+                      <ChevronDown className="w-3.5 h-3.5" />
+                    </motion.div>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        key="content"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-4 pb-3.5 sm:px-5 sm:pb-4 pt-0 text-[14.5px] sm:text-[15.5px] leading-[1.65] text-[var(--text-secondary)] font-normal">
+                          <p className="pt-0.5">{item.description}</p>
                         </div>
                       </motion.div>
                     )}
