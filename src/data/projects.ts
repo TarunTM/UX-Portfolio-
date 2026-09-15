@@ -181,31 +181,31 @@ export const projects: Project[] = [
     tools: ["Figma", "Prototyping", "Design Systems", "Mobile UI/UX"],
     objective: "A collection of small design explorations, interface experiments, and everyday UX problems I wanted to solve.",
     problem: "Everyday mobile and web products frequently have subtle friction points in navigation, context switching, and checkout transparency.",
-    solution: "Crafted minimal, focused design interventions for Nothing Calculator, Instagram Reels shared browsing, and Flipkart Checkout order transparency.",
+    solution: "Crafted minimal, focused design interventions for Instagram Reels shared browsing, Flipkart Checkout order transparency, and Nothing Calculator.",
     metrics: [
       { value: "3", label: "Core Explorations" },
-      { value: "01", label: "Nothing Calculator" },
-      { value: "02", label: "Instagram Reels" },
-      { value: "03", label: "Flipkart Checkout" }
+      { value: "01", label: "Instagram Reels" },
+      { value: "02", label: "Flipkart Checkout" },
+      { value: "03", label: "Nothing Calculator" }
     ],
     process: [
       {
-        phase: "01 Nothing Calculator",
-        type: "Divergent",
-        summary: "UI exploration for Nothing Calculator.",
-        details: "A visual redesign of the calculator experience inspired by Nothing’s minimal, distinctive design language. The exploration focused on typography, spacing, hierarchy, and creating a calculator interface that feels native to the Nothing ecosystem."
-      },
-      {
-        phase: "02 Instagram Reels",
+        phase: "01 Instagram Reels",
         type: "Convergent",
         summary: "Making shared reels easier to browse and reply to.",
         details: "When a friend sends multiple reels in a DM, each reel has to be opened individually. I explored a way to surface reels shared by a friend directly inside the Reels experience, turning a repetitive back-and-forth interaction into a continuous viewing experience."
       },
       {
-        phase: "03 Flipkart Checkout",
+        phase: "02 Flipkart Checkout",
         type: "Divergent",
         summary: "Adding context to the payment step.",
         details: "Added an Order Summary to the checkout experience, allowing users to quickly review what they're purchasing before making payment, giving users a final opportunity to catch mistakes and creating more confidence."
+      },
+      {
+        phase: "03 Nothing Calculator",
+        type: "Divergent",
+        summary: "UI exploration for Nothing Calculator.",
+        details: "A visual redesign of the calculator experience inspired by Nothing’s minimal, distinctive design language. The exploration focused on typography, spacing, hierarchy, and creating a calculator interface that feels native to the Nothing ecosystem."
       }
     ],
     takeaways: [

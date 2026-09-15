@@ -56,46 +56,13 @@ export const SideQuestsCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        {/* ── 01: NOTHING CALCULATOR (Two-Column Layout) ───────────── */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
-          {/* Left Column: Text Content */}
-          <div className="lg:col-span-6 flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                1. Nothing Calculator
-              </h2>
-              <p className="text-[17px] sm:text-[19px] font-medium text-[var(--text-primary)]">
-                UI exploration for Nothing Calculator
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal">
-              <p>
-                A visual redesign of the calculator experience inspired by Nothing’s minimal, distinctive design language. The exploration focused on typography, spacing, hierarchy, and creating a calculator interface that feels native to the Nothing ecosystem.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: Mockup (Matches Rizen mockup sizing) */}
-          <div className="lg:col-span-6 flex justify-center items-center py-2">
-            <img
-              src={nothingCalculatorImg}
-              alt="Nothing Calculator UI Exploration"
-              className="w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-500 hover:scale-[1.02]"
-            />
-          </div>
-        </section>
-
-        {/* ── DIVIDER ─────────────────────────────────────────────── */}
-        <div className="w-full h-[1px]" style={{ background: 'var(--border-card)' }} />
-
-        {/* ── 02: INSTAGRAM REELS (Two-Column Layout) ──────────────── */}
+        {/* ── 01: INSTAGRAM REELS (Two-Column Layout) ──────────────── */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
           {/* Left Column: Text Content + Problem & Solution */}
           <div className="lg:col-span-6 flex flex-col gap-5">
             <div className="flex flex-col gap-2">
               <h2 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                2. Instagram Reels
+                1. Instagram Reels
               </h2>
               <p className="text-[17px] sm:text-[19px] font-medium text-[var(--text-primary)]">
                 Making shared reels easier to browse and reply to
@@ -133,7 +100,6 @@ export const SideQuestsCaseStudy: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Prototype Video (Click to Pause / Play) */}
           {/* Right Column: Prototype Video (Matches Rizen mockup sizing) */}
           <div className="lg:col-span-6 flex justify-center items-center py-2">
             <div
@@ -167,11 +133,11 @@ export const SideQuestsCaseStudy: React.FC = () => {
         {/* ── DIVIDER ─────────────────────────────────────────────── */}
         <div className="w-full h-[1px]" style={{ background: 'var(--border-card)' }} />
 
-        {/* ── 03: FLIPKART CHECKOUT ───────────────────────────────── */}
+        {/* ── 02: FLIPKART CHECKOUT ───────────────────────────────── */}
         <section className="flex flex-col gap-6 pt-2">
           <div className="flex flex-col gap-2">
             <h2 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              3. Flipkart Checkout
+              2. Flipkart Checkout
             </h2>
             <p className="text-[17px] sm:text-[19px] font-medium text-[var(--text-primary)]">
               Adding context to the payment step
@@ -236,7 +202,6 @@ export const SideQuestsCaseStudy: React.FC = () => {
                   className="w-full h-auto object-contain block"
                 />
               </div>
-              
             </div>
 
             {/* After */}
@@ -253,7 +218,6 @@ export const SideQuestsCaseStudy: React.FC = () => {
                     Redesigned Payment Screen with Order Summary
                   </span>
                 </div>
-
               </div>
               <div
                 className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)]"
@@ -265,8 +229,40 @@ export const SideQuestsCaseStudy: React.FC = () => {
                   className="w-full h-auto object-contain block"
                 />
               </div>
-              
             </div>
+          </div>
+        </section>
+
+        {/* ── DIVIDER ─────────────────────────────────────────────── */}
+        <div className="w-full h-[1px]" style={{ background: 'var(--border-card)' }} />
+
+        {/* ── 03: NOTHING CALCULATOR (Two-Column Layout) ───────────── */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
+          {/* Left Column: Text Content */}
+          <div className="lg:col-span-6 flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <h2 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                3. Nothing Calculator
+              </h2>
+              <p className="text-[17px] sm:text-[19px] font-medium text-[var(--text-primary)]">
+                UI exploration for Nothing Calculator
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal">
+              <p>
+                A visual redesign of the calculator experience inspired by Nothing’s minimal, distinctive design language. The exploration focused on typography, spacing, hierarchy, and creating a calculator interface that feels native to the Nothing ecosystem.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Mockup (Matches Rizen mockup sizing) */}
+          <div className="lg:col-span-6 flex justify-center items-center py-2">
+            <img
+              src={nothingCalculatorImg}
+              alt="Nothing Calculator UI Exploration"
+              className="w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-500 hover:scale-[1.02]"
+            />
           </div>
         </section>
 
