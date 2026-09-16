@@ -150,11 +150,9 @@ export const Landing: React.FC = () => {
       id: 'the-social-slate',
       company: 'The Social Slate',
       role: 'UI/UX DESIGNER',
-      period: 'Mar 2025 — Feb 2026',
+      period: 'March 2025 — Present',
       logo: socialSlateLogo,
       fallbackInitials: 'SS',
-      tag: '1 Year',
-      employmentType: 'Internship',
       description:
         'Shipped 5 digital products and websites across fintech, fitness, education, and creative industries, owning features and pages from wireframes to final implementation.',
       skills: ['Figma', 'Framer', 'Wix Studio', 'Design Systems', 'Responsive UI', 'Asana'],
@@ -228,19 +226,19 @@ export const Landing: React.FC = () => {
                 style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
               >
                 I'm{' '}
-                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Tarun Madan , </span>
+                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Tarun Madan, </span>
                 {' '}crafting designs with top notes of delight, heart notes of simplicity,
                 and base notes of usability. 1+ year building digital products that matter.
               </p>
               
               <div className="flex flex-wrap items-center gap-3.5 mt-8 relative z-20">
                 <a
-                  href="https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing"
+                  href="https://drive.google.com/file/d/1AK32L5ju7GaP0tTYZeIow-NKwa8wt-Y5/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => {
                     if (!e.defaultPrevented) {
-                      window.open('https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing', '_blank', 'noopener,noreferrer');
+                      window.open('https://drive.google.com/file/d/1AK32L5ju7GaP0tTYZeIow-NKwa8wt-Y5/view?usp=sharing', '_blank', 'noopener,noreferrer');
                     }
                   }}
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer border border-transparent shadow-sm relative z-20 select-none"
@@ -554,12 +552,6 @@ export const Landing: React.FC = () => {
                 </span>
               </h2>
             </div>
-            <span
-              className="hidden sm:block text-xs uppercase tracking-widest"
-              style={{ color: 'var(--text-muted)' }}
-            >
-              1 Year
-            </span>
           </div>
 
           <div className="flex flex-col border-t border-[var(--border-card)]">
@@ -629,11 +621,6 @@ export const Landing: React.FC = () => {
                         className="overflow-hidden"
                       >
                         <div className="px-4 sm:px-12 pb-6 pt-1 flex flex-col gap-2.5 text-left">
-                          {exp.employmentType && (
-                            <span className="text-xs font-mono text-[var(--text-muted)] uppercase tracking-wider">
-                              {exp.employmentType}
-                            </span>
-                          )}
                           <p className="text-sm sm:text-base leading-relaxed text-[var(--text-secondary)] font-light max-w-3xl">
                             {exp.description}
                           </p>
@@ -783,12 +770,12 @@ export const Landing: React.FC = () => {
           </span>
           <div className="flex items-center gap-2.5 relative z-20">
             <a
-              href="https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing"
+              href="https://drive.google.com/file/d/1AK32L5ju7GaP0tTYZeIow-NKwa8wt-Y5/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => {
                 if (!e.defaultPrevented) {
-                  window.open('https://drive.google.com/file/d/1SEf4CQS4_5fQSBGuNIpDuatIZugeLJ_G/view?usp=sharing', '_blank', 'noopener,noreferrer');
+                  window.open('https://drive.google.com/file/d/1AK32L5ju7GaP0tTYZeIow-NKwa8wt-Y5/view?usp=sharing', '_blank', 'noopener,noreferrer');
                 }
               }}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 cursor-pointer relative z-20 select-none"
