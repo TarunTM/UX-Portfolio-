@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
@@ -7,13 +7,35 @@ import { projects } from '../data/projects';
 import heroVideo from '../assets/Sanctum Img:Video/Hero Video.webm';
 import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.webp';
 import juhuSanctum from '../assets/Sanctum Img:Video/Juhu Sanctum.webp';
+import andheriOldSanctum from '../assets/Sanctum Img:Video/Andheri Page old.webp';
 import groupxSanctum from '../assets/Sanctum Img:Video/GroupX Sanctum.webp';
 import trainingScrollVideo from '../assets/Sanctum Img:Video/Training Scroll video.webm';
+import trainingRecoveryIterationVideo from '../assets/Sanctum Img:Video/Training Recovery Iteration.webm';
+import recoveryIteration2Img from '../assets/Sanctum Img:Video/Recovery iteration 2.webp';
+import recoveryIteration3Img from '../assets/Sanctum Img:Video/Recovery iteration 3.webp';
 
 const outcomeImages = [
   { img: homeSanctum, alt: 'Sanctum Home Page', title: 'Home Experience' },
   { img: juhuSanctum, alt: 'Sanctum Juhu Club Page', title: 'Club Location Page' },
   { img: groupxSanctum, alt: 'Sanctum GroupX Classes', title: 'GroupX Experience' },
+];
+
+const iterationsData = [
+  {
+    type: 'video' as const,
+    src: trainingRecoveryIterationVideo,
+    alt: 'Sanctum Training and Recovery Iteration Video',
+  },
+  {
+    type: 'image' as const,
+    src: recoveryIteration2Img,
+    alt: 'Sanctum Training and Recovery Iteration 2',
+  },
+  {
+    type: 'image' as const,
+    src: recoveryIteration3Img,
+    alt: 'Sanctum Training and Recovery Iteration 3',
+  },
 ];
 
 const constraintsData = [
@@ -52,6 +74,28 @@ export const SanctumCaseStudy: React.FC = () => {
   const [expandedConstraint, setExpandedConstraint] = useState<string | null>(null);
   const [expandedLearning, setExpandedLearning] = useState<string | null>(null);
 
+  // Iterations Carousel & Full View State
+  const [fullscreenIterationIndex, setFullscreenIterationIndex] = useState<number | null>(null);
+  const iterationsScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollState = () => {
+    if (!iterationsScrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = iterationsScrollRef.current;
+    setCanScrollLeft(scrollLeft > 8);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 8);
+  };
+
+  const scrollIterations = (direction: 'left' | 'right') => {
+    if (!iterationsScrollRef.current) return;
+    const cardWidth = iterationsScrollRef.current.clientWidth * 0.72;
+    iterationsScrollRef.current.scrollBy({
+      left: direction === 'left' ? -cardWidth : cardWidth,
+      behavior: 'smooth',
+    });
+  };
+
   const toggleConstraint = (id: string) => {
     setExpandedConstraint((prev) => (prev === id ? null : id));
   };
@@ -64,6 +108,49 @@ export const SanctumCaseStudy: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Listen to carousel scroll to update arrow states
+  useEffect(() => {
+    const el = iterationsScrollRef.current;
+    if (!el) return;
+    checkScrollState();
+    el.addEventListener('scroll', checkScrollState, { passive: true });
+    window.addEventListener('resize', checkScrollState);
+    return () => {
+      el.removeEventListener('scroll', checkScrollState);
+      window.removeEventListener('resize', checkScrollState);
+    };
+  }, []);
+
+  // Keyboard navigation & body lock for Full View Modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (fullscreenIterationIndex === null) return;
+      if (e.key === 'Escape') {
+        setFullscreenIterationIndex(null);
+      } else if (e.key === 'ArrowLeft') {
+        setFullscreenIterationIndex((prev) =>
+          prev !== null ? (prev > 0 ? prev - 1 : iterationsData.length - 1) : null
+        );
+      } else if (e.key === 'ArrowRight') {
+        setFullscreenIterationIndex((prev) =>
+          prev !== null ? (prev < iterationsData.length - 1 ? prev + 1 : 0) : null
+        );
+      }
+    };
+
+    if (fullscreenIterationIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [fullscreenIterationIndex]);
 
   // 2-second rotating image timer for Outcome section
   useEffect(() => {
@@ -398,6 +485,121 @@ export const SanctumCaseStudy: React.FC = () => {
                   />
                 </div>
               </div>
+
+              {/* Iterations for Decision 02 */}
+              <div className="flex flex-col gap-4 pt-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-[18px] sm:text-[20px] md:text-[22px] font-semibold tracking-tight text-[var(--text-primary)]">
+                    Iterations
+                  </h4>
+                  {/* Left & Right Navigation Arrows */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => scrollIterations('left')}
+                      disabled={!canScrollLeft}
+                      aria-label="Previous iteration"
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all cursor-pointer ${
+                        canScrollLeft
+                          ? 'hover:scale-105 active:scale-95 shadow-sm'
+                          : 'opacity-30 cursor-not-allowed'
+                      }`}
+                      style={{
+                        background: 'var(--bg-surface)',
+                        borderColor: 'var(--border-card)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => scrollIterations('right')}
+                      disabled={!canScrollRight}
+                      aria-label="Next iteration"
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all cursor-pointer ${
+                        canScrollRight
+                          ? 'hover:scale-105 active:scale-95 shadow-sm'
+                          : 'opacity-30 cursor-not-allowed'
+                      }`}
+                      style={{
+                        background: 'var(--bg-surface)',
+                        borderColor: 'var(--border-card)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Horizontal Scrollable Gallery */}
+                <div className="relative group/carousel">
+                  <div
+                    ref={iterationsScrollRef}
+                    className="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory py-1 px-0.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                  >
+                    {iterationsData.map((item, idx) => (
+                      <div
+                        key={idx}
+                        onClick={() => setFullscreenIterationIndex(idx)}
+                        className="group relative flex-shrink-0 w-[84%] sm:w-[72%] md:w-[62%] aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border shadow-sm cursor-pointer snap-start transition-all duration-300 hover:shadow-md"
+                        style={{
+                          borderColor: 'var(--border-card)',
+                          background: 'var(--bg-surface)',
+                        }}
+                      >
+                        {item.type === 'video' ? (
+                          <video
+                            src={item.src}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
+                          />
+                        ) : (
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
+                          />
+                        )}
+
+                        {/* Hover Overlay with Expand Affordance */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-end p-3 sm:p-4">
+                          <div className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
+                            <Maximize2 className="w-3.5 h-3.5" />
+                            <span>Full view</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Floating On-Track Navigation Arrows (appear on hover/desktop) */}
+                  {canScrollLeft && (
+                    <button
+                      type="button"
+                      onClick={() => scrollIterations('left')}
+                      aria-label="Previous iteration"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95 z-10"
+                    >
+                      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                  )}
+                  {canScrollRight && (
+                    <button
+                      type="button"
+                      onClick={() => scrollIterations('right')}
+                      aria-label="Next iteration"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95 z-10"
+                    >
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Decision 03 */}
@@ -416,17 +618,56 @@ export const SanctumCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              {/* Mockup for Decision 03 — Juhu Club Page & Direct Actions */}
-              <div className="flex flex-col gap-1.5 pt-1">
-                <div
-                  className="w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
-                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                >
-                  <img
-                    src={juhuSanctum}
-                    alt="Sanctum Juhu Club Actionable Page"
-                    className="w-full h-full object-cover object-top"
-                  />
+              {/* Before vs After Screens for Decision 03 */}
+              <div className="flex flex-col gap-8 sm:gap-10 pt-2">
+                {/* Before Screen */}
+                <div className="flex flex-col gap-3 w-full">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
+                      style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+                    >
+                      Before
+                    </span>
+                    <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
+                      Initial Club Page (Andheri)
+                    </span>
+                  </div>
+                  <div
+                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
+                    <img
+                      src={andheriOldSanctum}
+                      alt="Sanctum Club Page - Before (Andheri)"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
+                </div>
+
+                {/* After / Redesigned Screen */}
+                <div className="flex flex-col gap-3 w-full">
+                  <div className="flex items-center gap-2.5">
+                    <span
+                      className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
+                      style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+                    >
+                      After
+                    </span>
+                    <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
+                      Redesigned Club Page with Direct Actions (Juhu)
+                    </span>
+                  </div>
+                  <div
+                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300"
+                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  >
+                    <img
+                      src={juhuSanctum}
+                      alt="Sanctum Redesigned Club Page with Direct Actions - After (Juhu)"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -563,6 +804,96 @@ export const SanctumCaseStudy: React.FC = () => {
         <CaseStudyFooter nextProject={nextProject} />
 
       </main>
+
+      {/* ── FULL VIEW MODAL / LIGHTBOX FOR ITERATIONS ───────────── */}
+      <AnimatePresence>
+        {fullscreenIterationIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setFullscreenIterationIndex(null)}
+            className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 select-none"
+          >
+            {/* Top Bar: Counter & Close Button */}
+            <div
+              className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between z-20 pointer-events-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span className="text-white/80 text-[13px] sm:text-[14px] font-mono tracking-wider px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15">
+                {fullscreenIterationIndex + 1} / {iterationsData.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => setFullscreenIterationIndex(null)}
+                aria-label="Close full view"
+                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 shadow-md"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Left Navigation Arrow */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setFullscreenIterationIndex((prev) =>
+                  prev !== null ? (prev > 0 ? prev - 1 : iterationsData.length - 1) : null
+                );
+              }}
+              aria-label="Previous iteration"
+              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 z-20 backdrop-blur-sm shadow-md"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            {/* Center Content: Image or Video */}
+            <motion.div
+              key={fullscreenIterationIndex}
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl max-h-[82vh] w-full flex items-center justify-center p-2 z-10"
+            >
+              {iterationsData[fullscreenIterationIndex].type === 'video' ? (
+                <video
+                  src={iterationsData[fullscreenIterationIndex].src}
+                  controls
+                  autoPlay
+                  loop
+                  playsInline
+                  className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl sm:rounded-2xl border border-white/15 shadow-2xl block bg-black"
+                />
+              ) : (
+                <img
+                  src={iterationsData[fullscreenIterationIndex].src}
+                  alt={iterationsData[fullscreenIterationIndex].alt}
+                  className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl sm:rounded-2xl border border-white/15 shadow-2xl block"
+                />
+              )}
+            </motion.div>
+
+            {/* Right Navigation Arrow */}
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setFullscreenIterationIndex((prev) =>
+                  prev !== null ? (prev < iterationsData.length - 1 ? prev + 1 : 0) : null
+                );
+              }}
+              aria-label="Next iteration"
+              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 z-20 backdrop-blur-sm shadow-md"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
