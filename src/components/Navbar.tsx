@@ -12,8 +12,8 @@ import {
   Moon,
   ArrowLeft,
   ArrowRight,
-  Dumbbell,
   Sparkles,
+  Dumbbell,
   TrendingUp,
   Layers,
 } from 'lucide-react';
@@ -33,11 +33,63 @@ const CASE_STUDIES: CaseStudyItem[] = [
   { id: 'side-quests', path: '/work/side-quests', name: 'Side Quests', label: 'Side Quests · Explorations', icon: Layers },
 ];
 
+interface SubheadingItem {
+  id: string;
+  label: string;
+  isNested?: boolean;
+}
+
+const CASE_STUDY_SUBHEADINGS: Record<string, SubheadingItem[]> = {
+  sanctum: [
+    { id: 'overview', label: 'Overview' },
+    { id: 'context', label: 'Context' },
+    { id: 'role', label: 'Role' },
+    { id: 'outcome', label: 'Outcome' },
+    { id: 'decisions', label: 'Key Decisions' },
+    { id: 'decision-1', label: 'Decision 1', isNested: true },
+    { id: 'decision-2', label: 'Decision 2', isNested: true },
+    { id: 'decision-3', label: 'Decision 3', isNested: true },
+    { id: 'constraints', label: 'Constraints' },
+    { id: 'learnings', label: 'Learnings' },
+  ],
+  rizen: [
+    { id: 'overview', label: 'Overview' },
+    { id: 'context', label: 'Context' },
+    { id: 'role', label: 'Role' },
+    { id: 'outcome', label: 'Outcome' },
+    { id: 'mvp', label: 'MVP' },
+    { id: 'decisions', label: 'Key Decisions' },
+    { id: 'decision-1', label: 'Decision 1', isNested: true },
+    { id: 'decision-2', label: 'Decision 2', isNested: true },
+    { id: 'decision-3', label: 'Decision 3', isNested: true },
+    { id: 'visuals', label: 'Visuals' },
+    { id: 'next', label: "What's Next" },
+  ],
+  'quantel-ai': [
+    { id: 'overview', label: 'Overview' },
+    { id: 'context', label: 'Intro' },
+    { id: 'role', label: 'Role' },
+    { id: 'screens', label: 'UI Screens' },
+  ],
+  'side-quests': [
+    { id: 'overview', label: 'Overview' },
+    { id: 'instagram', label: 'Instagram' },
+    { id: 'flipkart', label: 'Flipkart' },
+    { id: 'calculator', label: 'Calculator' },
+  ],
+};
+
+const getCaseStudySlug = (pathname: string): string => {
+  const slug = pathname.replace('/work/', '').split('/')[0] || '';
+  if (slug === 'side-projects' || slug === 'influencer-agency') return 'side-quests';
+  return slug;
+};
+
 // BenBox / Framer Signature Sliding Pill (High-damping spring with crisp glide and zero wobble)
 const ActivePill: React.FC<{ layoutId: string }> = ({ layoutId }) => (
   <motion.div
     layoutId={layoutId}
-    className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#3D3D3D] rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.35)] z-0"
+    className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#323232] border border-[#D7E1E8]/70 dark:border-[#404040]/70 rounded-full shadow-[0_2px_8px_rgba(18,24,32,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)] z-0"
     transition={{
       type: 'spring',
       stiffness: 500,
@@ -163,81 +215,217 @@ export const Navbar: React.FC = () => {
     return () => observer.disconnect();
   }, [isHome, location.pathname]);
 
-  // Current case study calculation
-  const currentProjectIdx = CASE_STUDIES.findIndex((p) => p.path === location.pathname);
+  // Case Study Subheadings Navigation State
+  const [activeCaseStudySection, setActiveCaseStudySection] = useState<string>('overview');
+
+  const currentSlug = getCaseStudySlug(location.pathname);
+  const currentSubheadings = CASE_STUDY_SUBHEADINGS[currentSlug] || [
+    { id: 'overview', label: 'Overview' },
+    { id: 'context', label: 'Context' },
+    { id: 'outcome', label: 'Outcome' },
+    { id: 'decisions', label: 'Decisions' },
+  ];
+
+  const scrollToSection = (sectionId: string) => {
+    if (sectionId === 'overview') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveCaseStudySection('overview');
+      return;
+    }
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const yOffset = -96;
+      const y = element.getBoundingClientRect().top + (window.pageYOffset || window.scrollY) + yOffset;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      setActiveCaseStudySection(sectionId);
+    }
+  };
+
+  // Intersection Observer for scroll tracking on Case Study pages
+  useEffect(() => {
+    if (!isCaseStudy) return;
+
+    const slug = getCaseStudySlug(location.pathname);
+    const subheadings = CASE_STUDY_SUBHEADINGS[slug] || [];
+    if (subheadings.length === 0) return;
+
+    setActiveCaseStudySection(subheadings[0]?.id || 'overview');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-15% 0px -60% 0px',
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      if (window.scrollY < 200) {
+        setActiveCaseStudySection(subheadings[0]?.id || 'overview');
+        return;
+      }
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveCaseStudySection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    subheadings.forEach((item) => {
+      const el = document.getElementById(item.id);
+      if (el) observer.observe(el);
+    });
+
+    const handleScroll = () => {
+      if (window.scrollY < 200) {
+        setActiveCaseStudySection(subheadings[0]?.id || 'overview');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isCaseStudy, location.pathname]);
+
+  const currentProjectIdx = CASE_STUDIES.findIndex(
+    (cs) => cs.path === location.pathname || location.pathname.startsWith(cs.path)
+  );
+
   const nextProject =
     currentProjectIdx !== -1
       ? CASE_STUDIES[(currentProjectIdx + 1) % CASE_STUDIES.length]
       : CASE_STUDIES[0];
 
   return (
-    <nav className="fixed bottom-[70px] sm:bottom-8 left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-1/2 lg:left-8 lg:-translate-y-1/2 lg:translate-x-0 z-[1000] select-none max-w-[calc(100vw-16px)] lg:max-w-none">
-      <div className="flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#262626] backdrop-blur-xl border border-[#C8D7DF] dark:border-[#383838] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] transition-all duration-300">
-        
+    <nav
+      className={
+        isCaseStudy
+          ? "fixed bottom-[70px] sm:bottom-8 left-1/2 -translate-x-1/2 xl:bottom-auto xl:top-1/2 xl:left-6 2xl:left-8 xl:-translate-y-1/2 xl:translate-x-0 z-[1000] select-none max-w-[calc(100vw-24px)] xl:max-w-none"
+          : "fixed bottom-[70px] sm:bottom-8 left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-1/2 lg:left-6 xl:left-8 lg:-translate-y-1/2 lg:translate-x-0 z-[1000] select-none max-w-[calc(100vw-24px)] lg:max-w-none"
+      }
+    >
+      <div
+        className={
+          isCaseStudy
+            ? "flex flex-row xl:flex-col items-center xl:items-stretch gap-1 sm:gap-1.5 xl:gap-1 px-1.5 py-1.5 sm:px-2 sm:py-2 xl:p-0 max-xl:bg-[#DFEAF0] max-xl:dark:bg-[#262626] max-xl:backdrop-blur-xl max-xl:border max-xl:border-[#C8D7DF] max-xl:dark:border-[#383838] max-xl:rounded-full max-xl:shadow-[0_8px_28px_rgba(18,24,32,0.08)] max-xl:dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] bg-transparent dark:bg-transparent border-none dark:border-none shadow-none dark:shadow-none backdrop-blur-none transition-all duration-300 max-w-[calc(100vw-24px)] xl:max-w-none xl:min-w-[144px]"
+            : "flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#262626] backdrop-blur-xl border border-[#C8D7DF] dark:border-[#383838] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] transition-all duration-300"
+        }
+      >
         {isCaseStudy ? (
           /* ── CASE STUDY MODE NAVBAR ── */
           <>
-            {/* Back to Home / Work */}
-            <button
-              onClick={() => navigate('/')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
-              aria-label="Back to Home"
-            >
-              <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
-                Back to Home
-              </span>
-            </button>
+            {/* ── MOBILE & TABLET NAVIGATION (< 1280px: Home + 4 Case Studies + Next Project) ── */}
+            <div className="flex xl:hidden items-center gap-1 sm:gap-1.5">
+              {/* Back to Home / Work */}
+              <button
+                onClick={() => navigate('/')}
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
+                aria-label="Back to Home"
+              >
+                <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
+                <span className="absolute bottom-12 sm:bottom-14 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+                  Back to Home
+                </span>
+              </button>
 
-            {/* Divider */}
-            <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#383838] mx-0.5 sm:mx-1 my-0.5" />
+              {/* Divider */}
+              <div className="w-[1px] h-4 sm:h-5 bg-[#C8D7DF] dark:bg-[#383838] mx-0.5 sm:mx-1 my-0.5" />
 
-            {/* 4 Case Studies Quick Jump */}
-            {CASE_STUDIES.map((item) => {
-              const IconComponent = item.icon;
-              const isActive = location.pathname === item.path;
+              {/* 4 Case Studies Quick Jump */}
+              {CASE_STUDIES.map((item) => {
+                const IconComponent = item.icon;
+                const isActive = location.pathname === item.path;
 
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    if (!isActive) {
-                      navigate(item.path);
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                  }}
-                  className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
-                  aria-label={item.name}
-                >
-                  {isActive && <ActivePill layoutId="casestudy-active-pill" />}
-                  <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
-                    isActive
-                      ? 'text-[#000000] dark:text-[#FFFFFF]'
-                      : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
-                  }`} />
-                  <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
-                    {item.label}
-                  </span>
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      if (!isActive) {
+                        navigate(item.path);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      } else {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }
+                    }}
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+                    aria-label={item.name}
+                  >
+                    {isActive && <ActivePill layoutId="casestudy-mobile-pill" />}
+                    <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
+                      isActive
+                        ? 'text-[#000000] dark:text-[#FFFFFF]'
+                        : 'text-[#000000] opacity-75 group-hover:opacity-100 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white'
+                    }`} />
+                    <span className="absolute bottom-12 sm:bottom-14 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+                      {item.label}
+                    </span>
+                  </button>
+                );
+              })}
 
-            {/* Next Project Fast Forward */}
-            <button
-              onClick={() => {
-                navigate(nextProject.path);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
-              aria-label={`Next: ${nextProject.name}`}
-            >
-              <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
-              <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
-                Next: {nextProject.name}
-              </span>
-            </button>
+              {/* Next Project Fast Forward */}
+              <button
+                onClick={() => {
+                  navigate(nextProject.path);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
+                aria-label={`Next: ${nextProject.name}`}
+              >
+                <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
+                <span className="absolute bottom-12 sm:bottom-14 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+                  Next: {nextProject.name}
+                </span>
+              </button>
+            </div>
+
+            {/* ── DESKTOP NAVIGATION (>= 1280px: In-Page Subheadings with Indented Decisions) ── */}
+            <div className="hidden xl:flex flex-col items-stretch gap-1">
+              {/* Back to Home with Home icon only */}
+              <button
+                onClick={() => navigate('/')}
+                className="w-10 h-10 rounded-full flex items-center justify-center self-start ml-1 text-[#000000]/70 dark:text-[#F0F0F0]/70 hover:text-[#000000] dark:hover:text-[#FFFFFF] transition-all duration-200 active:scale-90 relative group cursor-pointer select-none bg-transparent"
+                aria-label="Home"
+              >
+                <Home className="w-4.5 h-4.5 stroke-[2] transition-transform duration-200 group-hover:scale-110" />
+                <span className="absolute left-12 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+                  Home
+                </span>
+              </button>
+
+              {/* Divider */}
+              <div className="w-full h-[1px] bg-black/[0.08] dark:bg-white/[0.12] my-1.5 shrink-0" />
+
+              {/* Subheadings list: compact vertical spacing to comfortably fit all sections including Decision 1, 2, 3 */}
+              <div className="flex flex-col items-stretch gap-0.5 py-0.5">
+                {currentSubheadings.map((item) => {
+                  const isActive = activeCaseStudySection === item.id;
+                  const isNested = Boolean(item.isNested);
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => scrollToSection(item.id)}
+                      className={`relative whitespace-nowrap text-left shrink-0 transition-colors duration-200 cursor-pointer select-none active:scale-95 bg-transparent ${
+                        isNested
+                          ? 'pl-7 pr-3.5 py-1 text-[12.5px]'
+                          : 'px-3.5 py-1.25 text-[13px]'
+                      } ${
+                        isActive
+                          ? 'text-[#000000] dark:text-[#FFFFFF] font-semibold'
+                          : isNested
+                          ? 'text-[#000000]/45 dark:text-[#76767C] hover:text-[#000000] dark:hover:text-[#FFFFFF] font-normal'
+                          : 'text-[#000000]/55 dark:text-[#8E8E93] hover:text-[#000000] dark:hover:text-[#FFFFFF] font-medium'
+                      }`}
+                    >
+                      <span className="relative z-10 block truncate">{item.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </>
         ) : (
           /* ── LANDING PAGE MODE NAVBAR ── */
@@ -347,12 +535,22 @@ export const Navbar: React.FC = () => {
         )}
 
         {/* Vertical divider on mobile / Horizontal on desktop */}
-        <div className="w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#383838] mx-0.5 sm:mx-1 my-0.5" />
+        <div
+          className={
+            isCaseStudy
+              ? "w-[1px] h-4 sm:h-5 xl:w-full xl:h-[1px] bg-[#C8D7DF]/60 dark:bg-[#383838]/60 xl:bg-black/[0.08] xl:dark:bg-white/[0.12] mx-0.5 sm:mx-1 my-0.5 xl:my-2 shrink-0"
+              : "w-[1px] h-4 sm:h-5 lg:w-5 lg:h-[1px] bg-[#C8D7DF] dark:bg-[#383838] mx-0.5 sm:mx-1 my-0.5"
+          }
+        />
 
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
+          className={`w-9 h-9 sm:w-10 sm:h-10 lg:w-10 lg:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] dark:text-[#F0F0F0] ${
+            isCaseStudy
+              ? 'self-center xl:self-start xl:ml-1 hover:bg-[#FFFFFF]/70 dark:hover:bg-[#3D3D3D]/60 xl:hover:bg-transparent xl:dark:hover:bg-transparent hover:text-[#000000] dark:hover:text-white'
+              : 'self-center hover:bg-[#FFFFFF]/70 dark:hover:bg-[#3D3D3D]/60 hover:text-[#000000] dark:hover:text-white'
+          }`}
           aria-label="Toggle Theme"
         >
           {theme === 'light' ? (
@@ -360,7 +558,11 @@ export const Navbar: React.FC = () => {
           ) : (
             <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 dark:text-[#F0F0F0] dark:opacity-80 dark:group-hover:opacity-100 dark:group-hover:text-white stroke-[2] transition-colors" />
           )}
-          <span className="absolute bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2 px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50">
+          <span className={`absolute px-2.5 py-1 rounded-md bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-md border border-neutral-800 dark:border-neutral-200 z-50 ${
+            isCaseStudy
+              ? 'bottom-12 sm:bottom-14 xl:bottom-auto xl:left-14 xl:top-1/2 xl:-translate-y-1/2'
+              : 'bottom-12 sm:bottom-14 lg:bottom-auto lg:left-14 lg:top-1/2 lg:-translate-y-1/2'
+          }`}>
             Theme
           </span>
         </button>

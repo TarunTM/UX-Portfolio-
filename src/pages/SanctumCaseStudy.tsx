@@ -175,7 +175,7 @@ export const SanctumCaseStudy: React.FC = () => {
       <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-10 sm:gap-14">
 
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
-        <section className="flex flex-col gap-6">
+        <section id="overview" className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Website · Fitness & Wellness
@@ -273,7 +273,7 @@ export const SanctumCaseStudy: React.FC = () => {
         </section>
 
         {/* ── CONTEXT ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        <section id="context" className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Context
           </h2>
@@ -299,7 +299,7 @@ export const SanctumCaseStudy: React.FC = () => {
         </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        <section id="role" className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             My Role & Scope
           </h2>
@@ -312,7 +312,7 @@ export const SanctumCaseStudy: React.FC = () => {
         </section>
 
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-6 sm:gap-8">
+        <section id="outcome" className="flex flex-col gap-6 sm:gap-8">
           <div className="flex flex-col gap-4">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
               Outcome
@@ -422,13 +422,15 @@ export const SanctumCaseStudy: React.FC = () => {
 
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
         <section className="flex flex-col gap-5 sm:gap-6">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Key Design Decisions
-          </h2>
+          <div id="decisions" className="flex flex-col">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Key Design Decisions
+            </h2>
+          </div>
 
           <div className="flex flex-col gap-8 sm:gap-10">
             {/* Decision 01 */}
-            <div className="flex flex-col gap-4">
+            <div id="decision-1" className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   1. Making GroupX easier to explore
@@ -456,7 +458,7 @@ export const SanctumCaseStudy: React.FC = () => {
             </div>
 
             {/* Decision 02 */}
-            <div className="flex flex-col gap-4 pt-2">
+            <div id="decision-2" className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   2. Building the experience around Training + Recovery
@@ -603,7 +605,7 @@ export const SanctumCaseStudy: React.FC = () => {
             </div>
 
             {/* Decision 03 */}
-            <div className="flex flex-col gap-4 pt-2">
+            <div id="decision-3" className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   3. Turning club pages into actionable experiences
@@ -675,7 +677,7 @@ export const SanctumCaseStudy: React.FC = () => {
         </section>
 
         {/* ── CONSTRAINTS ─────────────────────────────────────────── */}
-        <section className="flex flex-col gap-4 sm:gap-5">
+        <section id="constraints" className="flex flex-col gap-4 sm:gap-5">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Constraints
           </h2>
@@ -738,7 +740,7 @@ export const SanctumCaseStudy: React.FC = () => {
         </section>
 
         {/* ── WHAT I LEARNT ───────────────────────────────────────── */}
-        <section className="flex flex-col gap-4 sm:gap-5">
+        <section id="learnings" className="flex flex-col gap-4 sm:gap-5">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             What I Learnt
           </h2>

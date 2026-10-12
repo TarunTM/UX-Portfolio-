@@ -42,7 +42,7 @@ export const SideQuestsCaseStudy: React.FC = () => {
       <main className="max-w-5xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-14 sm:gap-20">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
-        <section className="flex flex-col gap-6">
+        <section id="overview" className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Design Explorations · UI/UX Experiments · Side Projects
@@ -57,7 +57,7 @@ export const SideQuestsCaseStudy: React.FC = () => {
         </section>
 
         {/* ── 01: INSTAGRAM REELS (Two-Column Layout) ──────────────── */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
+        <section id="instagram" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
           {/* Left Column: Text Content + Problem & Solution */}
           <div className="lg:col-span-6 flex flex-col gap-5">
             <div className="flex flex-col gap-2">
@@ -134,7 +134,7 @@ export const SideQuestsCaseStudy: React.FC = () => {
         <div className="w-full h-[1px]" style={{ background: 'var(--border-card)' }} />
 
         {/* ── 02: FLIPKART CHECKOUT ───────────────────────────────── */}
-        <section className="flex flex-col gap-6 pt-2">
+        <section id="flipkart" className="flex flex-col gap-6 pt-2">
           <div className="flex flex-col gap-2">
             <h2 className="text-[28px] sm:text-[34px] md:text-[40px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
               2. Flipkart Checkout
@@ -237,7 +237,7 @@ export const SideQuestsCaseStudy: React.FC = () => {
         <div className="w-full h-[1px]" style={{ background: 'var(--border-card)' }} />
 
         {/* ── 03: NOTHING CALCULATOR (Two-Column Layout) ───────────── */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
+        <section id="calculator" className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-2">
           {/* Left Column: Text Content */}
           <div className="lg:col-span-6 flex flex-col gap-4">
             <div className="flex flex-col gap-2">

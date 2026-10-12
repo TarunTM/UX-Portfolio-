@@ -32,7 +32,7 @@ export const QuantelCaseStudy: React.FC = () => {
       <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-10 sm:gap-14">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
-        <section className="flex flex-col gap-6">
+        <section id="overview" className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Web App · Mobile App ·FinTech
@@ -126,7 +126,7 @@ export const QuantelCaseStudy: React.FC = () => {
         </section>
 
         {/* ── CONTEXT ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        <section id="context" className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Project Intro
           </h2>
@@ -154,7 +154,7 @@ export const QuantelCaseStudy: React.FC = () => {
         </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        <section id="role" className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             My Role & Scope
           </h2>
@@ -167,14 +167,16 @@ export const QuantelCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
-        <section className="flex flex-col gap-5 sm:gap-6">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            UI Screens
-          </h2>
+        {/* ── UI SCREENS ─────────────────────────────────────────── */}
+        <section id="screens" className="flex flex-col gap-5 sm:gap-6">
+          <div className="flex flex-col">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              UI Screens
+            </h2>
+          </div>
 
           <div className="flex flex-col gap-8 sm:gap-10">
-            {/* Decision 01 */}
+            {/* Screen 01 — Assets Dashboard */}
             <div className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
@@ -189,7 +191,7 @@ export const QuantelCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              {/* Mockup for Decision 01 — Assets Dashboard */}
+              {/* Mockup for Screen 01 — Assets Dashboard */}
               <div className="flex flex-col gap-1.5 pt-1">
                 <div
                   className="w-full aspect-[1920/1024] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
@@ -204,7 +206,7 @@ export const QuantelCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            {/* Decision 02 — Dashboard Light Mode */}
+            {/* Screen 02 — Dashboard Light Mode */}
             <div className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
@@ -221,7 +223,7 @@ export const QuantelCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              {/* Mockup for Decision 02 — Light Mode Dashboard */}
+              {/* Mockup for Screen 02 — Light Mode Dashboard */}
               <div className="flex flex-col gap-1.5 pt-1">
                 <div
                   className="w-full aspect-[1920/1112] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
@@ -236,7 +238,7 @@ export const QuantelCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            {/* Decision 03 — Quantel Capital Flow */}
+            {/* Screen 03 — Quantel Capital Flow */}
             <div className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
@@ -323,22 +325,6 @@ export const QuantelCaseStudy: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* ── OUTCOME ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Outcome & Impact
-          </h2>
-
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              My work expanded Quantel's existing product foundation with new web and mobile experiences across its investment, wealth management, and engagement features.
-            </p>
-            <p>
-              Working within an established design system also gave me experience designing for a complex FinTech product where data, product requirements, and system consistency directly influenced the interface.
-            </p>
           </div>
         </section>
 

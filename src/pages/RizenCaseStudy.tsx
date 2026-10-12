@@ -69,7 +69,7 @@ export const RizenCaseStudy: React.FC = () => {
       <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-24 sm:pt-28 flex flex-col gap-10 sm:gap-14">
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
-        <section className="flex flex-col gap-6">
+        <section id="overview" className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Mobile App · Fitness & Habit Formation
@@ -150,16 +150,15 @@ export const RizenCaseStudy: React.FC = () => {
               <div className="flex flex-col text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <span>Figma</span>
                 <span>FigJam</span>
-                <span>Wix Studio</span>
-                <span>Asana</span>
-                <span>Google Meet </span>
+                <span>Balsamiq</span>
+                <span>Google Meet</span>
               </div>
             </div>
           </div>
         </section>
 
         {/* ── CONTEXT ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        <section id="context" className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Context
           </h2>
@@ -188,7 +187,7 @@ export const RizenCaseStudy: React.FC = () => {
         </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-3">
+        <section id="role" className="flex flex-col gap-3">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             My Role & Scope
           </h2>
@@ -202,7 +201,7 @@ export const RizenCaseStudy: React.FC = () => {
         </section>
 
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
-        <section className="flex flex-col gap-6 sm:gap-8">
+        <section id="outcome" className="flex flex-col gap-6 sm:gap-8">
           <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
             Outcome
           </h2>
@@ -255,7 +254,7 @@ export const RizenCaseStudy: React.FC = () => {
         </section>
 
         {/* ── BUILT THE MVP ────────────────────────────────────────── */}
-        <section className="flex flex-col gap-8">
+        <section id="mvp" className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                Defining the MVP
@@ -421,13 +420,15 @@ export const RizenCaseStudy: React.FC = () => {
 
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
         <section className="flex flex-col gap-5 sm:gap-6">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Key Design Decisions
-          </h2>
+          <div id="decisions" className="flex flex-col">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Key Design Decisions
+            </h2>
+          </div>
 
           <div className="flex flex-col gap-8 sm:gap-10">
             {/* Decision 01 */}
-            <div className="flex flex-col gap-4">
+            <div id="decision-1" className="flex flex-col gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   1. Separate Planning from Doing
@@ -469,7 +470,7 @@ export const RizenCaseStudy: React.FC = () => {
             </div>
 
             {/* Decision 02 */}
-            <div className="flex flex-col gap-4 pt-2">
+            <div id="decision-2" className="flex flex-col gap-4 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   2. Accountability Without Comparison Anxiety
@@ -509,7 +510,7 @@ export const RizenCaseStudy: React.FC = () => {
             </div>
 
             {/* Decision 03 */}
-            <div className="flex flex-col gap-5 pt-2">
+            <div id="decision-3" className="flex flex-col gap-5 pt-2">
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   3. Gamification That Makes Progress Feel Good
@@ -626,7 +627,7 @@ export const RizenCaseStudy: React.FC = () => {
         </section>
 
         {/* ── SETTING THE VISUAL DIRECTION ─────────────────────────── */}
-        <section className="flex flex-col gap-8">
+        <section id="visuals" className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
               Setting the Visual Direction
@@ -964,7 +965,7 @@ export const RizenCaseStudy: React.FC = () => {
         </section>
 
         {/* ── WHAT'S NEXT / PHASE 2 ─────────────────────────────────── */}
-        <section className="flex flex-col gap-8">
+        <section id="next" className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
               What's Next for Rizen
