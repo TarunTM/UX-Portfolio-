@@ -32,7 +32,7 @@ export const projects: Project[] = [
     title: "Sanctum House of Wellness",
     tagline: "Designing a premium fitness experience around brand clarity, local discovery, and conversion.",
     category: "Web — Desktop + Mobile · Fitness & Wellness",
-    role: "UI/UX Designer",
+    role: "UI/UX Designer @The Social Slate",
     timeline: "2025",
     tools: ["Figma", "Responsive Layouts", "Location Discovery", "Conversion UX"],
     objective: "Create a digital experience that clearly communicated what Sanctum stands for while helping users discover a nearby club and take the next step.",

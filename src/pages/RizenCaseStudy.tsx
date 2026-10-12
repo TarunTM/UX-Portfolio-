@@ -124,7 +124,7 @@ export const RizenCaseStudy: React.FC = () => {
               </span>
               <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
                 <div>
-                  <span >6 Designers</span> <br></br>
+                  <span >Team of 6 UX learners</span> <br></br>
                   {/* <span className="text-xs text-[var(--text-muted)]">(Design Lead)</span> */}
                 </div>
                 {/* <div>

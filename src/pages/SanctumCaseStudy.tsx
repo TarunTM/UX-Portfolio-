@@ -210,7 +210,7 @@ export const SanctumCaseStudy: React.FC = () => {
                 MY ROLE
               </span>
               <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
-                <span>UI/UX Designer</span>
+                <span>UI/UX Designer <br/>@The Social Slate</span>
                 {/* <span className="text-xs text-[var(--text-muted)]">(Web & Conversion)</span> */}
               </div>
             </div>
