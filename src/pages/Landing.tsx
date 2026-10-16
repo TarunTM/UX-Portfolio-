@@ -4,6 +4,8 @@ import { Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
+import TiltCard from '../components/TiltCard';
+import StreamingText from '../components/StreamingText';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.webp';
 import wixStudioIcon from '../assets/wix-studio.webp';
 import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
@@ -194,16 +196,22 @@ export const Landing: React.FC = () => {
               >
                 Product
               </span>
-              <div
-                className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden border-2 shrink-0 inline-block align-middle shadow-sm hover:scale-105 transition-transform duration-300"
-                style={{ borderColor: 'var(--border-card)' }}
+              <TiltCard
+                className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 inline-block align-middle select-none cursor-pointer"
+                cardClassName="!rounded-full border-2 shadow-sm"
+                cardStyle={{ borderColor: 'var(--border-card)' }}
+                maxTilt={38}
+                perspective={320}
+                scale={1.12}
+                showGlare={true}
               >
                 <img
                   src="/avatar.webp?v=11"
                   alt="Tarun — Product Designer"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover select-none pointer-events-none"
+                  draggable={false}
                 />
-              </div>
+              </TiltCard>
             </span>
             <span
               className="block text-5xl sm:text-7xl lg:text-8xl tracking-tight mt-2"
@@ -221,15 +229,17 @@ export const Landing: React.FC = () => {
           {/* Intro text section */}
           <div className="mt-10">
             <div className="flex-1">
-              <p
+              <StreamingText
                 className="text-base sm:text-lg max-w-lg leading-relaxed"
                 style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
-              >
-                I'm{' '}
-                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Tarun Madan, </span>
-                {' '}crafting designs with top notes of delight, heart notes of simplicity,
-                and base notes of usability. 1+ year building digital products that matter.
-              </p>
+                delay={180}
+                gap={45}
+                segments={[
+                  { text: "I'm" },
+                  { text: "Tarun Madan,", style: { color: 'var(--text-primary)', fontWeight: 500 } },
+                  { text: "crafting designs with top notes of delight, heart notes of simplicity, and base notes of usability. 1+ year building digital products that matter." },
+                ]}
+              />
               
               <div className="flex flex-wrap items-center gap-3.5 mt-8 relative z-20">
                 <a

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
+import TextReveal from '../components/TextReveal';
 import { projects } from '../data/projects';
 import heroQuantel from '../assets/Quantel Img/Quantel hero.webp';
 import assetsQuantel from '../assets/Quantel Img/Assets Quantel.webp';
@@ -33,7 +34,7 @@ export const QuantelCaseStudy: React.FC = () => {
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
+          <TextReveal className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Web App · Mobile App ·FinTech
             </span>
@@ -43,7 +44,7 @@ export const QuantelCaseStudy: React.FC = () => {
             <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
               AI-powered wealth management platform
             </p>
-          </div>
+          </TextReveal>
 
           {/* Large Project Hero Image — Matching 16:9 ratio of Sanctum & Rizen */}
           <div
@@ -127,58 +128,50 @@ export const QuantelCaseStudy: React.FC = () => {
 
         {/* ── CONTEXT ─────────────────────────────────────────────── */}
         <section id="context" className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Project Intro
-          </h2>
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Project Intro
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              Quantel AI is a wealth management platform that brings investing, financial advice, and AI-powered market insights into one experience.
-              <br></br>
-              I joined the project when the core product direction and design system were already established. My focus was designing the new UI screens required for production and adapting existing web experiences for mobile.
-            </p>
-          </div>
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Quantel AI is a wealth management platform that brings investing, financial advice, and AI-powered market insights into one experience.
+                <br></br>
+                I joined the project when the core product direction and design system were already established. My focus was designing the new UI screens required for production and adapting existing web experiences for mobile.
+              </p>
+            </div>
+          </TextReveal>
         </section>
-
-        {/* ── THE PROBLEM ─────────────────────────────────────────── */}
-        {/* <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            The Problem
-          </h2>
-
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              While the core brand vision was set, the platform lacked key transactional workflows and critical expansion modules. Wealth management data was dense and intimidating for everyday investors, and complex decision-making during financial onboarding caused significant friction.
-            </p>
-          </div>
-        </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
         <section id="role" className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            My Role & Scope
-          </h2>
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              My Role & Scope
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              I worked as a UI/UX Designer, primarily contributing to the visual design of Quantel's web and mobile experiences. I designed the Assets Dashboard, a light-mode version of the main dashboard, and a Points & Rewards concept for the web app. I also adapted the existing Quantel Capital and Quantel Advise flows into mobile screens, making the necessary adjustments for smaller screen sizes while maintaining consistency with the established design system.
-            </p>
-          
-          </div>
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                I worked as a UI/UX Designer, primarily contributing to the visual design of Quantel's web and mobile experiences. I designed the Assets Dashboard, a light-mode version of the main dashboard, and a Points & Rewards concept for the web app. I also adapted the existing Quantel Capital and Quantel Advise flows into mobile screens, making the necessary adjustments for smaller screen sizes while maintaining consistency with the established design system.
+              </p>
+            </div>
+          </TextReveal>
         </section>
 
         {/* ── UI SCREENS ─────────────────────────────────────────── */}
         <section id="screens" className="flex flex-col gap-5 sm:gap-6">
           <div className="flex flex-col">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              UI Screens
-            </h2>
+            <TextReveal className="flex flex-col">
+              <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                UI Screens
+              </h2>
+            </TextReveal>
           </div>
 
           <div className="flex flex-col gap-8 sm:gap-10">
             {/* Screen 01 — Assets Dashboard */}
             <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   Assets Dashboard
                 </h3>
@@ -187,9 +180,8 @@ export const QuantelCaseStudy: React.FC = () => {
                   <p>
                     Users can connect investment accounts held on other platforms to Quantel. The Assets experience brings that information together and gives users an overview of their investments along with key insights about their accounts.
                   </p>
-                  
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Mockup for Screen 01 — Assets Dashboard */}
               <div className="flex flex-col gap-1.5 pt-1">
@@ -208,20 +200,20 @@ export const QuantelCaseStudy: React.FC = () => {
 
             {/* Screen 02 — Dashboard Light Mode */}
             <div className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   Dashboard Light Mode
                 </h3>
                 
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                      Quantel was originally designed as a dark-mode product. Later in the project, the founder requested a light-mode version of the dashboard.
+                    Quantel was originally designed as a dark-mode product. Later in the project, the founder requested a light-mode version of the dashboard.
                   </p>
                   <p>
-                      I adapted the existing dashboard to light mode while keeping the established components, layout, hierarchy, and visual language consistent with the original product.
+                    I adapted the existing dashboard to light mode while keeping the established components, layout, hierarchy, and visual language consistent with the original product.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Mockup for Screen 02 — Light Mode Dashboard */}
               <div className="flex flex-col gap-1.5 pt-1">
@@ -240,7 +232,7 @@ export const QuantelCaseStudy: React.FC = () => {
 
             {/* Screen 03 — Quantel Capital Flow */}
             <div className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   Quantel Capital Flow - Mobile App
                 </h3>
@@ -256,7 +248,7 @@ export const QuantelCaseStudy: React.FC = () => {
                     For mobile, I focused on prioritising the most important information, simplifying layouts, and adapting the existing components to a smaller screen rather than changing the underlying flow.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Mockups for Decision 03 — Capital 1 & Capital 2 */}
               <div className="flex flex-col gap-6 pt-2 items-center">
@@ -279,17 +271,17 @@ export const QuantelCaseStudy: React.FC = () => {
 
             {/* Decision 04 — Quantel Advise Flow */}
             <div className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   Quantel Advise Flow - Mobile App
                 </h3>
               
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                      Quantel Advise connects users with financial advisors through a subscription-based experience, where users can subscribe for a certain number of advisory calls and book sessions with an advisor.
+                    Quantel Advise connects users with financial advisors through a subscription-based experience, where users can subscribe for a certain number of advisory calls and book sessions with an advisor.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Mockup for Decision 04 — Advise Mobile Flow */}
               <div className="flex flex-col gap-1.5 pt-2 items-center">
@@ -305,11 +297,11 @@ export const QuantelCaseStudy: React.FC = () => {
 
             {/* Decision 05 — Concept Screen for Quantel Referrals */}
             <div className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   Concept Screen for Quantel Referrals
                 </h3>
-              </div>
+              </TextReveal>
 
               {/* Mockup for Decision 05 — Points and Rewards */}
               <div className="flex flex-col gap-1.5 pt-1">

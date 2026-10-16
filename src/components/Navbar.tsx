@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import {
   Home,
   Award,
@@ -84,20 +83,6 @@ const getCaseStudySlug = (pathname: string): string => {
   if (slug === 'side-projects' || slug === 'influencer-agency') return 'side-quests';
   return slug;
 };
-
-// BenBox / Framer Signature Sliding Pill (High-damping spring with crisp glide and zero wobble)
-const ActivePill: React.FC<{ layoutId: string }> = ({ layoutId }) => (
-  <motion.div
-    layoutId={layoutId}
-    className="absolute inset-0 bg-[#FFFFFF] dark:bg-[#323232] border border-[#D7E1E8]/70 dark:border-[#404040]/70 rounded-full shadow-[0_2px_8px_rgba(18,24,32,0.06)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.4)] z-0"
-    transition={{
-      type: 'spring',
-      stiffness: 500,
-      damping: 35,
-      mass: 0.8,
-    }}
-  />
-);
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
@@ -299,6 +284,97 @@ export const Navbar: React.FC = () => {
       ? CASE_STUDIES[(currentProjectIdx + 1) % CASE_STUDIES.length]
       : CASE_STUDIES[0];
 
+  // ── Tabs Sliding Animation (transitions.dev) ──
+  const landingNavPillRef = useRef<HTMLSpanElement>(null);
+  const landingNavRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const moveLandingPill = useCallback((animate: boolean) => {
+    const pill = landingNavPillRef.current;
+    const targetEl = landingNavRefs.current[activeSection];
+    if (!pill || !targetEl) return;
+
+    if (!animate) {
+      const prev = pill.style.transition;
+      pill.style.transition = 'none';
+      pill.style.transform = `translate3d(${targetEl.offsetLeft}px, ${targetEl.offsetTop}px, 0)`;
+      pill.style.width = `${targetEl.offsetWidth}px`;
+      pill.style.height = `${targetEl.offsetHeight}px`;
+      pill.style.opacity = '1';
+      void pill.offsetWidth;
+      pill.style.transition = prev;
+    } else {
+      pill.style.transform = `translate3d(${targetEl.offsetLeft}px, ${targetEl.offsetTop}px, 0)`;
+      pill.style.width = `${targetEl.offsetWidth}px`;
+      pill.style.height = `${targetEl.offsetHeight}px`;
+      pill.style.opacity = '1';
+    }
+  }, [activeSection]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    moveLandingPill(true);
+  }, [activeSection, isHome, moveLandingPill]);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const frame = requestAnimationFrame(() => moveLandingPill(false));
+    const handleResize = () => moveLandingPill(false);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isHome, moveLandingPill]);
+
+  // Mobile Case Study Sliding Pill
+  const caseStudyPillRef = useRef<HTMLSpanElement>(null);
+  const caseStudyRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const activeCaseStudySlug = CASE_STUDIES.find(
+    (cs) => cs.path === location.pathname || location.pathname.startsWith(cs.path)
+  )?.id;
+
+  const moveCaseStudyPill = useCallback((animate: boolean) => {
+    const pill = caseStudyPillRef.current;
+    if (!activeCaseStudySlug) {
+      if (pill) pill.style.opacity = '0';
+      return;
+    }
+    const targetEl = caseStudyRefs.current[activeCaseStudySlug];
+    if (!pill || !targetEl) return;
+
+    if (!animate) {
+      const prev = pill.style.transition;
+      pill.style.transition = 'none';
+      pill.style.transform = `translate3d(${targetEl.offsetLeft}px, ${targetEl.offsetTop}px, 0)`;
+      pill.style.width = `${targetEl.offsetWidth}px`;
+      pill.style.height = `${targetEl.offsetHeight}px`;
+      pill.style.opacity = '1';
+      void pill.offsetWidth;
+      pill.style.transition = prev;
+    } else {
+      pill.style.transform = `translate3d(${targetEl.offsetLeft}px, ${targetEl.offsetTop}px, 0)`;
+      pill.style.width = `${targetEl.offsetWidth}px`;
+      pill.style.height = `${targetEl.offsetHeight}px`;
+      pill.style.opacity = '1';
+    }
+  }, [activeCaseStudySlug]);
+
+  useEffect(() => {
+    if (!isCaseStudy) return;
+    moveCaseStudyPill(true);
+  }, [isCaseStudy, location.pathname, moveCaseStudyPill]);
+
+  useEffect(() => {
+    if (!isCaseStudy) return;
+    const frame = requestAnimationFrame(() => moveCaseStudyPill(false));
+    const handleResize = () => moveCaseStudyPill(false);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isCaseStudy, moveCaseStudyPill]);
+
   return (
     <nav
       className={
@@ -311,18 +387,25 @@ export const Navbar: React.FC = () => {
         className={
           isCaseStudy
             ? "flex flex-row xl:flex-col items-center xl:items-stretch gap-1 sm:gap-1.5 xl:gap-1 px-1.5 py-1.5 sm:px-2 sm:py-2 xl:p-0 max-xl:bg-[#DFEAF0] max-xl:dark:bg-[#262626] max-xl:backdrop-blur-xl max-xl:border max-xl:border-[#C8D7DF] max-xl:dark:border-[#383838] max-xl:rounded-full max-xl:shadow-[0_8px_28px_rgba(18,24,32,0.08)] max-xl:dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] bg-transparent dark:bg-transparent border-none dark:border-none shadow-none dark:shadow-none backdrop-blur-none transition-all duration-300 max-w-[calc(100vw-24px)] xl:max-w-none xl:min-w-[144px]"
-            : "flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#262626] backdrop-blur-xl border border-[#C8D7DF] dark:border-[#383838] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] transition-all duration-300"
+            : "relative flex flex-row lg:flex-col items-center gap-1 sm:gap-1.5 lg:gap-2 px-1.5 py-1.5 sm:px-2 sm:py-2 lg:px-2 lg:py-2.5 bg-[#DFEAF0] dark:bg-[#262626] backdrop-blur-xl border border-[#C8D7DF] dark:border-[#383838] rounded-full shadow-[0_8px_28px_rgba(18,24,32,0.08)] dark:shadow-[0_12px_45px_rgba(0,0,0,0.5)] transition-all duration-300"
         }
       >
         {isCaseStudy ? (
           /* ── CASE STUDY MODE NAVBAR ── */
           <>
             {/* ── MOBILE & TABLET NAVIGATION (< 1280px: Home + 4 Case Studies + Next Project) ── */}
-            <div className="flex xl:hidden items-center gap-1 sm:gap-1.5">
+            <div className="relative flex xl:hidden items-center gap-1 sm:gap-1.5">
+              {/* Sliding Pill for mobile case study dock */}
+              <span
+                ref={caseStudyPillRef}
+                className="t-nav-pill opacity-0"
+                aria-hidden="true"
+              />
+
               {/* Back to Home / Work */}
               <button
                 onClick={() => navigate('/')}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative z-10 group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
                 aria-label="Back to Home"
               >
                 <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
@@ -342,6 +425,7 @@ export const Navbar: React.FC = () => {
                 return (
                   <button
                     key={item.id}
+                    ref={(el) => { caseStudyRefs.current[item.id] = el; }}
                     onClick={() => {
                       if (!isActive) {
                         navigate(item.path);
@@ -350,10 +434,9 @@ export const Navbar: React.FC = () => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }
                     }}
-                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
                     aria-label={item.name}
                   >
-                    {isActive && <ActivePill layoutId="casestudy-mobile-pill" />}
                     <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                       isActive
                         ? 'text-[#000000] dark:text-[#FFFFFF]'
@@ -372,7 +455,7 @@ export const Navbar: React.FC = () => {
                   navigate(nextProject.path);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
+                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-200 active:scale-90 relative z-10 group cursor-pointer text-[#000000] hover:bg-[#FFFFFF]/70 hover:text-[#000000] dark:text-[#F0F0F0] dark:hover:bg-[#3D3D3D]/60 dark:hover:text-white"
                 aria-label={`Next: ${nextProject.name}`}
               >
                 <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2]" />
@@ -430,13 +513,20 @@ export const Navbar: React.FC = () => {
         ) : (
           /* ── LANDING PAGE MODE NAVBAR ── */
           <>
+            {/* Sliding Pill for landing navigation (transitions.dev Tabs Sliding) */}
+            <span
+              ref={landingNavPillRef}
+              className="t-nav-pill opacity-0"
+              aria-hidden="true"
+            />
+
             {/* Home Button */}
             <button
+              ref={(el) => { landingNavRefs.current['home'] = el; }}
               onClick={() => handleNav('home')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Home"
             >
-              {activeSection === 'home' && <ActivePill layoutId="nav-active-pill" />}
               <Home className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'home'
                   ? 'text-[#000000] dark:text-[#FFFFFF]'
@@ -449,11 +539,11 @@ export const Navbar: React.FC = () => {
 
             {/* Projects (Work) Button */}
             <button
+              ref={(el) => { landingNavRefs.current['work'] = el; }}
               onClick={() => handleNav('work')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Work"
             >
-              {activeSection === 'work' && <ActivePill layoutId="nav-active-pill" />}
               <Award className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'work'
                   ? 'text-[#000000] dark:text-[#FFFFFF]'
@@ -466,11 +556,11 @@ export const Navbar: React.FC = () => {
 
             {/* Skills Button */}
             <button
+              ref={(el) => { landingNavRefs.current['skills'] = el; }}
               onClick={() => handleNav('skills')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Skills"
             >
-              {activeSection === 'skills' && <ActivePill layoutId="nav-active-pill" />}
               <Wrench className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'skills'
                   ? 'text-[#000000] dark:text-[#FFFFFF]'
@@ -483,11 +573,11 @@ export const Navbar: React.FC = () => {
 
             {/* Experience Button */}
             <button
+              ref={(el) => { landingNavRefs.current['timeline'] = el; }}
               onClick={() => handleNav('timeline')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Experience"
             >
-              {activeSection === 'timeline' && <ActivePill layoutId="nav-active-pill" />}
               <Briefcase className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'timeline'
                   ? 'text-[#000000] dark:text-[#FFFFFF]'
@@ -500,11 +590,11 @@ export const Navbar: React.FC = () => {
 
             {/* Contact Button */}
             <button
+              ref={(el) => { landingNavRefs.current['contact'] = el; }}
               onClick={() => handleNav('contact')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Contact"
             >
-              {activeSection === 'contact' && <ActivePill layoutId="nav-active-pill" />}
               <Mail className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'contact'
                   ? 'text-[#000000] dark:text-[#FFFFFF]'
@@ -517,11 +607,11 @@ export const Navbar: React.FC = () => {
 
             {/* Mini Game Button */}
             <button
+              ref={(el) => { landingNavRefs.current['game'] = el; }}
               onClick={() => handleNav('game')}
-              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative group cursor-pointer transition-transform duration-200 active:scale-90"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center relative z-10 group cursor-pointer transition-transform duration-200 active:scale-90"
               aria-label="Mini Game"
             >
-              {activeSection === 'game' && <ActivePill layoutId="nav-active-pill" />}
               <Gamepad2 className={`w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2] relative z-10 transition-colors duration-200 ${
                 activeSection === 'game'
                   ? 'text-[#000000] dark:text-[#FFFFFF]'

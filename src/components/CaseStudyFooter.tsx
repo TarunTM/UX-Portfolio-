@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, Copy, Check, ExternalLink } from 'lucide-react';
 import ValorantGame from './ValorantGame';
+import ShimmerText from './ShimmerText';
 
 const LinkedInIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -110,13 +111,13 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
       {/* ── 2. "LET'S TALK" CONTACT HERO SECTION ───────────────── */}
       <div className="flex flex-col items-center text-center gap-3.5 sm:gap-4.5 pt-4 sm:pt-5 pb-8 sm:pb-10 px-4">
         
-        {/* Signature script */}
-        <span 
-          className="text-2xl sm:text-3xl text-[var(--text-secondary)] tracking-wide select-none font-medium leading-none"
+        {/* Signature script with transitions.dev Shimmer Text */}
+        <ShimmerText 
+          className="text-2xl sm:text-3xl tracking-wide select-none font-medium leading-none"
           style={{ fontFamily: "'Caveat', 'Alex Brush', cursive, sans-serif" }}
         >
           Tarun Madan
-        </span>
+        </ShimmerText>
 
         {/* Catchy headline */}
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-[var(--text-primary)] max-w-xl mx-auto leading-snug">

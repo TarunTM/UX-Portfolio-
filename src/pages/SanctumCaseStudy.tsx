@@ -3,6 +3,8 @@ import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Maximize2, X } from
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
+import TextReveal from '../components/TextReveal';
+import SpinningCounter from '../components/SpinningCounter';
 import { projects } from '../data/projects';
 import heroVideo from '../assets/Sanctum Img:Video/Hero Video.webm';
 import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.webp';
@@ -176,7 +178,7 @@ export const SanctumCaseStudy: React.FC = () => {
 
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
+          <TextReveal trigger="scroll" className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Website · Fitness & Wellness
             </span>
@@ -186,7 +188,7 @@ export const SanctumCaseStudy: React.FC = () => {
             <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
               A digital experience for a premium fitness & wellness brand
             </p>
-          </div>
+          </TextReveal>
 
           {/* Large Project Hero Video — Uncropped Natural Aspect Ratio */}
           <div
@@ -274,63 +276,63 @@ export const SanctumCaseStudy: React.FC = () => {
 
         {/* ── CONTEXT ─────────────────────────────────────────────── */}
         <section id="context" className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Context
-          </h2>
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Context
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              Sanctum House of Wellness is a premium fitness and wellness brand with multiple locations across Mumbai. I worked on the website from design through implementation, creating an experience that communicated what Sanctum stands for, helped users discover the right classes and locations, and made it easier to enquire.
-            </p>
-          </div>
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Sanctum House of Wellness is a premium fitness and wellness brand with multiple locations across Mumbai. I worked on the website from design through implementation, creating an experience that communicated what Sanctum stands for, helped users discover the right classes and locations, and made it easier to enquire.
+              </p>
+            </div>
+          </TextReveal>
         </section>
-
-        {/* ── THE PROBLEM ─────────────────────────────────────────── */}
-        {/* <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            The Problem
-          </h2>
-
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              The previous online presence presented an overwhelming catalog of wellness services without clarifying the core brand ethos. Furthermore, high-intent traffic arriving from Meta advertising had no frictionless channel to ask questions or book trial sessions.
-            </p>
-          </div>
-        </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
         <section id="role" className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            My Role & Scope
-          </h2>
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              My Role & Scope
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              I worked as part of a team of three designers, contributing to the design of the website, including the homepage, all club pages and the GroupX experience. I designed the screens in Figma and implemented the final experience in Wix Studio, using Wix Bookings for class scheduling and reservations.
-            </p>
-          </div>
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                I worked as part of a team of three designers, contributing to the design of the website, including the homepage, all club pages and the GroupX experience. I designed the screens in Figma and implemented the final experience in Wix Studio, using Wix Bookings for class scheduling and reservations.
+              </p>
+            </div>
+          </TextReveal>
         </section>
 
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
         <section id="outcome" className="flex flex-col gap-6 sm:gap-8">
           <div className="flex flex-col gap-4">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              Outcome
-            </h2>
+            <TextReveal className="flex flex-col gap-2">
+              <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                Outcome
+              </h2>
+            </TextReveal>
 
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-5 md:gap-6 items-center">
               {/* Left narrative */}
-              <div className="md:col-span-9 flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal">
+              <TextReveal className="md:col-span-9 flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal">
                 <p>
                   <strong >3x increase in WhatsApp and phone enquiries within 3 weeks</strong>, as reported by the client after direct contact actions were introduced on the club pages. The final experience also gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
                 </p>
-              </div>
+              </TextReveal>
 
-              {/* Right: 3x Inquiries Stat Display */}
-              <div className="md:col-span-3 flex flex-col items-center justify-center text-center select-none py-1">
-                <span className="text-[60px] sm:text-[72px] md:text-[84px] font-bold tracking-tight text-[var(--text-primary)] leading-none">
-                  3x
-                </span>
+              {/* Right: 3x Inquiries Stat Display with Spinning Counter */}
+              <div
+                className="md:col-span-3 flex flex-col items-center justify-center text-center select-none py-1 group cursor-pointer"
+                title="Click to replay spin"
+              >
+                <div className="flex items-baseline justify-center">
+                  <SpinningCounter
+                    value={3}
+                    suffix="x"
+                    className="text-[60px] sm:text-[72px] md:text-[84px] font-bold tracking-tight text-[var(--text-primary)] leading-none"
+                  />
+                </div>
                 <span className="text-[15px] sm:text-[17px] md:text-[18px] font-medium text-[var(--text-primary)] tracking-tight mt-1 sm:mt-1.5">
                   Inquiries
                 </span>
@@ -423,24 +425,26 @@ export const SanctumCaseStudy: React.FC = () => {
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
         <section className="flex flex-col gap-5 sm:gap-6">
           <div id="decisions" className="flex flex-col">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              Key Design Decisions
-            </h2>
+            <TextReveal className="flex flex-col">
+              <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                Key Design Decisions
+              </h2>
+            </TextReveal>
           </div>
 
           <div className="flex flex-col gap-8 sm:gap-10">
             {/* Decision 01 */}
             <div id="decision-1" className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   1. Making GroupX easier to explore
                 </h3>
                 <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    GroupX offers a range of classes across Sanctum's locations, but users first needed to understand what classes were available and where they could take them.I designed the GroupX experience to make the relationship between class and location clearer, allowing users to browse the available sessions and understand where each class was offered before moving into the booking flow.
+                    GroupX offers a range of classes across Sanctum's locations, but users first needed to understand what classes were available and where they could take them. I designed the GroupX experience to make the relationship between class and location clearer, allowing users to browse the available sessions and understand where each class was offered before moving into the booking flow.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Mockup for Decision 01 — GroupX Experience */}
               <div className="flex flex-col gap-1.5 pt-1">
@@ -459,7 +463,7 @@ export const SanctumCaseStudy: React.FC = () => {
 
             {/* Decision 02 */}
             <div id="decision-2" className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   2. Building the experience around Training + Recovery
                 </h3>
@@ -469,7 +473,7 @@ export const SanctumCaseStudy: React.FC = () => {
                     This helped communicate what Sanctum stood for before users moved into the details of its locations, classes and facilities.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Video Mockup for Decision 02 — Training Scroll Video */}
               <div className="flex flex-col gap-1.5 pt-1">
@@ -606,7 +610,7 @@ export const SanctumCaseStudy: React.FC = () => {
 
             {/* Decision 03 */}
             <div id="decision-3" className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   3. Turning club pages into actionable experiences
                 </h3>
@@ -616,9 +620,8 @@ export const SanctumCaseStudy: React.FC = () => {
                     I redesigned the Andheri, Juhu and Khar club pages and later added direct WhatsApp, Phone and Directions actions to make it easier for users to ask questions, call the club or find their way there.
                     About a week after the change, the client shared that WhatsApp and phone enquiries had increased by approximately <strong>3X</strong>.
                   </p>
-
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Before vs After Screens for Decision 03 */}
               <div className="flex flex-col gap-8 sm:gap-10 pt-2">
@@ -741,9 +744,11 @@ export const SanctumCaseStudy: React.FC = () => {
 
         {/* ── WHAT I LEARNT ───────────────────────────────────────── */}
         <section id="learnings" className="flex flex-col gap-4 sm:gap-5">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            What I Learnt
-          </h2>
+          <TextReveal className="flex flex-col">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              What I Learnt
+            </h2>
+          </TextReveal>
 
           <div className="flex flex-col gap-2.5 sm:gap-3">
             {whatILearntData.map((item) => {

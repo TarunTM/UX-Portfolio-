@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
+import TextReveal from '../components/TextReveal';
 import { projects } from '../data/projects';
 import heroRizen from '../assets/Rizen Img/Hero Rizen.webp';
 import outcomePrototype from '../assets/Rizen Img/Outcome Prototype.webm';
@@ -70,7 +71,7 @@ export const RizenCaseStudy: React.FC = () => {
         
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
+          <TextReveal className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               Mobile App · Fitness & Habit Formation
             </span>
@@ -80,7 +81,7 @@ export const RizenCaseStudy: React.FC = () => {
             <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
               Fitness Journey Companion to achieve fitness goals.
             </p>
-          </div>
+          </TextReveal>
 
           {/* Large Project Hero Image — Uncropped Natural Aspect Ratio */}
           <div
@@ -159,52 +160,44 @@ export const RizenCaseStudy: React.FC = () => {
 
         {/* ── CONTEXT ─────────────────────────────────────────────── */}
         <section id="context" className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Context
-          </h2>
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Context
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              Rizen is a fitness journey companion designed to help people stay committed to their fitness goals through workout planning, progress tracking and social accountability.
-              This was a project I worked on as part of my PG UX Austin course, starting with a simple question: how might we help people stay committed to their fitness goals? <br></br>
-              The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.
-              
-            </p>
-          </div>
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Rizen is a fitness journey companion designed to help people stay committed to their fitness goals through workout planning, progress tracking and social accountability.
+                This was a project I worked on as part of my PG UX Austin course, starting with a simple question: how might we help people stay committed to their fitness goals? <br></br>
+                The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.
+              </p>
+            </div>
+          </TextReveal>
         </section>
-
-        {/* ── THE PROBLEM ─────────────────────────────────────────── */}
-        {/* <section className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            The Problem
-          </h2>
-
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              The internship program lacked a dedicated website, leaving information scattered and hard to find. Without a centralized home, users struggled to learn about the program and apply, limiting its growth. There is an internship program — but no home to call its own.
-            </p>
-          </div>
-        </section> */}
 
         {/* ── MY ROLE ─────────────────────────────────────────────── */}
         <section id="role" className="flex flex-col gap-3">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            My Role & Scope
-          </h2>
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              My Role & Scope
+            </h2>
 
-          <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
                 I worked across the workout experience, social/accountability features, gamification and visual direction, while also contributing to the information architecture, user flows and high-fidelity UI.
                 I was also involved in Product Thinking (MVP) like sharing workouts with friends or clients, and the XP, rank, streak and achievement system.
-            </p>
-          </div>
+              </p>
+            </div>
+          </TextReveal>
         </section>
 
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
         <section id="outcome" className="flex flex-col gap-6 sm:gap-8">
-          <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Outcome
-          </h2>
+          <TextReveal className="flex flex-col">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Outcome
+            </h2>
+          </TextReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-center">
             {/* Left Prototype Video (Click to Pause / Play) */}
@@ -255,7 +248,7 @@ export const RizenCaseStudy: React.FC = () => {
 
         {/* ── BUILT THE MVP ────────────────────────────────────────── */}
         <section id="mvp" className="flex flex-col gap-8">
-          <div className="flex flex-col gap-3">
+          <TextReveal className="flex flex-col gap-3">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                Defining the MVP
             </h2>
@@ -270,7 +263,7 @@ export const RizenCaseStudy: React.FC = () => {
                 The MVP focused on four core areas:
               </p>
             </div>
-          </div>
+          </TextReveal>
 
           {/* 4 Core Focus Areas - Sleek Modular Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -421,15 +414,17 @@ export const RizenCaseStudy: React.FC = () => {
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
         <section className="flex flex-col gap-5 sm:gap-6">
           <div id="decisions" className="flex flex-col">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              Key Design Decisions
-            </h2>
+            <TextReveal className="flex flex-col">
+              <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                Key Design Decisions
+              </h2>
+            </TextReveal>
           </div>
 
           <div className="flex flex-col gap-8 sm:gap-10">
             {/* Decision 01 */}
             <div id="decision-1" className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   1. Separate Planning from Doing
                 </h3>
@@ -439,7 +434,7 @@ export const RizenCaseStudy: React.FC = () => {
                     When planning, users need to browse, customise and decide what they're going to do. Once they're working out, they just need to focus on the session, so we separated Workout Plans from Record Workout.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* 2 Side-by-Side Phone Mockups with divided captions above */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-start justify-items-center">
@@ -471,7 +466,7 @@ export const RizenCaseStudy: React.FC = () => {
 
             {/* Decision 02 */}
             <div id="decision-2" className="flex flex-col gap-4 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   2. Accountability Without Comparison Anxiety
                 </h3>
@@ -481,7 +476,7 @@ export const RizenCaseStudy: React.FC = () => {
                     So instead of ranking users against an entire country or the world, we built the social experience around friends, activity, profiles and group rankings. We also made workouts shareable, so users could share routines with friends or clients.                  
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Centered Quote across both images */}
               <div className="w-full flex justify-center pt-2">
@@ -511,7 +506,7 @@ export const RizenCaseStudy: React.FC = () => {
 
             {/* Decision 03 */}
             <div id="decision-3" className="flex flex-col gap-5 pt-2">
-              <div className="flex flex-col gap-1.5">
+              <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
                   3. Gamification That Makes Progress Feel Good
                 </h3>
@@ -526,7 +521,7 @@ export const RizenCaseStudy: React.FC = () => {
                     We chose familiar rank names because our research was conducted with Indian users, many of whom were already familiar with similar progression systems through games.
                   </p>
                 </div>
-              </div>
+              </TextReveal>
 
               {/* Visual Artifacts: Rank System & Achievement Badges */}
               <div className="flex flex-col gap-6 pt-2">

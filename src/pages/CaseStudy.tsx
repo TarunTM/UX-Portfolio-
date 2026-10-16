@@ -5,6 +5,7 @@ import { projects } from '../data/projects';
 import ProjectMockup from '../components/ProjectMockup';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
+import TextReveal from '../components/TextReveal';
 import RizenCaseStudy from './RizenCaseStudy';
 import SanctumCaseStudy from './SanctumCaseStudy';
 import QuantelCaseStudy from './QuantelCaseStudy';
@@ -66,7 +67,7 @@ export const CaseStudy: React.FC = () => {
       <main className="max-w-4xl mx-auto px-6 sm:px-10 pt-20 sm:pt-24 flex flex-col gap-10 sm:gap-14">
         {/* Project Hero Header */}
         <section className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2">
+          <TextReveal className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
               {project.category}
             </span>
@@ -76,7 +77,7 @@ export const CaseStudy: React.FC = () => {
             <p className="text-[17px] sm:text-[19px] md:text-[20px] text-[var(--text-secondary)] font-normal leading-relaxed max-w-3xl mt-0.5">
               {project.tagline}
             </p>
-          </div>
+          </TextReveal>
 
           {/* Project Metadata Strip */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 pt-6 pb-2 items-start text-left">
@@ -133,39 +134,39 @@ export const CaseStudy: React.FC = () => {
 
         {/* Case Overview: Objectives, Problem & Solution */}
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-left py-2">
-          <div className="flex flex-col gap-2">
+          <TextReveal className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-wider text-accent">
               Core Objective
             </span>
             <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Goal</h3>
             <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">{project.objective}</p>
-          </div>
+          </TextReveal>
 
-          <div className="flex flex-col gap-2">
+          <TextReveal className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">
               Problem Statement
             </span>
             <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Friction</h3>
             <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">{project.problem}</p>
-          </div>
+          </TextReveal>
 
-          <div className="flex flex-col gap-2">
+          <TextReveal className="flex flex-col gap-2">
             <span className="text-xs font-mono uppercase tracking-wider text-accent">
               Design Solution
             </span>
             <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Outcome</h3>
             <p className="text-[16px] text-[var(--text-secondary)] leading-[1.75] font-normal">{project.solution}</p>
-          </div>
+          </TextReveal>
         </section>
 
         {/* Detailed Double Diamond Walkthrough */}
         <section className="flex flex-col gap-6 text-left">
-          <div className="flex items-center justify-between">
+          <TextReveal className="flex items-center justify-between">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
               Double Diamond Execution
             </h2>
             <span className="text-xs text-[var(--text-muted)] font-mono">STEP-BY-STEP</span>
-          </div>
+          </TextReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {project.process.map((step, idx) => (
@@ -205,9 +206,11 @@ export const CaseStudy: React.FC = () => {
 
         {/* Hi-Fi Design Mockups Section */}
         <section className="flex flex-col gap-4 text-left">
-          <h3 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            High-Fidelity Interface Concept
-          </h3>
+          <TextReveal className="flex flex-col">
+            <h3 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              High-Fidelity Interface Concept
+            </h3>
+          </TextReveal>
           <div
             className="h-[320px] sm:h-[450px] w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm relative border"
             style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
@@ -221,9 +224,11 @@ export const CaseStudy: React.FC = () => {
           className="border p-6 sm:p-8 rounded-2xl sm:rounded-3xl text-left flex flex-col gap-4"
           style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
         >
-          <h3 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-            Key Project Takeaways
-          </h3>
+          <TextReveal className="flex flex-col">
+            <h3 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Key Project Takeaways
+            </h3>
+          </TextReveal>
           <ul className="flex flex-col gap-3 text-[16px] text-[var(--text-secondary)] leading-[1.75] list-disc list-inside font-normal">
             {project.takeaways.map((takeaway, idx) => (
               <li key={idx} className="marker:text-accent pl-1">
