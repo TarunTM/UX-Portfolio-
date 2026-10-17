@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
 import TiltCard from '../components/TiltCard';
 import StreamingText from '../components/StreamingText';
+import PixelCompanion from '../components/PixelCompanion';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.webp';
 import wixStudioIcon from '../assets/wix-studio.webp';
 import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
@@ -173,105 +174,113 @@ export const Landing: React.FC = () => {
       {/* ── HERO SECTION ────────────────────────────────────────── */}
       <section id="home-section" className="section-band-base pt-24 pb-20 sm:pt-32 sm:pb-28">
         <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16">
-          {/* Small label */}
-          <div className="flex items-center gap-2 mb-6">
-            <span
-              className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ background: '#4ade80' }}
-            />
-            <span
-              className="text-[11px] font-medium uppercase tracking-[0.12em]"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              Open for opportunities
-            </span>
-          </div>
-
-          {/* Hero display heading with inline avatar */}
-          <h1 className="mb-8 leading-none">
-            <span className="flex items-center gap-4 flex-wrap">
-              <span
-                className="text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-tight"
-                style={{ fontFamily: 'Hanken Grotesk, Satoshi, sans-serif', letterSpacing: '-0.03em' }}
-              >
-                Product
-              </span>
-              <TiltCard
-                className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 inline-block align-middle select-none cursor-pointer"
-                cardClassName="!rounded-full border-2 shadow-sm"
-                cardStyle={{ borderColor: 'var(--border-card)' }}
-                maxTilt={38}
-                perspective={320}
-                scale={1.12}
-                showGlare={true}
-              >
-                <img
-                  src="/avatar.webp?v=11"
-                  alt="Tarun — Product Designer"
-                  className="w-full h-full object-cover select-none pointer-events-none"
-                  draggable={false}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Column: Heading, Bio, CTAs */}
+            <div className="lg:col-span-7 flex flex-col">
+              {/* Small label */}
+              <div className="flex items-center gap-2 mb-6">
+                <span
+                  className="w-1.5 h-1.5 rounded-full animate-pulse"
+                  style={{ background: '#4ade80' }}
                 />
-              </TiltCard>
-            </span>
-            <span
-              className="block text-5xl sm:text-7xl lg:text-8xl tracking-tight mt-2"
-              style={{
-                fontFamily: 'Instrument Serif, Fraunces, Georgia, serif',
-                fontStyle: 'italic',
-                fontWeight: 400,
-                letterSpacing: '-0.01em',
-              }}
-            >
-              Designer
-            </span>
-          </h1>
-
-          {/* Intro text section */}
-          <div className="mt-10">
-            <div className="flex-1">
-              <StreamingText
-                className="text-base sm:text-lg max-w-lg leading-relaxed"
-                style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
-                delay={180}
-                gap={45}
-                segments={[
-                  { text: "I'm" },
-                  { text: "Tarun Madan,", style: { color: 'var(--text-primary)', fontWeight: 500 } },
-                  { text: "crafting designs with top notes of delight, heart notes of simplicity, and base notes of usability. 1+ year building digital products that matter." },
-                ]}
-              />
-              
-              <div className="flex flex-wrap items-center gap-3.5 mt-8 relative z-20">
-                <a
-                  href="https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => {
-                    if (!e.defaultPrevented) {
-                      window.open('https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing', '_blank', 'noopener,noreferrer');
-                    }
-                  }}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer border border-transparent shadow-sm relative z-20 select-none"
+                <span
+                  className="text-[11px] font-medium uppercase tracking-[0.12em]"
+                  style={{ color: 'var(--text-secondary)' }}
                 >
-                  <span>Resume</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-                
-                <a
-                  href="https://www.linkedin.com/in/taruntm/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase border hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
-                  style={{
-                    background: 'transparent',
-                    borderColor: 'var(--border-card)',
-                    color: 'var(--text-primary)',
-                  }}
-                >
-                  <LinkedInIcon className="w-3.5 h-3.5 text-accent" />
-                  <span>LinkedIn</span>
-                </a>
+                  Open for opportunities
+                </span>
               </div>
+
+              {/* Hero display heading with inline avatar */}
+              <h1 className="mb-8 leading-none">
+                <span className="flex items-center gap-4 flex-wrap">
+                  <span
+                    className="text-5xl sm:text-7xl lg:text-8xl font-semibold tracking-tight"
+                    style={{ fontFamily: 'Hanken Grotesk, Satoshi, sans-serif', letterSpacing: '-0.03em' }}
+                  >
+                    Product
+                  </span>
+                  <TiltCard
+                    className="w-14 h-14 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 inline-block align-middle select-none cursor-pointer"
+                    cardClassName="!rounded-full border-2 shadow-sm"
+                    cardStyle={{ borderColor: 'var(--border-card)' }}
+                    maxTilt={38}
+                    perspective={320}
+                    scale={1.12}
+                    showGlare={true}
+                  >
+                    <img
+                      src="/avatar.webp?v=11"
+                      alt="Tarun — Product Designer"
+                      className="w-full h-full object-cover select-none pointer-events-none"
+                      draggable={false}
+                    />
+                  </TiltCard>
+                </span>
+                <span
+                  className="block text-5xl sm:text-7xl lg:text-8xl tracking-tight mt-2"
+                  style={{
+                    fontFamily: 'Instrument Serif, Fraunces, Georgia, serif',
+                    fontStyle: 'italic',
+                    fontWeight: 400,
+                    letterSpacing: '-0.01em',
+                  }}
+                >
+                  Designer
+                </span>
+              </h1>
+
+              {/* Intro text section */}
+              <div className="mt-4 sm:mt-6">
+                <StreamingText
+                  className="text-base sm:text-lg max-w-lg leading-relaxed"
+                  style={{ color: 'var(--text-secondary)', fontWeight: 300 }}
+                  delay={180}
+                  gap={45}
+                  segments={[
+                    { text: "I'm" },
+                    { text: "Tarun Madan,", style: { color: 'var(--text-primary)', fontWeight: 500 } },
+                    { text: "crafting designs with top notes of delight, heart notes of simplicity, and base notes of usability. 1.5+ year building digital products that matter." },
+                  ]}
+                />
+                
+                <div className="flex flex-wrap items-center gap-3.5 mt-8 relative z-20">
+                  <a
+                    href="https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!e.defaultPrevented) {
+                        window.open('https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing', '_blank', 'noopener,noreferrer');
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase bg-neutral-900 text-white hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-950 dark:hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer border border-transparent shadow-sm relative z-20 select-none"
+                  >
+                    <span>Resume</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                  
+                  <a
+                    href="https://www.linkedin.com/in/taruntm/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[10px] font-semibold tracking-wider uppercase border hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 cursor-pointer"
+                    style={{
+                      background: 'transparent',
+                      borderColor: 'var(--border-card)',
+                      color: 'var(--text-primary)',
+                    }}
+                  >
+                    <LinkedInIcon className="w-3.5 h-3.5 text-accent" />
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Interactive Pixel Character */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end mt-4 lg:mt-0">
+              <PixelCompanion />
             </div>
           </div>
         </div>

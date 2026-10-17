@@ -52,6 +52,8 @@
   --font-body: 'Hanken Grotesk', 'Satoshi', sans-serif;
   --font-inter: 'Inter', sans-serif;
   --font-mono: 'DM Mono', 'Fira Code', ui-monospace, monospace;
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-pixelify: 'Pixelify Sans', sans-serif;
 
   --color-accent: var(--accent);
   --color-bg-base: var(--bg-base);
