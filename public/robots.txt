@@ -1,0 +1,45 @@
+# robots.txt for Tarun Madan's Portfolio
+# Human-readable & LLM-friendly crawler configuration
+
+User-agent: *
+Allow: /
+
+# Explicitly permit AI & LLM crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+# Direct links to machine-readable & LLM-optimized dossiers
+# Standard llms.txt protocol: https://llmstxt.org/
+llms-txt: https://tarunmadan.design/llms.txt
+llms-full-txt: https://tarunmadan.design/llms-full.txt
+Sitemap: https://tarunmadan.design/sitemap.xml
