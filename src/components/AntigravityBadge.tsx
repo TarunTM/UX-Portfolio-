@@ -18,7 +18,7 @@ export const AntigravityBadge: React.FC = () => {
         />
       </div>
       <span>
-        Vibe coded with <span className="font-extrabold text-accent">Antigravity</span>
+        Made with <span className="font-extrabold text-accent">Antigravity IDE</span>
       </span>
     </a>
   );
