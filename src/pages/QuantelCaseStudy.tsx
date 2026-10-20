@@ -65,7 +65,7 @@ export const QuantelCaseStudy: React.FC = () => {
                 MY ROLE
               </span>
               <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
-                <span>UI/UX Intern <br/>@The Social Slate</span>
+                <span>UI/UX Designer <br/>@The Social Slate</span>
                 {/* <span className="text-xs text-[var(--text-muted)]">(Feature Expansion)</span> */}
               </div>
             </div>

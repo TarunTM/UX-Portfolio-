@@ -150,15 +150,26 @@ export const Landing: React.FC = () => {
 
   const experiences = [
     {
-      id: 'the-social-slate',
+      id: 'the-social-slate-fulltime',
       company: 'The Social Slate',
       role: 'UI/UX DESIGNER',
-      period: 'March 2025 — Present',
+      period: 'Sept 2025 — Present',
       logo: socialSlateLogo,
       fallbackInitials: 'SS',
       description:
-        'Shipped 5 digital products and websites across fintech, fitness, education, and creative industries, owning features and pages from wireframes to final implementation.',
+        'Full-time UI/UX Designer (Sept 1, 2025 — Present) promoted after a successful 6-month internship. Shipped 5 digital products and websites across fintech, fitness, education, and creative industries, owning features and pages from wireframes to final implementation.',
       skills: ['Figma', 'Framer', 'Wix Studio', 'Design Systems', 'Responsive UI', 'Asana'],
+    },
+    {
+      id: 'the-social-slate-intern',
+      company: 'The Social Slate',
+      role: 'UI/UX INTERN',
+      period: 'March 2025 — Aug 2025',
+      logo: socialSlateLogo,
+      fallbackInitials: 'SS',
+      description:
+        '6-month intensive UI/UX design internship (March 2025 — August 2025). Contributed to client web platforms, responsive layouts, design component libraries, and conversion-focused landing experiences, culminating in full-time conversion.',
+      skills: ['Figma', 'Wireframing', 'Prototyping', 'User Research', 'Design Systems'],
     },
   ];
 
