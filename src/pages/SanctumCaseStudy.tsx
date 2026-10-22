@@ -82,6 +82,47 @@ export const SanctumCaseStudy: React.FC = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
+  // Before vs After Comparison Connector State & Refs
+  const comparisonRef = useRef<HTMLDivElement>(null);
+  const beforeBoxRef = useRef<HTMLDivElement>(null);
+  const afterBoxRef = useRef<HTMLDivElement>(null);
+  const [connectorPath, setConnectorPath] = useState('');
+
+  const updateComparisonConnector = () => {
+    if (!comparisonRef.current || !beforeBoxRef.current || !afterBoxRef.current) return;
+    const container = comparisonRef.current.getBoundingClientRect();
+    const bBox = beforeBoxRef.current.getBoundingClientRect();
+    const aBox = afterBoxRef.current.getBoundingClientRect();
+
+    if (bBox.width === 0 || aBox.width === 0) return;
+
+    // Start point: bottom center of Before box
+    const startX = bBox.left + bBox.width / 2 - container.left;
+    const startY = bBox.bottom - container.top;
+
+    // End point: top center of After box
+    const endX = aBox.left + aBox.width / 2 - container.left;
+    const endY = aBox.top - container.top;
+
+    // Smooth cubic S-curve transition
+    const midY = startY + (endY - startY) * 0.5;
+    setConnectorPath(`M ${startX} ${startY} C ${startX} ${midY}, ${endX} ${midY}, ${endX} ${endY}`);
+  };
+
+  useEffect(() => {
+    updateComparisonConnector();
+    const ro = new ResizeObserver(updateComparisonConnector);
+    if (comparisonRef.current) ro.observe(comparisonRef.current);
+    if (beforeBoxRef.current) ro.observe(beforeBoxRef.current);
+    if (afterBoxRef.current) ro.observe(afterBoxRef.current);
+
+    window.addEventListener('resize', updateComparisonConnector);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', updateComparisonConnector);
+    };
+  }, []);
+
   const checkScrollState = () => {
     if (!iterationsScrollRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = iterationsScrollRef.current;
@@ -624,7 +665,53 @@ export const SanctumCaseStudy: React.FC = () => {
               </TextReveal>
 
               {/* Before vs After Screens for Decision 03 */}
-              <div className="flex flex-col gap-8 sm:gap-10 pt-2">
+              <div ref={comparisonRef} className="relative flex flex-col gap-8 sm:gap-10 pt-2">
+                {/* Connecting Line between Before Box and After Box */}
+                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
+                  <defs>
+                    <marker
+                      id="red-arrowhead"
+                      viewBox="0 0 10 10"
+                      refX="7"
+                      refY="5"
+                      markerWidth="7"
+                      markerHeight="7"
+                      orient="auto"
+                    >
+                      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#FF4D4D" />
+                    </marker>
+                    <filter id="connector-glow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#FF334B" floodOpacity="0.45" />
+                    </filter>
+                  </defs>
+                  {connectorPath && (
+                    <>
+                      {/* Dark under-line for contrast across images */}
+                      <path
+                        d={connectorPath}
+                        stroke="rgba(0, 0, 0, 0.75)"
+                        strokeWidth="5"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+                      {/* Glowing red connector line with arrowhead */}
+                      <motion.path
+                        d={connectorPath}
+                        stroke="#FF4D4D"
+                        strokeWidth="2.5"
+                        fill="none"
+                        strokeLinecap="round"
+                        markerEnd="url(#red-arrowhead)"
+                        filter="url(#connector-glow)"
+                        initial={{ pathLength: 0, opacity: 0 }}
+                        whileInView={{ pathLength: 1, opacity: 1 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                      />
+                    </>
+                  )}
+                </svg>
+
                 {/* Before Screen */}
                 <div className="flex flex-col gap-3 w-full">
                   <div className="flex items-center gap-2.5">
@@ -639,13 +726,25 @@ export const SanctumCaseStudy: React.FC = () => {
                     </span>
                   </div>
                   <div
-                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300"
+                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
                     style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                   >
                     <img
                       src={andheriOldSanctum}
                       alt="Sanctum Club Page - Before (Andheri)"
                       className="w-full h-full object-cover object-top"
+                      onLoad={updateComparisonConnector}
+                    />
+
+                    {/* Perfect Square / Rectangle outline around Club Hours */}
+                    <motion.div
+                      ref={beforeBoxRef}
+                      initial={{ opacity: 0, scale: 0.97 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute left-[63.0%] top-[27.2%] w-[20.2%] h-[17.2%] rounded-xl sm:rounded-2xl border-2 border-[#FF4D4D] shadow-[0_0_18px_rgba(255,77,77,0.35)] pointer-events-none"
+                      style={{ background: 'rgba(255, 77, 77, 0.06)' }}
                     />
                   </div>
                 </div>
@@ -664,13 +763,25 @@ export const SanctumCaseStudy: React.FC = () => {
                     </span>
                   </div>
                   <div
-                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300"
+                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
                     style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                   >
                     <img
                       src={juhuSanctum}
                       alt="Sanctum Redesigned Club Page with Direct Actions - After (Juhu)"
                       className="w-full h-full object-cover object-top"
+                      onLoad={updateComparisonConnector}
+                    />
+
+                    {/* Perfect Square / Rectangle outline around Connect with us */}
+                    <motion.div
+                      ref={afterBoxRef}
+                      initial={{ opacity: 0, scale: 0.97 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute left-[62.8%] top-[28.8%] w-[25.0%] h-[14.4%] rounded-xl sm:rounded-2xl border-2 border-[#FF4D4D] shadow-[0_0_18px_rgba(255,77,77,0.35)] pointer-events-none"
+                      style={{ background: 'rgba(255, 77, 77, 0.06)' }}
                     />
                   </div>
                 </div>
