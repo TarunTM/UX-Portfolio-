@@ -378,10 +378,16 @@ export const Landing: React.FC = () => {
                 />
               </div>
 
-              <div className="z-10">
+              <div className="z-10 flex flex-col gap-1.5">
                 <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Sanctum
                 </h3>
+                <div className="flex items-center">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs backdrop-blur-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    3x Inquiries
+                  </span>
+                </div>
               </div>
             </Link>
 
@@ -432,10 +438,16 @@ export const Landing: React.FC = () => {
                 />
               </div>
 
-              <div className="z-10">
+              <div className="z-10 flex flex-col gap-1.5">
                 <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
                   Quantel AI
                 </h3>
+                <div className="flex items-center">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs backdrop-blur-xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    50% returns delivered
+                  </span>
+                </div>
               </div>
             </Link>
 
