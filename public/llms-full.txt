@@ -208,10 +208,12 @@ Quantel AI is an enterprise-grade wealth management platform combining automated
    - Mapped semantic color tokens (`surface-primary`, `text-primary`, `border-subtle`, `accent-success`) across the entire component library.
    - Guaranteed 100% component consistency between Light and Dark modes without breaking engineering contracts.
 
-#### Measurable Outcomes
-- Successfully shipped 5+ core production flows.
-- Maintained 100% adherence to established FinTech design system guidelines with zero component divergence.
-- Received zero accessibility contrast violations during audit.
+#### Measurable Outcomes & Post-Launch Impact
+- **50%+ Returns**: Delivered over 18 months across Quantel portfolios, systematically beating benchmark indices.
+- **36.83% IRA Expansion in 12 Months**: A client director's IRA expanded from $1.11M to $1.52M (vs ~20% for the S&P 500).
+- **5 Years Ahead on Retirement**: Enabled a client to be on track to retire a full 5 years ahead of their original schedule.
+- **Direct Client Testimonial**: *“I went from feeling overlooked by conventional 60/40 advisors to feeling like I finally have real advantages.”* — Quantel client & Fortune 500 corporate director.
+- **System Scale & Consistency**: Successfully shipped 5+ core production flows with 100% adherence to established FinTech design tokens and zero accessibility contrast violations.
 
 ---
 

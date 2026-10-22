@@ -69,6 +69,7 @@ const CASE_STUDY_SUBHEADINGS: Record<string, SubheadingItem[]> = {
     { id: 'context', label: 'Intro' },
     { id: 'role', label: 'Role' },
     { id: 'screens', label: 'UI Screens' },
+    { id: 'outcomes', label: 'Outcomes' },
   ],
   'side-quests': [
     { id: 'overview', label: 'Overview' },

@@ -320,6 +320,79 @@ export const QuantelCaseStudy: React.FC = () => {
           </div>
         </section>
 
+        {/* ── WHAT HAPPENED AFTER LAUNCH ─────────────────────────── */}
+        <section id="outcomes" className="flex flex-col gap-6 sm:gap-8 pt-2">
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              What happened after launch
+            </h2>
+
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Quantel successfully launched the MVP into the hands of real capital investors. The combination of high-powered quantitative models and clear, human-centered UI drove remarkable quantifiable outcomes:
+              </p>
+            </div>
+          </TextReveal>
+
+          {/* 3 Metric Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+            {/* Metric 01 */}
+            <div
+              className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-4 border shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)' }}
+            >
+              <span className="text-[36px] sm:text-[40px] md:text-[44px] font-bold tracking-tight text-[var(--text-primary)] leading-none">
+                50%+
+              </span>
+              <p className="text-[14px] sm:text-[15px] leading-relaxed text-[var(--text-secondary)] font-normal">
+                Returns delivered over 18 months across Quantel portfolios, systematically beating benchmark indices.
+              </p>
+            </div>
+
+            {/* Metric 02 */}
+            <div
+              className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-4 border shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)' }}
+            >
+              <span className="text-[36px] sm:text-[40px] md:text-[44px] font-bold tracking-tight text-[var(--text-primary)] leading-none">
+                36.83%
+              </span>
+              <p className="text-[14px] sm:text-[15px] leading-relaxed text-[var(--text-secondary)] font-normal">
+                A director&apos;s IRA expanded from $1.11M to $1.52M in 12 months, versus ~20% for the S&amp;P 500.
+              </p>
+            </div>
+
+            {/* Metric 03 */}
+            <div
+              className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-4 border shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)' }}
+            >
+              <span className="text-[36px] sm:text-[40px] md:text-[44px] font-bold tracking-tight text-[var(--text-primary)] leading-none">
+                5 Yrs
+              </span>
+              <p className="text-[14px] sm:text-[15px] leading-relaxed text-[var(--text-secondary)] font-normal">
+                One client is now on track to retire a full 5 years ahead of their original schedule.
+              </p>
+            </div>
+          </div>
+
+          {/* Client Feedback Card */}
+          <div
+            className="w-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border shadow-xs flex flex-col gap-3.5 sm:gap-4 transition-all duration-300 hover:shadow-md"
+            style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)' }}
+          >
+            <span className="text-[11px] sm:text-[12px] font-mono uppercase tracking-[0.12em] text-[var(--text-muted)] font-semibold">
+              CLIENT FEEDBACK
+            </span>
+            <blockquote className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-[1.35]">
+              “I went from feeling overlooked by conventional 60/40 advisors to feeling like I finally have real advantages.”
+            </blockquote>
+            <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] font-normal">
+              — Quantel client &amp; Fortune 500 corporate director
+            </p>
+          </div>
+        </section>
+
         {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
         <CaseStudyFooter nextProject={nextProject} />
 

@@ -108,9 +108,11 @@
   - Designed progressive step-by-step onboarding for *Quantel Capital* and *Quantel Advise* to prevent cognitive fatigue in high-stakes financial decisions.
   - Expanded the tokenized design system to support a high-contrast Light Mode and a gamified Points & Rewards engagement loop.
 - **Key Metrics & Outcomes**:
-  - 5+ new core production-ready product flows delivered.
-  - 100% adherence to established FinTech design tokens and component guidelines.
-  - Unified multi-platform experience across responsive web and mobile viewports.
+  - **50%+ Returns**: Delivered over 18 months across Quantel portfolios, systematically beating benchmark indices.
+  - **36.83% Growth in 12 Months**: A client director's IRA expanded from $1.11M to $1.52M (vs ~20% for S&P 500).
+  - **5 Years Ahead on Retirement**: Client on track to retire 5 years earlier than planned.
+  - **Client Feedback**: *"I went from feeling overlooked by conventional 60/40 advisors to feeling like I finally have real advantages."*
+  - 5+ new core production-ready product flows delivered with 100% design system consistency.
 
 ### 4. Side Quests — Micro-UX Friction Experiments
 - **Category**: Product Design Explorations · Mobile & Web
