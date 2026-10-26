@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, RotateCcw, Trophy, Zap, Sparkles } from 'lucide-react';
+import { createTarunRunnerFrames, SPRITE_WIDTH, SPRITE_HEIGHT } from './game/pixelTarunRunner';
 
 interface Obstacle {
   x: number;
@@ -55,15 +56,23 @@ export const UXGame: React.FC = () => {
   // Player Physics with High Jump Clearance & Buffer
   const playerRef = useRef({
     x: 50,
-    y: 115,
-    width: 20,
-    height: 20,
+    y: 99,
+    width: SPRITE_WIDTH,
+    height: SPRITE_HEIGHT,
     vy: 0,
     isGrounded: false,
     jumpForce: -8.2, // High clearance jump
     gravity: 0.38,
-    rotation: 0
   });
+
+  const cachedFramesRef = useRef<HTMLCanvasElement[]>([]);
+  const runFrameRef = useRef(0);
+  const animTimerRef = useRef(0);
+
+  // Pre-render pixel frames into cached offscreen canvases on mount
+  useEffect(() => {
+    cachedFramesRef.current = createTarunRunnerFrames();
+  }, []);
 
   const jumpBufferRef = useRef(0); // Input buffer for early jump presses
   const obstaclesRef = useRef<Obstacle[]>([]);
@@ -101,7 +110,7 @@ export const UXGame: React.FC = () => {
     for (let i = 0; i < 6; i++) {
       particlesRef.current.push({
         x: px + 10,
-        y: py + 18,
+        y: py + 32, // Dust directly beneath shoes
         vx: (Math.random() - 0.5) * 3,
         vy: (Math.random() - 0.7) * 2,
         life: 1,
@@ -123,10 +132,11 @@ export const UXGame: React.FC = () => {
     spawnTimerRef.current = 0;
     groundOffsetRef.current = 0;
     jumpBufferRef.current = 0;
-    playerRef.current.y = 115;
+    runFrameRef.current = 0;
+    animTimerRef.current = 0;
+    playerRef.current.y = 99;
     playerRef.current.vy = 0;
     playerRef.current.isGrounded = false;
-    playerRef.current.rotation = 0;
   };
 
   const triggerJump = () => {
@@ -183,7 +193,6 @@ export const UXGame: React.FC = () => {
       const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || '#000000';
       const borderCard = rootStyle.getPropertyValue('--border-card').trim() || '#D7E1E8';
       const bgSurface = rootStyle.getPropertyValue('--bg-surface').trim() || '#DFEAF0';
-      const bgCard = rootStyle.getPropertyValue('--bg-card').trim() || '#FFFFFF';
 
       // Clear Canvas
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -254,11 +263,13 @@ export const UXGame: React.FC = () => {
           }
         }
 
-        // Jump Rotation
-        if (!player.isGrounded) {
-          player.rotation += 0.08;
-        } else {
-          player.rotation = 0;
+        // Ground Stride Animation Cycling (cadence scaled to ground speed)
+        if (player.isGrounded) {
+          animTimerRef.current += speedRef.current;
+          if (animTimerRef.current >= 14) {
+            animTimerRef.current = 0;
+            runFrameRef.current = (runFrameRef.current + 1) % 4;
+          }
         }
 
         // Score & Sprint Level Updates
@@ -318,33 +329,16 @@ export const UXGame: React.FC = () => {
         if (p.life >= p.maxLife) particlesRef.current.splice(pIdx, 1);
       }
 
-      // Render Player Character Block (Monochrome)
-      ctx.save();
-      ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
-      ctx.rotate(player.rotation);
-      
-      const r = 4;
-      const w = player.width;
-      const h = player.height;
-      ctx.fillStyle = textPrimary;
-      ctx.beginPath();
-      ctx.moveTo(-w/2 + r, -h/2);
-      ctx.lineTo(w/2 - r, -h/2);
-      ctx.quadraticCurveTo(w/2, -h/2, w/2, -h/2 + r);
-      ctx.lineTo(w/2, h/2 - r);
-      ctx.quadraticCurveTo(w/2, h/2, w/2 - r, h/2);
-      ctx.lineTo(-w/2 + r, h/2);
-      ctx.quadraticCurveTo(-w/2, h/2, -w/2, h/2 - r);
-      ctx.lineTo(-w/2, -h/2 + r);
-      ctx.quadraticCurveTo(-w/2, -h/2, -w/2 + r, -h/2);
-      ctx.closePath();
-      ctx.fill();
+      // Render Animated Pixel Art Character (Tarun Runner - Authentic Full Colors)
+      const currentFrameIndex = !player.isGrounded
+        ? 4 // Airborne leap pose
+        : (gameStateRef.current === 'playing' ? runFrameRef.current : 0);
 
-      // Expressive Eyes (contrasting against textPrimary)
-      ctx.fillStyle = bgCard;
-      ctx.fillRect(1.5, -3.5, 3, 3);
-      ctx.fillRect(7, -3.5, 3, 3);
-      ctx.restore();
+      const spriteCanvas = cachedFramesRef.current[currentFrameIndex];
+      if (spriteCanvas) {
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(spriteCanvas, Math.round(player.x), Math.round(player.y));
+      }
 
       // Render & Update Obstacles
       for (let i = obstaclesRef.current.length - 1; i >= 0; i--) {
@@ -364,17 +358,24 @@ export const UXGame: React.FC = () => {
           }
         }
 
-        // Fair & forgiving hitbox insets (Coyote-friendly collision)
-        const hitBoxShrinkX = 6;
-        const hitBoxShrinkY = 4;
+        // Fair & forgiving collision hitbox (focus on lower torso and legs, ignoring sunglasses & hair skimming)
+        const playerLeft = player.x + 4;
+        const playerRight = player.x + player.width - 4;
+        const playerTop = player.y + 12; // Lower 24px of sprite (body & legs)
+        const playerBottom = player.y + player.height - 1;
+
+        const obsLeft = obs.x + 4;
+        const obsRight = obs.x + obs.width - 4;
+        const obsTop = obs.y + 2;
+        const obsBottom = obs.y + obs.height;
 
         if (
-          player.x + hitBoxShrinkX < obs.x + obs.width - hitBoxShrinkX &&
-          player.x + player.width - hitBoxShrinkX > obs.x + hitBoxShrinkX &&
-          player.y + hitBoxShrinkY < obs.y + obs.height &&
-          player.y + player.height > obs.y + hitBoxShrinkY
+          playerLeft < obsRight &&
+          playerRight > obsLeft &&
+          playerTop < obsBottom &&
+          playerBottom > obsTop
         ) {
-          spawnJumpParticles(player.x, player.y, textSecondary);
+          spawnJumpParticles(player.x + 4, player.y + 24, textSecondary);
           setLastHurdle(obs.text);
           setGameState('gameover');
         }
