@@ -55,14 +55,14 @@ export const UXGame: React.FC = () => {
 
   // Player Physics with High Jump Clearance & Buffer
   const playerRef = useRef({
-    x: 50,
-    y: 99,
+    x: 45,
+    y: 96,
     width: SPRITE_WIDTH,
     height: SPRITE_HEIGHT,
     vy: 0,
     isGrounded: false,
-    jumpForce: -8.2, // High clearance jump
-    gravity: 0.38,
+    jumpForce: -9.6, // High clearance athletic jump for 72px character
+    gravity: 0.44,
   });
 
   const cachedFramesRef = useRef<HTMLCanvasElement[]>([]);
@@ -107,16 +107,16 @@ export const UXGame: React.FC = () => {
   };
 
   const spawnJumpParticles = (px: number, py: number, color: string) => {
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 7; i++) {
       particlesRef.current.push({
-        x: px + 10,
-        y: py + 32, // Dust directly beneath shoes
-        vx: (Math.random() - 0.5) * 3,
-        vy: (Math.random() - 0.7) * 2,
+        x: px + 18,
+        y: py + 68, // Dust directly beneath shoes for 72px tall runner
+        vx: (Math.random() - 0.5) * 3.5,
+        vy: (Math.random() - 0.7) * 2.5,
         life: 1,
-        maxLife: 14 + Math.random() * 8,
+        maxLife: 15 + Math.random() * 8,
         color: color,
-        size: 2 + Math.random() * 2
+        size: 2.2 + Math.random() * 2.2
       });
     }
   };
@@ -134,7 +134,7 @@ export const UXGame: React.FC = () => {
     jumpBufferRef.current = 0;
     runFrameRef.current = 0;
     animTimerRef.current = 0;
-    playerRef.current.y = 99;
+    playerRef.current.y = 96;
     playerRef.current.vy = 0;
     playerRef.current.isGrounded = false;
   };
@@ -182,10 +182,10 @@ export const UXGame: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const canvasWidth = 480;
-    const canvasHeight = 160;
-    const groundY = 135;
-    const obstacleHeight = 15;
+    const canvasWidth = 520;
+    const canvasHeight = 200;
+    const groundY = 168;
+    const obstacleHeight = 20;
 
     const gameLoop = () => {
       const rootStyle = getComputedStyle(document.documentElement);
@@ -293,11 +293,11 @@ export const UXGame: React.FC = () => {
         if (spawnTimerRef.current >= spawnInterval) {
           spawnTimerRef.current = 0;
           const text = obstacleTexts[Math.floor(Math.random() * obstacleTexts.length)];
-          ctx.font = 'bold 10px system-ui, -apple-system, sans-serif';
+          ctx.font = '600 11px system-ui, -apple-system, sans-serif';
           const textWidth = ctx.measureText(text).width;
 
-          // Compact hurdle width for clear jumpability
-          const obsWidth = Math.min(Math.max(textWidth + 14, 44), 72);
+          // Proportional hurdle width for 200px canvas
+          const obsWidth = Math.min(Math.max(textWidth + 18, 52), 86);
 
           obstaclesRef.current.push({
             x: canvasWidth,
@@ -358,11 +358,11 @@ export const UXGame: React.FC = () => {
           }
         }
 
-        // Fair & forgiving collision hitbox (focus on lower torso and legs, ignoring sunglasses & hair skimming)
-        const playerLeft = player.x + 4;
-        const playerRight = player.x + player.width - 4;
-        const playerTop = player.y + 12; // Lower 24px of sprite (body & legs)
-        const playerBottom = player.y + player.height - 1;
+        // Fair & forgiving collision hitbox (focus on lower torso and legs of 72px sprite, ignoring sunglasses & hair)
+        const playerLeft = player.x + 8;
+        const playerRight = player.x + player.width - 8;
+        const playerTop = player.y + 24; // Lower 48px of sprite (torso & legs)
+        const playerBottom = player.y + player.height - 2;
 
         const obsLeft = obs.x + 4;
         const obsRight = obs.x + obs.width - 4;
@@ -375,7 +375,7 @@ export const UXGame: React.FC = () => {
           playerTop < obsBottom &&
           playerBottom > obsTop
         ) {
-          spawnJumpParticles(player.x + 4, player.y + 24, textSecondary);
+          spawnJumpParticles(player.x + 12, player.y + 48, textSecondary);
           setLastHurdle(obs.text);
           setGameState('gameover');
         }
@@ -405,7 +405,7 @@ export const UXGame: React.FC = () => {
 
         // High-contrast readable hurdle text
         ctx.fillStyle = textPrimary;
-        ctx.font = '600 10px system-ui, -apple-system, sans-serif';
+        ctx.font = '600 11px system-ui, -apple-system, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(obs.text, obs.x + obs.width / 2 + 1, obs.y + obs.height / 2 + 0.5);
@@ -486,14 +486,14 @@ export const UXGame: React.FC = () => {
       </div>
 
       <div 
-        className="relative flex-1 rounded-2xl border overflow-hidden min-h-[160px] flex items-center justify-center"
+        className="relative flex-1 rounded-2xl border overflow-hidden min-h-[200px] flex items-center justify-center"
         style={{ borderColor: 'var(--border-card)', background: 'var(--bg-base)' }}
       >
         <canvas 
           ref={canvasRef}
-          width={480}
-          height={160}
-          className="w-full h-[160px] max-w-[480px] cursor-default"
+          width={520}
+          height={200}
+          className="w-full h-[200px] max-w-[520px] cursor-default"
         />
 
         {gameState === 'idle' && (
