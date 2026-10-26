@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Play, RotateCcw, Trophy, Zap, Sparkles } from 'lucide-react';
-import { createTarunRunnerFrames, SPRITE_WIDTH, SPRITE_HEIGHT } from './game/pixelTarunRunner';
 
 interface Obstacle {
   x: number;
@@ -55,24 +54,16 @@ export const UXGame: React.FC = () => {
 
   // Player Physics with High Jump Clearance & Buffer
   const playerRef = useRef({
-    x: 45,
-    y: 96,
-    width: SPRITE_WIDTH,
-    height: SPRITE_HEIGHT,
+    x: 50,
+    y: 115,
+    width: 20,
+    height: 20,
     vy: 0,
-    isGrounded: true,
-    jumpForce: -7.8, // Athletic high jump with generous clearance over hurdles
-    gravity: 0.35,
+    isGrounded: false,
+    jumpForce: -8.2, // High clearance jump
+    gravity: 0.38,
+    rotation: 0
   });
-
-  const cachedFramesRef = useRef<HTMLCanvasElement[]>([]);
-  const runFrameRef = useRef(0);
-  const animTimerRef = useRef(0);
-
-  // Pre-render pixel frames into cached offscreen canvases on mount
-  useEffect(() => {
-    cachedFramesRef.current = createTarunRunnerFrames();
-  }, []);
 
   const jumpBufferRef = useRef(0); // Input buffer for early jump presses
   const obstaclesRef = useRef<Obstacle[]>([]);
@@ -85,18 +76,18 @@ export const UXGame: React.FC = () => {
 
   // Short, punchy UI/UX specific hurdle names
   const obstacleTexts = [
-    'Iterate',
     'Last Change',
+    'Iterate',
     'Scope Creep',
     'Pixel Off',
     'Font Shift',
     'V2 Draft',
-    '404 Bug',
-    'Feedback',
+    '404 Error',
+    'Dark Pattern',
+    'User Bug',
     'Client Edit',
     'Edge Case',
-    'Break Point',
-    'Redo Layout'
+    'Break Point'
   ];
 
   const getSprintLevel = (currentScore: number) => {
@@ -107,16 +98,16 @@ export const UXGame: React.FC = () => {
   };
 
   const spawnJumpParticles = (px: number, py: number, color: string) => {
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       particlesRef.current.push({
-        x: px + 18,
-        y: py + 70, // Dust directly beneath shoes for 72px tall runner
-        vx: (Math.random() - 0.5) * 3.5,
-        vy: (Math.random() - 0.7) * 2.5,
+        x: px + 10,
+        y: py + 18,
+        vx: (Math.random() - 0.5) * 3,
+        vy: (Math.random() - 0.7) * 2,
         life: 1,
-        maxLife: 15 + Math.random() * 8,
+        maxLife: 14 + Math.random() * 8,
         color: color,
-        size: 2.2 + Math.random() * 2.2
+        size: 2 + Math.random() * 2
       });
     }
   };
@@ -132,11 +123,10 @@ export const UXGame: React.FC = () => {
     spawnTimerRef.current = 0;
     groundOffsetRef.current = 0;
     jumpBufferRef.current = 0;
-    runFrameRef.current = 0;
-    animTimerRef.current = 0;
-    playerRef.current.y = 96;
+    playerRef.current.y = 115;
     playerRef.current.vy = 0;
-    playerRef.current.isGrounded = true;
+    playerRef.current.isGrounded = false;
+    playerRef.current.rotation = 0;
   };
 
   const triggerJump = () => {
@@ -151,8 +141,8 @@ export const UXGame: React.FC = () => {
       const textPrimary = rootStyle.getPropertyValue('--text-primary').trim() || '#1a1814';
       spawnJumpParticles(player.x, player.y, textPrimary);
     } else {
-      // Buffer jump input if pressed slightly before landing (12 frames window)
-      jumpBufferRef.current = 12;
+      // Buffer jump input if pressed slightly before landing (10 frames window)
+      jumpBufferRef.current = 10;
     }
   };
 
@@ -182,10 +172,10 @@ export const UXGame: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const canvasWidth = 520;
-    const canvasHeight = 200;
-    const groundY = 168;
-    const obstacleHeight = 14;
+    const canvasWidth = 480;
+    const canvasHeight = 160;
+    const groundY = 135;
+    const obstacleHeight = 15;
 
     const gameLoop = () => {
       const rootStyle = getComputedStyle(document.documentElement);
@@ -193,6 +183,7 @@ export const UXGame: React.FC = () => {
       const textSecondary = rootStyle.getPropertyValue('--text-secondary').trim() || '#000000';
       const borderCard = rootStyle.getPropertyValue('--border-card').trim() || '#D7E1E8';
       const bgSurface = rootStyle.getPropertyValue('--bg-surface').trim() || '#DFEAF0';
+      const bgCard = rootStyle.getPropertyValue('--bg-card').trim() || '#FFFFFF';
 
       // Clear Canvas
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -263,13 +254,11 @@ export const UXGame: React.FC = () => {
           }
         }
 
-        // Ground Stride Animation Cycling (cadence scaled to ground speed)
-        if (player.isGrounded) {
-          animTimerRef.current += speedRef.current;
-          if (animTimerRef.current >= 14) {
-            animTimerRef.current = 0;
-            runFrameRef.current = (runFrameRef.current + 1) % 4;
-          }
+        // Jump Rotation
+        if (!player.isGrounded) {
+          player.rotation += 0.08;
+        } else {
+          player.rotation = 0;
         }
 
         // Score & Sprint Level Updates
@@ -288,16 +277,16 @@ export const UXGame: React.FC = () => {
 
         // Obstacles Handling
         spawnTimerRef.current++;
-        const spawnInterval = Math.max(100, 150 - Math.floor(scoreRef.current / 300));
+        const spawnInterval = Math.max(90, 140 - Math.floor(scoreRef.current / 300));
         
         if (spawnTimerRef.current >= spawnInterval) {
           spawnTimerRef.current = 0;
           const text = obstacleTexts[Math.floor(Math.random() * obstacleTexts.length)];
-          ctx.font = '600 9.5px system-ui, -apple-system, sans-serif';
+          ctx.font = 'bold 10px system-ui, -apple-system, sans-serif';
           const textWidth = ctx.measureText(text).width;
 
-          // Compact, clean hurdle chip with generous jump clearance
-          const obsWidth = Math.min(Math.max(textWidth + 14, 38), 58);
+          // Compact hurdle width for clear jumpability
+          const obsWidth = Math.min(Math.max(textWidth + 14, 44), 72);
 
           obstaclesRef.current.push({
             x: canvasWidth,
@@ -329,16 +318,33 @@ export const UXGame: React.FC = () => {
         if (p.life >= p.maxLife) particlesRef.current.splice(pIdx, 1);
       }
 
-      // Render Animated Pixel Art Character (Tarun Runner - Authentic Full Colors)
-      const currentFrameIndex = !player.isGrounded
-        ? 4 // Airborne leap pose
-        : (gameStateRef.current === 'playing' ? runFrameRef.current : 0);
+      // Render Player Character Block (Monochrome)
+      ctx.save();
+      ctx.translate(player.x + player.width / 2, player.y + player.height / 2);
+      ctx.rotate(player.rotation);
+      
+      const r = 4;
+      const w = player.width;
+      const h = player.height;
+      ctx.fillStyle = textPrimary;
+      ctx.beginPath();
+      ctx.moveTo(-w/2 + r, -h/2);
+      ctx.lineTo(w/2 - r, -h/2);
+      ctx.quadraticCurveTo(w/2, -h/2, w/2, -h/2 + r);
+      ctx.lineTo(w/2, h/2 - r);
+      ctx.quadraticCurveTo(w/2, h/2, w/2 - r, h/2);
+      ctx.lineTo(-w/2 + r, h/2);
+      ctx.quadraticCurveTo(-w/2, h/2, -w/2, h/2 - r);
+      ctx.lineTo(-w/2, -h/2 + r);
+      ctx.quadraticCurveTo(-w/2, -h/2, -w/2 + r, -h/2);
+      ctx.closePath();
+      ctx.fill();
 
-      const spriteCanvas = cachedFramesRef.current[currentFrameIndex];
-      if (spriteCanvas) {
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(spriteCanvas, Math.round(player.x), Math.round(player.y));
-      }
+      // Expressive Eyes (contrasting against textPrimary)
+      ctx.fillStyle = bgCard;
+      ctx.fillRect(1.5, -3.5, 3, 3);
+      ctx.fillRect(7, -3.5, 3, 3);
+      ctx.restore();
 
       // Render & Update Obstacles
       for (let i = obstaclesRef.current.length - 1; i >= 0; i--) {
@@ -358,25 +364,17 @@ export const UXGame: React.FC = () => {
           }
         }
 
-        // Precise, fair feet-only collision hitbox:
-        // Ground hurdles touch only the shoes/feet (bottom 14px of sprite)
-        const playerFeetLeft = player.x + 12;
-        const playerFeetRight = player.x + player.width - 12;
-        const playerFeetTop = player.y + player.height - 14;
-        const playerFeetBottom = player.y + player.height - 2;
-
-        const obsLeft = obs.x + 3;
-        const obsRight = obs.x + obs.width - 3;
-        const obsTop = obs.y + 2;
-        const obsBottom = obs.y + obs.height;
+        // Fair & forgiving hitbox insets (Coyote-friendly collision)
+        const hitBoxShrinkX = 6;
+        const hitBoxShrinkY = 4;
 
         if (
-          playerFeetLeft < obsRight &&
-          playerFeetRight > obsLeft &&
-          playerFeetBottom > obsTop &&
-          playerFeetTop < obsBottom
+          player.x + hitBoxShrinkX < obs.x + obs.width - hitBoxShrinkX &&
+          player.x + player.width - hitBoxShrinkX > obs.x + hitBoxShrinkX &&
+          player.y + hitBoxShrinkY < obs.y + obs.height &&
+          player.y + player.height > obs.y + hitBoxShrinkY
         ) {
-          spawnJumpParticles(player.x + 12, player.y + 48, textSecondary);
+          spawnJumpParticles(player.x, player.y, textSecondary);
           setLastHurdle(obs.text);
           setGameState('gameover');
         }
@@ -385,7 +383,7 @@ export const UXGame: React.FC = () => {
         ctx.fillStyle = bgSurface;
         ctx.strokeStyle = borderCard;
         ctx.lineWidth = 1.2;
-        const rx = 3;
+        const rx = 4;
         ctx.beginPath();
         ctx.moveTo(obs.x + rx, obs.y);
         ctx.lineTo(obs.x + obs.width - rx, obs.y);
@@ -402,11 +400,11 @@ export const UXGame: React.FC = () => {
 
         // Left indicator tag (Monochrome)
         ctx.fillStyle = textPrimary;
-        ctx.fillRect(obs.x + 2, obs.y + 2, 2, obs.height - 4);
+        ctx.fillRect(obs.x + 2, obs.y + 2, 2.5, obs.height - 4);
 
         // High-contrast readable hurdle text
         ctx.fillStyle = textPrimary;
-        ctx.font = '600 9.5px system-ui, -apple-system, sans-serif';
+        ctx.font = '600 10px system-ui, -apple-system, sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(obs.text, obs.x + obs.width / 2 + 1, obs.y + obs.height / 2 + 0.5);
@@ -443,24 +441,9 @@ export const UXGame: React.FC = () => {
     <div 
       ref={containerRef}
       className="flex flex-col gap-4 w-full h-full select-none"
-      onClick={() => {
-        if (gameStateRef.current === 'playing') {
+      onTouchStart={() => {
+        if (gameState === 'playing') {
           triggerJump();
-        }
-      }}
-      onPointerDown={(e) => {
-        if ((e.target as HTMLElement).tagName !== 'BUTTON') {
-          if (gameStateRef.current === 'playing') {
-            triggerJump();
-          }
-        }
-      }}
-      onTouchStart={(e) => {
-        if ((e.target as HTMLElement).tagName !== 'BUTTON') {
-          if (gameStateRef.current === 'playing') {
-            e.preventDefault();
-            triggerJump();
-          }
         }
       }}
     >
@@ -502,22 +485,14 @@ export const UXGame: React.FC = () => {
       </div>
 
       <div 
-        className="relative flex-1 rounded-2xl border overflow-hidden min-h-[200px] flex items-center justify-center"
+        className="relative flex-1 rounded-2xl border overflow-hidden min-h-[160px] flex items-center justify-center"
         style={{ borderColor: 'var(--border-card)', background: 'var(--bg-base)' }}
       >
         <canvas 
           ref={canvasRef}
-          width={520}
-          height={200}
-          className="w-full h-[200px] max-w-[520px] cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            if (gameStateRef.current === 'playing') {
-              triggerJump();
-            } else {
-              handleStart();
-            }
-          }}
+          width={480}
+          height={160}
+          className="w-full h-[160px] max-w-[480px] cursor-default"
         />
 
         {gameState === 'idle' && (
@@ -536,7 +511,7 @@ export const UXGame: React.FC = () => {
               Dodge <span className="text-[var(--text-primary)] font-semibold">"Last Change"</span>, <span className="text-[var(--text-primary)] font-semibold">"Iterate"</span> & <span className="text-[var(--text-primary)] font-semibold">"Scope Creep"</span>
             </p>
             <p className="text-[11px] font-mono text-[var(--text-muted)]">
-              <span className="hidden sm:inline">Press Space, Click, or Tap to Jump</span>
+              <span className="hidden sm:inline">Press Space to Jump</span>
               <span className="sm:hidden">Tap Screen to Jump</span>
             </p>
             <button

@@ -793,7 +793,7 @@ export const Landing: React.FC = () => {
               className="text-[10px] font-mono uppercase tracking-widest"
               style={{ color: 'var(--text-muted)' }}
             >
-              <span className="hidden sm:inline">Space or Click to Jump</span>
+              <span className="hidden sm:inline">Space to Jump</span>
               <span className="sm:hidden">Tap to Jump</span>
             </span>
           </div>
