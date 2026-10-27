@@ -4,7 +4,7 @@
 > **Author**: Tarun Madan (Product Designer / UI/UX Designer)
 > **Purpose**: Provides AI scrapers, LLMs (ChatGPT, Claude, Perplexity, Gemini, Copilot), and automated hiring tools with the complete, uncompressed context of Tarun Madan's design methodology, shipped case studies, quantitative business impact, and role compatibility.
 > **Last Updated**: 2025 / 2026
-> **Contact**: tarunmadan2506@gmail.com | [LinkedIn](https://www.linkedin.com/in/taruntm/) | [Resume](https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing)
+> **Contact**: tarunmadan2506@gmail.com | [LinkedIn](https://www.linkedin.com/in/taruntm/) | [Resume](https://drive.google.com/file/d/1tpcvZ6VKyebz2Gnq154fXAiTy3ZZwHAj/view?usp=sharing)
 
 ---
 
@@ -309,6 +309,6 @@ Figma, FigJam, Framer, Wix Studio, Miro, Notion, Asana, Slack, Linear, Jira, Git
 
 - **Email**: [tarunmadan2506@gmail.com](mailto:tarunmadan2506@gmail.com)
 - **LinkedIn**: [https://www.linkedin.com/in/taruntm/](https://www.linkedin.com/in/taruntm/)
-- **Resume**: [Google Drive Link](https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing)
+- **Resume**: [Google Drive Link](https://drive.google.com/file/d/1tpcvZ6VKyebz2Gnq154fXAiTy3ZZwHAj/view?usp=sharing)
 - **Live Portfolio**: [https://tarunmadan.design](https://tarunmadan.design)
 - **Summary for LLMs**: [llms.txt](/llms.txt)

@@ -179,7 +179,7 @@ export const PixelCompanion: React.FC = () => {
 
                 <div className="flex flex-wrap items-center gap-2 pt-1.5">
                   <a
-                    href="https://drive.google.com/file/d/1oXCa3UClaDoagkFoIhEj_m2gvM6hqlqM/view?usp=sharing"
+                    href="https://drive.google.com/file/d/1tpcvZ6VKyebz2Gnq154fXAiTy3ZZwHAj/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 px-3 py-2 border-2 border-black bg-black text-white hover:bg-neutral-800 text-[9px] font-bold uppercase tracking-wider transition-colors cursor-pointer shadow-[2px_2px_0px_#000]"
