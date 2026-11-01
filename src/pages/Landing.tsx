@@ -733,9 +733,14 @@ export const Landing: React.FC = () => {
                   background: 'var(--bg-card)',
                   border: '1px solid var(--border-card)',
                   color: 'var(--text-primary)',
+                  fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif"
                 }}
+                title="Click to copy email address"
+                aria-label="Copy email address"
               >
-                <span className="font-mono text-sm">tarunmadan2506@gmail.com</span>
+                <span className="text-sm font-medium">
+                  {copied ? 'Copied' : 'Copy mail'}
+                </span>
                 {copied ? (
                   <Check className="w-4 h-4 shrink-0" style={{ color: '#4ade80' }} />
                 ) : (
@@ -752,10 +757,11 @@ export const Landing: React.FC = () => {
                   background: 'var(--bg-card)',
                   borderColor: 'var(--border-card)',
                   color: 'var(--text-primary)',
+                  fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif"
                 }}
               >
                 <LinkedInIcon className="w-4 h-4 text-accent" />
-                <span className="font-mono text-sm">LinkedIn</span>
+                <span className="text-sm font-medium">LinkedIn</span>
               </a>
             </div>
           </div>
@@ -802,10 +808,13 @@ export const Landing: React.FC = () => {
       </section>
 
       {/* ── FOOTER ─────────────────────────────────────────────────── */}
-      <footer className="section-band-base py-8 border-t border-[var(--border-subtle)]">
+      <footer 
+        className="section-band-base py-8 border-t border-[var(--border-subtle)]"
+        style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+      >
         <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col sm:flex-row items-center justify-between gap-4">
           <span
-            className="text-[11px] font-mono"
+            className="text-[11px] font-medium"
             style={{ color: 'var(--text-muted)' }}
           >
             © {new Date().getFullYear()} Tarun. All rights reserved.
@@ -820,7 +829,7 @@ export const Landing: React.FC = () => {
                   window.open('https://drive.google.com/file/d/1tpcvZ6VKyebz2Gnq154fXAiTy3ZZwHAj/view?usp=sharing', '_blank', 'noopener,noreferrer');
                 }
               }}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 cursor-pointer relative z-20 select-none"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5 cursor-pointer relative z-20 select-none"
               style={{
                 borderColor: 'var(--border-card)',
                 color: 'var(--text-secondary)',
@@ -833,7 +842,7 @@ export const Landing: React.FC = () => {
               href="https://www.linkedin.com/in/taruntm/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-mono border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium border transition-all duration-200 hover:border-accent hover:text-accent hover:bg-accent/5"
               style={{
                 borderColor: 'var(--border-card)',
                 color: 'var(--text-secondary)',

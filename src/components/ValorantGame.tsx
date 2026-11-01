@@ -541,17 +541,20 @@ export const ValorantGame: React.FC = () => {
               Spot the Yoru Clone
             </h3>
             <span 
-              className="text-[9px] font-mono px-2 py-0.5 rounded-full font-medium"
-              style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-secondary)' }}
+              className="text-[9px] px-2 py-0.5 rounded-full font-medium"
+              style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-secondary)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
             >
               Map: Range
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 font-mono text-xs">
+        <div 
+          className="flex items-center gap-3 text-xs"
+          style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+        >
           <div 
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
             style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)' }}
           >
             <span className="text-[var(--text-muted)]">ELIMINATIONS:</span> 
@@ -601,7 +604,10 @@ export const ValorantGame: React.FC = () => {
         )}
 
         {/* Instruction Tag */}
-        <div className="absolute bottom-3 left-4 pointer-events-none z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[var(--bg-card)]/90 dark:bg-[var(--bg-card)]/90 backdrop-blur-md border border-[var(--border-card)] text-[11px] font-mono text-[var(--text-muted)] shadow-sm">
+        <div 
+          className="absolute bottom-3 left-4 pointer-events-none z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[var(--bg-card)]/90 dark:bg-[var(--bg-card)]/90 backdrop-blur-md border border-[var(--border-card)] text-[11px] font-medium text-[var(--text-muted)] shadow-sm"
+          style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+        >
           <Crosshair className="w-3.5 h-3.5 text-[var(--text-muted)]" />
           <span>{isMobile ? 'Tap to Shoot Agent' : 'Aim & Click to Shoot Agent'}</span>
         </div>
@@ -635,7 +641,8 @@ export const ValorantGame: React.FC = () => {
                 <button
                   type="button"
                   onClick={handlePlayAgain}
-                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--text-primary)] hover:opacity-90 text-[var(--bg-base)] text-xs font-mono font-bold tracking-wider uppercase transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-md"
+                  className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[var(--text-primary)] hover:opacity-90 text-[var(--bg-base)] text-xs font-bold tracking-wider uppercase transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer shadow-md"
+                  style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Play Again</span>

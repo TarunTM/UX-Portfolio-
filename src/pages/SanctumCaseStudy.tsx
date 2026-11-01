@@ -26,17 +26,20 @@ const iterationsData = [
   {
     type: 'video' as const,
     src: trainingRecoveryIterationVideo,
-    alt: 'Sanctum Training and Recovery Iteration Video',
+    alt: 'Sanctum Training and Recovery - Image cards for every service',
+    caption: 'Image cards for every service',
   },
   {
     type: 'image' as const,
     src: recoveryIteration2Img,
-    alt: 'Sanctum Training and Recovery Iteration 2',
+    alt: 'Sanctum Training and Recovery - Card grid with icon and description',
+    caption: 'Card grid with icon and description',
   },
   {
     type: 'image' as const,
     src: recoveryIteration3Img,
-    alt: 'Sanctum Training and Recovery Iteration 3',
+    alt: 'Sanctum Training and Recovery - Same grid, borders instead of gaps',
+    caption: 'Same grid, borders instead of gaps',
   },
 ];
 
@@ -81,47 +84,6 @@ export const SanctumCaseStudy: React.FC = () => {
   const iterationsScrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-
-  // Before vs After Comparison Connector State & Refs
-  const comparisonRef = useRef<HTMLDivElement>(null);
-  const beforeBoxRef = useRef<HTMLDivElement>(null);
-  const afterBoxRef = useRef<HTMLDivElement>(null);
-  const [connectorPath, setConnectorPath] = useState('');
-
-  const updateComparisonConnector = () => {
-    if (!comparisonRef.current || !beforeBoxRef.current || !afterBoxRef.current) return;
-    const container = comparisonRef.current.getBoundingClientRect();
-    const bBox = beforeBoxRef.current.getBoundingClientRect();
-    const aBox = afterBoxRef.current.getBoundingClientRect();
-
-    if (bBox.width === 0 || aBox.width === 0) return;
-
-    // Start point: bottom center of Before box
-    const startX = bBox.left + bBox.width / 2 - container.left;
-    const startY = bBox.bottom - container.top;
-
-    // End point: top center of After box
-    const endX = aBox.left + aBox.width / 2 - container.left;
-    const endY = aBox.top - container.top;
-
-    // Smooth cubic S-curve transition
-    const midY = startY + (endY - startY) * 0.5;
-    setConnectorPath(`M ${startX} ${startY} C ${startX} ${midY}, ${endX} ${midY}, ${endX} ${endY}`);
-  };
-
-  useEffect(() => {
-    updateComparisonConnector();
-    const ro = new ResizeObserver(updateComparisonConnector);
-    if (comparisonRef.current) ro.observe(comparisonRef.current);
-    if (beforeBoxRef.current) ro.observe(beforeBoxRef.current);
-    if (afterBoxRef.current) ro.observe(afterBoxRef.current);
-
-    window.addEventListener('resize', updateComparisonConnector);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', updateComparisonConnector);
-    };
-  }, []);
 
   const checkScrollState = () => {
     if (!iterationsScrollRef.current) return;
@@ -220,7 +182,10 @@ export const SanctumCaseStudy: React.FC = () => {
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
           <TextReveal trigger="scroll" className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+            <span 
+              className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Website · Fitness & Wellness
             </span>
             <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
@@ -275,19 +240,11 @@ export const SanctumCaseStudy: React.FC = () => {
               <span className="text-[12px] sm:text-[13px] font-extrabold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
                 TEAM
               </span>
-              <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
-                <div>
-                  <span >Yash Moon</span> <br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(Design Lead)</span>
-                </div>
-                <div>
-                  <span >Tarun Madan</span><br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
-                </div>
-                <div>
-                  <span >Shruti Katekar</span><br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
-                </div>
+              <div className="flex flex-col gap-0.5 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
+                <span>Me</span>
+                <span>2 Designers</span>
+                <span>Brand Manager</span>
+                <span>Agency Lead</span>
               </div>
             </div>
 
@@ -315,36 +272,6 @@ export const SanctumCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        {/* ── CONTEXT ─────────────────────────────────────────────── */}
-        <section id="context" className="flex flex-col gap-3">
-          <TextReveal className="flex flex-col gap-3">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              Context
-            </h2>
-
-            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-              <p>
-                Sanctum House of Wellness is a premium fitness and wellness brand with multiple locations across Mumbai. I worked on the website from design through implementation, creating an experience that communicated what Sanctum stands for, helped users discover the right classes and locations, and made it easier to enquire.
-              </p>
-            </div>
-          </TextReveal>
-        </section>
-
-        {/* ── MY ROLE ─────────────────────────────────────────────── */}
-        <section id="role" className="flex flex-col gap-3">
-          <TextReveal className="flex flex-col gap-3">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              My Role & Scope
-            </h2>
-
-            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-              <p>
-                I worked as part of a team of three designers, contributing to the design of the website, including the homepage, all club pages and the GroupX experience. I designed the screens in Figma and implemented the final experience in Wix Studio, using Wix Bookings for class scheduling and reservations.
-              </p>
-            </div>
-          </TextReveal>
-        </section>
-
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
         <section id="outcome" className="flex flex-col gap-6 sm:gap-8">
           <div className="flex flex-col gap-4">
@@ -358,7 +285,7 @@ export const SanctumCaseStudy: React.FC = () => {
               {/* Left narrative */}
               <TextReveal className="md:col-span-9 flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal">
                 <p>
-                  <strong >3x increase in WhatsApp and phone enquiries within 3 weeks</strong>, as reported by the client after direct contact actions were introduced on the club pages. The final experience also gave Sanctum a clearer way to communicate its brand, helped users discover GroupX classes by location, and created a more direct path from location-specific traffic to enquiry.
+                  <strong className="text-[var(--text-primary)] font-semibold">3x WhatsApp and phone enquiries within 3 weeks</strong> of adding direct contact actions to the club pages, as reported by the client.
                 </p>
               </TextReveal>
 
@@ -463,6 +390,36 @@ export const SanctumCaseStudy: React.FC = () => {
           </div>
         </section>
 
+        {/* ── CONTEXT ─────────────────────────────────────────────── */}
+        <section id="context" className="flex flex-col gap-3">
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              Context
+            </h2>
+
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                Sanctum is a premium fitness and wellness brand with multiple locations across Mumbai. I took the website from design through implementation, covering the homepage, all club pages and the GroupX experience. The goals were to communicate what Sanctum stands for, help users find the right class and location, and make it easy to enquire.
+              </p>
+            </div>
+          </TextReveal>
+        </section>
+
+        {/* ── MY ROLE ─────────────────────────────────────────────── */}
+        <section id="role" className="flex flex-col gap-3">
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              My Role & Scope
+            </h2>
+
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+              <p>
+                I designed the homepage, club pages and GroupX experience in Figma, then built the final site in Wix Studio, using Wix Bookings for class scheduling and reservations.
+              </p>
+            </div>
+          </TextReveal>
+        </section>
+
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
         <section className="flex flex-col gap-5 sm:gap-6">
           <div id="decisions" className="flex flex-col">
@@ -475,19 +432,133 @@ export const SanctumCaseStudy: React.FC = () => {
 
           <div className="flex flex-col gap-8 sm:gap-10">
             {/* Decision 01 */}
-            <div id="decision-1" className="flex flex-col gap-4">
-              <TextReveal className="flex flex-col gap-1.5">
+            <div id="decision-1" className="flex flex-col gap-5">
+              <TextReveal className="flex flex-col gap-2">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  1. Making GroupX easier to explore
+                  1. Turning contact details into actions
                 </h3>
-                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    GroupX offers a range of classes across Sanctum's locations, but users first needed to understand what classes were available and where they could take them. I designed the GroupX experience to make the relationship between class and location clearer, allowing users to browse the available sessions and understand where each class was offered before moving into the booking flow.
+                    Meta Ads began sending people straight to specific club pages. These visitors already had a location in mind and wanted to ask a question, call or find the club.
+                  </p>
+                  <p>
+                    The club pages showed the phone number and address as plain text. A visitor had to copy the number, switch apps or look up the address themselves.
                   </p>
                 </div>
               </TextReveal>
 
-              {/* Mockup for Decision 01 — GroupX Experience */}
+              {/* Specific Image: (Before image) */}
+              <div className="flex flex-col gap-3 w-full">
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full font-semibold"
+                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                  >
+                    Before
+                  </span>
+                  <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
+                    Initial Club Page (Andheri)
+                  </span>
+                </div>
+                <div
+                  className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <img
+                    src={andheriOldSanctum}
+                    alt="Sanctum Club Page - Before (Andheri)"
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {/* Outline around plain text details */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute left-[63.0%] top-[27.2%] w-[20.2%] h-[17.2%] rounded-xl sm:rounded-2xl border-2 border-[#FF4D4D] shadow-[0_0_18px_rgba(255,77,77,0.35)] pointer-events-none"
+                    style={{ background: 'rgba(255, 77, 77, 0.06)' }}
+                  />
+                </div>
+              </div>
+
+              {/* Redesign Decision & Experience */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  I redesigned the Andheri, Juhu and Khar pages and turned the key information into three tappable actions: WhatsApp, Call and Directions. I made them one-tap on purpose, because visitors from ads were ready to act.
+                </p>
+                <p>
+                  A visitor landing from an ad can message, call or get directions in one tap.
+                </p>
+              </TextReveal>
+
+              {/* Specific Image: (After image) */}
+              <div className="flex flex-col gap-3 w-full">
+                <div className="flex items-center gap-2.5">
+                  <span
+                    className="text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full font-semibold"
+                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                  >
+                    After
+                  </span>
+                  <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
+                    Redesigned Club Page with Direct Actions (Juhu)
+                  </span>
+                </div>
+                <div
+                  className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <img
+                    src={juhuSanctum}
+                    alt="Sanctum Redesigned Club Page with Direct Actions - After (Juhu)"
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {/* Outline around action buttons */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.97 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute left-[62.8%] top-[28.8%] w-[25.0%] h-[14.4%] rounded-xl sm:rounded-2xl border-2 border-[#FF4D4D] shadow-[0_0_18px_rgba(255,77,77,0.35)] pointer-events-none"
+                    style={{ background: 'rgba(255, 77, 77, 0.06)' }}
+                  />
+                </div>
+              </div>
+
+              {/* Client Report Card */}
+              <div
+                className="w-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border shadow-xs flex flex-col gap-3.5 sm:gap-4 transition-all duration-300 hover:shadow-md mt-1"
+                style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)' }}
+              >
+                <span 
+                  className="text-[11px] sm:text-[12px] uppercase tracking-[0.12em] text-[var(--text-muted)] font-semibold"
+                  style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                >
+                  CLIENT REPORT
+                </span>
+                <blockquote className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-[1.35]">
+                  “Roughly 3x WhatsApp and phone enquiries within 3 weeks of the change.”
+                </blockquote>
+              </div>
+            </div>
+
+            {/* Decision 02 */}
+            <div id="decision-2" className="flex flex-col gap-5 pt-3">
+              <TextReveal className="flex flex-col gap-2">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  2. Putting location into the structure, because the cards couldn’t hold it
+                </h3>
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    GroupX runs classes across several locations, so users needed to know which classes were offered where before they booked. Wix Bookings offers four preset layouts (Side by Side, Overlapping, Strip, Grid), and every one shows the same fields: image, name, short description, days, duration and Book Now. There is no field for location, I couldn’t change the image sizes and shapes, and the booking flow was fixed. With no location on the cards, a combined list of classes couldn’t say where each class runs.
+                  </p>
+                  <p>
+                    I moved location out of the cards and into the structure of the site. A separate “GroupX near you” page has a location filter (All Services, Andheri East, Juhu, Khar), and the same class widget sits on every club page, where the page already tells the user the location. I used the Wix Bookings widget instead of a custom flow because building one would have been a project in itself, and we had a deadline.
+                  </p>
+                </div>
+              </TextReveal>
+
+              {/* Specific Image: (GroupX page image) */}
               <div className="flex flex-col gap-1.5 pt-1">
                 <div
                   className="w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
@@ -495,46 +566,38 @@ export const SanctumCaseStudy: React.FC = () => {
                 >
                   <img
                     src={groupxSanctum}
-                    alt="Sanctum GroupX Class Experience"
+                    alt="Sanctum GroupX Class Experience with Location Filtering"
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
               </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  Users pick a location and see only that location’s classes, then book from the card.
+                </p>
+                <p>
+                  Location discovery works inside Wix’s fixed layouts, with a booking flow users already know how to use.
+                </p>
+              </TextReveal>
             </div>
 
-            {/* Decision 02 */}
-            <div id="decision-2" className="flex flex-col gap-4 pt-2">
-              <TextReveal className="flex flex-col gap-1.5">
+            {/* Decision 03 */}
+            <div id="decision-3" className="flex flex-col gap-5 pt-3">
+              <TextReveal className="flex flex-col gap-2">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  2. Building the experience around Training + Recovery
+                  3. Giving Training and Recovery equal weight without overloading the homepage
                 </h3>
-                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Sanctum's branding already defined Training and Recovery as its two core pillars. I translated that into the website through a left-and-right visual composition, giving both pillars equal importance.
-                    This helped communicate what Sanctum stood for before users moved into the details of its locations, classes and facilities.
+                    Sanctum is built on two pillars with four services each. Shown in full, the homepage section would turn into a feature list before visitors reached the club and class pages. I started by giving every service its own image card, then moved to a card grid with an icon, name and description for each item.
                   </p>
                 </div>
               </TextReveal>
 
-              {/* Video Mockup for Decision 02 — Training Scroll Video */}
-              <div className="flex flex-col gap-1.5 pt-1">
-                <div
-                  className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
-                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                >
-                  <video
-                    src={trainingScrollVideo}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="w-full h-auto object-contain block"
-                  />
-                </div>
-              </div>
-
-              {/* Iterations for Decision 02 */}
-              <div className="flex flex-col gap-4 pt-4">
+              {/* Specific Media: (Iterations 1 to 3) */}
+              <div className="flex flex-col gap-4 pt-1">
                 <div className="flex items-center justify-between">
                   <h4 className="text-[18px] sm:text-[20px] md:text-[22px] font-semibold tracking-tight text-[var(--text-primary)]">
                     Iterations
@@ -589,37 +652,44 @@ export const SanctumCaseStudy: React.FC = () => {
                     {iterationsData.map((item, idx) => (
                       <div
                         key={idx}
-                        onClick={() => setFullscreenIterationIndex(idx)}
-                        className="group relative flex-shrink-0 w-[84%] sm:w-[72%] md:w-[62%] aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border shadow-sm cursor-pointer snap-start transition-all duration-300 hover:shadow-md"
-                        style={{
-                          borderColor: 'var(--border-card)',
-                          background: 'var(--bg-surface)',
-                        }}
+                        className="flex-shrink-0 w-[84%] sm:w-[72%] md:w-[62%] snap-start flex flex-col gap-2"
                       >
-                        {item.type === 'video' ? (
-                          <video
-                            src={item.src}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
-                          />
-                        ) : (
-                          <img
-                            src={item.src}
-                            alt={item.alt}
-                            className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
-                          />
-                        )}
+                        <div
+                          onClick={() => setFullscreenIterationIndex(idx)}
+                          className="group relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border shadow-sm cursor-pointer transition-all duration-300 hover:shadow-md"
+                          style={{
+                            borderColor: 'var(--border-card)',
+                            background: 'var(--bg-surface)',
+                          }}
+                        >
+                          {item.type === 'video' ? (
+                            <video
+                              src={item.src}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
+                            />
+                          ) : (
+                            <img
+                              src={item.src}
+                              alt={item.alt}
+                              className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
+                            />
+                          )}
 
-                        {/* Hover Overlay with Expand Affordance */}
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-end p-3 sm:p-4">
-                          <div className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                            <Maximize2 className="w-3.5 h-3.5" />
-                            <span>Full view</span>
+                          {/* Hover Overlay with Expand Affordance */}
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-end p-3 sm:p-4">
+                            <div className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
+                              <Maximize2 className="w-3.5 h-3.5" />
+                              <span>Full view</span>
+                            </div>
                           </div>
                         </div>
+                        <span className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] font-medium px-0.5">
+                          {item.caption}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -647,145 +717,42 @@ export const SanctumCaseStudy: React.FC = () => {
                   )}
                 </div>
               </div>
-            </div>
 
-            {/* Decision 03 */}
-            <div id="decision-3" className="flex flex-col gap-4 pt-2">
-              <TextReveal className="flex flex-col gap-1.5">
-                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  3. Turning club pages into actionable experiences
-                </h3>
-                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
-                  <p>
-                    After the website went live, Meta Ads started driving traffic to specific Sanctum locations. We knew the campaigns were targeting areas around the clubs, so users landing on these pages were often already interested in a particular location.
-                    I redesigned the Andheri, Juhu and Khar club pages and later added direct WhatsApp, Phone and Directions actions to make it easier for users to ask questions, call the club or find their way there.
-                    About a week after the change, the client shared that WhatsApp and phone enquiries had increased by approximately <strong>3X</strong>.
-                  </p>
-                </div>
+              {/* Narrative: Decision */}
+              <TextReveal className="flex flex-col text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  I dropped the cards and descriptions. Each pillar became a headline with just its service names, either side of one image that shows training and recovery together. The names appear as the user scrolls.
+                </p>
               </TextReveal>
 
-              {/* Before vs After Screens for Decision 03 */}
-              <div ref={comparisonRef} className="relative flex flex-col gap-8 sm:gap-10 pt-2">
-                {/* Connecting Line between Before Box and After Box */}
-                <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible">
-                  <defs>
-                    <marker
-                      id="red-arrowhead"
-                      viewBox="0 0 10 10"
-                      refX="7"
-                      refY="5"
-                      markerWidth="7"
-                      markerHeight="7"
-                      orient="auto"
-                    >
-                      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#FF4D4D" />
-                    </marker>
-                    <filter id="connector-glow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#FF334B" floodOpacity="0.45" />
-                    </filter>
-                  </defs>
-                  {connectorPath && (
-                    <>
-                      {/* Dark under-line for contrast across images */}
-                      <path
-                        d={connectorPath}
-                        stroke="rgba(0, 0, 0, 0.75)"
-                        strokeWidth="5"
-                        fill="none"
-                        strokeLinecap="round"
-                      />
-                      {/* Glowing red connector line with arrowhead */}
-                      <motion.path
-                        d={connectorPath}
-                        stroke="#FF4D4D"
-                        strokeWidth="2.5"
-                        fill="none"
-                        strokeLinecap="round"
-                        markerEnd="url(#red-arrowhead)"
-                        filter="url(#connector-glow)"
-                        initial={{ pathLength: 0, opacity: 0 }}
-                        whileInView={{ pathLength: 1, opacity: 1 }}
-                        viewport={{ once: true, amount: 0.2 }}
-                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                      />
-                    </>
-                  )}
-                </svg>
-
-                {/* Before Screen */}
-                <div className="flex flex-col gap-3 w-full">
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
-                      style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
-                    >
-                      Before
-                    </span>
-                    <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
-                      Initial Club Page (Andheri)
-                    </span>
-                  </div>
-                  <div
-                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img
-                      src={andheriOldSanctum}
-                      alt="Sanctum Club Page - Before (Andheri)"
-                      className="w-full h-full object-cover object-top"
-                      onLoad={updateComparisonConnector}
-                    />
-
-                    {/* Perfect Square / Rectangle outline around Club Hours */}
-                    <motion.div
-                      ref={beforeBoxRef}
-                      initial={{ opacity: 0, scale: 0.97 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute left-[63.0%] top-[27.2%] w-[20.2%] h-[17.2%] rounded-xl sm:rounded-2xl border-2 border-[#FF4D4D] shadow-[0_0_18px_rgba(255,77,77,0.35)] pointer-events-none"
-                      style={{ background: 'rgba(255, 77, 77, 0.06)' }}
-                    />
-                  </div>
-                </div>
-
-                {/* After / Redesigned Screen */}
-                <div className="flex flex-col gap-3 w-full">
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
-                      style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
-                    >
-                      After
-                    </span>
-                    <span className="text-[15px] sm:text-[17px] font-semibold tracking-tight text-[var(--text-primary)]">
-                      Redesigned Club Page with Direct Actions (Juhu)
-                    </span>
-                  </div>
-                  <div
-                    className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
-                    style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-                  >
-                    <img
-                      src={juhuSanctum}
-                      alt="Sanctum Redesigned Club Page with Direct Actions - After (Juhu)"
-                      className="w-full h-full object-cover object-top"
-                      onLoad={updateComparisonConnector}
-                    />
-
-                    {/* Perfect Square / Rectangle outline around Connect with us */}
-                    <motion.div
-                      ref={afterBoxRef}
-                      initial={{ opacity: 0, scale: 0.97 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true, amount: 0.2 }}
-                      transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute left-[62.8%] top-[28.8%] w-[25.0%] h-[14.4%] rounded-xl sm:rounded-2xl border-2 border-[#FF4D4D] shadow-[0_0_18px_rgba(255,77,77,0.35)] pointer-events-none"
-                      style={{ background: 'rgba(255, 77, 77, 0.06)' }}
-                    />
-                  </div>
+              {/* Specific Media: (Final design and scroll video) */}
+              <div className="pt-1">
+                <div
+                  className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
+                  style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                >
+                  <video
+                    src={trainingScrollVideo}
+                    title="Final: names only, revealed on scroll"
+                    aria-label="Final: names only, revealed on scroll"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-auto object-contain block"
+                  />
                 </div>
               </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  The homepage introduces both pillars with equal weight and an uncluttered first screen.
+                </p>
+                <p>
+                  This became the final direction. It suited the homepage, didn’t explain every detail, and looked premium.
+                </p>
+              </TextReveal>
             </div>
           </div>
         </section>
@@ -934,14 +901,22 @@ export const SanctumCaseStudy: React.FC = () => {
             onClick={() => setFullscreenIterationIndex(null)}
             className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 select-none"
           >
-            {/* Top Bar: Counter & Close Button */}
+            {/* Top Bar: Counter, Caption & Close Button */}
             <div
-              className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between z-20 pointer-events-auto"
+              className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between z-20 pointer-events-auto gap-4"
               onClick={(e) => e.stopPropagation()}
             >
-              <span className="text-white/80 text-[13px] sm:text-[14px] font-mono tracking-wider px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15">
-                {fullscreenIterationIndex + 1} / {iterationsData.length}
-              </span>
+              <div className="flex items-center gap-3">
+                <span 
+                  className="text-white/80 text-[13px] sm:text-[14px] tracking-wider px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 font-semibold"
+                  style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                >
+                  {fullscreenIterationIndex + 1} / {iterationsData.length}
+                </span>
+                <span className="text-white/90 text-[13px] sm:text-[14px] font-medium hidden sm:inline-block">
+                  {iterationsData[fullscreenIterationIndex].caption}
+                </span>
+              </div>
               <button
                 type="button"
                 onClick={() => setFullscreenIterationIndex(null)}

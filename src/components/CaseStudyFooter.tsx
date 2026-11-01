@@ -33,7 +33,10 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
   const nextPath = nextProject.path || `/work/${nextProject.id}`;
 
   return (
-    <footer className="mt-14 sm:mt-20 flex flex-col">
+    <footer 
+      className="mt-14 sm:mt-20 flex flex-col"
+      style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+    >
       
       {/* ── 1. CASE STUDY NAVIGATION BAR ────────────────────────── */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-5 w-full pb-8 sm:pb-10">
@@ -43,6 +46,7 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors cursor-pointer group px-1 py-1"
+          style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
           aria-label="Return to Portfolio"
         >
           <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
@@ -55,7 +59,7 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all duration-200 hover:border-[var(--text-primary)] hover:shadow-sm cursor-pointer group"
-          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)' }}
+          style={{ background: 'var(--bg-surface)', borderColor: 'var(--border-card)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
           aria-label="Next Case Study"
         >
           <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors">
@@ -95,8 +99,8 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
             </h2>
           </div>
           <span
-            className="text-[10px] font-mono uppercase tracking-widest"
-            style={{ color: 'var(--text-muted)' }}
+            className="text-[10px] uppercase tracking-widest font-medium"
+            style={{ color: 'var(--text-muted)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
           >
             <span className="hidden sm:inline">Click to Shoot</span>
             <span className="sm:hidden">Tap to Shoot</span>
@@ -131,15 +135,17 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
           <button
             onClick={handleCopyEmail}
             className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[var(--border-card)] hover:border-[var(--text-primary)] bg-[var(--bg-card)]/50 text-[var(--text-primary)] text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer group"
+            style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
             title="Click to copy email address"
             aria-label="Copy email address"
           >
-            <span className="text-[var(--text-muted)] group-hover:text-accent transition-colors font-mono">@</span>
-            <span className="font-mono text-xs sm:text-sm">tarunmadan2506@gmail.com</span>
+            <span className="text-[var(--text-muted)] group-hover:text-accent transition-colors" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>@</span>
+            <span className="text-xs sm:text-sm font-medium" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+              {copied ? 'Copied' : 'Copy mail'}
+            </span>
             {copied ? (
-              <span className="flex items-center gap-1 text-emerald-500 font-sans text-xs ml-1 animate-fade-in">
+              <span className="flex items-center gap-1 text-emerald-500 text-xs ml-1 animate-fade-in" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
                 <Check className="w-3.5 h-3.5 shrink-0" />
-                <span>Copied</span>
               </span>
             ) : (
               <Copy className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors ml-0.5 shrink-0" />
@@ -152,10 +158,11 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-[var(--border-card)] hover:border-[var(--text-primary)] bg-[var(--bg-card)]/50 text-[var(--text-primary)] text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer group"
+            style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
             aria-label="Open Tarun's LinkedIn Profile"
           >
             <LinkedInIcon className="w-3.5 h-3.5 text-[#0A66C2] dark:text-[#38bdf8] shrink-0" />
-            <span>LinkedIn</span>
+            <span style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>LinkedIn</span>
             <ExternalLink className="w-3 h-3 text-[var(--text-muted)] group-hover:text-[var(--text-primary)] transition-colors ml-0.5" />
           </a>
 
@@ -164,8 +171,11 @@ export const CaseStudyFooter: React.FC<CaseStudyFooterProps> = ({ nextProject })
       </div>
 
       {/* ── 3. BOTTOM COPYRIGHT SUB-FOOTER ─────────────────────── */}
-      <div className="flex items-center justify-center text-center text-[11px] font-mono text-[var(--text-muted)] pb-8 -mt-2">
-        <span>© {new Date().getFullYear()} Tarun. All rights reserved.</span>
+      <div 
+        className="flex items-center justify-center text-center text-[11px] text-[var(--text-muted)] pb-8 -mt-2 font-medium"
+        style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+      >
+        <span style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>© {new Date().getFullYear()} Tarun. All rights reserved.</span>
       </div>
 
     </footer>

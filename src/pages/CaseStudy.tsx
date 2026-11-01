@@ -45,7 +45,11 @@ export const CaseStudy: React.FC = () => {
         style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}
       >
         <h1 className="text-2xl font-bold tracking-tight">Case Study Not Found</h1>
-        <Link to="/" className="text-accent flex items-center gap-2 hover:underline text-sm font-mono">
+        <Link 
+          to="/" 
+          className="text-accent flex items-center gap-2 hover:underline text-sm font-medium"
+          style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+        >
           <ArrowLeft className="w-4 h-4" />
           <span>Return Home</span>
         </Link>
@@ -68,7 +72,10 @@ export const CaseStudy: React.FC = () => {
         {/* Project Hero Header */}
         <section className="flex flex-col gap-6">
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+            <span 
+              className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               {project.category}
             </span>
             <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
@@ -124,7 +131,10 @@ export const CaseStudy: React.FC = () => {
                 <span className="text-3xl sm:text-4xl font-bold tracking-tight text-accent">
                   {metric.value}
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--text-secondary)] mt-1.5">
+                <span 
+                  className="text-[10px] uppercase tracking-wider text-[var(--text-secondary)] mt-1.5 font-semibold"
+                  style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                >
                   {metric.label}
                 </span>
               </div>
@@ -135,7 +145,10 @@ export const CaseStudy: React.FC = () => {
         {/* Case Overview: Objectives, Problem & Solution */}
         <section className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-left py-2">
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-accent">
+            <span 
+              className="text-xs uppercase tracking-wider text-accent font-semibold"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Core Objective
             </span>
             <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Goal</h3>
@@ -143,7 +156,10 @@ export const CaseStudy: React.FC = () => {
           </TextReveal>
 
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)]">
+            <span 
+              className="text-xs uppercase tracking-wider text-[var(--text-muted)] font-semibold"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Problem Statement
             </span>
             <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Friction</h3>
@@ -151,7 +167,10 @@ export const CaseStudy: React.FC = () => {
           </TextReveal>
 
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-accent">
+            <span 
+              className="text-xs uppercase tracking-wider text-accent font-semibold"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Design Solution
             </span>
             <h3 className="text-lg sm:text-xl font-medium tracking-tight text-[var(--text-primary)]">The Outcome</h3>
@@ -165,7 +184,12 @@ export const CaseStudy: React.FC = () => {
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
               Double Diamond Execution
             </h2>
-            <span className="text-xs text-[var(--text-muted)] font-mono">STEP-BY-STEP</span>
+            <span 
+              className="text-xs text-[var(--text-muted)] font-semibold"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
+              STEP-BY-STEP
+            </span>
           </TextReveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -177,14 +201,20 @@ export const CaseStudy: React.FC = () => {
               >
                 <div className="flex flex-col gap-2">
                   <div className="flex justify-between items-center">
-                    <span className="font-mono text-xs text-[var(--text-muted)]">
+                    <span 
+                      className="text-xs text-[var(--text-muted)] font-semibold"
+                      style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                    >
                       Phase {step.phase.split(' ')[0]}
                     </span>
-                    <span className={`text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded ${
-                      step.type === 'Divergent'
-                        ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
-                        : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
-                    }`}>
+                    <span 
+                      className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded font-semibold ${
+                        step.type === 'Divergent'
+                          ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                          : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                      }`}
+                      style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                    >
                       {step.type} Thinking {step.type === 'Divergent' ? '◀▶' : '▶◀'}
                     </span>
                   </div>

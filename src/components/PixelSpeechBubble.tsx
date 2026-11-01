@@ -12,7 +12,7 @@ export const PixelSpeechBubble: React.FC<PixelSpeechBubbleProps> = ({
   tailX = 56,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ width: 340, height: 160 });
+  const [dimensions, setDimensions] = useState({ width: 340, height: 56 });
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -20,7 +20,7 @@ export const PixelSpeechBubble: React.FC<PixelSpeechBubbleProps> = ({
         const { offsetWidth, offsetHeight } = containerRef.current;
         // Snap to nearest 4px grid for crisp retro pixel art
         const w = Math.max(260, Math.round(offsetWidth / 4) * 4);
-        const h = Math.max(100, Math.round(offsetHeight / 4) * 4);
+        const h = Math.max(44, Math.round(offsetHeight / 4) * 4);
         setDimensions({ width: w, height: h });
       }
     };
@@ -113,7 +113,7 @@ export const PixelSpeechBubble: React.FC<PixelSpeechBubbleProps> = ({
       {/* Bubble Content with safe padding inside 4px borders */}
       <div
         ref={containerRef}
-        className="relative z-10 px-5 pt-4 pb-4.5 sm:px-6 sm:pt-5 sm:pb-5 text-black"
+        className="relative z-10 px-5 pt-3 pb-3.5 sm:px-6 sm:pt-3.5 sm:pb-4 text-black"
         style={{ color: '#000000' }}
       >
         {children}

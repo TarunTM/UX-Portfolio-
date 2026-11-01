@@ -35,7 +35,10 @@ export const QuantelCaseStudy: React.FC = () => {
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+            <span 
+              className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Web App · Mobile App ·FinTech
             </span>
             <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
@@ -65,7 +68,7 @@ export const QuantelCaseStudy: React.FC = () => {
                 MY ROLE
               </span>
               <div className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6] flex flex-col">
-                <span>UI/UX Designer <br/>@The Social Slate</span>
+                <span>UI/UX Intern <br/>@The Social Slate</span>
                 {/* <span className="text-xs text-[var(--text-muted)]">(Feature Expansion)</span> */}
               </div>
             </div>
@@ -86,19 +89,12 @@ export const QuantelCaseStudy: React.FC = () => {
               <span className="text-[12px] sm:text-[13px] font-extrabold uppercase tracking-[0.08em] text-[var(--text-primary)] mb-1.5">
                 TEAM
               </span>
-              <div className="flex flex-col gap-1 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
-                <div>
-                  <span >Yash Moon</span><br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(Design Lead)</span>
-                </div>
-                <div>
-                  <span >Tarun Madan</span><br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
-                </div>
-                <div>
-                  <span > Shruti Katekar</span><br></br>
-                  <span className="text-xs text-[var(--text-muted)]">(UI/UX Designer)</span>
-                </div>
+              <div className="flex flex-col gap-0.5 text-[14px] sm:text-[15px] text-[var(--text-secondary)] font-normal leading-[1.6]">
+                <span>Me</span>
+                <span>Design Lead</span>
+                <span>Agency Lead</span>
+                <span>Project Manager</span>
+                <span>6 Engineers</span>
               </div>
             </div>
 
@@ -381,7 +377,10 @@ export const QuantelCaseStudy: React.FC = () => {
             className="w-full rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border shadow-xs flex flex-col gap-3.5 sm:gap-4 transition-all duration-300 hover:shadow-md"
             style={{ background: 'var(--bg-card)', borderColor: 'var(--border-card)' }}
           >
-            <span className="text-[11px] sm:text-[12px] font-mono uppercase tracking-[0.12em] text-[var(--text-muted)] font-semibold">
+            <span 
+              className="text-[11px] sm:text-[12px] uppercase tracking-[0.12em] text-[var(--text-muted)] font-semibold"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               CLIENT FEEDBACK
             </span>
             <blockquote className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-[1.35]">

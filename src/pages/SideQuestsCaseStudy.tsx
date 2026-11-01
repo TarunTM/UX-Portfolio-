@@ -45,7 +45,10 @@ export const SideQuestsCaseStudy: React.FC = () => {
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+            <span 
+              className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Design Explorations · UI/UX Experiments · Side Projects
             </span>
             <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
@@ -183,8 +186,8 @@ export const SideQuestsCaseStudy: React.FC = () => {
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-2.5">
                   <span
-                    className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
-                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+                    className="text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full font-semibold"
+                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
                   >
                     Before
                   </span>
@@ -210,8 +213,8 @@ export const SideQuestsCaseStudy: React.FC = () => {
               <div className="flex items-center justify-between flex-wrap gap-2">
                 <div className="flex items-center gap-2.5">
                   <span
-                    className="text-[11px] font-mono uppercase tracking-wider px-3 py-0.5 rounded-full font-medium"
-                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)' }}
+                    className="text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full font-semibold"
+                    style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-card)', color: 'var(--text-primary)', fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
                   >
                     After
                   </span>

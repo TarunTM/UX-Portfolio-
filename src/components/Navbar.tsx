@@ -41,9 +41,9 @@ interface SubheadingItem {
 const CASE_STUDY_SUBHEADINGS: Record<string, SubheadingItem[]> = {
   sanctum: [
     { id: 'overview', label: 'Overview' },
+    { id: 'outcome', label: 'Outcome' },
     { id: 'context', label: 'Context' },
     { id: 'role', label: 'Role' },
-    { id: 'outcome', label: 'Outcome' },
     { id: 'decisions', label: 'Key Decisions' },
     { id: 'decision-1', label: 'Decision 1', isNested: true },
     { id: 'decision-2', label: 'Decision 2', isNested: true },
@@ -53,15 +53,17 @@ const CASE_STUDY_SUBHEADINGS: Record<string, SubheadingItem[]> = {
   ],
   rizen: [
     { id: 'overview', label: 'Overview' },
+    { id: 'outcome', label: 'Outcome' },
     { id: 'context', label: 'Context' },
     { id: 'role', label: 'Role' },
-    { id: 'outcome', label: 'Outcome' },
-    { id: 'mvp', label: 'MVP' },
     { id: 'decisions', label: 'Key Decisions' },
     { id: 'decision-1', label: 'Decision 1', isNested: true },
     { id: 'decision-2', label: 'Decision 2', isNested: true },
+    { id: 'wireframes', label: 'Wireframes', isNested: true },
     { id: 'decision-3', label: 'Decision 3', isNested: true },
-    { id: 'visuals', label: 'Visuals' },
+    { id: 'decision-4', label: 'Decision 4', isNested: true },
+    { id: 'decision-5', label: 'Decision 5', isNested: true },
+    { id: 'screens', label: 'Hi-Fi Screens' },
     { id: 'next', label: "What's Next" },
   ],
   'quantel-ai': [

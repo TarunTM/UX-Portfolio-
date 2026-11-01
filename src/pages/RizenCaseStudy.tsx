@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  XCircle, 
-  Clock, 
-  Dumbbell, 
-  TrendingUp, 
-  Users, 
-  Sparkles, 
-  UserCheck, 
-  Flame, 
-  Plus
+  Plus,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  X
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
@@ -34,9 +31,140 @@ import badgeRecordBreaker from '../assets/Rizen Img/Badge-RecordBreaker.webp';
 import badgeProgressMachine from '../assets/Rizen Img/Badge-ProgressMachine.webp';
 import badgeConsistentPerformer from '../assets/Rizen Img/Badge-ConsistentPerformer.webp';
 
+// Wireframe assets (01 to 05)
+import wireframe01 from '../assets/Rizen Img/01-wireframe home.png';
+import wireframe02 from '../assets/Rizen Img/02- Wireframe workout plan.png';
+import wireframe03 from '../assets/Rizen Img/03-Wireframe record.png';
+import wireframe04 from '../assets/Rizen Img/04-wireframe profile.png';
+import wireframe05 from '../assets/Rizen Img/05-wireframe Stats.png';
+
+// High-Fidelity Mockups
+import splashMockup from '../assets/Rizen Img/Splash HIFI mockup.png';
+import signupMockup from '../assets/Rizen Img/Signup HIFI MOCKUpp.png';
+import homeMockup from '../assets/Rizen Img/Home Mockup.webp';
+import analyticsMockup from '../assets/Rizen Img/Analytics Hifi mockup.png';
+import myProfileMockup from '../assets/Rizen Img/My profile HIfi Mockup.png';
+import settingsMockup from '../assets/Rizen Img/Settings HIFI mockup.png';
+
+const wireframesData = [
+  {
+    num: '01',
+    src: wireframe01,
+    alt: '01 · Home Wireframe',
+    title: 'Home & Feed',
+    desc: 'Daily streak, today’s workout card, and friend activity preview',
+  },
+  {
+    num: '02',
+    src: wireframe02,
+    alt: '02 · Workout Plan Wireframe',
+    title: 'Workout Plans',
+    desc: 'Categorized split browsing and routine creation flow',
+  },
+  {
+    num: '03',
+    src: wireframe03,
+    alt: '03 · Record Workout Wireframe',
+    title: 'Record Workout',
+    desc: 'Live execution mode with rest timers and set counter',
+  },
+  {
+    num: '04',
+    src: wireframe04,
+    alt: '04 · Profile Wireframe',
+    title: 'Profile & Social',
+    desc: 'Stats, current rank tier, and friend connection cards',
+  },
+  {
+    num: '05',
+    src: wireframe05,
+    alt: '05 · Stats Wireframe',
+    title: 'Stats & Consistency',
+    desc: 'Volume tracking, consistency logs, and progression analytics',
+  },
+];
+
+const hifiScreensData = [
+  {
+    num: '01',
+    src: splashMockup,
+    alt: 'Splash Screen Mockup',
+    title: 'Splash Screen',
+    caption: 'Brand Identity',
+  },
+  {
+    num: '02',
+    src: signupMockup,
+    alt: 'Sign Up Screen Mockup',
+    title: 'Sign In / Welcome',
+    caption: 'Authentication & Onboarding',
+  },
+  {
+    num: '03',
+    src: homeMockup,
+    alt: 'Home Screen Mockup',
+    title: 'Home Screen',
+    caption: 'Daily Focus, Streaks & Feed',
+  },
+  {
+    num: '04',
+    src: workoutPlanMockup,
+    alt: 'Workout Plan Screen Mockup',
+    title: 'Workout Plan',
+    caption: 'Plan Mode & Custom Splits',
+  },
+  {
+    num: '05',
+    src: analyticsMockup,
+    alt: 'Analytics Screen Mockup',
+    title: 'Analytics & Progress',
+    caption: 'PRs & Progressive Overload',
+  },
+  {
+    num: '06',
+    src: myProfileMockup,
+    alt: 'My Profile Screen Mockup',
+    title: 'My Profile',
+    caption: 'Rank Progression & Badges',
+  },
+  {
+    num: '07',
+    src: friendsActivityMockup,
+    alt: 'Friends Activity Mockup',
+    title: 'Friends Activity',
+    caption: 'Accountability Feed',
+  },
+  {
+    num: '08',
+    src: friendsProfileMockup,
+    alt: 'Friends Profile Mockup',
+    title: 'Friends Profile',
+    caption: 'Routine Sharing',
+  },
+  {
+    num: '09',
+    src: settingsMockup,
+    alt: 'Settings Screen Mockup',
+    title: 'Settings',
+    caption: 'Preferences & Splits',
+  },
+];
+
 export const RizenCaseStudy: React.FC = () => {
   const outcomeVideoRef = useRef<HTMLVideoElement>(null);
   const [isPlayingOutcome, setIsPlayingOutcome] = useState(true);
+
+  // Wireframes Scroll & Fullscreen State
+  const wireframesScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollWireframesLeft, setCanScrollWireframesLeft] = useState(false);
+  const [canScrollWireframesRight, setCanScrollWireframesRight] = useState(true);
+  const [fullscreenWireframeIndex, setFullscreenWireframeIndex] = useState<number | null>(null);
+
+  // Hi-Fi Screens Scroll & Fullscreen State
+  const screensScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollScreensLeft, setCanScrollScreensLeft] = useState(false);
+  const [canScrollScreensRight, setCanScrollScreensRight] = useState(true);
+  const [fullscreenScreenIndex, setFullscreenScreenIndex] = useState<number | null>(null);
 
   const toggleOutcomePlay = () => {
     if (outcomeVideoRef.current) {
@@ -49,6 +177,79 @@ export const RizenCaseStudy: React.FC = () => {
       }
     }
   };
+
+  const checkWireframesScroll = () => {
+    if (!wireframesScrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = wireframesScrollRef.current;
+    setCanScrollWireframesLeft(scrollLeft > 10);
+    setCanScrollWireframesRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
+
+  const checkScreensScroll = () => {
+    if (!screensScrollRef.current) return;
+    const { scrollLeft, scrollWidth, clientWidth } = screensScrollRef.current;
+    setCanScrollScreensLeft(scrollLeft > 10);
+    setCanScrollScreensRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
+
+  const scrollWireframes = (direction: 'left' | 'right') => {
+    if (!wireframesScrollRef.current) return;
+    const scrollAmount = wireframesScrollRef.current.clientWidth * 0.75;
+    wireframesScrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  const scrollScreens = (direction: 'left' | 'right') => {
+    if (!screensScrollRef.current) return;
+    const scrollAmount = screensScrollRef.current.clientWidth * 0.75;
+    screensScrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
+
+  // Lightbox keyboard controls
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (fullscreenWireframeIndex !== null) {
+        if (e.key === 'Escape') setFullscreenWireframeIndex(null);
+        else if (e.key === 'ArrowLeft') {
+          setFullscreenWireframeIndex((prev) =>
+            prev !== null ? (prev > 0 ? prev - 1 : wireframesData.length - 1) : null
+          );
+        } else if (e.key === 'ArrowRight') {
+          setFullscreenWireframeIndex((prev) =>
+            prev !== null ? (prev < wireframesData.length - 1 ? prev + 1 : 0) : null
+          );
+        }
+      } else if (fullscreenScreenIndex !== null) {
+        if (e.key === 'Escape') setFullscreenScreenIndex(null);
+        else if (e.key === 'ArrowLeft') {
+          setFullscreenScreenIndex((prev) =>
+            prev !== null ? (prev > 0 ? prev - 1 : hifiScreensData.length - 1) : null
+          );
+        } else if (e.key === 'ArrowRight') {
+          setFullscreenScreenIndex((prev) =>
+            prev !== null ? (prev < hifiScreensData.length - 1 ? prev + 1 : 0) : null
+          );
+        }
+      }
+    };
+
+    if (fullscreenWireframeIndex !== null || fullscreenScreenIndex !== null) {
+      window.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+    };
+  }, [fullscreenWireframeIndex, fullscreenScreenIndex]);
 
   // Scroll to top on mount
   useEffect(() => {
@@ -72,7 +273,10 @@ export const RizenCaseStudy: React.FC = () => {
         {/* ── HERO TITLE & INTRO ───────────────────────────────────── */}
         <section id="overview" className="flex flex-col gap-6">
           <TextReveal className="flex flex-col gap-2">
-            <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">
+            <span 
+              className="text-xs uppercase tracking-widest text-[var(--text-muted)] font-medium"
+              style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+            >
               Mobile App · Fitness & Habit Formation
             </span>
             <h1 className="text-[36px] sm:text-[48px] md:text-[60px] font-bold tracking-[0px] text-[var(--text-primary)] leading-[1.1]">
@@ -158,39 +362,6 @@ export const RizenCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        {/* ── CONTEXT ─────────────────────────────────────────────── */}
-        <section id="context" className="flex flex-col gap-3">
-          <TextReveal className="flex flex-col gap-3">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              Context
-            </h2>
-
-            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-              <p>
-                Rizen is a fitness journey companion designed to help people stay committed to their fitness goals through workout planning, progress tracking and social accountability.
-                This was a project I worked on as part of my PG UX Austin course, starting with a simple question: how might we help people stay committed to their fitness goals? <br></br>
-                The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.
-              </p>
-            </div>
-          </TextReveal>
-        </section>
-
-        {/* ── MY ROLE ─────────────────────────────────────────────── */}
-        <section id="role" className="flex flex-col gap-3">
-          <TextReveal className="flex flex-col gap-3">
-            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              My Role & Scope
-            </h2>
-
-            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-              <p>
-                I worked across the workout experience, social/accountability features, gamification and visual direction, while also contributing to the information architecture, user flows and high-fidelity UI.
-                I was also involved in Product Thinking (MVP) like sharing workouts with friends or clients, and the XP, rank, streak and achievement system.
-              </p>
-            </div>
-          </TextReveal>
-        </section>
-
         {/* ── OUTCOME ─────────────────────────────────────────────── */}
         <section id="outcome" className="flex flex-col gap-6 sm:gap-8">
           <TextReveal className="flex flex-col">
@@ -246,169 +417,34 @@ export const RizenCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        {/* ── BUILT THE MVP ────────────────────────────────────────── */}
-        <section id="mvp" className="flex flex-col gap-8">
+        {/* ── CONTEXT ─────────────────────────────────────────────── */}
+        <section id="context" className="flex flex-col gap-3">
           <TextReveal className="flex flex-col gap-3">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-               Defining the MVP
+              Context
             </h2>
-            <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
               <p>
-                We initially planned Rizen around workout tracking and gamification, including ranks and public leaderboards.
-              </p>
-              <p>
-                After our survey and 5 user interviews, we found that users preferred competing with friends rather than everyone. I proposed refining the MVP around what users actually valued and discussed it with the team using a Must Have vs Nice to Have approach.
-              </p>
-              <p className="font-medium text-[var(--text-primary)] pt-1">
-                The MVP focused on four core areas:
+                Rizen is a fitness companion that helps people stay committed through workout planning, progress tracking and social accountability. I worked on it as part of my PG UX Austin course, starting with the question: how might we help people stay committed to their fitness goals? The challenge was to move beyond workout tracking and help users return after missing a workout. The problem wasn’t starting. It was restarting.
               </p>
             </div>
           </TextReveal>
+        </section>
 
-          {/* 4 Core Focus Areas - Sleek Modular Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            {[
-              {
-                title: "Workout Tracking",
-                desc: "Set, rep & rest timer logging",
-                icon: Dumbbell,
-                badge: "Must Have"
-              },
-              {
-                title: "Progress Tracking",
-                desc: "PRs, volume & consistency logs",
-                icon: TrendingUp,
-                badge: "Must Have"
-              },
-              {
-                title: "Social & Accountability",
-                desc: "Friends feed & routine sharing",
-                icon: Users,
-                badge: "Must Have"
-              },
-              {
-                title: "Lightweight Gamification",
-                desc: "XP, rank tiers, streaks & badges",
-                icon: Flame,
-                badge: "Must Have"
-              }
-            ].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="relative overflow-hidden p-4 sm:p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all duration-300 shadow-sm group"
-                  style={{
-                    borderColor: 'var(--border-card)',
-                    background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
-                  }}
-                >
-                  {/* Subtle Neon Volt ambient gradient in top-left */}
-                  <div className="absolute top-0 left-0 w-32 h-32 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
+        {/* ── MY ROLE & SCOPE ───────────────────────────────────────── */}
+        <section id="role" className="flex flex-col gap-3">
+          <TextReveal className="flex flex-col gap-3">
+            <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+              My Role & Scope
+            </h2>
 
-                  <div className="flex items-center justify-between relative z-10">
-                    {/* Icon Container */}
-                    <div
-                      className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300"
-                      style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
-                    >
-                      <Icon size={20} />
-                    </div>
-
-                    <span 
-                      className="text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider border shrink-0 text-right whitespace-nowrap ml-auto"
-                      style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-muted)' }}
-                    >
-                      {item.badge}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-col gap-1 relative z-10">
-                    <h4 className="text-[16px] sm:text-[17px] md:text-[18px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
-                      {item.title}
-                    </h4>
-                    <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] leading-relaxed font-normal">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Nice to Have Section & Modular Cards */}
-          <div className="flex flex-col gap-4 pt-1">
-            <div className="flex flex-col gap-2 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+            <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
               <p>
-                Public leaderboards and other ideas like AI workout assistance and trainer booking were moved out of the MVP:
+                I worked across the workout experience, social and accountability features, gamification and visual direction, and contributed to the information architecture, user flows and high-fidelity UI. I also owned the MVP product thinking, including workout sharing and the XP, rank, streak and achievement system.
               </p>
             </div>
-
-            {/* 3 Nice to Have (Moved Out) Cards matching the MVP style */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-              {[
-                {
-                  title: "Public Leaderboards",
-                  desc: "Removed to prevent comparison anxiety",
-                  icon: XCircle,
-                  badge: "Moved Out"
-                },
-                {
-                  title: "AI Workout Assistance",
-                  desc: "Deferred to a future subscription tier",
-                  icon: Clock,
-                  badge: "Phase 2"
-                },
-                {
-                  title: "Trainer Booking",
-                  desc: "Deferred to validate retention first",
-                  icon: Clock,
-                  badge: "Phase 2"
-                }
-              ].map((item, idx) => {
-                const Icon = item.icon;
-                return (
-                  <div
-                    key={idx}
-                    className="relative overflow-hidden p-4 sm:p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all duration-300 shadow-sm group"
-                    style={{
-                      borderColor: 'var(--border-card)',
-                      background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
-                    }}
-                  >
-                    {/* Subtle Neon Volt ambient gradient in top-left */}
-                    <div className="absolute top-0 left-0 w-32 h-32 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
-
-                    <div className="flex items-center justify-between relative z-10">
-                      {/* Icon Container */}
-                      <div
-                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300"
-                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
-                      >
-                        <Icon size={20} />
-                      </div>
-
-                      <span 
-                        className="text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider border shrink-0 text-right whitespace-nowrap ml-auto"
-                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-muted)' }}
-                      >
-                        {item.badge}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-1 relative z-10">
-                      <h4 className="text-[16px] sm:text-[17px] md:text-[18px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
-                        {item.title}
-                      </h4>
-                      <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] leading-relaxed font-normal">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          </TextReveal>
         </section>
 
         {/* ── KEY DESIGN DECISIONS ─────────────────────────────────── */}
@@ -426,54 +462,14 @@ export const RizenCaseStudy: React.FC = () => {
             <div id="decision-1" className="flex flex-col gap-4">
               <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  1. Separate Planning from Doing
+                  1. Replacing public leaderboards with friends-only accountability
                 </h3>
-                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    Planning a workout and actually doing one are two very different things.
-                    When planning, users need to browse, customise and decide what they're going to do. Once they're working out, they just need to focus on the session, so we separated Workout Plans from Record Workout.
+                    Our first plan leaned on competition, but competition can motivate some people and make others feel they’re behind. The initial plan was workout tracking and gamification with ranks and public leaderboards.
                   </p>
-                </div>
-              </TextReveal>
-
-              {/* 2 Side-by-Side Phone Mockups with divided captions above */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-start justify-items-center">
-                {/* 1st Mockup: Plan */}
-                <div className="w-full flex flex-col items-center gap-3">
-                  <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
-                    "Plan when you're planning"
-                  </p>
-                  <img
-                    src={workoutPlanMockup}
-                    alt="Workout Plans Mode Mockup"
-                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
-                  />
-                </div>
-
-                {/* 2nd Mockup: Execute */}
-                <div className="w-full flex flex-col items-center gap-3">
-                  <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
-                    "Execute when you're training"
-                  </p>
-                  <img
-                    src={recordWorkoutMockup}
-                    alt="Record Workout Mode Mockup"
-                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Decision 02 */}
-            <div id="decision-2" className="flex flex-col gap-4 pt-2">
-              <TextReveal className="flex flex-col gap-1.5">
-                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  2. Accountability Without Comparison Anxiety
-                </h3>
-                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    We initially considered public leaderboards, but our interviews showed that users were more comfortable competing or staying accountable within their own circles.
-                    So instead of ranking users against an entire country or the world, we built the social experience around friends, activity, profiles and group rankings. We also made workouts shareable, so users could share routines with friends or clients.                  
+                    After our survey and 5 interviews, we saw that users preferred competing with friends over everyone. I proposed refining the MVP around that. Instead of ranking users against a country or the world, I built the social layer around friends: an activity feed, profiles and group rankings, plus shareable routines for friends or clients. Public leaderboards were removed to prevent comparison anxiety.
                   </p>
                 </div>
               </TextReveal>
@@ -481,11 +477,11 @@ export const RizenCaseStudy: React.FC = () => {
               {/* Centered Quote across both images */}
               <div className="w-full flex justify-center pt-2">
                 <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
-                  "My friend is working out. I should probably show up too."
+                  “My friend is working out. I should probably show up too.”
                 </p>
               </div>
 
-              {/* 2 Side-by-Side Phone Mockups for Decision 02 */}
+              {/* 2 Side-by-Side Phone Mockups for Decision 01 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-center justify-items-center">
                 <div className="w-full flex justify-center">
                   <img
@@ -502,23 +498,331 @@ export const RizenCaseStudy: React.FC = () => {
                   />
                 </div>
               </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  The social experience centers on people the user already knows. Public leaderboards left the MVP, and the friends feed and routine sharing became must-haves.
+                </p>
+              </TextReveal>
+            </div>
+
+            {/* Decision 02 */}
+            <div id="decision-2" className="flex flex-col gap-5 pt-3">
+              <TextReveal className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  2. Scoping the MVP with Must Have vs Nice to Have
+                </h3>
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    We had a list of good ideas and one month to design them. The ideas on the table included workout tracking, progress, social features, gamification, public leaderboards, AI workout assistance and trainer booking.
+                  </p>
+                  <p>
+                    I took the revised scope to the team using a Must Have vs Nice to Have approach. We kept four must-haves, each with a clear scope:
+                  </p>
+                </div>
+              </TextReveal>
+
+              {/* 4 Core Focus Areas - Max 2 Cards Per Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                {[
+                  {
+                    title: "Workout Tracking",
+                    desc: "Set, rep & rest timer logging",
+                    badge: "Must Have"
+                  },
+                  {
+                    title: "Progress Tracking",
+                    desc: "PRs, volume & consistency logs",
+                    badge: "Must Have"
+                  },
+                  {
+                    title: "Social & Accountability",
+                    desc: "Friends feed & routine sharing",
+                    badge: "Must Have"
+                  },
+                  {
+                    title: "Lightweight Gamification",
+                    desc: "XP, rank tiers, streaks & badges",
+                    badge: "Must Have"
+                  }
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-4 border shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                    style={{
+                      background: 'var(--bg-card)',
+                      borderColor: 'var(--border-card)',
+                    }}
+                  >
+                    <span 
+                      className="text-[11px] sm:text-[12px] uppercase tracking-[0.12em] text-[var(--text-muted)] font-semibold"
+                      style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                    >
+                      {item.badge}
+                    </span>
+
+                    <div className="flex flex-col gap-1.5">
+                      <h4 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
+                        {item.title}
+                      </h4>
+                      <p className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] leading-relaxed font-normal">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Deferred ideas narrative & cards */}
+              <div className="flex flex-col gap-4 pt-1">
+                <TextReveal className="flex flex-col text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
+                  <p>
+                    We deferred AI workout assistance to a future subscription tier and trainer booking until retention was validated:
+                  </p>
+                </TextReveal>
+
+                {/* 3 Nice to Have (Moved Out) Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+                  {[
+                    {
+                      title: "Public Leaderboards",
+                      desc: "Removed to prevent comparison anxiety",
+                      badge: "Moved Out"
+                    },
+                    {
+                      title: "AI Workout Assistance",
+                      desc: "Deferred to a future subscription tier",
+                      badge: "Phase 2"
+                    },
+                    {
+                      title: "Trainer Booking",
+                      desc: "Deferred to validate retention first",
+                      badge: "Phase 2"
+                    }
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-4 border shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                      style={{
+                        background: 'var(--bg-card)',
+                        borderColor: 'var(--border-card)',
+                      }}
+                    >
+                      <span 
+                        className="text-[11px] sm:text-[12px] uppercase tracking-[0.12em] text-[var(--text-muted)] font-semibold"
+                        style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                      >
+                        {item.badge}
+                      </span>
+
+                      <div className="flex flex-col gap-1.5">
+                        <h4 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
+                          {item.title}
+                        </h4>
+                        <p className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] leading-relaxed font-normal">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  A focused four-area MVP gave every deferred idea a stated reason. The team designed against one agreed scope, and the deferred ideas became the Phase 2 plan at the end of this page.
+                </p>
+              </TextReveal>
+            </div>
+
+            {/* Wireframes: Information Architecture & Core Flows */}
+            <div id="wireframes" className="flex flex-col gap-5 pt-3">
+              <TextReveal className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  Wireframes: Translating Scope into Structure
+                </h3>
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    With the MVP scope locked, we mapped out user flows and explored low-fidelity wireframes to test layout clarity, screen density, and navigation hierarchy before committing to visual fidelity.
+                  </p>
+                </div>
+              </TextReveal>
+
+              {/* Wireframes Carousel */}
+              <div className="flex flex-col gap-3 pt-1">
+                <div className="flex items-center justify-end">
+                  {/* Left & Right Navigation Arrows */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => scrollWireframes('left')}
+                      disabled={!canScrollWireframesLeft}
+                      aria-label="Previous wireframe"
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all cursor-pointer ${
+                        canScrollWireframesLeft
+                          ? 'hover:scale-105 active:scale-95 shadow-sm'
+                          : 'opacity-30 cursor-not-allowed'
+                      }`}
+                      style={{
+                        background: 'var(--bg-surface)',
+                        borderColor: 'var(--border-card)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => scrollWireframes('right')}
+                      disabled={!canScrollWireframesRight}
+                      aria-label="Next wireframe"
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all cursor-pointer ${
+                        canScrollWireframesRight
+                          ? 'hover:scale-105 active:scale-95 shadow-sm'
+                          : 'opacity-30 cursor-not-allowed'
+                      }`}
+                      style={{
+                        background: 'var(--bg-surface)',
+                        borderColor: 'var(--border-card)',
+                        color: 'var(--text-primary)',
+                      }}
+                    >
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Horizontal Scrollable Gallery */}
+                <div className="relative group/wireframes">
+                  <div
+                    ref={wireframesScrollRef}
+                    onScroll={checkWireframesScroll}
+                    className="flex gap-4 sm:gap-5 overflow-x-auto snap-x snap-mandatory py-2 px-0.5 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+                  >
+                    {wireframesData.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="flex-shrink-0 w-[54%] sm:w-[34%] md:w-[25%] lg:w-[21%] max-w-[210px] sm:max-w-[230px] snap-start flex flex-col items-center gap-2.5"
+                      >
+                        <div
+                          onClick={() => setFullscreenWireframeIndex(idx)}
+                          className="group relative w-full aspect-[1/2] rounded-2xl overflow-hidden border shadow-sm cursor-pointer transition-all duration-300 hover:shadow-md bg-white flex items-center justify-center"
+                          style={{ borderColor: 'var(--border-card)' }}
+                        >
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            className="w-full h-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
+                          />
+
+                          {/* Hover Overlay */}
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-end justify-end p-3">
+                            <div className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
+                              <Maximize2 className="w-3.5 h-3.5" />
+                              <span>Full view</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-col items-center text-center gap-0.5 px-2">
+                          <span className="text-[14px] sm:text-[15px] font-semibold text-[var(--text-primary)]">
+                            {item.title}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Desktop Floating Arrows */}
+                  {canScrollWireframesLeft && (
+                    <button
+                      type="button"
+                      onClick={() => scrollWireframes('left')}
+                      aria-label="Previous wireframe"
+                      className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95 z-10"
+                    >
+                      <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                  )}
+                  {canScrollWireframesRight && (
+                    <button
+                      type="button"
+                      onClick={() => scrollWireframes('right')}
+                      aria-label="Next wireframe"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95 z-10"
+                    >
+                      <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Decision 03 */}
-            <div id="decision-3" className="flex flex-col gap-5 pt-2">
+            <div id="decision-3" className="flex flex-col gap-4 pt-3">
               <TextReveal className="flex flex-col gap-1.5">
                 <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-                  3. Gamification That Makes Progress Feel Good
+                  3. Separating planning from doing
                 </h3>
-                <div className="flex flex-col gap-2.5 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
                   <p>
-                    I wanted gamification to make progress feel rewarding without making Rizen feel like a game.<br />
-                    So each part had a different purpose:<br />
-                    <b>XP</b> shows progress.<br />
-                    <b>Ranks</b> show long-term progression.<br />
-                    <b>Streaks</b> celebrate consistency.<br />
-                    <b>Achievements</b> to celebrate smaller milestones.<br />
-                    We chose familiar rank names because our research was conducted with Indian users, many of whom were already familiar with similar progression systems through games.
+                    Planning a workout and doing one are different jobs. When planning, users browse, customise and decide. When training, they only need to focus on the session. The fitness apps I looked at put planning and recording in the same place.
+                  </p>
+                  <p>
+                    I separated Workout Plans from Record Workout so each could be designed for one purpose.
+                  </p>
+                </div>
+              </TextReveal>
+
+              {/* 2 Side-by-Side Phone Mockups with divided captions above */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-start justify-items-center">
+                {/* 1st Mockup: Plan */}
+                <div className="w-full flex flex-col items-center gap-3">
+                  <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
+                    “Plan when you’re planning”
+                  </p>
+                  <img
+                    src={workoutPlanMockup}
+                    alt="Workout Plans Mode Mockup"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                  />
+                </div>
+
+                {/* 2nd Mockup: Execute */}
+                <div className="w-full flex flex-col items-center gap-3">
+                  <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
+                    “Execute when you’re training”
+                  </p>
+                  <img
+                    src={recordWorkoutMockup}
+                    alt="Record Workout Mode Mockup"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                  />
+                </div>
+              </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  Planning has room to browse and customise, and recording keeps the screen on the session — two focused experiences instead of one crowded one.
+                </p>
+              </TextReveal>
+            </div>
+
+            {/* Decision 04 */}
+            <div id="decision-4" className="flex flex-col gap-5 pt-3">
+              <TextReveal className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  4. Giving each part of gamification a different job
+                </h3>
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Gamification can make progress feel rewarding or make an app feel like a game, and I wanted the first without the second. Gamification began as ranks and public leaderboards.
+                  </p>
+                  <p>
+                    I gave each part its own purpose: XP shows progress, ranks show long-term progression, streaks celebrate consistency and achievements mark smaller milestones. I chose familiar rank names because our research was with Indian users who already knew similar progression systems from games.
                   </p>
                 </div>
               </TextReveal>
@@ -528,7 +832,7 @@ export const RizenCaseStudy: React.FC = () => {
                 {/* 1. Rank System */}
                 <div className="flex flex-col gap-3">
                   <p className="text-[16px] font-bold text-[var(--text-primary)]">
-                    The Rank progression became
+                    Rank Progression
                   </p>
                   <div className="grid grid-cols-3 md:grid-cols-6 gap-2 sm:gap-4 pt-1">
                     {[
@@ -617,345 +921,366 @@ export const RizenCaseStudy: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  The system includes XP, rank tiers, streaks and six badges: First Step, Momentum, Unbreakable, Record Breaker, Progress Machine and Consistent Performer. Streaks and early badges are designed to reward returning, which supports the restarting problem.
+                </p>
+              </TextReveal>
+            </div>
+
+            {/* Decision 05 */}
+            <div id="decision-5" className="flex flex-col gap-6 pt-3">
+              <TextReveal className="flex flex-col gap-1.5">
+                <h3 className="text-[20px] sm:text-[24px] md:text-[28px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
+                  5. Moving from blue and purple to neon green
+                </h3>
+                <div className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl mt-0.5">
+                  <p>
+                    Our first visual direction felt too similar to existing fitness apps. When planning colours, we generated AI design explorations, and they came out in blue and purple.
+                  </p>
+                  <p>
+                    I moved to neon green (#C8FF3D) on a dark base (#0B0F1A), with an orange streak accent (#FF6B35), for a more energetic and distinctive identity. I created the initial system covering colour, typography, buttons, cards, spacing and icons, and chose Inter for its readability across workout data, social content and gamification.
+                  </p>
+                </div>
+              </TextReveal>
+
+              {/* 01 Color */}
+              <div className="flex flex-col gap-5 pt-1">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
+                  <h4 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
+                    01 Color
+                  </h4>
+                </div>
+
+                {/* 3 Main Color Swatches */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                  {/* Primary */}
+                  <div className="h-28 sm:h-32 rounded-2xl bg-[#C8FF3D] p-4 sm:p-5 flex flex-col justify-between text-black shadow-sm">
+                    <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                      PRIMARY
+                    </span>
+                    <span className="text-[20px] sm:text-[24px] font-black tracking-tight" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                      #C8FF3D
+                    </span>
+                  </div>
+
+                  {/* Streak */}
+                  <div className="h-28 sm:h-32 rounded-2xl bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] p-4 sm:p-5 flex flex-col justify-between text-white shadow-sm">
+                    <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider opacity-90" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                      STREAK
+                    </span>
+                    <span className="text-[20px] sm:text-[24px] font-black tracking-tight" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                      #FF6B35
+                    </span>
+                  </div>
+
+                  {/* Danger */}
+                  <div className="h-28 sm:h-32 rounded-2xl bg-[#FF4D6D] p-4 sm:p-5 flex flex-col justify-between text-white shadow-sm">
+                    <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider opacity-90" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                      DANGER
+                    </span>
+                    <span className="text-[20px] sm:text-[24px] font-black tracking-tight" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                      #FF4D6D
+                    </span>
+                  </div>
+                </div>
+
+                {/* Neutrals Sub-section */}
+                <div className="flex flex-col gap-3 pt-2">
+                  <span className="text-[11px] sm:text-[12px] uppercase tracking-wider text-[var(--text-secondary)] font-semibold px-0.5" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                    Neutrals
+                  </span>
+
+                  <div className="flex flex-col gap-3 sm:gap-4">
+                    {/* Line 1: Background & Stroke Tokens (4 items) */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                      {[
+                        { token: "bg/page", hex: "#0B0F1A", color: "#0B0F1A", borderColor: "#2A3142", textColor: "text-white" },
+                        { token: "bg/surface", hex: "#161B2A", color: "#161B2A", borderColor: "#2A3142", textColor: "text-white" },
+                        { token: "bg/raised", hex: "#1F2638", color: "#1F2638", borderColor: "#2A3142", textColor: "text-white" },
+                        { token: "border/stroke", hex: "#2A3142", color: "#2A3142", borderColor: "#3A4356", textColor: "text-white" }
+                      ].map((neutral, idx) => (
+                        <div 
+                          key={idx}
+                          className={`h-24 sm:h-28 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border shadow-sm ${neutral.textColor}`}
+                          style={{ background: neutral.color, borderColor: neutral.borderColor }}
+                        >
+                          <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider opacity-80" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                            {neutral.token}
+                          </span>
+                          <span className="text-[16px] sm:text-[19px] font-black tracking-tight" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                            {neutral.hex}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Line 2: Typography & Content Tokens (3 items) */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                      {[
+                        { token: "text/tertiary", hex: "#5A637B", color: "#5A637B", borderColor: "#4A5268", textColor: "text-white" },
+                        { token: "text/secondary", hex: "#9CA3AF", color: "#9CA3AF", borderColor: "#CBD5E1", textColor: "text-black" },
+                        { token: "text/primary", hex: "#FFFFFF", color: "#FFFFFF", borderColor: "#FFFFFF", textColor: "text-black" }
+                      ].map((neutral, idx) => (
+                        <div 
+                          key={idx}
+                          className={`h-24 sm:h-28 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border shadow-sm ${neutral.textColor}`}
+                          style={{ background: neutral.color, borderColor: neutral.borderColor }}
+                        >
+                          <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider opacity-80" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                            {neutral.token}
+                          </span>
+                          <span className="text-[16px] sm:text-[19px] font-black tracking-tight" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                            {neutral.hex}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 02 Typography */}
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
+                  <h4 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
+                    02 Typography
+                  </h4>
+                </div>
+
+                <div 
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                  className="p-5 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] shadow-xs flex items-center justify-between"
+                >
+                  <span className="text-[11px] sm:text-[12px] uppercase tracking-widest text-[var(--text-secondary)] font-bold" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                    Typeface
+                  </span>
+                  <span className="text-[20px] sm:text-[24px] font-bold text-[var(--text-primary)] tracking-tight">
+                    Inter
+                  </span>
+                </div>
+              </div>
+
+              {/* 03 Components */}
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
+                  <h4 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
+                    03 Components
+                  </h4>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+                  {/* Buttons & States */}
+                  <div className="lg:col-span-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col justify-between gap-5">
+                    <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3">
+                      <span className="text-[11px] uppercase tracking-widest text-[var(--text-secondary)] font-bold" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                        Buttons & States
+                      </span>
+                      <span className="text-[11px] text-[var(--text-secondary)] font-medium" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                        Interactive
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col gap-4 py-2">
+                      {/* Primary Button */}
+                      <div className="flex items-center gap-4">
+                        <button
+                          type="button"
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                          className="w-36 sm:w-40 py-2.5 sm:py-3 rounded-xl bg-[#C8FF3D] text-black font-bold text-[13px] sm:text-[14px] shadow-sm flex items-center justify-center transition-transform hover:scale-105"
+                        >
+                          Start Workout
+                        </button>
+                        <span className="text-[12px] sm:text-[13px] text-[var(--text-secondary)] font-medium" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                          Primary
+                        </span>
+                      </div>
+
+                      {/* Disabled Button */}
+                      <div className="flex items-center gap-4">
+                        <button
+                          type="button"
+                          disabled
+                          style={{ fontFamily: "'Inter', sans-serif" }}
+                          className="w-36 sm:w-40 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-surface)] text-[var(--text-secondary)] opacity-60 font-bold text-[13px] sm:text-[14px] border border-[var(--border-card)] flex items-center justify-center cursor-not-allowed"
+                        >
+                          Start Workout
+                        </button>
+                        <span className="text-[12px] sm:text-[13px] text-[var(--text-secondary)] font-medium" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                          Disabled
+                        </span>
+                      </div>
+
+                      {/* FAB Button */}
+                      <div className="flex items-center gap-4">
+                        <button
+                          type="button"
+                          className="w-11 h-11 rounded-full bg-[#C8FF3D] text-black flex items-center justify-center shadow-md transition-transform hover:scale-110"
+                        >
+                          <Plus size={20} strokeWidth={3} />
+                        </button>
+                        <span className="text-[12px] sm:text-[13px] text-[var(--text-secondary)] font-medium" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                          Create Plan
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Navigation */}
+                  <div className="lg:col-span-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col justify-between gap-5">
+                    <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3">
+                      <span className="text-[11px] uppercase tracking-widest text-[var(--text-secondary)] font-bold" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                        Bottom Navigation
+                      </span>
+                      <span className="text-[10px] text-[var(--text-secondary)] font-medium" style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}>
+                        from IA · 5 destinations
+                      </span>
+                    </div>
+
+                    {/* Bottom Navigation Image Preview */}
+                    <div className="flex items-center justify-center my-auto py-4 sm:py-6 px-1">
+                      <img
+                        src={bottomNavImg}
+                        alt="Bottom Navigation (from IA · 5 destinations)"
+                        className="w-full max-w-md sm:max-w-lg object-contain transition-transform duration-300 hover:scale-[1.03]"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* After & Result narrative */}
+              <TextReveal className="flex flex-col gap-3 text-[16px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl pt-1">
+                <p>
+                  The team had one consistent foundation for the high-fidelity screens. Establishing a distinctive identity, with Hi-Fi screens built on one shared system.
+                </p>
+              </TextReveal>
             </div>
           </div>
         </section>
 
-        {/* ── SETTING THE VISUAL DIRECTION ─────────────────────────── */}
-        <section id="visuals" className="flex flex-col gap-8">
-          <div className="flex flex-col gap-3">
+        {/* ── HIGH-FIDELITY SCREENS ───────────────────────────────── */}
+        <section id="screens" className="flex flex-col gap-5 sm:gap-6">
+          <TextReveal className="flex flex-col gap-2">
             <h2 className="text-[28px] sm:text-[36px] md:text-[42px] font-semibold tracking-tight text-[var(--text-primary)] leading-tight">
-              Setting the Visual Direction
+              High-Fidelity Screens
             </h2>
-            <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-              <p>
-                We started with blue and purple, but the direction felt too similar to existing fitness apps. I moved towards neon green to give Rizen a more energetic and distinctive identity.
-              </p>
-              <p>
-                I created the initial visual system covering colour, typography, buttons, cards, spacing and icons, giving the team a consistent foundation for the Hi-Fi screens.
-              </p>
-            </div>
-          </div>
+          </TextReveal>
 
-          {/* 01 — Color */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2.5">
-              <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
-              <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
-                01 — Color
-              </h3>
-            </div>
-
-            {/* 3 Main Color Swatches */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-              {/* Primary */}
-              <div className="flex flex-col gap-1.5">
-                <div className="h-28 sm:h-32 rounded-2xl bg-[#C8FF3D] p-4 sm:p-5 flex flex-col justify-between text-black shadow-sm">
-                  <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider">
-                    PRIMARY
-                  </span>
-                  <span className="text-[20px] sm:text-[24px] font-black font-mono tracking-tight">
-                    #C8FF3D
-                  </span>
-                </div>
-                <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1">
-                  brand/primary
-                </span>
-              </div>
-
-              {/* Streak */}
-              <div className="flex flex-col gap-1.5">
-                <div className="h-28 sm:h-32 rounded-2xl bg-gradient-to-r from-[#FF6B35] to-[#FF8C42] p-4 sm:p-5 flex flex-col justify-between text-white shadow-sm">
-                  <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider opacity-90">
-                    STREAK
-                  </span>
-                  <span className="text-[20px] sm:text-[24px] font-black font-mono tracking-tight">
-                    #FF6B35
-                  </span>
-                </div>
-                <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1">
-                  accent/streak
-                </span>
-              </div>
-
-              {/* Danger */}
-              <div className="flex flex-col gap-1.5">
-                <div className="h-28 sm:h-32 rounded-2xl bg-[#FF4D6D] p-4 sm:p-5 flex flex-col justify-between text-white shadow-sm">
-                  <span className="text-[11px] sm:text-[12px] font-extrabold uppercase tracking-wider opacity-90">
-                    DANGER
-                  </span>
-                  <span className="text-[20px] sm:text-[24px] font-black font-mono tracking-tight">
-                    #FF4D6D
-                  </span>
-                </div>
-                <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1">
-                  feedback/danger
-                </span>
-              </div>
-            </div>
-
-            {/* Neutrals Sub-section (Divided in 2 Lines, matching primary swatch cards) */}
-            <div className="flex flex-col gap-3 pt-2">
-              <span className="text-[11px] sm:text-[12px] font-mono uppercase tracking-wider text-[var(--text-secondary)] font-semibold px-0.5">
-                Neutrals
-              </span>
-
-              <div className="flex flex-col gap-3 sm:gap-4">
-                {/* Line 1: Background & Stroke Tokens (4 items) */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-                  {[
-                    { token: "bg/page", hex: "#0B0F1A", desc: "Page base", color: "#0B0F1A", borderColor: "#2A3142", textColor: "text-white" },
-                    { token: "bg/surface", hex: "#161B2A", desc: "Cards", color: "#161B2A", borderColor: "#2A3142", textColor: "text-white" },
-                    { token: "bg/raised", hex: "#1F2638", desc: "Raised cards", color: "#1F2638", borderColor: "#2A3142", textColor: "text-white" },
-                    { token: "border/stroke", hex: "#2A3142", desc: "Borders, dividers", color: "#2A3142", borderColor: "#3A4356", textColor: "text-white" }
-                  ].map((neutral, idx) => (
-                    <div key={idx} className="flex flex-col gap-1.5">
-                      <div 
-                        className={`h-24 sm:h-28 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border shadow-sm ${neutral.textColor}`}
-                        style={{ background: neutral.color, borderColor: neutral.borderColor }}
-                      >
-                        <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider opacity-80 font-mono">
-                          {neutral.token}
-                        </span>
-                        <span className="text-[16px] sm:text-[19px] font-black font-mono tracking-tight">
-                          {neutral.hex}
-                        </span>
-                      </div>
-                      <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1 truncate">
-                        {neutral.desc}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Line 2: Typography & Content Tokens (3 items) */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                  {[
-                    { token: "text/tertiary", hex: "#5A637B", desc: "Hints, disabled", color: "#5A637B", borderColor: "#4A5268", textColor: "text-white" },
-                    { token: "text/secondary", hex: "#9CA3AF", desc: "Labels, captions", color: "#9CA3AF", borderColor: "#CBD5E1", textColor: "text-black" },
-                    { token: "text/primary", hex: "#FFFFFF", desc: "Headings, values", color: "#FFFFFF", borderColor: "#FFFFFF", textColor: "text-black" }
-                  ].map((neutral, idx) => (
-                    <div key={idx} className="flex flex-col gap-1.5">
-                      <div 
-                        className={`h-24 sm:h-28 rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border shadow-sm ${neutral.textColor}`}
-                        style={{ background: neutral.color, borderColor: neutral.borderColor }}
-                      >
-                        <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider opacity-80 font-mono">
-                          {neutral.token}
-                        </span>
-                        <span className="text-[16px] sm:text-[19px] font-black font-mono tracking-tight">
-                          {neutral.hex}
-                        </span>
-                      </div>
-                      <span className="text-[11px] sm:text-[12px] font-mono text-[var(--text-secondary)] px-1 truncate">
-                        {neutral.desc}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 02 — Typography */}
+          {/* Hi-Fi Screens Carousel */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2.5">
-              <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
-              <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
-                02 — Typography
-              </h3>
-            </div>
-
-            <div 
-              style={{ fontFamily: "'Inter', sans-serif" }}
-              className="p-5 sm:p-7 md:p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col gap-6"
-            >
-              <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3.5">
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-secondary)] font-bold">
-                  Type Scale
-                </span>
-                <span className="text-[11px] font-mono text-[var(--text-secondary)] font-medium">
-                  Inter
-                </span>
-              </div>
-
-              <div className="flex flex-col gap-5">
-                {/* H1 */}
-                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
-                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
-                    <span className="text-[#C8FF3D] font-bold">H1</span>
-                    <span className="text-[var(--text-secondary)]">28 · Extra Bold · 34lh · -1%</span>
-                  </div>
-                  <p 
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    className="text-[22px] sm:text-[26px] md:text-[28px] font-extrabold text-[var(--text-primary)] tracking-[-0.01em] leading-[1.25]"
-                  >
-                    Your plan is ready
-                  </p>
-                </div>
-
-                {/* H2 */}
-                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
-                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
-                    <span className="text-[#C8FF3D] font-bold">H2</span>
-                    <span className="text-[var(--text-secondary)]">22 · Extra Bold · 28lh · -0.5%</span>
-                  </div>
-                  <p 
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    className="text-[18px] sm:text-[20px] md:text-[22px] font-extrabold text-[var(--text-primary)] tracking-[-0.005em] leading-[1.28]"
-                  >
-                    Workout Complete!
-                  </p>
-                </div>
-
-                {/* Title */}
-                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
-                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
-                    <span className="text-[#C8FF3D] font-bold">Title</span>
-                    <span className="text-[var(--text-secondary)]">16 · Bold · 22lh</span>
-                  </div>
-                  <p 
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    className="text-[15px] sm:text-[16px] font-bold text-[var(--text-primary)] leading-[22px]"
-                  >
-                    Friends activity
-                  </p>
-                </div>
-
-                {/* Body */}
-                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
-                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
-                    <span className="text-[#C8FF3D] font-bold">Body</span>
-                    <span className="text-[var(--text-secondary)]">14 · Medium · 20lh</span>
-                  </div>
-                  <p 
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    className="text-[14px] font-medium text-[var(--text-secondary)] leading-[20px]"
-                  >
-                    Six exercises planned for today's push session.
-                  </p>
-                </div>
-
-                {/* Body S */}
-                <div className="flex flex-col gap-1.5 border-b border-[var(--border-card)]/60 pb-4">
-                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
-                    <span className="text-[#C8FF3D] font-bold">Body S</span>
-                    <span className="text-[var(--text-secondary)]">13 · Medium · 18lh</span>
-                  </div>
-                  <p 
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    className="text-[13px] font-medium text-[var(--text-secondary)] leading-[18px]"
-                  >
-                    2 minutes ago
-                  </p>
-                </div>
-
-                {/* Caption */}
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex flex-wrap items-center justify-between gap-1 text-[11px] font-mono">
-                    <span className="text-[#C8FF3D] font-bold">Caption</span>
-                    <span className="text-[var(--text-secondary)]">11 · Semi Bold · 14lh · 2%</span>
-                  </div>
-                  <p 
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                    className="text-[11px] font-semibold text-[var(--text-secondary)] uppercase tracking-[0.02em] leading-[14px]"
-                  >
-                    TUE 17 MAY · 52:18 MIN
-                  </p>
-                </div>
+            <div className="flex items-center justify-end">
+              {/* Left & Right Navigation Arrows */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => scrollScreens('left')}
+                  disabled={!canScrollScreensLeft}
+                  aria-label="Previous screen"
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all cursor-pointer ${
+                    canScrollScreensLeft
+                      ? 'hover:scale-105 active:scale-95 shadow-sm'
+                      : 'opacity-30 cursor-not-allowed'
+                  }`}
+                  style={{
+                    background: 'var(--bg-surface)',
+                    borderColor: 'var(--border-card)',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollScreens('right')}
+                  disabled={!canScrollScreensRight}
+                  aria-label="Next screen"
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center border transition-all cursor-pointer ${
+                    canScrollScreensRight
+                      ? 'hover:scale-105 active:scale-95 shadow-sm'
+                      : 'opacity-30 cursor-not-allowed'
+                  }`}
+                  style={{
+                    background: 'var(--bg-surface)',
+                    borderColor: 'var(--border-card)',
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
               </div>
             </div>
-          </div>
 
-          {/* 03 — Components */}
-          <div className="flex flex-col gap-5">
-            <div className="flex items-center gap-2.5">
-              <div className="w-1.5 h-4 bg-[#C8FF3D] rounded-full" />
-              <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight">
-                03 — Components
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
-              {/* Buttons & States */}
-              <div className="lg:col-span-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col justify-between gap-5">
-                <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3">
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-secondary)] font-bold">
-                    Buttons & States
-                  </span>
-                  <span className="text-[11px] font-mono text-[var(--text-secondary)]">Interactive</span>
-                </div>
-
-                <div className="flex flex-col gap-4 py-2">
-                  {/* Primary Button */}
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                      className="w-36 sm:w-40 py-2.5 sm:py-3 rounded-xl bg-[#C8FF3D] text-black font-bold text-[13px] sm:text-[14px] shadow-sm flex items-center justify-center transition-transform hover:scale-105"
+            {/* Horizontal Scrollable Mockups */}
+            <div className="relative group/screens">
+              <div
+                ref={screensScrollRef}
+                onScroll={checkScreensScroll}
+                className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory py-4 px-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {hifiScreensData.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex-shrink-0 w-[68%] sm:w-[42%] md:w-[32%] snap-start flex flex-col items-center gap-3.5"
+                  >
+                    <div
+                      onClick={() => setFullscreenScreenIndex(idx)}
+                      className="group relative w-full cursor-pointer flex justify-center transition-transform duration-300 hover:scale-[1.03]"
                     >
-                      Start Workout
-                    </button>
-                    <span className="text-[12px] sm:text-[13px] font-mono text-[var(--text-secondary)]">
-                      Primary
-                    </span>
-                  </div>
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="w-full max-w-[220px] sm:max-w-[245px] md:max-w-[260px] h-auto object-contain block"
+                      />
 
-                  {/* Disabled Button */}
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      disabled
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                      className="w-36 sm:w-40 py-2.5 sm:py-3 rounded-xl bg-[var(--bg-surface)] text-[var(--text-secondary)] opacity-60 font-bold text-[13px] sm:text-[14px] border border-[var(--border-card)] flex items-center justify-center cursor-not-allowed"
-                    >
-                      Start Workout
-                    </button>
-                    <span className="text-[12px] sm:text-[13px] font-mono text-[var(--text-secondary)]">
-                      Disabled
-                    </span>
-                  </div>
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        <div className="flex items-center gap-1.5 bg-black/70 backdrop-blur-md text-white text-[12px] font-medium px-3.5 py-1.5 rounded-full border border-white/15 shadow-xl">
+                          <Maximize2 className="w-3.5 h-3.5" />
+                          <span>View screen</span>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* FAB Button */}
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      className="w-11 h-11 rounded-full bg-[#C8FF3D] text-black flex items-center justify-center shadow-md transition-transform hover:scale-110"
-                    >
-                      <Plus size={20} strokeWidth={3} />
-                    </button>
-                    <span className="text-[12px] sm:text-[13px] font-mono text-[var(--text-secondary)]">
-                      Create Plan
-                    </span>
+                    <div className="flex flex-col items-center text-center gap-0.5 px-2">
+                      <span className="text-[14px] sm:text-[15px] font-semibold text-[var(--text-primary)]">
+                        {item.title}
+                      </span>
+                      <span className="text-[12px] text-[var(--text-secondary)] font-normal">
+                        {item.caption}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
 
-              {/* Bottom Navigation */}
-              <div className="lg:col-span-6 p-4 sm:p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col justify-between gap-5">
-                <div className="flex items-center justify-between border-b border-[var(--border-card)] pb-3">
-                  <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-secondary)] font-bold">
-                    Bottom Navigation
-                  </span>
-                  <span className="text-[10px] font-mono text-[var(--text-secondary)]">from IA · 5 destinations</span>
-                </div>
-
-                {/* Bottom Navigation Image Preview */}
-                <div className="flex items-center justify-center my-auto py-4 sm:py-6 px-1">
-                  <img
-                    src={bottomNavImg}
-                    alt="Bottom Navigation (from IA · 5 destinations)"
-                    className="w-full max-w-md sm:max-w-lg object-contain transition-transform duration-300 hover:scale-[1.03]"
-                  />
-                </div>
-              </div>
+              {/* Desktop Floating Arrows */}
+              {canScrollScreensLeft && (
+                <button
+                  type="button"
+                  onClick={() => scrollScreens('left')}
+                  aria-label="Previous screen"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95 z-10"
+                >
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+              )}
+              {canScrollScreensRight && (
+                <button
+                  type="button"
+                  onClick={() => scrollScreens('right')}
+                  aria-label="Next screen"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg hover:scale-105 active:scale-95 z-10"
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
+              )}
             </div>
-          </div>
-
-          <div className="flex flex-col gap-3 text-[16px] sm:text-[17px] leading-[1.75] text-[var(--text-secondary)] font-normal max-w-3xl">
-            <p>
-              I chose Inter for its readability across the app's workout data, social content and gamification.
-            </p>
           </div>
         </section>
 
@@ -969,121 +1294,226 @@ export const RizenCaseStudy: React.FC = () => {
               <p>
                 Once the MVP was defined, I also explored opportunities to make Rizen a sustainable business beyond basic workout tracking.
               </p>
-              <p className="font-medium text-[var(--text-primary)] pt-1">
-                The Phase 2 ideas focused on three revenue opportunities:
+              <p className="pt-1">
+                The <strong className="font-bold text-[var(--text-primary)]">Phase 2</strong> ideas focused on revenue and growth opportunities:
               </p>
             </div>
           </div>
 
-          {/* 3 Revenue Opportunities Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+          {/* Revenue & Growth Opportunities Cards (Max 2 cards per row) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             {[
               {
-                num: "01",
-                category: "Monetization",
                 title: "Community",
                 desc: "Build engagement through group challenges, creator workout plans and community features.",
-                subtext: "Creator splits & group challenge passes",
-                icon: Users
               },
               {
-                num: "02",
-                category: "Premium Tier",
                 title: "Advanced Analytics",
                 desc: "Offer deeper performance, recovery and health insights as a potential premium feature.",
-                subtext: "Fatigue recovery & progressive overload insights",
-                icon: TrendingUp
               },
               {
-                num: "03",
-                category: "Marketplace",
-                title: "Online Coaching",
+                title: "Online Coaching Marketplace",
                 desc: "Connect users with certified trainers and explore a booking/commission model.",
-                subtext: "Direct coach assignments & session bookings",
-                icon: UserCheck
+              },
+              {
+                title: "AI Workout Assistance",
+                desc: "AI assistance could also become part of a future subscription, using the user's existing workout and progress data to provide personalised guidance.",
               }
-            ].map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="relative overflow-hidden p-4 sm:p-5 rounded-2xl border flex flex-col justify-between gap-4 transition-all duration-300 shadow-sm group"
-                  style={{
-                    borderColor: 'var(--border-card)',
-                    background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
-                  }}
-                >
-                  {/* Subtle Neon Volt ambient gradient in top-left */}
-                  <div className="absolute top-0 left-0 w-32 h-32 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
-
-                  <div className="flex flex-col gap-3 relative z-10">
-                    <div className="flex items-center justify-between gap-2">
-                      {/* Icon Container */}
-                      <div
-                        className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300"
-                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
-                      >
-                        <Icon size={20} />
-                      </div>
-
-                      <span 
-                        className="text-[10px] sm:text-[11px] font-mono px-2.5 py-0.5 rounded-full font-semibold uppercase tracking-wider border shrink-0 text-right whitespace-nowrap ml-auto"
-                        style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-muted)' }}
-                      >
-                        {item.category}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-1">
-                      <h3 className="text-[16px] sm:text-[17px] md:text-[18px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
-                        {item.title}
-                      </h3>
-                      <p className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] leading-relaxed font-normal">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div 
-                    className="pt-3 border-t text-[12px] text-[var(--text-muted)] flex items-center gap-1.5 relative z-10" 
-                    style={{ borderColor: 'var(--border-card)' }}
-                  >
-                    {item.subtext}
-                  </div>
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between gap-5 border shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                style={{
+                  background: 'var(--bg-card)',
+                  borderColor: 'var(--border-card)',
+                }}
+              >
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-[18px] sm:text-[20px] font-bold text-[var(--text-primary)] tracking-tight leading-snug">
+                    {item.title}
+                  </h3>
+                  <p className="text-[14px] sm:text-[15px] text-[var(--text-secondary)] leading-relaxed font-normal">
+                    {item.desc}
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-
-          {/* AI Assistance Future Subscription Box */}
-          <div
-            className="w-full rounded-2xl p-4 sm:p-5 border relative overflow-hidden shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 transition-all duration-300 group"
-            style={{
-              borderColor: 'var(--border-card)',
-              background: 'linear-gradient(155deg, rgba(200, 255, 61, 0.045) 0%, var(--bg-card) 45%, var(--bg-card) 100%)'
-            }}
-          >
-            {/* Subtle ambient gradient in top-left */}
-            <div className="absolute top-0 left-0 w-36 h-36 bg-[#C8FF3D]/[0.05] dark:bg-[#C8FF3D]/[0.07] rounded-full blur-2xl pointer-events-none -ml-8 -mt-8" />
-
-            <div 
-              className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300 relative z-10"
-              style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
-            >
-              <Sparkles size={20} />
-            </div>
-            <div className="flex flex-col gap-1 relative z-10">
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] sm:text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-bold">
-                  Future AI Subscription Layer
-                </span>
               </div>
-              <p className="text-[13px] sm:text-[14px] leading-relaxed text-[var(--text-secondary)]">
-                AI assistance could also become part of a future subscription, using the user's existing workout and progress data to provide personalised guidance.
-              </p>
-            </div>
+            ))}
           </div>
         </section>
+
+        {/* Fullscreen Lightbox for Wireframes */}
+        <AnimatePresence>
+          {fullscreenWireframeIndex !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setFullscreenWireframeIndex(null)}
+              className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 select-none"
+            >
+              {/* Top Bar: Counter, Title & Close Button */}
+              <div
+                className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between z-20 pointer-events-auto gap-4"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center gap-3">
+                  <span 
+                    className="text-white/80 text-[13px] sm:text-[14px] tracking-wider px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 font-semibold"
+                    style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                  >
+                    {fullscreenWireframeIndex + 1} / {wireframesData.length}
+                  </span>
+                  <span className="text-white/90 text-[13px] sm:text-[14px] font-medium hidden sm:inline-block">
+                    {wireframesData[fullscreenWireframeIndex].title} · Wireframe
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setFullscreenWireframeIndex(null)}
+                  aria-label="Close fullscreen view"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer border border-white/15 backdrop-blur-sm"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Prev Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFullscreenWireframeIndex((prev) =>
+                    prev !== null ? (prev > 0 ? prev - 1 : wireframesData.length - 1) : null
+                  );
+                }}
+                aria-label="Previous wireframe"
+                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 z-20 backdrop-blur-sm shadow-md"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+
+              {/* Lightbox Image Container */}
+              <motion.div
+                key={`wireframe-${fullscreenWireframeIndex}`}
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative max-w-4xl max-h-[82vh] w-full flex items-center justify-center p-2 z-10"
+              >
+                <img
+                  src={wireframesData[fullscreenWireframeIndex].src}
+                  alt={wireframesData[fullscreenWireframeIndex].alt}
+                  className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl sm:rounded-2xl border border-white/15 shadow-2xl block bg-white"
+                />
+              </motion.div>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFullscreenWireframeIndex((prev) =>
+                    prev !== null ? (prev < wireframesData.length - 1 ? prev + 1 : 0) : null
+                  );
+                }}
+                aria-label="Next wireframe"
+                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 z-20 backdrop-blur-sm shadow-md"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Fullscreen Lightbox for Hi-Fi Screens */}
+        <AnimatePresence>
+          {fullscreenScreenIndex !== null && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setFullscreenScreenIndex(null)}
+              className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 select-none"
+            >
+              {/* Top Bar: Counter, Title & Close Button */}
+              <div
+                className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between z-20 pointer-events-auto gap-4"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center gap-3">
+                  <span 
+                    className="text-white/80 text-[13px] sm:text-[14px] tracking-wider px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 font-semibold"
+                    style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
+                  >
+                    {fullscreenScreenIndex + 1} / {hifiScreensData.length}
+                  </span>
+                  <span className="text-white/90 text-[13px] sm:text-[14px] font-medium hidden sm:inline-block">
+                    {hifiScreensData[fullscreenScreenIndex].title} · {hifiScreensData[fullscreenScreenIndex].caption}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setFullscreenScreenIndex(null)}
+                  aria-label="Close fullscreen view"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer border border-white/15 backdrop-blur-sm"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Prev Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFullscreenScreenIndex((prev) =>
+                    prev !== null ? (prev > 0 ? prev - 1 : hifiScreensData.length - 1) : null
+                  );
+                }}
+                aria-label="Previous screen"
+                className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 z-20 backdrop-blur-sm shadow-md"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+
+              {/* Lightbox Image Container */}
+              <motion.div
+                key={`screen-${fullscreenScreenIndex}`}
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={(e) => e.stopPropagation()}
+                className="relative max-w-4xl max-h-[85vh] w-full flex items-center justify-center p-2 z-10"
+              >
+                <img
+                  src={hifiScreensData[fullscreenScreenIndex].src}
+                  alt={hifiScreensData[fullscreenScreenIndex].alt}
+                  className="max-w-full max-h-[82vh] w-auto h-auto object-contain block"
+                />
+              </motion.div>
+
+              {/* Next Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setFullscreenScreenIndex((prev) =>
+                    prev !== null ? (prev < hifiScreensData.length - 1 ? prev + 1 : 0) : null
+                  );
+                }}
+                aria-label="Next screen"
+                className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all cursor-pointer border border-white/15 hover:scale-105 active:scale-95 z-20 backdrop-blur-sm shadow-md"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
         <CaseStudyFooter nextProject={nextProject} />
