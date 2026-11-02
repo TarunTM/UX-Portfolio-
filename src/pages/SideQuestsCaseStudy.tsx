@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import TextReveal from '../components/TextReveal';
+import ImageLightboxModal, { type LightboxImage } from '../components/ImageLightboxModal';
 import { projects } from '../data/projects';
 import nothingCalculatorImg from '../assets/3.Side Project Large.webp';
 import instaReelsPrototype from '../assets/Insta Reels Prototype.webm';
@@ -10,19 +11,7 @@ import afterFlipkartImg from '../assets/After Flipkart Checkout.webp';
 
 export const SideQuestsCaseStudy: React.FC = () => {
   const instaVideoRef = useRef<HTMLVideoElement>(null);
-  const [isPlayingInsta, setIsPlayingInsta] = useState(true);
-
-  const toggleInstaPlay = () => {
-    if (instaVideoRef.current) {
-      if (instaVideoRef.current.paused) {
-        instaVideoRef.current.play();
-        setIsPlayingInsta(true);
-      } else {
-        instaVideoRef.current.pause();
-        setIsPlayingInsta(false);
-      }
-    }
-  };
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
   // Scroll to top on mount
   useEffect(() => {
@@ -107,17 +96,17 @@ export const SideQuestsCaseStudy: React.FC = () => {
           {/* Right Column: Prototype Video (Matches Rizen mockup sizing) */}
           <div className="lg:col-span-6 flex justify-center items-center py-2">
             <div
-              onClick={toggleInstaPlay}
+              onClick={() => setLightboxImage({ src: instaReelsPrototype, type: 'video', caption: 'Instagram Reels — Shared Reels Prototype' })}
               role="button"
               tabIndex={0}
-              aria-label={isPlayingInsta ? "Pause Instagram Reels prototype video" : "Play Instagram Reels prototype video"}
+              aria-label="View Instagram Reels prototype in bigger preview"
               onKeyDown={(e) => {
                 if (e.key === ' ' || e.key === 'Enter') {
                   e.preventDefault();
-                  toggleInstaPlay();
+                  setLightboxImage({ src: instaReelsPrototype, type: 'video', caption: 'Instagram Reels — Shared Reels Prototype' });
                 }
               }}
-              className="relative cursor-pointer select-none w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] rounded-[48px] overflow-hidden drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
+              className="relative cursor-zoom-in select-none w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] rounded-[48px] overflow-hidden drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:scale-[1.02]"
             >
               <video
                 ref={instaVideoRef}
@@ -126,8 +115,6 @@ export const SideQuestsCaseStudy: React.FC = () => {
                 loop
                 muted
                 playsInline
-                onPlay={() => setIsPlayingInsta(true)}
-                onPause={() => setIsPlayingInsta(false)}
                 className="w-full h-auto object-contain block rounded-[48px]"
               />
             </div>
@@ -197,13 +184,14 @@ export const SideQuestsCaseStudy: React.FC = () => {
                 </div>
               </div>
               <div
-                className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)]"
+                className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)] cursor-zoom-in group"
                 style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                onClick={() => setLightboxImage({ src: beforeFlipkartImg, alt: 'Flipkart Original Payment Screen - Before', caption: 'Flipkart Checkout — Before' })}
               >
                 <img
                   src={beforeFlipkartImg}
                   alt="Flipkart Original Payment Screen - Before"
-                  className="w-full h-auto object-contain block"
+                  className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </div>
             </div>
@@ -224,13 +212,14 @@ export const SideQuestsCaseStudy: React.FC = () => {
                 </div>
               </div>
               <div
-                className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)]"
+                className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 hover:border-[var(--text-primary)] cursor-zoom-in group"
                 style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                onClick={() => setLightboxImage({ src: afterFlipkartImg, alt: 'Flipkart Redesigned Payment Screen - After', caption: 'Flipkart Checkout — After' })}
               >
                 <img
                   src={afterFlipkartImg}
                   alt="Flipkart Redesigned Payment Screen - After"
-                  className="w-full h-auto object-contain block"
+                  className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
                 />
               </div>
             </div>
@@ -262,13 +251,24 @@ export const SideQuestsCaseStudy: React.FC = () => {
 
           {/* Right Column: Mockup (Matches Rizen mockup sizing) */}
           <div className="lg:col-span-6 flex justify-center items-center py-2">
-            <img
-              src={nothingCalculatorImg}
-              alt="Nothing Calculator UI Exploration"
-              className="w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-500 hover:scale-[1.02]"
-            />
+            <div
+              className="cursor-zoom-in group"
+              onClick={() => setLightboxImage({ src: nothingCalculatorImg, alt: 'Nothing Calculator UI Exploration', caption: 'Nothing Calculator UI Exploration' })}
+            >
+              <img
+                src={nothingCalculatorImg}
+                alt="Nothing Calculator UI Exploration"
+                className="w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+            </div>
           </div>
         </section>
+
+        {/* ── FULL VIEW LIGHTBOX MODAL ────────────────────────────── */}
+        <ImageLightboxModal
+          image={lightboxImage}
+          onClose={() => setLightboxImage(null)}
+        />
 
         {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
         <CaseStudyFooter nextProject={nextProject} />

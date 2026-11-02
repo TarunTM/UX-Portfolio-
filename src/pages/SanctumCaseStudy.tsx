@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import TextReveal from '../components/TextReveal';
 import SpinningCounter from '../components/SpinningCounter';
+import ImageLightboxModal, { type LightboxImage } from '../components/ImageLightboxModal';
 import { projects } from '../data/projects';
 import heroVideo from '../assets/Sanctum Img:Video/Hero Video.webm';
 import homeSanctum from '../assets/Sanctum Img:Video/Home Sanctum.webp';
@@ -78,6 +79,8 @@ export const SanctumCaseStudy: React.FC = () => {
   const [btnHovered, setBtnHovered] = useState(false);
   const [expandedConstraint, setExpandedConstraint] = useState<string | null>('wix-limitations');
   const [expandedLearning, setExpandedLearning] = useState<string | null>('design-for-outcomes');
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
+  const [outcomeLightboxIndex, setOutcomeLightboxIndex] = useState<number | null>(null);
 
   // Iterations Carousel & Full View State
   const [fullscreenIterationIndex, setFullscreenIterationIndex] = useState<number | null>(null);
@@ -198,8 +201,9 @@ export const SanctumCaseStudy: React.FC = () => {
 
           {/* Large Project Hero Video — Uncropped Natural Aspect Ratio */}
           <div
-            className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
+            className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm cursor-zoom-in group"
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+            onClick={() => setLightboxImage({ src: heroVideo, type: 'video', caption: 'Sanctum — Hero Video' })}
           >
             <video
               src={heroVideo}
@@ -207,7 +211,7 @@ export const SanctumCaseStudy: React.FC = () => {
               loop
               muted
               playsInline
-              className="w-full h-auto object-contain block"
+              className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
             />
           </div>
 
@@ -317,13 +321,14 @@ export const SanctumCaseStudy: React.FC = () => {
               {outcomeImages.map((slide, idx) => (
                 <div
                   key={idx}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                  onClick={() => setOutcomeLightboxIndex(idx)}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out cursor-zoom-in group ${activeSlide === idx ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                     }`}
                 >
                   <img
                     src={slide.img}
                     alt={slide.alt}
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
                   />
                 </div>
               ))}
@@ -461,13 +466,14 @@ export const SanctumCaseStudy: React.FC = () => {
                   </span>
                 </div>
                 <div
-                  className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
+                  className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group cursor-zoom-in"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  onClick={() => setLightboxImage({ src: andheriOldSanctum, alt: 'Sanctum Club Page - Before (Andheri)', caption: 'Initial Club Page (Andheri)' })}
                 >
                   <img
                     src={andheriOldSanctum}
                     alt="Sanctum Club Page - Before (Andheri)"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
                   />
                   {/* Outline around plain text details */}
                   <motion.div
@@ -505,13 +511,14 @@ export const SanctumCaseStudy: React.FC = () => {
                   </span>
                 </div>
                 <div
-                  className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group"
+                  className="w-full aspect-[3840/2556] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm transition-all duration-300 relative group cursor-zoom-in"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  onClick={() => setLightboxImage({ src: juhuSanctum, alt: 'Sanctum Redesigned Club Page with Direct Actions - After (Juhu)', caption: 'Redesigned Club Page with Direct Actions (Juhu)' })}
                 >
                   <img
                     src={juhuSanctum}
                     alt="Sanctum Redesigned Club Page with Direct Actions - After (Juhu)"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
                   />
                   {/* Outline around action buttons */}
                   <motion.div
@@ -561,13 +568,14 @@ export const SanctumCaseStudy: React.FC = () => {
               {/* Specific Image: (GroupX page image) */}
               <div className="flex flex-col gap-1.5 pt-1">
                 <div
-                  className="w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
+                  className="w-full aspect-[3388/1758] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-zoom-in group"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  onClick={() => setLightboxImage({ src: groupxSanctum, alt: 'Sanctum GroupX Class Experience with Location Filtering', caption: 'GroupX Class Experience with Location Filtering' })}
                 >
                   <img
                     src={groupxSanctum}
                     alt="Sanctum GroupX Class Experience with Location Filtering"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
                   />
                 </div>
               </div>
@@ -656,7 +664,7 @@ export const SanctumCaseStudy: React.FC = () => {
                       >
                         <div
                           onClick={() => setFullscreenIterationIndex(idx)}
-                          className="group relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border shadow-sm cursor-pointer transition-all duration-300 hover:shadow-md"
+                          className="group relative w-full aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border shadow-sm cursor-zoom-in transition-all duration-300 hover:shadow-md"
                           style={{
                             borderColor: 'var(--border-card)',
                             background: 'var(--bg-surface)',
@@ -678,14 +686,6 @@ export const SanctumCaseStudy: React.FC = () => {
                               className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
                             />
                           )}
-
-                          {/* Hover Overlay with Expand Affordance */}
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-end justify-end p-3 sm:p-4">
-                            <div className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                              <Maximize2 className="w-3.5 h-3.5" />
-                              <span>Full view</span>
-                            </div>
-                          </div>
                         </div>
                         <span className="text-[13px] sm:text-[14px] text-[var(--text-secondary)] font-medium px-0.5">
                           {item.caption}
@@ -728,8 +728,9 @@ export const SanctumCaseStudy: React.FC = () => {
               {/* Specific Media: (Final design and scroll video) */}
               <div className="pt-1">
                 <div
-                  className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm"
+                  className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-zoom-in group"
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+                  onClick={() => setLightboxImage({ src: trainingScrollVideo, type: 'video', caption: 'Sanctum — Final: Revealed on scroll' })}
                 >
                   <video
                     src={trainingScrollVideo}
@@ -739,7 +740,7 @@ export const SanctumCaseStudy: React.FC = () => {
                     loop
                     muted
                     playsInline
-                    className="w-full h-auto object-contain block"
+                    className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
                   />
                 </div>
               </div>
@@ -987,6 +988,25 @@ export const SanctumCaseStudy: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── OUTCOME CAROUSEL GALLERY LIGHTBOX MODAL ─────────────── */}
+      <ImageLightboxModal
+        images={outcomeImages.map((s) => ({
+          src: s.img,
+          alt: s.alt,
+          caption: `Sanctum Outcome — ${s.title}`,
+        }))}
+        initialIndex={outcomeLightboxIndex ?? 0}
+        isOpen={outcomeLightboxIndex !== null}
+        onIndexChange={(idx) => setActiveSlide(idx)}
+        onClose={() => setOutcomeLightboxIndex(null)}
+      />
+
+      {/* ── SINGLE IMAGE PREVIEW LIGHTBOX MODAL ─────────────────── */}
+      <ImageLightboxModal
+        image={lightboxImage}
+        onClose={() => setLightboxImage(null)}
+      />
     </div>
   );
 };

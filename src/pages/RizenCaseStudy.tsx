@@ -4,12 +4,12 @@ import {
   Plus,
   ChevronLeft,
   ChevronRight,
-  Maximize2,
   X
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import TextReveal from '../components/TextReveal';
+import ImageLightboxModal, { type LightboxImage } from '../components/ImageLightboxModal';
 import { projects } from '../data/projects';
 import heroRizen from '../assets/Rizen Img/Hero Rizen.webp';
 import outcomePrototype from '../assets/Rizen Img/Outcome Prototype.webm';
@@ -152,7 +152,6 @@ const hifiScreensData = [
 
 export const RizenCaseStudy: React.FC = () => {
   const outcomeVideoRef = useRef<HTMLVideoElement>(null);
-  const [isPlayingOutcome, setIsPlayingOutcome] = useState(true);
 
   // Wireframes Scroll & Fullscreen State
   const wireframesScrollRef = useRef<HTMLDivElement>(null);
@@ -166,17 +165,8 @@ export const RizenCaseStudy: React.FC = () => {
   const [canScrollScreensRight, setCanScrollScreensRight] = useState(true);
   const [fullscreenScreenIndex, setFullscreenScreenIndex] = useState<number | null>(null);
 
-  const toggleOutcomePlay = () => {
-    if (outcomeVideoRef.current) {
-      if (outcomeVideoRef.current.paused) {
-        outcomeVideoRef.current.play();
-        setIsPlayingOutcome(true);
-      } else {
-        outcomeVideoRef.current.pause();
-        setIsPlayingOutcome(false);
-      }
-    }
-  };
+  // Single Image Lightbox
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
   const checkWireframesScroll = () => {
     if (!wireframesScrollRef.current) return;
@@ -289,13 +279,14 @@ export const RizenCaseStudy: React.FC = () => {
 
           {/* Large Project Hero Image — Uncropped Natural Aspect Ratio */}
           <div
-            className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm"
+            className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm cursor-zoom-in group"
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
+            onClick={() => setLightboxImage({ src: heroRizen, alt: 'Rizen Fitness App Showcase — Hero Mockup', caption: 'Rizen — Social Gamified Fitness App' })}
           >
             <img
               src={heroRizen}
               alt="Rizen Fitness App Showcase — Hero Mockup"
-              className="w-full h-auto object-contain block"
+              className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
             />
           </div>
 
@@ -371,20 +362,20 @@ export const RizenCaseStudy: React.FC = () => {
           </TextReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-12 items-center">
-            {/* Left Prototype Video (Click to Pause / Play) */}
+            {/* Left Prototype Video (Click for bigger video preview) */}
             <div className="md:col-span-5 flex justify-center md:justify-start">
               <div
-                onClick={toggleOutcomePlay}
+                onClick={() => setLightboxImage({ src: outcomePrototype, type: 'video', caption: 'Rizen — Outcome Interactive Prototype' })}
                 role="button"
                 tabIndex={0}
-                aria-label={isPlayingOutcome ? "Pause prototype video" : "Play prototype video"}
+                aria-label="View prototype in bigger preview"
                 onKeyDown={(e) => {
                   if (e.key === ' ' || e.key === 'Enter') {
                     e.preventDefault();
-                    toggleOutcomePlay();
+                    setLightboxImage({ src: outcomePrototype, type: 'video', caption: 'Rizen — Outcome Interactive Prototype' });
                   }
                 }}
-                className="relative cursor-pointer select-none w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.22)]"
+                className="relative cursor-zoom-in select-none w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:scale-[1.02]"
               >
                 <video
                   ref={outcomeVideoRef}
@@ -393,8 +384,6 @@ export const RizenCaseStudy: React.FC = () => {
                   loop
                   muted
                   playsInline
-                  onPlay={() => setIsPlayingOutcome(true)}
-                  onPause={() => setIsPlayingOutcome(false)}
                   className="w-full h-auto object-contain block rounded-[44px]"
                 />
               </div>
@@ -483,18 +472,24 @@ export const RizenCaseStudy: React.FC = () => {
 
               {/* 2 Side-by-Side Phone Mockups for Decision 01 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-center justify-items-center">
-                <div className="w-full flex justify-center">
+                <div 
+                  className="w-full flex justify-center cursor-zoom-in group"
+                  onClick={() => setLightboxImage({ src: friendsActivityMockup, alt: 'Friends Activity Feed Mockup', caption: 'Decision 1: Friends Activity Feed' })}
+                >
                   <img
                     src={friendsActivityMockup}
                     alt="Friends Activity Feed Mockup"
-                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
-                <div className="w-full flex justify-center">
+                <div 
+                  className="w-full flex justify-center cursor-zoom-in group"
+                  onClick={() => setLightboxImage({ src: friendsProfileMockup, alt: 'Friends Profile Mockup', caption: 'Decision 1: Friends Profile & Routine Sharing' })}
+                >
                   <img
                     src={friendsProfileMockup}
                     alt="Friends Profile Mockup"
-                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
               </div>
@@ -708,7 +703,7 @@ export const RizenCaseStudy: React.FC = () => {
                       >
                         <div
                           onClick={() => setFullscreenWireframeIndex(idx)}
-                          className="group relative w-full aspect-[1/2] rounded-2xl overflow-hidden border shadow-sm cursor-pointer transition-all duration-300 hover:shadow-md bg-white flex items-center justify-center"
+                          className="group relative w-full aspect-[1/2] rounded-2xl overflow-hidden border shadow-sm cursor-zoom-in transition-all duration-300 hover:shadow-md bg-white flex items-center justify-center"
                           style={{ borderColor: 'var(--border-card)' }}
                         >
                           <img
@@ -716,14 +711,6 @@ export const RizenCaseStudy: React.FC = () => {
                             alt={item.alt}
                             className="w-full h-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
                           />
-
-                          {/* Hover Overlay */}
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-end justify-end p-3">
-                            <div className="flex items-center gap-1.5 bg-black/60 hover:bg-black/80 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                              <Maximize2 className="w-3.5 h-3.5" />
-                              <span>Full view</span>
-                            </div>
-                          </div>
                         </div>
 
                         <div className="flex flex-col items-center text-center gap-0.5 px-2">
@@ -779,26 +766,32 @@ export const RizenCaseStudy: React.FC = () => {
               {/* 2 Side-by-Side Phone Mockups with divided captions above */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10 pt-2 items-start justify-items-center">
                 {/* 1st Mockup: Plan */}
-                <div className="w-full flex flex-col items-center gap-3">
+                <div 
+                  className="w-full flex flex-col items-center gap-3 cursor-zoom-in group"
+                  onClick={() => setLightboxImage({ src: workoutPlanMockup, alt: 'Workout Plans Mode Mockup', caption: 'Decision 2: Workout Plans Mode Mockup' })}
+                >
                   <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
                     “Plan when you’re planning”
                   </p>
                   <img
                     src={workoutPlanMockup}
                     alt="Workout Plans Mode Mockup"
-                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
 
                 {/* 2nd Mockup: Execute */}
-                <div className="w-full flex flex-col items-center gap-3">
+                <div 
+                  className="w-full flex flex-col items-center gap-3 cursor-zoom-in group"
+                  onClick={() => setLightboxImage({ src: recordWorkoutMockup, alt: 'Record Workout Mode Mockup', caption: 'Decision 2: Record Workout Mode Mockup' })}
+                >
                   <p className="text-[16px] sm:text-[17px] font-medium text-[var(--text-primary)] text-center italic">
                     “Execute when you’re training”
                   </p>
                   <img
                     src={recordWorkoutMockup}
                     alt="Record Workout Mode Mockup"
-                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]"
+                    className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </div>
               </div>
@@ -845,7 +838,8 @@ export const RizenCaseStudy: React.FC = () => {
                     ].map((rank, idx) => (
                       <div
                         key={idx}
-                        className="flex flex-col items-center justify-center py-1 sm:py-2 transition-all duration-300 hover:scale-[1.05] group"
+                        onClick={() => setLightboxImage({ src: rank.image, alt: rank.name, caption: `Rank Badge: ${rank.name}` })}
+                        className="flex flex-col items-center justify-center py-1 sm:py-2 transition-all duration-300 hover:scale-[1.05] group cursor-zoom-in"
                       >
                         <div className="w-[78px] h-[78px] sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center p-0.5 sm:p-1">
                           <img
@@ -899,7 +893,8 @@ export const RizenCaseStudy: React.FC = () => {
                     ].map((badge, idx) => (
                       <div
                         key={idx}
-                        className="flex flex-col items-center text-center py-2 transition-all duration-300 hover:scale-[1.05] group"
+                        onClick={() => setLightboxImage({ src: badge.image, alt: badge.name, caption: `Achievement Badge: ${badge.name} (${badge.desc})` })}
+                        className="flex flex-col items-center text-center py-2 transition-all duration-300 hover:scale-[1.05] group cursor-zoom-in"
                       >
                         <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center p-1">
                           <img
@@ -1143,11 +1138,14 @@ export const RizenCaseStudy: React.FC = () => {
                     </div>
 
                     {/* Bottom Navigation Image Preview */}
-                    <div className="flex items-center justify-center my-auto py-4 sm:py-6 px-1">
+                    <div 
+                      className="flex items-center justify-center my-auto py-4 sm:py-6 px-1 cursor-zoom-in group"
+                      onClick={() => setLightboxImage({ src: bottomNavImg, alt: 'Bottom Navigation (from IA · 5 destinations)', caption: 'Bottom Navigation Bar (5 destinations)' })}
+                    >
                       <img
                         src={bottomNavImg}
                         alt="Bottom Navigation (from IA · 5 destinations)"
-                        className="w-full max-w-md sm:max-w-lg object-contain transition-transform duration-300 hover:scale-[1.03]"
+                        className="w-full max-w-md sm:max-w-lg object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                       />
                     </div>
                   </div>
@@ -1230,21 +1228,13 @@ export const RizenCaseStudy: React.FC = () => {
                   >
                     <div
                       onClick={() => setFullscreenScreenIndex(idx)}
-                      className="group relative w-full cursor-pointer flex justify-center transition-transform duration-300 hover:scale-[1.03]"
+                      className="group relative w-full cursor-zoom-in flex justify-center transition-transform duration-300 hover:scale-[1.03]"
                     >
                       <img
                         src={item.src}
                         alt={item.alt}
                         className="w-full max-w-[220px] sm:max-w-[245px] md:max-w-[260px] h-auto object-contain block"
                       />
-
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                        <div className="flex items-center gap-1.5 bg-black/70 backdrop-blur-md text-white text-[12px] font-medium px-3.5 py-1.5 rounded-full border border-white/15 shadow-xl">
-                          <Maximize2 className="w-3.5 h-3.5" />
-                          <span>View screen</span>
-                        </div>
-                      </div>
                     </div>
 
                     <div className="flex flex-col items-center text-center gap-0.5 px-2">
@@ -1514,6 +1504,12 @@ export const RizenCaseStudy: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Single Image Lightbox Preview Modal */}
+        <ImageLightboxModal
+          image={lightboxImage}
+          onClose={() => setLightboxImage(null)}
+        />
 
         {/* ── FOOTER & CONTACT ───────────────────────────────────── */}
         <CaseStudyFooter nextProject={nextProject} />

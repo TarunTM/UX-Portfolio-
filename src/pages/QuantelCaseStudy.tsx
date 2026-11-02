@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Maximize2, X } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import TextReveal from '../components/TextReveal';
 import SpinningCounter from '../components/SpinningCounter';
+import ImageLightboxModal, { type LightboxImage } from '../components/ImageLightboxModal';
 import { projects } from '../data/projects';
 
 // Asset imports
@@ -83,31 +84,12 @@ const learningsData = [
 
 export const QuantelCaseStudy: React.FC = () => {
   const [expandedLearning, setExpandedLearning] = useState<string | null>('role-based-tokens');
-  const [lightboxImage, setLightboxImage] = useState<{ src: string; alt: string; caption?: string } | null>(null);
+  const [lightboxImage, setLightboxImage] = useState<LightboxImage | null>(null);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  // Lock body when lightbox is active & support Escape key
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setLightboxImage(null);
-    };
-
-    if (lightboxImage) {
-      document.body.style.overflow = 'hidden';
-      window.addEventListener('keydown', handleKeyDown);
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [lightboxImage]);
 
   const toggleLearning = (id: string) => {
     setExpandedLearning((prev) => (prev === id ? null : id));
@@ -146,7 +128,7 @@ export const QuantelCaseStudy: React.FC = () => {
 
           {/* Large Project Hero Image — Matching 16:9 ratio of Sanctum & Rizen */}
           <div
-            className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm cursor-pointer group"
+            className="w-full aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm cursor-zoom-in group"
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
             onClick={() => setLightboxImage({ src: heroQuantel, alt: 'Quantel AI Wealth Management Platform Hero', caption: 'Quantel AI Platform Overview' })}
           >
@@ -155,12 +137,6 @@ export const QuantelCaseStudy: React.FC = () => {
               alt="Quantel AI Wealth Management Platform Hero"
               className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.01]"
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-end justify-end p-4">
-              <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span>Full view</span>
-              </div>
-            </div>
           </div>
 
           {/* Metadata Strip */}
@@ -268,7 +244,7 @@ export const QuantelCaseStudy: React.FC = () => {
             {/* Dashboard Light Mode Mockup */}
             <div className="flex flex-col gap-2.5 pt-1">
               <div
-                className="w-full aspect-[1920/1112] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-pointer group relative"
+                className="w-full aspect-[1920/1112] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-zoom-in group relative"
                 style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 onClick={() => setLightboxImage({ src: lightmodeDashboard, alt: 'Quantel Dashboard Light Mode', caption: 'Production Light-Mode Dashboard' })}
               >
@@ -277,12 +253,6 @@ export const QuantelCaseStudy: React.FC = () => {
                   alt="Quantel Dashboard Light Mode"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-end justify-end p-4">
-                  <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Full view</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -466,7 +436,7 @@ export const QuantelCaseStudy: React.FC = () => {
 
               {/* Capital 1 */}
               <div 
-                className="w-full flex justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+                className="w-full flex justify-center cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
                 onClick={() => setLightboxImage({ src: capital1Quantel, alt: 'Quantel Capital Mobile Flow Part 1' })}
               >
                 <img
@@ -478,7 +448,7 @@ export const QuantelCaseStudy: React.FC = () => {
 
               {/* Capital 2 */}
               <div 
-                className="w-full flex justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+                className="w-full flex justify-center cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
                 onClick={() => setLightboxImage({ src: capital2Quantel, alt: 'Quantel Capital Mobile Flow Part 2' })}
               >
                 <img
@@ -495,7 +465,7 @@ export const QuantelCaseStudy: React.FC = () => {
 
               {/* Advise */}
               <div 
-                className="w-full flex justify-center cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+                className="w-full flex justify-center cursor-zoom-in transition-transform duration-300 hover:scale-[1.01]"
                 onClick={() => setLightboxImage({ src: adviseQuantel, alt: 'Quantel Advise Mobile Flow' })}
               >
                 <img
@@ -534,7 +504,7 @@ export const QuantelCaseStudy: React.FC = () => {
             {/* Assets Dashboard Mockup */}
             <div className="flex flex-col gap-2.5 pt-1">
               <div
-                className="w-full aspect-[1920/1024] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-pointer group relative"
+                className="w-full aspect-[1920/1024] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-zoom-in group relative"
                 style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                 onClick={() => setLightboxImage({ src: assetsQuantel, alt: 'Quantel Assets Dashboard', caption: 'Assets Dashboard — Account Value, Health Status & Conversion Path to Advise' })}
               >
@@ -543,12 +513,6 @@ export const QuantelCaseStudy: React.FC = () => {
                   alt="Quantel Assets Dashboard"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-end justify-end p-4">
-                  <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                    <Maximize2 className="w-3.5 h-3.5" />
-                    <span>Full view</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -590,7 +554,7 @@ export const QuantelCaseStudy: React.FC = () => {
           {/* Referral Screen Concept Mockup */}
           <div className="flex flex-col gap-2 pt-1">
             <div
-              className="w-full aspect-[3840/2280] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-pointer group relative"
+              className="w-full aspect-[3840/2280] rounded-2xl sm:rounded-3xl overflow-hidden border shadow-sm cursor-zoom-in group relative"
               style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
               onClick={() => setLightboxImage({ src: referralQuantel, alt: 'Quantel Points and Rewards Referral Screen Concept', caption: 'Points & Rewards Concept Exploration (Unconfirmed Placeholder Values)' })}
             >
@@ -606,12 +570,6 @@ export const QuantelCaseStudy: React.FC = () => {
                 >
                   Concept
                 </span>
-              </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-all duration-300 flex items-end justify-end p-4">
-                <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-md text-white text-[12px] font-medium px-3 py-1.5 rounded-full border border-white/15 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg">
-                  <Maximize2 className="w-3.5 h-3.5" />
-                  <span>Full view</span>
-                </div>
               </div>
             </div>
           </div>
@@ -740,58 +698,10 @@ export const QuantelCaseStudy: React.FC = () => {
       </main>
 
       {/* ── FULL VIEW LIGHTBOX MODAL ────────────────────────────── */}
-      <AnimatePresence>
-        {lightboxImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => setLightboxImage(null)}
-            className="fixed inset-0 z-[100] bg-black/92 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 select-none"
-          >
-            {/* Top Bar: Caption & Close Button */}
-            <div
-              className="absolute top-4 sm:top-6 left-4 sm:left-8 right-4 sm:right-8 flex items-center justify-between z-20 pointer-events-auto gap-4"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center gap-3">
-                <span 
-                  className="text-white/80 text-[13px] sm:text-[14px] tracking-wider px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 font-semibold"
-                  style={{ fontFamily: "'Hanken Grotesk', 'Satoshi', sans-serif" }}
-                >
-                  Preview
-                </span>
-                {lightboxImage.caption && (
-                  <span className="text-white/90 text-[13px] sm:text-[14px] font-medium hidden sm:inline-block">
-                    {lightboxImage.caption}
-                  </span>
-                )}
-              </div>
-              <button
-                type="button"
-                onClick={() => setLightboxImage(null)}
-                aria-label="Close full view"
-                className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-lg active:scale-95"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Lightbox Image Container */}
-            <div
-              className="relative max-w-5xl max-h-[82vh] w-full flex items-center justify-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={lightboxImage.src}
-                alt={lightboxImage.alt}
-                className="max-w-full max-h-[82vh] object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/15"
-              />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <ImageLightboxModal
+        image={lightboxImage}
+        onClose={() => setLightboxImage(null)}
+      />
     </div>
   );
 };
