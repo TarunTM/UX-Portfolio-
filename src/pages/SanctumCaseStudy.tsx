@@ -76,8 +76,8 @@ const whatILearntData = [
 export const SanctumCaseStudy: React.FC = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const [btnHovered, setBtnHovered] = useState(false);
-  const [expandedConstraint, setExpandedConstraint] = useState<string | null>(null);
-  const [expandedLearning, setExpandedLearning] = useState<string | null>(null);
+  const [expandedConstraint, setExpandedConstraint] = useState<string | null>('wix-limitations');
+  const [expandedLearning, setExpandedLearning] = useState<string | null>('design-for-outcomes');
 
   // Iterations Carousel & Full View State
   const [fullscreenIterationIndex, setFullscreenIterationIndex] = useState<number | null>(null);
