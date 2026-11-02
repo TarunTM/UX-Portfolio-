@@ -76,43 +76,48 @@
 ### 1. Sanctum House of Wellness
 - **Category**: Web (Desktop + Mobile) · Fitness & Wellness
 - **Role**: UI/UX Designer @ The Social Slate (2025)
-- **Core Challenge**: Bridge the gap between luxury wellness branding and real-world physical footfall across 3 Mumbai clubs (Andheri, Khar, Juhu) without cognitive overload.
-- **Solution & Design Interventions**:
-  - Engineered a balanced two-pillar homepage structure (*Training + Recovery*).
-  - Placed immediate geographic club discovery right after the core value proposition.
-  - Deployed intent-focused conversion actions (WhatsApp chat, one-tap phone calls, GPS directions) on club landing pages.
+- **Core Challenge**: Bridge the gap between luxury wellness branding and real-world physical footfall across 3 Mumbai clubs (Andheri, Khar, Juhu) while designing within Wix Bookings platform constraints.
+- **Key Design Decisions**:
+  - **Decision 1: Turning contact details into actions**: Replaced plain-text phone numbers and addresses with one-tap WhatsApp, Call, and Directions buttons on club pages, capturing high-intent ad traffic.
+  - **Decision 2: Putting location into the site structure**: Wix Bookings preset cards lacked location fields; moved location discovery to site structure via a "GroupX near you" location filter and club-specific embedded class widgets.
+  - **Decision 3: Giving Training and Recovery equal weight without overloading the homepage**: Balanced Sanctum's two 4-service pillars with interactive scroll reveals, avoiding a cluttered feature-dump before users explore clubs.
+- **Constraints & Learnings**:
+  - Worked within Wix Bookings and native Wix component limitations under strict phased delivery deadlines.
+  - *Learnings*: Design for outcomes, not just aesthetics (practical UX can outperform aesthetic purity); design with implementation in mind.
 - **Key Metrics & Outcomes**:
-  - **~3× increase in direct club enquiries** during active Meta advertising campaigns.
-  - Eliminated high drop-off rates on mobile paid traffic.
-  - United 3 physical flagship clubs under a coherent, frictionless web architecture.
+  - **~3× increase in WhatsApp and phone enquiries** within 3 weeks of launch during active Meta advertising campaigns.
+  - United 3 flagship clubs (Andheri, Khar, Juhu) with frictionless mobile conversion.
 
 ### 2. RIZEN — Gamified Habit Formation App
 - **Category**: Mobile App (iOS / Android) · HealthTech & Habit Formation
-- **Role**: Product Designer (2025)
-- **Core Challenge**: 78% of fitness app users abandon their routine entirely after breaking a streak due to guilt and friction. The challenge was: *"The problem isn't starting; it's restarting."*
-- **Solution & Design Interventions**:
-  - "Designing for the comeback, not the streak": low-friction 15-minute reactivation flows.
-  - Separated calm workout planning from high-focus live workout execution mode.
-  - Replaced toxic global leaderboards with intimate friend accountability pods.
-  - Architected a 6-tier XP rank progression ladder (Iron to Rizen Elite) that rewards consistency over perfection.
+- **Role**: Product Designer (End-to-End, 2025)
+- **Core Challenge**: 78% of fitness app users abandon their routine entirely after breaking a streak due to guilt and friction. *"The problem isn't starting; it's restarting."*
+- **Research**: 37 quantitative surveys and 5 deep qualitative interviews with inconsistent exercisers.
+- **Key Design Decisions**:
+  - **Decision 1: Friends-only accountability pods**: Replaced toxic global leaderboards with intimate 3-to-5 person friend circles and one-tap high-five encouragement.
+  - **Decision 2: Separation of calm planning vs. live execution mode**: Relaxed planning at home vs. gym-floor live execution mode with high-contrast logs, auto-advancing rest timers, and minimum 56×56pt tap targets.
+  - **Decision 3: 6-tier XP rank ladder & consistency badges**: Long-term progression (Iron to Rizen Elite) that rewards consistency and comeback recovery over perfection.
 - **Key Metrics & Outcomes**:
-  - 37 quantitative research surveys & 5 deep qualitative interviews.
-  - Delivered comprehensive end-to-end mobile design system and interactive prototype.
+  - Validated MVP architecture balancing Structure, Progress, Recovery, and Social Accountability.
+  - Delivered complete mobile design system and interactive prototype.
 
 ### 3. Quantel AI — Wealth Management Platform
 - **Category**: FinTech · Web App & Mobile App · Wealth Management & AI
 - **Role**: UI/UX Designer (2025)
-- **Core Challenge**: Extend an existing enterprise AI investment platform into new production-ready modules while strictly maintaining 100% design system consistency.
-- **Solution & Design Interventions**:
-  - Structured multi-tiered asset data from broad portfolio health down to granular holdings.
-  - Designed progressive step-by-step onboarding for *Quantel Capital* and *Quantel Advise* to prevent cognitive fatigue in high-stakes financial decisions.
-  - Expanded the tokenized design system to support a high-contrast Light Mode and a gamified Points & Rewards engagement loop.
+- **Core Context**: Joined after product direction and design system were set; every decision worked inside the existing system to design new production screens and adapt web experiences for mobile.
+- **Key Design Decisions**:
+  - **Decision 1: Adapting dashboard to light mode without redesigning it**: Kept components, layout, and hierarchy intact while switching color via 12 role-based variables (Surface, Text, Stroke, CTA/Link), achieving a 6.3:1 contrast ratio behind white button labels.
+  - **Decision 2: Bringing Capital and Advise to mobile without changing flows**: Translated desktop flows into mobile-first patterns — step-by-step questions with a step counter in Capital, and stacked plan cards with a "Recommended" tag in Advise.
+  - **Decision 3: Turning portfolio status view into a path to Quantel Advise**: Structured account value, health status, six ratings, and a sticky "Schedule a free call" bar leading directly into Advise.
+- **Concept (Not Shipped)**:
+  - *Points & Rewards*: Exploration of total, earned, and redeemed points with placeholder values (unconfirmed rewards).
+- **Key Learnings**:
+  - Role-based tokens made light mode possible without modifying component structure or layout code.
+  - Check contrast early while building — lighter text colors sit near the WCAG AA limit.
 - **Key Metrics & Outcomes**:
-  - **50%+ Returns**: Delivered over 18 months across Quantel portfolios, systematically beating benchmark indices.
-  - **36.83% Growth in 12 Months**: A client director's IRA expanded from $1.11M to $1.52M (vs ~20% for S&P 500).
-  - **5 Years Ahead on Retirement**: Client on track to retire 5 years earlier than planned.
-  - **Client Feedback**: *"I went from feeling overlooked by conventional 60/40 advisors to feeling like I finally have real advantages."*
-  - 5+ new core production-ready product flows delivered with 100% design system consistency.
+  - **50%+ Returns**: Delivered over 18 months across Quantel portfolios (source: Quantel's public YouTube video). *Explicit attribution: These reflect Quantel’s investment models and the platform as a whole, not my screens alone.*
+  - **12 Role-Based Variables**: Seamless dual-theme support across all production dashboard components.
+  - **3 Core Shipped Decisions**: Shipped Light-Mode Dashboard, Mobile Capital & Advise flows, and Assets Status conversion view.
 
 ### 4. Side Quests — Micro-UX Friction Experiments
 - **Category**: Product Design Explorations · Mobile & Web

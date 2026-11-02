@@ -33,142 +33,142 @@ export const projects: Project[] = [
     tagline: "Designing a premium fitness experience around brand clarity, local discovery, and conversion.",
     category: "Web — Desktop + Mobile · Fitness & Wellness",
     role: "UI/UX Designer @The Social Slate",
-    timeline: "2025",
-    tools: ["Figma", "Responsive Layouts", "Location Discovery", "Conversion UX"],
-    objective: "Create a digital experience that clearly communicated what Sanctum stands for while helping users discover a nearby club and take the next step.",
-    problem: "Sanctum needed to communicate its core proposition without overwhelming visitors with a long list of services, while bridging the gap between brand understanding and physical club enquiry in Mumbai.",
-    solution: "Designed a clean two-pillar homepage (Training + Recovery), instant location discovery for Mumbai clubs, and high-intent contact actions (WhatsApp, Phone, Directions) on club landing pages.",
+    timeline: "3 Months (2025)",
+    tools: ["Figma", "FigJam", "Wix Studio", "Wix Bookings", "Asana", "Google Meet"],
+    objective: "Create a digital experience that clearly communicates what Sanctum stands for, helps users find the right class and location, and makes it seamless to enquire.",
+    problem: "Sanctum needed to communicate its two-pillar proposition without turning the homepage into a feature list, while overcoming Wix Bookings card constraints and bridging the gap between ad clicks and direct enquiries.",
+    solution: "Turned contact details into one-tap WhatsApp, Call, and Directions actions (generating ~3x enquiries), moved location discovery into the site structure, and balanced Training and Recovery through interactive scroll reveal.",
     metrics: [
-      { value: "~3×", label: "Enquiries Increase" },
+      { value: "~3×", label: "Enquiries Surge within 3 Weeks" },
       { value: "3", label: "Mumbai Clubs (Andheri, Khar, Juhu)" },
-      { value: "2", label: "Equal Core Pillars" }
+      { value: "2", label: "Equal Pillars (Training + Recovery)" }
     ],
     process: [
       {
-        phase: "01 Project Intro",
+        phase: "01 Context & Role",
         type: "Divergent",
-        summary: "Defining brand clarity and local discovery for premium Mumbai clubs.",
-        details: "Sanctum House of Wellness is a premium fitness and wellness brand with clubs across Mumbai. The challenge was to create a digital experience that clearly communicated what Sanctum stands for while helping users discover a nearby club and take the next step."
+        summary: "Designing and building Sanctum's digital presence in Wix Studio.",
+        details: "Sanctum is a premium fitness and wellness brand with multiple locations across Mumbai. Designed the homepage, club pages, and GroupX experience in Figma, then built the final site in Wix Studio using Wix Bookings for scheduling."
       },
       {
-        phase: "02 Team & Role",
+        phase: "02 Decision 1: Contact Details into Actions",
         type: "Convergent",
-        summary: "Shaping the journey from understanding to club discovery and enquiry.",
-        details: "Worked alongside a team of three designers contributing to new website screens, responsive layouts, location experiences, and conversion-focused improvements."
+        summary: "Turning plain text into one-tap WhatsApp, Call, and Directions buttons.",
+        details: "Meta Ads sent traffic directly to club pages where visitors wanted to ask questions or visit. Replaced plain static phone and address text with direct action buttons, leading to roughly 3x WhatsApp and phone enquiries within 3 weeks."
       },
       {
-        phase: "03 Key Design Decisions",
+        phase: "03 Decision 2: Location into Site Structure",
         type: "Divergent",
-        summary: "Two pillars, location discovery, and actionable club pages.",
-        details: "Introduced Training + Recovery as two equal visual pillars, placed location discovery immediately after brand proposition, and added direct WhatsApp, Phone, and Directions actions."
+        summary: "Overcoming Wix Bookings card limitations through architecture.",
+        details: "Wix Bookings preset cards had fixed layouts with no location fields. Solved this by moving location out of cards and into the site structure: a dedicated 'GroupX near you' location filter and embedded club-specific class widgets."
       },
       {
-        phase: "04 Outcome & Impact",
+        phase: "04 Decision 3: Equal Weight Pillars",
         type: "Convergent",
-        summary: "3× surge in direct enquiries during active Meta Ad traffic.",
-        details: "Following the addition of direct contact actions, enquiries increased approximately 3× while Meta Ads were actively driving traffic to the website, demonstrating the power of intent-driven UX."
+        summary: "Balancing Training and Recovery without overloading the homepage.",
+        details: "Iterated through image cards and card grids to a clean interactive scroll reveal that presents Sanctum's two 4-service pillars with equal weight before users navigate to club pages."
       }
     ],
     takeaways: [
-      "A small, intent-driven UX improvement can directly support business conversion.",
-      "Shaping the journey from understanding Sanctum → finding a club → making an enquiry drastically reduces cognitive friction.",
-      "Direct communication channels (WhatsApp, Phone, Directions) capture high-intent ad traffic before drop-off occurs."
+      "Design for outcomes, not just aesthetics — a practical, high-intent UX change can drive massive conversion improvements.",
+      "Design with implementation in mind — working within platform constraints (Wix Bookings) under strict deadlines requires smart structural solutions.",
+      "Direct action buttons (WhatsApp, Call, Directions) capture high-intent ad traffic immediately."
     ]
   },
   {
     id: "rizen",
     title: "RIZEN",
     tagline: "Designing for the comeback, not the streak.",
-    category: "Mobile App · Gamified Fitness",
-    role: "Product Designer",
-    timeline: "1 Month",
-    tools: ["Figma", "Design Systems", "User Research", "Gamification Design", "Mobile UI/UX"],
-    objective: "A fitness companion designed to help inconsistent exercisers build sustainable workout habits through structure, progress and accountability.",
-    problem: "The challenge was to move beyond workout tracking and help users stay consistent and return after missing a workout. The problem wasn't starting. It was restarting.",
-    solution: "An intentional fitness experience built around recovery nudges, separating workout planning from live execution, friend-circle accountability, and visible XP/tier progress.",
+    category: "Mobile App · Gamified Fitness & Habit Formation",
+    role: "Product Designer (End-to-End)",
+    timeline: "1 Month (2025)",
+    tools: ["Figma", "FigJam", "Balsamiq", "Google Meet", "Mobile UI/UX"],
+    objective: "A fitness companion designed to help inconsistent exercisers build sustainable workout habits through structure, progress, and recovery accountability.",
+    problem: "78% of users abandon fitness apps after breaking a streak due to guilt and friction. The core challenge wasn't starting a routine — it was restarting after missing a workout.",
+    solution: "Engineered a comeback engine that rewards restarting, separated calm planning from live gym execution, replaced global leaderboards with intimate friend pods, and established a 6-tier XP rank ladder.",
     metrics: [
       { value: "37", label: "Research Surveys" },
       { value: "5", label: "In-Depth Interviews" },
-      { value: "6", label: "Progression Tiers" }
+      { value: "6", label: "Progression Tiers (Iron to Elite)" }
     ],
     process: [
       {
-        phase: "01 Intro & Insight",
+        phase: "01 Discovery & Insight",
         type: "Divergent",
-        summary: "Discovering that the core problem wasn't starting, it was restarting.",
-        details: "Surveyed 37 exercisers and conducted 5 in-depth qualitative interviews. Found that 78% of users abandon fitness apps entirely after breaking a streak due to guilt, shame, and friction in resetting routines."
+        summary: "Discovering that the core problem was restarting, not starting.",
+        details: "Surveyed 37 exercisers and conducted 5 in-depth interviews. Uncovered that streak-based guilt triggers immediate abandonment when life interrupts training routines."
       },
       {
-        phase: "02 Role & Systems",
+        phase: "02 Decision 1: Friend-Circle Pods",
         type: "Convergent",
-        summary: "Architecting user flows, information architecture, and the design system.",
-        details: "Worked in a cross-functional team of 6 to establish complete UI components, recovery flow architectures, rank progression metrics, and high-fidelity screens."
+        summary: "Replacing toxic global leaderboards with intimate friend accountability.",
+        details: "Substituted demotivating public rankings with 3-to-5 person friend circles focused on celebration and positive nudges rather than comparison."
       },
       {
-        phase: "03 Design Decisions",
+        phase: "03 Decision 2: Planning vs. Execution Separation",
         type: "Divergent",
-        summary: "Engineering the comeback engine, planning separation, and small circles.",
-        details: "Designed 15-minute recovery reactivation flows, split the app into relaxed planning vs high-focus execution modes, and removed toxic global leaderboards in favor of intimate friend pods."
+        summary: "Calm planning at home vs high-focus live workout tracking.",
+        details: "Split the app into two intentional modes: relaxed routine building at home, and high-contrast, clutter-free gym floor execution with 56pt tap targets and auto-rest timers."
       },
       {
-        phase: "04 Outcome & Delivery",
+        phase: "04 Decision 3: XP Progression & Badges",
         type: "Convergent",
-        summary: "Delivering a focused MVP balancing Structure, Progress, Recovery, and Social.",
-        details: "Delivered a complete mobile prototype integrating workout plans, live tracking, friend activity feeds, and a 6-tier XP rank ladder (Iron to Rizen Elite)."
+        summary: "A 6-tier ladder and badges rewarding comeback resilience.",
+        details: "Architected a long-term progression ladder from Iron to Rizen Elite with consistency badges that reward returning to workouts rather than demanding unbroken perfection."
       }
     ],
     takeaways: [
-      "A feature is only valuable when it supports a user behaviour.",
-      "Rizen taught me to move beyond 'What features should this product have?' and ask 'What behaviour are we trying to change?'",
-      "Designing for the comeback prevents shame-induced churn and turns broken streaks into sustainable habit loops."
+      "A feature is only valuable when it supports a desirable human behavior.",
+      "Designing for the comeback prevents shame-induced churn and turns broken streaks into sustainable habit loops.",
+      "Separating planning cognitive load from live execution creates an effortless gym-floor experience."
     ]
   },
   {
     id: "quantel-ai",
     title: "Quantel AI",
-    tagline: "Designing new experiences for an AI-powered wealth management platform",
-    category: "FinTech · Web App · Mobile App · UI/UX Design",
-    role: "UI/UX Designer",
-    timeline: "2025",
-    tools: ["Figma", "Design Systems", "Web App UI", "Mobile UX", "FinTech"],
-    objective: "Quantel AI is a wealth management platform that brings investing, financial advice, and market insights into one digital experience.",
-    problem: "When I joined the project, the core product direction and design system were already established. I focused on designing new web and mobile experiences needed to expand the product toward production.",
-    solution: "Structured complex asset data into clear scannable hierarchies, designed focused step-by-step onboarding for Capital & Advise, and extended Light Mode and Points & Rewards while maintaining 100% design system consistency.",
+    tagline: "AI-powered wealth management platform",
+    category: "Web App · Mobile App · FinTech",
+    role: "UI/UX Intern @The Social Slate",
+    timeline: "3 Months (2025)",
+    tools: ["Figma", "FigJam", "Jira", "Asana", "Google Meet"],
+    objective: "Quantel AI brings investing, financial advice and AI market insights into one experience. The goal was to design new production screens and adapt web experiences for mobile inside the existing system.",
+    problem: "Joined after the product direction and design system were already established. Every design decision had to work strictly inside the existing system while delivering a new Light Mode dashboard, mobile translations for Capital and Advise, and a status view that leads into Advise.",
+    solution: "Adapted the dashboard to Light Mode using 12 role-based variables without layout changes, brought Capital & Advise to mobile without altering user journeys, and turned external portfolio views into a path to Advise.",
     metrics: [
-      { value: "5+", label: "New Core Flows" },
-      { value: "100%", label: "System Consistency" },
-      { value: "Web+App", label: "Production Ready" }
+      { value: "50%+", label: "Portfolio Returns (YT Source)" },
+      { value: "12", label: "Light Mode Variables" },
+      { value: "3", label: "Core Shipped Decisions" }
     ],
     process: [
       {
-        phase: "01 Project Intro",
+        phase: "01 Context & Scope",
         type: "Divergent",
-        summary: "Extending an established AI wealth management platform toward production.",
-        details: "Quantel AI is a wealth management platform that brings investing, financial advice, and market insights into one digital experience. When I joined the project, the core product direction and design system were already established. I focused on designing new web and mobile experiences needed to expand the product toward production."
+        summary: "Joining after product direction and design system were set.",
+        details: "Quantel AI brings investing, financial advice and AI market insights into one experience. Joined after the product direction and design system were set, so every decision worked inside the existing system. Focused on designing new production screens and adapting web experiences for mobile."
       },
       {
-        phase: "02 My Role",
+        phase: "02 Decision 1: Light Mode Adaptation",
         type: "Convergent",
-        summary: "Extending the existing product through new screens and flows.",
-        details: "Contributed to new web and mobile experiences including the Assets Dashboard, Light Mode Dashboard, Points & Rewards experience, Quantel Capital, and Quantel Advise, ensuring seamless consistency with the established design system."
+        summary: "Adapting the dashboard to light mode without redesigning it.",
+        details: "Kept components, layout, and hierarchy intact while switching color. Built 12 variables organized strictly by role (Surface, Text, Stroke, CTA/Link), achieving a 6.3:1 contrast ratio behind white button labels. The light-mode dashboard shipped."
       },
       {
-        phase: "03 Key Design Decisions",
+        phase: "03 Decision 2: Mobile Adaptation",
         type: "Divergent",
-        summary: "Structuring data, focused onboarding steps, and system extension.",
-        details: "Created scannable asset hierarchies, broke Capital and Advise into focused progressive steps, and adapted existing components to Light Mode and gamified reward systems."
+        summary: "Bringing Capital and Advise to mobile without changing flows.",
+        details: "Translated web experiences into mobile screens — one question per screen with step counters in Capital, and stacked plan cards with Recommended badges in Advise. Both mobile flows shipped."
       },
       {
-        phase: "04 Outcome & Delivery",
+        phase: "04 Decision 3: Path to Advise & Concept",
         type: "Convergent",
-        summary: "Delivered production-ready web and mobile investment experiences.",
-        details: "Expanded Quantel's existing product foundation across investment, wealth management, and engagement features while mastering constraint within an established FinTech design system."
+        summary: "Turning portfolio status into a path to Advise; Points & Rewards concept.",
+        details: "Designed an Assets status view with health ratings and a 'Schedule a free call' bar leading into Advise. Explored a Points & Rewards concept with placeholder values. Post-launch metrics showed 50%+ returns over 18 months across Quantel portfolios (source: Quantel's public YouTube video; reflects Quantel's platform and investment models as a whole, not designer screens alone)."
       }
     ],
     takeaways: [
-      "Extending a product is about mastering constraint — designing seamlessly within an established system.",
-      "Structuring data from broad portfolio overview to granular holdings keeps complex numbers scannable.",
-      "One decision at a time reduces cognitive overload in high-stakes financial choices."
+      "Role-based tokens made the light mode possible — organizing color strictly by surface, text, stroke, and brand allowed the entire dashboard to switch themes without modifying layout code.",
+      "Check contrast while building — lighter text colors sit near the WCAG AA limit, so validating contrast early is crucial.",
+      "50%+ returns over 18 months across Quantel portfolios (source: Quantel's public YouTube video) reflect Quantel's investment models and platform as a whole, not my screens alone."
     ]
   },
   {
