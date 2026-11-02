@@ -68,10 +68,14 @@ const CASE_STUDY_SUBHEADINGS: Record<string, SubheadingItem[]> = {
   ],
   'quantel-ai': [
     { id: 'overview', label: 'Overview' },
-    { id: 'context', label: 'Intro' },
-    { id: 'role', label: 'Role' },
-    { id: 'screens', label: 'UI Screens' },
-    { id: 'outcomes', label: 'Outcomes' },
+    { id: 'context', label: 'Context' },
+    { id: 'decisions', label: 'Key Decisions' },
+    { id: 'decision-1', label: 'Decision 1', isNested: true },
+    { id: 'decision-2', label: 'Decision 2', isNested: true },
+    { id: 'decision-3', label: 'Decision 3', isNested: true },
+    { id: 'concept', label: 'Concept' },
+    { id: 'results', label: 'Results' },
+    { id: 'learnings', label: 'Learnings' },
   ],
   'side-quests': [
     { id: 'overview', label: 'Overview' },
