@@ -11,7 +11,7 @@ import CaseStudyFooter from '../components/CaseStudyFooter';
 import TextReveal from '../components/TextReveal';
 import ImageLightboxModal, { type LightboxImage } from '../components/ImageLightboxModal';
 import { projects } from '../data/projects';
-import heroRizen from '../assets/Rizen Img/Hero Rizen.webp';
+import rizenHeroVideo from '../assets/Rizen Img/rizen mockup video.webm';
 import outcomePrototype from '../assets/Rizen Img/Outcome Prototype.webm';
 import workoutPlanMockup from '../assets/Rizen Img/Workout Plan Mockup.webp';
 import recordWorkoutMockup from '../assets/Rizen Img/Record Workout Mockup.webp';
@@ -277,15 +277,18 @@ export const RizenCaseStudy: React.FC = () => {
             </p>
           </TextReveal>
 
-          {/* Large Project Hero Image — Uncropped Natural Aspect Ratio */}
+          {/* Large Project Hero Video — Uncropped Natural Aspect Ratio */}
           <div
             className="w-full rounded-2xl sm:rounded-3xl overflow-hidden border relative shadow-sm cursor-zoom-in group"
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
-            onClick={() => setLightboxImage({ src: heroRizen, alt: 'Rizen Fitness App Showcase — Hero Mockup', caption: 'Rizen — Social Gamified Fitness App' })}
+            onClick={() => setLightboxImage({ src: rizenHeroVideo, type: 'video', caption: 'Rizen — Social Gamified Fitness App' })}
           >
-            <img
-              src={heroRizen}
-              alt="Rizen Fitness App Showcase — Hero Mockup"
+            <video
+              src={rizenHeroVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
               className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
             />
           </div>

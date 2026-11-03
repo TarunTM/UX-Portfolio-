@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import UXGame from '../components/UXGame';
 import TiltCard from '../components/TiltCard';
+import ProjectCard from '../components/ProjectCard';
 import StreamingText from '../components/StreamingText';
 import PixelCompanion from '../components/PixelCompanion';
 import figjamIcon from '../assets/figjam-icon-filled-256 1.webp';
 import wixStudioIcon from '../assets/wix-studio.webp';
 import antigravityIcon from '../assets/antigravity-icon__full-color.webp';
 import socialSlateLogo from '../assets/SS- OG colors.webp';
-import rizenHomeMockup from '../assets/HomePage Rizen.webp';
-import sanctumHomeMockup from '../assets/Sanctum HomePage.webp';
-import quantelHomeMockup from '../assets/Home page Quantel.webp';
+import rizenMockupVideo from '../assets/Rizen Img/rizen mockup video.webm';
+import sanctumMockupVideo from '../assets/Sanctum Img:Video/Sanctum Home mockup.webm';
+import quantelMockupVideo from '../assets/Quantel Img/quantel mockup vid.webm';
 import sideProject1 from '../assets/1.Side Project.webp';
 import sideProject2 from '../assets/2.Side Project.webp';
 import sideProject3 from '../assets/3.Side Project.webp';
@@ -352,159 +352,96 @@ export const Landing: React.FC = () => {
           </span> */}
         </div>
 
-        {/* Bento Grid Layout (Left: 3 Horizontal Cards, Right: Tall Side Projects Card) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        {/* 2x2 Grid Layout (Max 2 per row, No Dividers) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 sm:gap-x-10 sm:gap-y-14 lg:gap-x-10 lg:gap-y-14">
           
-          {/* ── LEFT COLUMN (8 Cols) — 3 Horizontal Bento Cards ── */}
-          <div className="lg:col-span-8 flex flex-col gap-6">
-            
-            {/* Card 1: Sanctum */}
-            <Link
-              to="/work/sanctum"
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
-            >
-              <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
-                  Website
-                </span>
-              </div>
+          {/* ── CARD 1: Sanctum House of Wellness ── */}
+          <ProjectCard
+            to="/work/sanctum"
+            title="Sanctum"
+            description="Turning high-intent ad traffic into ~3× direct enquiries across 3 Mumbai clubs"
+            thumbBg="#080b11"
+          >
+            <video
+              src={sanctumMockupVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </ProjectCard>
 
-              {/* Laptop + Phone Mockup Peek — Native Mockup PNG */}
-              <div className="absolute -right-10 sm:-right-4 -bottom-6 sm:-bottom-10 w-[290px] sm:w-[380px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-105 transition-transform duration-500 ease-out z-0 drop-shadow-[0_15px_30px_rgba(0,0,0,0.14)]">
-                <img
-                  src={sanctumHomeMockup}
-                  alt="Sanctum Mockup Preview"
-                  className="w-full h-auto object-contain"
+          {/* ── CARD 2: Quantel AI ── */}
+          <ProjectCard
+            to="/work/quantel-ai"
+            title="Quantel AI"
+            description="Adapting an AI wealth management platform to Light Mode without redesigning layouts"
+            thumbBg="#090d18"
+          >
+            <video
+              src={quantelMockupVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </ProjectCard>
+
+          {/* ── CARD 3: RIZEN ── */}
+          <ProjectCard
+            to="/work/rizen"
+            title="RIZEN"
+            description="Habit recovery flows, calm planning, and 6-tier XP comeback engine"
+            thumbBg="#0b100d"
+          >
+            <video
+              src={rizenMockupVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          </ProjectCard>
+
+          {/* ── CARD 4: Side Quests ── */}
+          <ProjectCard
+            to="/work/side-quests"
+            title="Side Quests"
+            description="Targeted micro-UX friction experiments across Instagram Reels, Flipkart, and Nothing OS"
+            thumbBg="radial-gradient(ellipse at 50% 55%, #1e263c 0%, #080b11 100%)"
+          >
+            <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
+              {/* 1. Left (Reels Phone) */}
+              <div className="absolute left-[3%] sm:left-[5%] -rotate-6 w-[110px] sm:w-[130px] md:w-[145px] z-10 transition-all duration-500 ease-out group-hover:-rotate-9 group-hover:-translate-x-1.5 drop-shadow-[0_16px_24px_rgba(0,0,0,0.65)]">
+                <img 
+                  src={sideProject1} 
+                  alt="Instagram Reels Side Quest" 
+                  className="w-full h-auto object-contain" 
                 />
               </div>
 
-              <div className="z-10 flex flex-col gap-1.5">
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-                  Sanctum
-                </h3>
-                <div className="flex items-center">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs backdrop-blur-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    3x Inquiries
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-            {/* Card 2: Rizen */}
-            <Link
-              to="/work/rizen"
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
-            >
-              <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
-                  Mobile App
-                </span>
-              </div>
-
-              {/* Phone Mockup Peek — Decreased width and shifted slightly down */}
-              <div className="absolute right-4 sm:right-8 md:right-12 top-5 sm:top-6 w-[185px] sm:w-[205px] md:w-[220px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-[1.02] transition-all duration-500 ease-out z-0 drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]">
-                <img
-                  src={rizenHomeMockup}
-                  alt="Rizen Mockup Preview"
-                  className="w-full h-auto object-contain object-top"
+              {/* 2. Center (Flipkart MacBook) */}
+              <div className="absolute left-1/2 -translate-x-1/2 w-[210px] sm:w-[245px] md:w-[275px] z-20 transition-all duration-500 ease-out group-hover:scale-105 drop-shadow-[0_20px_32px_rgba(0,0,0,0.75)]">
+                <img 
+                  src={sideProject2} 
+                  alt="Flipkart Checkout Side Quest" 
+                  className="w-full h-auto object-contain" 
                 />
               </div>
 
-              <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-                  Rizen
-                </h3>
-              </div>
-            </Link>
-
-            {/* Card 3: Quantel AI */}
-            <Link
-              to="/work/quantel-ai"
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-[215px] sm:h-[225px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
-            >
-              <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
-                  WebApp
-                </span>
-              </div>
-
-              {/* Laptop + Phone Mockup Peek — Shifted down and to the far right */}
-              <div className="absolute -right-16 sm:-right-10 md:-right-8 -bottom-9 sm:-bottom-13 md:-bottom-14 w-[330px] sm:w-[410px] md:w-[430px] pointer-events-none group-hover:-translate-y-1.5 group-hover:scale-105 transition-transform duration-500 ease-out z-0 drop-shadow-[0_15px_30px_rgba(0,0,0,0.14)]">
-                <img
-                  src={quantelHomeMockup}
-                  alt="Quantel AI Mockup Preview"
-                  className="w-full h-auto object-contain"
+              {/* 3. Right (Nothing Calculator Phone) */}
+              <div className="absolute right-[3%] sm:right-[5%] rotate-6 w-[110px] sm:w-[130px] md:w-[145px] z-10 transition-all duration-500 ease-out group-hover:rotate-9 group-hover:translate-x-1.5 drop-shadow-[0_16px_24px_rgba(0,0,0,0.65)]">
+                <img 
+                  src={sideProject3} 
+                  alt="Nothing OS Calculator Side Quest" 
+                  className="w-full h-auto object-contain" 
                 />
               </div>
-
-              <div className="z-10 flex flex-col gap-1.5">
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-                  Quantel AI
-                </h3>
-                <div className="flex items-center">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] sm:text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 shadow-2xs backdrop-blur-xs">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    50% returns delivered
-                  </span>
-                </div>
-              </div>
-            </Link>
-
-          </div>
-
-          {/* ── RIGHT COLUMN (4 Cols) — Sleeker Tall Side Projects Card ── */}
-          <div className="lg:col-span-4 flex flex-col">
-            <Link
-              to="/work/side-quests"
-              className="bg-[var(--bg-card)] border border-[var(--border-card)] rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 relative overflow-hidden h-full min-h-[460px] lg:min-h-[710px] flex flex-col justify-between group cursor-pointer hover:border-[var(--text-muted)] hover:shadow-md transition-all duration-300 shadow-sm block text-inherit no-underline"
-            >
-              <div className="z-10">
-                <span className="px-3.5 py-1 rounded-full text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-card)] w-max shadow-sm tracking-tight inline-block transition-colors">
-                  Mobile . Web
-                </span>
-              </div>
-
-              {/* Diagonal Staggered Deck: Top-Left, Center, Bottom-Right -> Expands on Hover */}
-              <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-                {/* Ambient Backlight Glow */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[340px] rounded-full bg-black/[0.02] dark:bg-white/[0.02] blur-3xl pointer-events-none" />
-
-                {/* 1. Top Mockup (Indian Modern Reels) — At Rest: Top-Left | On Hover: Glides UP & LEFT */}
-                <div className="absolute left-[44%] sm:left-[42%] top-1/2 -translate-x-1/2 -translate-y-[56%] -rotate-3 w-[240px] sm:w-[280px] md:w-[310px] z-20 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:left-[38%] sm:group-hover:left-[36%] group-hover:-translate-y-[104%] sm:group-hover:-translate-y-[110%] group-hover:-rotate-5 group-hover:scale-[1.03] drop-shadow-[0_20px_35px_rgba(0,0,0,0.18)]">
-                  <img
-                    src={sideProject1}
-                    alt="Side Project - Reels"
-                    className="w-full h-auto object-contain"
-                  />
-                </div>
-
-                {/* 2. Middle Mockup (Flipkart MacBook) — At Rest: Dead Center | On Hover: Stays in CENTER */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[330px] sm:w-[380px] md:w-[410px] z-10 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04] drop-shadow-[0_15px_30px_rgba(0,0,0,0.14)]">
-                  <img
-                    src={sideProject2}
-                    alt="Desktop Side Project - Flipkart"
-                    className="w-full h-auto object-contain"
-                  />
-                </div>
-
-                {/* 3. Bottom Mockup (Nothing OS Calculator) — At Rest: Bottom-Right | On Hover: Glides DOWN & RIGHT */}
-                <div className="absolute left-[56%] sm:left-[58%] top-1/2 -translate-x-1/2 -translate-y-[44%] rotate-3 w-[240px] sm:w-[280px] md:w-[310px] z-30 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:left-[62%] sm:group-hover:left-[64%] group-hover:translate-y-[4%] sm:group-hover:translate-y-[10%] group-hover:rotate-5 group-hover:scale-[1.03] drop-shadow-[0_20px_35px_rgba(0,0,0,0.18)]">
-                  <img
-                    src={sideProject3}
-                    alt="Side Project - Calculator"
-                    className="w-full h-auto object-contain"
-                  />
-                </div>
-              </div>
-
-              <div className="z-10">
-                <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] tracking-tight">
-                  Side Quests
-                </h3>
-              </div>
-            </Link>
-          </div>
+            </div>
+          </ProjectCard>
 
         </div>
         </div>
