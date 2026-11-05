@@ -376,7 +376,7 @@ export const Landing: React.FC = () => {
           <ProjectCard
             to="/work/quantel-ai"
             title="Quantel AI"
-            description="AI wealth management app combining automated investing, AI-driven advice, and real-time market data."
+            description="AI wealth management app combining automated investing, AI driven advice, and real time market data."
             thumbBg="#090d18"
           >
             <video
@@ -410,7 +410,7 @@ export const Landing: React.FC = () => {
           <ProjectCard
             to="/work/side-quests"
             title="Side Quests"
-            description="UX fixes for Instagram Reels, Flipkart checkout, and a Nothing-style calculator."
+            description="UX fixes for Instagram Reels, Flipkart checkout, and a Nothing style calculator."
             thumbBg="radial-gradient(ellipse at 50% 65%, #182235 0%, #080b11 100%)"
           >
             {/* Ambient Backlight Glow */}
