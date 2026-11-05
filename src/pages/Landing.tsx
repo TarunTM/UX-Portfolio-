@@ -355,11 +355,11 @@ export const Landing: React.FC = () => {
         {/* 2x2 Grid Layout (Max 2 per row, No Dividers) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 sm:gap-x-10 sm:gap-y-14 lg:gap-x-10 lg:gap-y-14">
           
-          {/* ── CARD 1: Sanctum House of Wellness ── */}
+          {/* ── CARD 1: Sanctum ── */}
           <ProjectCard
             to="/work/sanctum"
             title="Sanctum"
-            description="Turning high-intent ad traffic into ~3× direct enquiries across 3 Mumbai clubs"
+            description="Wellness club website that turned ad traffic into 3× more direct enquiries."
             thumbBg="#080b11"
           >
             <video
@@ -376,7 +376,7 @@ export const Landing: React.FC = () => {
           <ProjectCard
             to="/work/quantel-ai"
             title="Quantel AI"
-            description="Adapting an AI wealth management platform to Light Mode without redesigning layouts"
+            description="AI wealth management app combining automated investing, AI-driven advice, and real-time market data."
             thumbBg="#090d18"
           >
             <video
@@ -393,7 +393,7 @@ export const Landing: React.FC = () => {
           <ProjectCard
             to="/work/rizen"
             title="RIZEN"
-            description="Habit recovery flows, calm planning, and 6-tier XP comeback engine"
+            description="Fitness app built around Plan, Workout, Progress, and Accountability, designed for the comeback."
             thumbBg="#0b100d"
           >
             <video
@@ -410,7 +410,7 @@ export const Landing: React.FC = () => {
           <ProjectCard
             to="/work/side-quests"
             title="Side Quests"
-            description="Targeted micro-UX friction experiments across Instagram Reels, Flipkart, and Nothing OS"
+            description="UX fixes for Instagram Reels, Flipkart checkout, and a Nothing-style calculator."
             thumbBg="radial-gradient(ellipse at 50% 65%, #182235 0%, #080b11 100%)"
           >
             {/* Ambient Backlight Glow */}
