@@ -14,9 +14,9 @@ import socialSlateLogo from '../assets/SS- OG colors.webp';
 import rizenMockupVideo from '../assets/Rizen Img/rizen mockup video.webm';
 import sanctumMockupVideo from '../assets/Sanctum Img:Video/Sanctum Home mockup.webm';
 import quantelMockupVideo from '../assets/Quantel Img/quantel mockup vid.webm';
-import sideProject1 from '../assets/1.Side Project.webp';
-import sideProject2 from '../assets/2.Side Project.webp';
-import sideProject3 from '../assets/3.Side Project.webp';
+import sideReelsMockup from '../assets/side_reels_mockup.png';
+import sideFlipkartMockup from '../assets/side_flipkart_mockup.png';
+import sideNothingMockup from '../assets/side_nothing_mockup.png';
 
 // ── Tool Icon Components ──────────────────────────────────────────────
 const FigmaIcon = () => (
@@ -411,33 +411,39 @@ export const Landing: React.FC = () => {
             to="/work/side-quests"
             title="Side Quests"
             description="Targeted micro-UX friction experiments across Instagram Reels, Flipkart, and Nothing OS"
-            thumbBg="radial-gradient(ellipse at 50% 55%, #1e263c 0%, #080b11 100%)"
+            thumbBg="radial-gradient(ellipse at 50% 65%, #182235 0%, #080b11 100%)"
           >
-            <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
-              {/* 1. Left (Reels Phone) */}
-              <div className="absolute left-[3%] sm:left-[5%] -rotate-6 w-[110px] sm:w-[130px] md:w-[145px] z-10 transition-all duration-500 ease-out group-hover:-rotate-9 group-hover:-translate-x-1.5 drop-shadow-[0_16px_24px_rgba(0,0,0,0.65)]">
-                <img 
-                  src={sideProject1} 
-                  alt="Instagram Reels Side Quest" 
-                  className="w-full h-auto object-contain" 
-                />
-              </div>
+            {/* Ambient Backlight Glow */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[200px] bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
 
-              {/* 2. Center (Flipkart MacBook) */}
-              <div className="absolute left-1/2 -translate-x-1/2 w-[210px] sm:w-[245px] md:w-[275px] z-20 transition-all duration-500 ease-out group-hover:scale-105 drop-shadow-[0_20px_32px_rgba(0,0,0,0.75)]">
+            <div className="w-full h-full relative flex items-center justify-center overflow-hidden select-none">
+              {/* 1. Center: Flipkart MacBook (z-10) */}
+              <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[68%] sm:w-[72%] max-w-[340px] z-10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] group-hover:-translate-y-1">
                 <img 
-                  src={sideProject2} 
+                  src={sideFlipkartMockup} 
                   alt="Flipkart Checkout Side Quest" 
-                  className="w-full h-auto object-contain" 
+                  className="w-full h-auto object-contain block select-none pointer-events-none" 
+                  draggable={false}
                 />
               </div>
 
-              {/* 3. Right (Nothing Calculator Phone) */}
-              <div className="absolute right-[3%] sm:right-[5%] rotate-6 w-[110px] sm:w-[130px] md:w-[145px] z-10 transition-all duration-500 ease-out group-hover:rotate-9 group-hover:translate-x-1.5 drop-shadow-[0_16px_24px_rgba(0,0,0,0.65)]">
+              {/* 2. Left: Instagram Reels Phone (z-20, in front of laptop left) */}
+              <div className="absolute bottom-[3%] left-[8%] sm:left-[10%] w-[23%] sm:w-[24%] max-w-[112px] z-20 -rotate-6 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-[0_24px_38px_rgba(0,0,0,0.95)] group-hover:-translate-x-2.5 group-hover:-translate-y-1 group-hover:-rotate-10 group-hover:scale-105">
                 <img 
-                  src={sideProject3} 
+                  src={sideReelsMockup} 
+                  alt="Instagram Reels Side Quest" 
+                  className="w-full h-auto object-contain block select-none pointer-events-none" 
+                  draggable={false}
+                />
+              </div>
+
+              {/* 3. Right: Nothing Calculator Phone (z-20, in front of laptop right) */}
+              <div className="absolute bottom-[3%] right-[8%] sm:right-[10%] w-[23%] sm:w-[24%] max-w-[112px] z-20 rotate-6 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-[0_24px_38px_rgba(0,0,0,0.95)] group-hover:translate-x-2.5 group-hover:-translate-y-1 group-hover:rotate-10 group-hover:scale-105">
+                <img 
+                  src={sideNothingMockup} 
                   alt="Nothing OS Calculator Side Quest" 
-                  className="w-full h-auto object-contain" 
+                  className="w-full h-auto object-contain block select-none pointer-events-none" 
+                  draggable={false}
                 />
               </div>
             </div>
