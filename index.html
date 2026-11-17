@@ -3,6 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Sword-pull intro (preloader): public/preloader/sword-intro.{js,css}.
+         This gate runs before first paint and starts the intro on every full
+         page load (visitors can leave with Skip intro / Esc). -->
+    <script>
+      (function () {
+        var html = document.documentElement;
+        var intro = (window.__swordIntro = { active: true, revealed: false, started: false });
+        html.classList.add('pl-active');
+        var sprite = document.createElement('link');
+        sprite.rel = 'preload';
+        sprite.as = 'image';
+        sprite.type = 'image/avif';
+        sprite.href = '/preloader/sword-pull.avif';
+        sprite.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(sprite);
+        // Safety net: never leave the page covered if the intro script fails to load.
+        setTimeout(function () {
+          if (intro.started) return;
+          intro.active = false;
+          intro.revealed = true;
+          html.classList.remove('pl-active');
+          window.dispatchEvent(new Event('sword-intro:reveal'));
+        }, 6000);
+      })();
+    </script>
+    <link rel="stylesheet" href="/preloader/sword-intro.css" />
+    <script src="/preloader/sword-intro.js" defer></script>
+
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/avatar.png" />
     <link rel="image_src" href="/og-image.png" />

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { useIntroRevealed } from '../lib/swordIntro';
 
 export interface StreamSegment {
   text: string;
@@ -60,8 +61,11 @@ export const StreamingText: React.FC<StreamingTextProps> = ({
   }, [segments, text]);
 
   const [visibleCount, setVisibleCount] = useState<number>(0);
-  const [hasStarted, setHasStarted] = useState<boolean>(false);
+  const [inView, setInView] = useState<boolean>(false);
   const containerRef = useRef<HTMLElement>(null);
+  // Hold the stream until the sword-pull intro has revealed the page.
+  const revealed = useIntroRevealed();
+  const hasStarted = inView && revealed;
 
   useEffect(() => {
     // Check if user prefers reduced motion
@@ -75,8 +79,8 @@ export const StreamingText: React.FC<StreamingTextProps> = ({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasStarted) {
-          setHasStarted(true);
+        if (entry.isIntersecting && !inView) {
+          setInView(true);
         }
       },
       { threshold: 0.1 }
@@ -84,7 +88,7 @@ export const StreamingText: React.FC<StreamingTextProps> = ({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [hasStarted, words.length]);
+  }, [inView, words.length]);
 
   useEffect(() => {
     if (!hasStarted || words.length === 0) return;
