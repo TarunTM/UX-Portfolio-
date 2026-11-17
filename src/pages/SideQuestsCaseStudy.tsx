@@ -8,6 +8,7 @@ import nothingCalculatorImg from '../assets/3.Side Project Large.webp';
 import instaReelsPrototype from '../assets/Insta Reels Prototype.webm';
 import beforeFlipkartImg from '../assets/Before Flipkart checkout.webp';
 import afterFlipkartImg from '../assets/After Flipkart Checkout.webp';
+import LazyVideo from '../components/LazyVideo';
 
 export const SideQuestsCaseStudy: React.FC = () => {
   const instaVideoRef = useRef<HTMLVideoElement>(null);
@@ -108,10 +109,9 @@ export const SideQuestsCaseStudy: React.FC = () => {
               }}
               className="relative cursor-zoom-in select-none w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] rounded-[48px] overflow-hidden drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-300 hover:scale-[1.02]"
             >
-              <video
+              <LazyVideo
                 ref={instaVideoRef}
                 src={instaReelsPrototype}
-                autoPlay
                 loop
                 muted
                 playsInline
@@ -189,6 +189,8 @@ export const SideQuestsCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: beforeFlipkartImg, alt: 'Flipkart Original Payment Screen - Before', caption: 'Flipkart Checkout — Before' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={beforeFlipkartImg}
                   alt="Flipkart Original Payment Screen - Before"
                   className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
@@ -217,6 +219,8 @@ export const SideQuestsCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: afterFlipkartImg, alt: 'Flipkart Redesigned Payment Screen - After', caption: 'Flipkart Checkout — After' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={afterFlipkartImg}
                   alt="Flipkart Redesigned Payment Screen - After"
                   className="w-full h-auto object-contain block transition-transform duration-500 group-hover:scale-[1.01]"
@@ -256,6 +260,8 @@ export const SideQuestsCaseStudy: React.FC = () => {
               onClick={() => setLightboxImage({ src: nothingCalculatorImg, alt: 'Nothing Calculator UI Exploration', caption: 'Nothing Calculator UI Exploration' })}
             >
               <img
+                loading="lazy"
+                decoding="async"
                 src={nothingCalculatorImg}
                 alt="Nothing Calculator UI Exploration"
                 className="w-full max-w-[230px] sm:max-w-[260px] lg:max-w-[280px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)] transition-transform duration-500 group-hover:scale-[1.02]"

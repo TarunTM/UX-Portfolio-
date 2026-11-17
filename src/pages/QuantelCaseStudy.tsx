@@ -249,6 +249,8 @@ export const QuantelCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: lightmodeDashboard, alt: 'Quantel Dashboard Light Mode', caption: 'Production Light-Mode Dashboard' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={lightmodeDashboard}
                   alt="Quantel Dashboard Light Mode"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
@@ -440,6 +442,8 @@ export const QuantelCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: capital1Quantel, alt: 'Quantel Capital Mobile Flow Part 1' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={capital1Quantel}
                   alt="Quantel Capital Mobile Flow Part 1"
                   className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
@@ -452,6 +456,8 @@ export const QuantelCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: capital2Quantel, alt: 'Quantel Capital Mobile Flow Part 2' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={capital2Quantel}
                   alt="Quantel Capital Mobile Flow Part 2"
                   className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
@@ -469,6 +475,8 @@ export const QuantelCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: adviseQuantel, alt: 'Quantel Advise Mobile Flow' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={adviseQuantel}
                   alt="Quantel Advise Mobile Flow"
                   className="w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.18)]"
@@ -509,6 +517,8 @@ export const QuantelCaseStudy: React.FC = () => {
                 onClick={() => setLightboxImage({ src: assetsQuantel, alt: 'Quantel Assets Dashboard', caption: 'Assets Dashboard — Account Value, Health Status & Conversion Path to Advise' })}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={assetsQuantel}
                   alt="Quantel Assets Dashboard"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
@@ -559,6 +569,8 @@ export const QuantelCaseStudy: React.FC = () => {
               onClick={() => setLightboxImage({ src: referralQuantel, alt: 'Quantel Points and Rewards Referral Screen Concept', caption: 'Points & Rewards Concept Exploration (Unconfirmed Placeholder Values)' })}
             >
               <img
+                loading="lazy"
+                decoding="async"
                 src={referralQuantel}
                 alt="Quantel Points and Rewards Referral Screen"
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"

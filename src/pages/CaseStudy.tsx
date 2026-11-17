@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { projects } from '../data/projects';
@@ -6,10 +6,18 @@ import ProjectMockup from '../components/ProjectMockup';
 import Navbar from '../components/Navbar';
 import CaseStudyFooter from '../components/CaseStudyFooter';
 import TextReveal from '../components/TextReveal';
-import RizenCaseStudy from './RizenCaseStudy';
-import SanctumCaseStudy from './SanctumCaseStudy';
-import QuantelCaseStudy from './QuantelCaseStudy';
-import SideQuestsCaseStudy from './SideQuestsCaseStudy';
+import { caseStudyLoaders } from '../lib/caseStudyLoaders';
+
+// Each case study (and its images, videos and footer game) loads only when opened.
+const RizenCaseStudy = lazy(caseStudyLoaders.rizen);
+const SanctumCaseStudy = lazy(caseStudyLoaders.sanctum);
+const QuantelCaseStudy = lazy(caseStudyLoaders['quantel-ai']);
+const SideQuestsCaseStudy = lazy(caseStudyLoaders['side-quests']);
+
+const PageFallback = () => (
+  <div className="min-h-screen" style={{ background: 'var(--bg-base)' }} aria-busy="true" />
+);
+const withSuspense = (page: React.ReactNode) => <Suspense fallback={<PageFallback />}>{page}</Suspense>;
 
 export const CaseStudy: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,19 +28,19 @@ export const CaseStudy: React.FC = () => {
   }, [id]);
 
   if (id === 'rizen') {
-    return <RizenCaseStudy />;
+    return withSuspense(<RizenCaseStudy />);
   }
 
   if (id === 'sanctum') {
-    return <SanctumCaseStudy />;
+    return withSuspense(<SanctumCaseStudy />);
   }
 
   if (id === 'quantel-ai') {
-    return <QuantelCaseStudy />;
+    return withSuspense(<QuantelCaseStudy />);
   }
 
   if (id === 'side-quests' || id === 'side-projects' || id === 'influencer-agency') {
-    return <SideQuestsCaseStudy />;
+    return withSuspense(<SideQuestsCaseStudy />);
   }
 
   const currentIdx = projects.findIndex((p) => p.id === id);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { VideoSourceList } from './LazyVideo';
 
 export interface LightboxMedia {
   src: string;
@@ -162,13 +163,15 @@ export const ImageLightboxModal: React.FC<ImageLightboxModalProps> = ({
           >
             {isCurrentVideo ? (
               <video
-                src={currentItem.src}
+                key={currentItem.src}
                 controls
                 autoPlay
                 loop
                 playsInline
                 className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-xl sm:rounded-2xl shadow-2xl border border-white/15 bg-black"
-              />
+              >
+                <VideoSourceList src={currentItem.src} />
+              </video>
             ) : (
               <img
                 src={currentItem.src}

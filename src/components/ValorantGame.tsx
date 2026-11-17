@@ -127,32 +127,55 @@ export const ValorantGame: React.FC = () => {
     showBannerRef.current = showBanner;
   }, [showBanner]);
 
-  // Preload map & character pose images
+  // Load map & character pose images once the game is close to the viewport, so
+  // they don't compete with the case study's own images at the top of the page.
   useEffect(() => {
-    const imgMap = new Image();
-    imgMap.src = ascentMapImg;
-    mapImgRef.current = imgMap;
+    const loadImages = () => {
+      if (mapImgRef.current) return;
+      const imgMap = new Image();
+      imgMap.src = ascentMapImg;
+      mapImgRef.current = imgMap;
 
-    const realSrcs = [yoruPose0, yoruPose1, yoruPose2, yoruPose3];
-    realPosesRef.current = realSrcs.map((src) => {
-      const img = new Image();
-      img.src = src;
-      return img;
-    });
+      const realSrcs = [yoruPose0, yoruPose1, yoruPose2, yoruPose3];
+      realPosesRef.current = realSrcs.map((src) => {
+        const img = new Image();
+        img.src = src;
+        return img;
+      });
 
-    const cloneSrcs = [clonePose0, clonePose1, clonePose2, clonePose3];
-    clonePosesRef.current = cloneSrcs.map((src) => {
-      const img = new Image();
-      img.src = src;
-      return img;
-    });
+      const cloneSrcs = [clonePose0, clonePose1, clonePose2, clonePose3];
+      clonePosesRef.current = cloneSrcs.map((src) => {
+        const img = new Image();
+        img.src = src;
+        return img;
+      });
+    };
+
+    const node = containerRef.current;
+    let nearObserver: IntersectionObserver | undefined;
+    if (node && typeof IntersectionObserver !== 'undefined') {
+      nearObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+          loadImages();
+          nearObserver?.disconnect();
+        },
+        { rootMargin: '800px 0px' }
+      );
+      nearObserver.observe(node);
+    } else {
+      loadImages();
+    }
 
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    return () => {
+      nearObserver?.disconnect();
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   // Spawn agent pair (Mini Yoru leading + Clone trailing from left)

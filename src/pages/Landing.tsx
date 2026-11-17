@@ -14,9 +14,10 @@ import socialSlateLogo from '../assets/SS- OG colors.webp';
 import rizenMockupVideo from '../assets/Rizen Img/rizen mockup video.webm';
 import sanctumMockupVideo from '../assets/Sanctum Img:Video/Sanctum Home mockup.webm';
 import quantelMockupVideo from '../assets/Quantel Img/quantel mockup vid.webm';
-import sideReelsMockup from '../assets/side_reels_mockup.png';
-import sideFlipkartMockup from '../assets/side_flipkart_mockup.png';
-import sideNothingMockup from '../assets/side_nothing_mockup.png';
+import sideReelsMockup from '../assets/side_reels_mockup.webp';
+import sideFlipkartMockup from '../assets/side_flipkart_mockup.webp';
+import sideNothingMockup from '../assets/side_nothing_mockup.webp';
+import LazyVideo from '../components/LazyVideo';
 
 // ── Tool Icon Components ──────────────────────────────────────────────
 const FigmaIcon = () => (
@@ -31,6 +32,8 @@ const FigmaIcon = () => (
 
 const FigJamIcon = () => (
   <img
+    loading="lazy"
+    decoding="async"
     src={figjamIcon}
     alt="FigJam"
     className="w-full h-full object-contain"
@@ -69,6 +72,8 @@ const LinkedInIcon = ({ className = "w-3 h-3" }: { className?: string }) => (
 
 const WixStudioIcon = () => (
   <img
+    loading="lazy"
+    decoding="async"
     src={wixStudioIcon}
     alt="Wix Studio"
     className="w-full h-full object-contain"
@@ -77,6 +82,8 @@ const WixStudioIcon = () => (
 
 const AntigravityIcon = () => (
   <img
+    loading="lazy"
+    decoding="async"
     src={antigravityIcon}
     alt="Antigravity"
     className="w-full h-full object-contain"
@@ -221,7 +228,7 @@ export const Landing: React.FC = () => {
                     showGlare={true}
                   >
                     <img
-                      src="/avatar.webp?v=11"
+                      src="/avatar-320.webp"
                       alt="Tarun — Product Designer"
                       className="w-full h-full object-cover select-none pointer-events-none"
                       draggable={false}
@@ -362,9 +369,8 @@ export const Landing: React.FC = () => {
             description="Wellness club website that turned ad traffic into 3× more direct enquiries."
             thumbBg="#080b11"
           >
-            <video
+            <LazyVideo
               src={sanctumMockupVideo}
-              autoPlay
               loop
               muted
               playsInline
@@ -379,9 +385,8 @@ export const Landing: React.FC = () => {
             description="AI wealth management app combining automated investing, AI driven advice, and real time market data."
             thumbBg="#090d18"
           >
-            <video
+            <LazyVideo
               src={quantelMockupVideo}
-              autoPlay
               loop
               muted
               playsInline
@@ -396,9 +401,8 @@ export const Landing: React.FC = () => {
             description="Fitness app built around Plan, Workout, Progress, and Accountability, designed for the comeback."
             thumbBg="#0b100d"
           >
-            <video
+            <LazyVideo
               src={rizenMockupVideo}
-              autoPlay
               loop
               muted
               playsInline
@@ -419,8 +423,10 @@ export const Landing: React.FC = () => {
             <div className="w-full h-full relative flex items-center justify-center overflow-hidden select-none">
               {/* 1. Center: Flipkart MacBook (z-10) */}
               <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 w-[68%] sm:w-[72%] max-w-[340px] z-10 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)] group-hover:scale-[1.03] group-hover:-translate-y-1">
-                <img 
-                  src={sideFlipkartMockup} 
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={sideFlipkartMockup}
                   alt="Flipkart Checkout Side Quest" 
                   className="w-full h-auto object-contain block select-none pointer-events-none" 
                   draggable={false}
@@ -429,8 +435,10 @@ export const Landing: React.FC = () => {
 
               {/* 2. Left: Instagram Reels Phone (z-20, in front of laptop left) */}
               <div className="absolute bottom-[3%] left-[8%] sm:left-[10%] w-[23%] sm:w-[24%] max-w-[112px] z-20 -rotate-6 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-[0_24px_38px_rgba(0,0,0,0.95)] group-hover:-translate-x-2.5 group-hover:-translate-y-1 group-hover:-rotate-10 group-hover:scale-105">
-                <img 
-                  src={sideReelsMockup} 
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={sideReelsMockup}
                   alt="Instagram Reels Side Quest" 
                   className="w-full h-auto object-contain block select-none pointer-events-none" 
                   draggable={false}
@@ -439,8 +447,10 @@ export const Landing: React.FC = () => {
 
               {/* 3. Right: Nothing Calculator Phone (z-20, in front of laptop right) */}
               <div className="absolute bottom-[3%] right-[8%] sm:right-[10%] w-[23%] sm:w-[24%] max-w-[112px] z-20 rotate-6 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] drop-shadow-[0_24px_38px_rgba(0,0,0,0.95)] group-hover:translate-x-2.5 group-hover:-translate-y-1 group-hover:rotate-10 group-hover:scale-105">
-                <img 
-                  src={sideNothingMockup} 
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={sideNothingMockup}
                   alt="Nothing OS Calculator Side Quest" 
                   className="w-full h-auto object-contain block select-none pointer-events-none" 
                   draggable={false}
@@ -558,6 +568,8 @@ export const Landing: React.FC = () => {
                       <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shrink-0 border border-[var(--border-card)] bg-[#121212] flex items-center justify-center shadow-sm relative">
                         {exp.logo ? (
                           <img
+                            loading="lazy"
+                            decoding="async"
                             src={exp.logo}
                             alt={exp.company}
                             className="w-full h-full object-cover"

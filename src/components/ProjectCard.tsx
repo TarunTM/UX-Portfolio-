@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import { prefetchCaseStudy } from '../lib/caseStudyLoaders';
 
 export interface ProjectCardProps {
   to: string;
@@ -22,6 +23,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <Link
       to={to}
+      onPointerEnter={() => prefetchCaseStudy(to)}
+      onFocus={() => prefetchCaseStudy(to)}
+      onTouchStart={() => prefetchCaseStudy(to)}
       className={`group flex flex-col w-full min-w-0 text-inherit no-underline cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black/20 dark:focus-visible:ring-white/20 rounded-2xl sm:rounded-[22px] ${className}`}
     >
       {/* ── Visual Media Banner ── */}

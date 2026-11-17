@@ -32,19 +32,20 @@ import badgeProgressMachine from '../assets/Rizen Img/Badge-ProgressMachine.webp
 import badgeConsistentPerformer from '../assets/Rizen Img/Badge-ConsistentPerformer.webp';
 
 // Wireframe assets (01 to 05)
-import wireframe01 from '../assets/Rizen Img/01-wireframe home.png';
-import wireframe02 from '../assets/Rizen Img/02- Wireframe workout plan.png';
-import wireframe03 from '../assets/Rizen Img/03-Wireframe record.png';
-import wireframe04 from '../assets/Rizen Img/04-wireframe profile.png';
-import wireframe05 from '../assets/Rizen Img/05-wireframe Stats.png';
+import wireframe01 from '../assets/Rizen Img/01-wireframe home.webp';
+import wireframe02 from '../assets/Rizen Img/02- Wireframe workout plan.webp';
+import wireframe03 from '../assets/Rizen Img/03-Wireframe record.webp';
+import wireframe04 from '../assets/Rizen Img/04-wireframe profile.webp';
+import wireframe05 from '../assets/Rizen Img/05-wireframe Stats.webp';
 
 // High-Fidelity Mockups
-import splashMockup from '../assets/Rizen Img/Splash HIFI mockup.png';
-import signupMockup from '../assets/Rizen Img/Signup HIFI MOCKUpp.png';
+import splashMockup from '../assets/Rizen Img/Splash HIFI mockup.webp';
+import signupMockup from '../assets/Rizen Img/Signup HIFI MOCKUpp.webp';
 import homeMockup from '../assets/Rizen Img/Home Mockup.webp';
-import analyticsMockup from '../assets/Rizen Img/Analytics Hifi mockup.png';
-import myProfileMockup from '../assets/Rizen Img/My profile HIfi Mockup.png';
-import settingsMockup from '../assets/Rizen Img/Settings HIFI mockup.png';
+import analyticsMockup from '../assets/Rizen Img/Analytics Hifi mockup.webp';
+import myProfileMockup from '../assets/Rizen Img/My profile HIfi Mockup.webp';
+import settingsMockup from '../assets/Rizen Img/Settings HIFI mockup.webp';
+import LazyVideo from '../components/LazyVideo';
 
 const wireframesData = [
   {
@@ -283,9 +284,8 @@ export const RizenCaseStudy: React.FC = () => {
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
             onClick={() => setLightboxImage({ src: rizenHeroVideo, type: 'video', caption: 'Rizen — Social Gamified Fitness App' })}
           >
-            <video
+            <LazyVideo
               src={rizenHeroVideo}
-              autoPlay
               loop
               muted
               playsInline
@@ -380,10 +380,9 @@ export const RizenCaseStudy: React.FC = () => {
                 }}
                 className="relative cursor-zoom-in select-none w-full max-w-[280px] sm:max-w-[320px] md:max-w-[340px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:scale-[1.02]"
               >
-                <video
+                <LazyVideo
                   ref={outcomeVideoRef}
                   src={outcomePrototype}
-                  autoPlay
                   loop
                   muted
                   playsInline
@@ -480,6 +479,8 @@ export const RizenCaseStudy: React.FC = () => {
                   onClick={() => setLightboxImage({ src: friendsActivityMockup, alt: 'Friends Activity Feed Mockup', caption: 'Decision 1: Friends Activity Feed' })}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={friendsActivityMockup}
                     alt="Friends Activity Feed Mockup"
                     className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
@@ -490,6 +491,8 @@ export const RizenCaseStudy: React.FC = () => {
                   onClick={() => setLightboxImage({ src: friendsProfileMockup, alt: 'Friends Profile Mockup', caption: 'Decision 1: Friends Profile & Routine Sharing' })}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={friendsProfileMockup}
                     alt="Friends Profile Mockup"
                     className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
@@ -710,6 +713,8 @@ export const RizenCaseStudy: React.FC = () => {
                           style={{ borderColor: 'var(--border-card)' }}
                         >
                           <img
+                            loading="lazy"
+                            decoding="async"
                             src={item.src}
                             alt={item.alt}
                             className="w-full h-full object-contain block transition-transform duration-500 group-hover:scale-[1.02]"
@@ -777,6 +782,8 @@ export const RizenCaseStudy: React.FC = () => {
                     “Plan when you’re planning”
                   </p>
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={workoutPlanMockup}
                     alt="Workout Plans Mode Mockup"
                     className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
@@ -792,6 +799,8 @@ export const RizenCaseStudy: React.FC = () => {
                     “Execute when you’re training”
                   </p>
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={recordWorkoutMockup}
                     alt="Record Workout Mode Mockup"
                     className="w-full max-w-[220px] sm:max-w-[255px] md:max-w-[270px] h-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] transition-transform duration-300 group-hover:scale-[1.02]"
@@ -846,6 +855,8 @@ export const RizenCaseStudy: React.FC = () => {
                       >
                         <div className="w-[78px] h-[78px] sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 flex items-center justify-center p-0.5 sm:p-1">
                           <img
+                            loading="lazy"
+                            decoding="async"
                             src={rank.image}
                             alt={rank.name}
                             className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105"
@@ -901,6 +912,8 @@ export const RizenCaseStudy: React.FC = () => {
                       >
                         <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex items-center justify-center p-1">
                           <img
+                            loading="lazy"
+                            decoding="async"
                             src={badge.image}
                             alt={badge.name}
                             className="w-full h-full object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.25)] transition-transform duration-300 group-hover:scale-105"
@@ -1146,6 +1159,8 @@ export const RizenCaseStudy: React.FC = () => {
                       onClick={() => setLightboxImage({ src: bottomNavImg, alt: 'Bottom Navigation (from IA · 5 destinations)', caption: 'Bottom Navigation Bar (5 destinations)' })}
                     >
                       <img
+                        loading="lazy"
+                        decoding="async"
                         src={bottomNavImg}
                         alt="Bottom Navigation (from IA · 5 destinations)"
                         className="w-full max-w-md sm:max-w-lg object-contain transition-transform duration-300 group-hover:scale-[1.03]"
@@ -1234,6 +1249,8 @@ export const RizenCaseStudy: React.FC = () => {
                       className="group relative w-full cursor-zoom-in flex justify-center transition-transform duration-300 hover:scale-[1.03]"
                     >
                       <img
+                        loading="lazy"
+                        decoding="async"
                         src={item.src}
                         alt={item.alt}
                         className="w-full max-w-[220px] sm:max-w-[245px] md:max-w-[260px] h-auto object-contain block"

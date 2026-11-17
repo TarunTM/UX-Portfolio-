@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import bodyImg from '../assets/tarun_front_body.png';
-import handImg from '../assets/tarun_waving_hand.png';
+import bodyImg from '../assets/tarun_front_body.webp';
+import handImg from '../assets/tarun_waving_hand.webp';
 
 interface PixelTarunCharacterProps {
   className?: string;

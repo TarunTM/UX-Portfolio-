@@ -16,6 +16,7 @@ import trainingScrollVideo from '../assets/Sanctum Img:Video/Training Scroll vid
 import trainingRecoveryIterationVideo from '../assets/Sanctum Img:Video/Training Recovery Iteration.webm';
 import recoveryIteration2Img from '../assets/Sanctum Img:Video/Recovery iteration 2.webp';
 import recoveryIteration3Img from '../assets/Sanctum Img:Video/Recovery iteration 3.webp';
+import LazyVideo, { VideoSourceList } from '../components/LazyVideo';
 
 const outcomeImages = [
   { img: homeSanctum, alt: 'Sanctum Home Page', title: 'Home Experience' },
@@ -205,9 +206,8 @@ export const SanctumCaseStudy: React.FC = () => {
             style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
             onClick={() => setLightboxImage({ src: heroVideo, type: 'video', caption: 'Sanctum — Hero Video' })}
           >
-            <video
+            <LazyVideo
               src={heroVideo}
-              autoPlay
               loop
               muted
               playsInline
@@ -326,6 +326,8 @@ export const SanctumCaseStudy: React.FC = () => {
                     }`}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={slide.img}
                     alt={slide.alt}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
@@ -471,6 +473,8 @@ export const SanctumCaseStudy: React.FC = () => {
                   onClick={() => setLightboxImage({ src: andheriOldSanctum, alt: 'Sanctum Club Page - Before (Andheri)', caption: 'Initial Club Page (Andheri)' })}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={andheriOldSanctum}
                     alt="Sanctum Club Page - Before (Andheri)"
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
@@ -516,6 +520,8 @@ export const SanctumCaseStudy: React.FC = () => {
                   onClick={() => setLightboxImage({ src: juhuSanctum, alt: 'Sanctum Redesigned Club Page with Direct Actions - After (Juhu)', caption: 'Redesigned Club Page with Direct Actions (Juhu)' })}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={juhuSanctum}
                     alt="Sanctum Redesigned Club Page with Direct Actions - After (Juhu)"
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
@@ -573,6 +579,8 @@ export const SanctumCaseStudy: React.FC = () => {
                   onClick={() => setLightboxImage({ src: groupxSanctum, alt: 'Sanctum GroupX Class Experience with Location Filtering', caption: 'GroupX Class Experience with Location Filtering' })}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={groupxSanctum}
                     alt="Sanctum GroupX Class Experience with Location Filtering"
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
@@ -671,9 +679,8 @@ export const SanctumCaseStudy: React.FC = () => {
                           }}
                         >
                           {item.type === 'video' ? (
-                            <video
+                            <LazyVideo
                               src={item.src}
-                              autoPlay
                               loop
                               muted
                               playsInline
@@ -681,6 +688,8 @@ export const SanctumCaseStudy: React.FC = () => {
                             />
                           ) : (
                             <img
+                              loading="lazy"
+                              decoding="async"
                               src={item.src}
                               alt={item.alt}
                               className="w-full h-full object-cover object-top block transition-transform duration-500 group-hover:scale-[1.02]"
@@ -732,11 +741,10 @@ export const SanctumCaseStudy: React.FC = () => {
                   style={{ borderColor: 'var(--border-card)', background: 'var(--bg-surface)' }}
                   onClick={() => setLightboxImage({ src: trainingScrollVideo, type: 'video', caption: 'Sanctum — Final: Revealed on scroll' })}
                 >
-                  <video
+                  <LazyVideo
                     src={trainingScrollVideo}
                     title="Final: names only, revealed on scroll"
                     aria-label="Final: names only, revealed on scroll"
-                    autoPlay
                     loop
                     muted
                     playsInline
@@ -955,13 +963,15 @@ export const SanctumCaseStudy: React.FC = () => {
             >
               {iterationsData[fullscreenIterationIndex].type === 'video' ? (
                 <video
-                  src={iterationsData[fullscreenIterationIndex].src}
+                  key={iterationsData[fullscreenIterationIndex].src}
                   controls
                   autoPlay
                   loop
                   playsInline
                   className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-xl sm:rounded-2xl border border-white/15 shadow-2xl block bg-black"
-                />
+                >
+                  <VideoSourceList src={iterationsData[fullscreenIterationIndex].src} />
+                </video>
               ) : (
                 <img
                   src={iterationsData[fullscreenIterationIndex].src}
